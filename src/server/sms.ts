@@ -34,7 +34,7 @@ export const $sendSms = async (phone: string) => {
     console.log("[sms] sending: ", { phone, code })
     // 复制代码运行请自行打印 API 的返回值
     const res = true
-    await sleep(3000)
+    await sleep(1000)
     // const res = await client.sendSmsWithOptions(
     //   sendSmsRequest,
     //   new RuntimeOptions({}),

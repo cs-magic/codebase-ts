@@ -17,7 +17,7 @@ import { ButtonWithLoading } from "@/components/buttons"
 import { ISendSms, sendSmsSchema } from "@/schema/sms"
 
 export const SmsSend = () => {
-  const { codeDowntime, sendCode, sendingCode } = useSmsStore()
+  const { downtime, sendCode, sendingCode } = useSmsStore()
 
   const form = useForm<ISendSms>({
     resolver: zodResolver(sendSmsSchema),
@@ -54,7 +54,7 @@ export const SmsSend = () => {
             <FormItem className={"w-full"}>
               <FormLabel>请输入手机号</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} autoFocus />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -65,7 +65,7 @@ export const SmsSend = () => {
           type={"submit"}
           className={"w-full"}
           loading={sendingCode}
-          downtime={codeDowntime}
+          downtime={downtime}
         >
           发送验证码
         </ButtonWithLoading>

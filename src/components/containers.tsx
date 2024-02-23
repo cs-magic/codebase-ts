@@ -1,6 +1,15 @@
-import { HTMLAttributes, PropsWithChildren } from "react"
+"use client"
+
+import {
+  ComponentProps,
+  HTMLAttributes,
+  PropsWithChildren,
+  useEffect,
+  useRef,
+} from "react"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
+import { Input } from "@/components/ui/input"
 
 export type Orientation = "horizontal" | "vertical"
 
@@ -66,5 +75,29 @@ export const AuthContainer = ({ children }: PropsWithChildren) => {
         </div>
       </div>
     </div>
+  )
+}
+
+export const DigitContainer = ({
+  className,
+  maxLength,
+  focus,
+  ...props
+}: ComponentProps<typeof Input> & { focus: boolean }) => {
+  const ref = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!focus || !ref.current) return
+
+    ref.current.focus()
+  }, [focus])
+
+  return (
+    <Input
+      ref={ref}
+      className={cn("w-12 h-12 rounded-lg text-3xl text-center", className)}
+      maxLength={1}
+      {...props}
+    />
   )
 }
