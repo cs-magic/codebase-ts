@@ -32,15 +32,18 @@ export const Container = ({
   )
 }
 
-export const IconContainer = ({ children }: PropsWithChildren) => {
+export const IconContainer = ({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
-      className={
-        "p-2 text-foreground/75 hover:bg-accent hover:text-foreground rounded-lg"
-      }
-    >
-      {children}
-    </div>
+      className={cn(
+        "p-2 text-foreground/75 hover:bg-accent hover:text-foreground rounded-lg",
+        className,
+      )}
+      {...props}
+    />
   )
 }
 
