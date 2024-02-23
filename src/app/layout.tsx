@@ -7,6 +7,8 @@ import ThemeProvider from "@/providers/theme"
 import { Toaster } from "@/components/ui/sonner"
 import { SessionProvider } from "@/providers/session"
 import { LoadingAlertDialog } from "@/components/dialog"
+import { type Viewport } from "next"
+import AutoHeightProvider from "@/providers/AutoHeightProvider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,6 +21,14 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 }
 
+// ref: https://nextjs.org/docs/app/building-your-application/upgrading/codemods#use-viewport-export
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -27,17 +37,19 @@ export default function RootLayout({
   return (
     <html lang="zh" suppressHydrationWarning>
       <body className={`font-sans ${inter.variable} h-screen`}>
-        <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
-          <SessionProvider>
-            <TRPCReactProvider>
-              {children}
+        <AutoHeightProvider>
+          <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
+            <SessionProvider>
+              <TRPCReactProvider>
+                {children}
 
-              <Toaster />
+                <Toaster />
 
-              <LoadingAlertDialog />
-            </TRPCReactProvider>
-          </SessionProvider>
-        </ThemeProvider>
+                <LoadingAlertDialog />
+              </TRPCReactProvider>
+            </SessionProvider>
+          </ThemeProvider>
+        </AutoHeightProvider>
       </body>
     </html>
   )
