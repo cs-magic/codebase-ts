@@ -1,4 +1,4 @@
-import { useSmsStore } from "@/store/sms"
+import { useSmsStore } from "@/store/sms.slice"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -13,11 +13,11 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { SeparatorContainer } from "@/components/containers"
 import { Input } from "@/components/ui/input"
-import { ButtonWithLoading } from "@/components/buttons"
 import { ISendSms, sendSmsSchema } from "@/schema/sms"
+import { ButtonWithLoading } from "@/components/buttons"
 
-export const SmsSend = () => {
-  const { downtime, sendCode, sendingCode } = useSmsStore()
+export const SmsSendCode = () => {
+  const { downtime, sendCode } = useSmsStore()
 
   const form = useForm<ISendSms>({
     resolver: zodResolver(sendSmsSchema),
@@ -64,7 +64,6 @@ export const SmsSend = () => {
         <ButtonWithLoading
           type={"submit"}
           className={"w-full"}
-          loading={sendingCode}
           downtime={downtime}
         >
           发送验证码

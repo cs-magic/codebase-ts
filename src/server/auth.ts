@@ -8,6 +8,7 @@ import { type Adapter } from "next-auth/adapters"
 import Credentials from "next-auth/providers/credentials"
 import { db } from "@/server/db"
 import { SMS_PROVIDER_ID } from "@/config/const"
+import { $smsSignIn } from "@/server/sms"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -58,7 +59,7 @@ export const authOptions: NextAuthOptions = {
         const { code, phone } = credentials
         if (!code || !phone) throw new Error("no phone or code")
 
-        return null
+        return $smsSignIn(credentials)
       },
     }),
 

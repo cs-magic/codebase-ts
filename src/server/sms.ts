@@ -8,6 +8,10 @@ import { env } from "@/env"
 import Dysmsapi20170525, { SendSmsRequest } from "@alicloud/dysmsapi20170525"
 import * as Client from "@alicloud/openapi-client"
 import { sleep } from "@/lib/utils"
+import { RuntimeOptions } from "@alicloud/tea-util"
+import { db } from "@/server/db"
+import { SMS_PROVIDER_ID } from "@/config/const"
+import { ISmsSignIn } from "@/schema/sms"
 
 const config = new Client.Config({
   // 必填，您的 AccessKey ID
@@ -33,16 +37,75 @@ export const $sendSms = async (phone: string) => {
   try {
     console.log("[sms] sending: ", { phone, code })
     // 复制代码运行请自行打印 API 的返回值
-    const res = true
-    await sleep(1000)
-    // const res = await client.sendSmsWithOptions(
-    //   sendSmsRequest,
-    //   new RuntimeOptions({}),
-    // )
+    // const res = true
+    // await sleep(1000)
+
+    /**
+     * {
+     *   statusCode: 200,
+     *   body: SendSmsResponseBody {
+     *     bizId: '532323708714267957^0',
+     *     code: 'OK',
+     *     message: 'OK',
+     *     requestId: '441F81AC-3C53-56E3-8FB7-008901536C23'
+     *   }
+     * }
+     */
+    const res = await client.sendSmsWithOptions(
+      sendSmsRequest,
+      new RuntimeOptions({}),
+    )
     console.log("[sms] sent result: ", res)
-    return true
+    const ok = res.statusCode === 200 && res.body.code === "OK"
+    if (ok) {
+      // todo: link account
+
+      const id = {
+        providerAccountId: phone,
+        provider: SMS_PROVIDER_ID,
+      }
+      const update = {
+        access_token: code,
+        // 10 m
+        expires_at: Date.now() / 10000 + 10 * 60,
+      }
+      const account = await db.account.upsert({
+        where: {
+          provider_providerAccountId: id,
+        },
+        create: {
+          ...id,
+          type: "credentials",
+          ...update,
+          user: {
+            create: {},
+          },
+        },
+        update: update,
+      })
+      console.log("[sms] account: ", account)
+    }
+    return ok
   } catch (err) {
     console.log("[sms] sent error: ", err)
     return false
   }
+}
+
+export const $smsSignIn = async (values: ISmsSignIn) => {
+  const { phone, code } = values
+  const account = await db.account.findUnique({
+    where: {
+      provider_providerAccountId: {
+        providerAccountId: phone,
+        provider: SMS_PROVIDER_ID,
+      },
+      access_token: code,
+    },
+    include: { user: true },
+  })
+
+  if (!account) throw new Error("account not found")
+
+  return account.user
 }

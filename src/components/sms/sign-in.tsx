@@ -1,15 +1,14 @@
-import { useSmsStore } from "@/store/sms"
+import { useSmsStore } from "@/store/sms.slice"
 import { Label } from "@/components/ui/label"
 import { EditIcon } from "lucide-react"
 import { DigitContainer } from "@/components/containers"
 import { useInputVerifyCodes } from "@/hooks/use-input-verify-codes"
-import { ButtonWithLoading } from "@/components/buttons"
+import { useSignInResult } from "@/hooks/use-sms-sign-in-result"
 
 export const SmsSignIn = () => {
-  const { phone, setStage, downtime, sendCode, isSigningIn, code } =
-    useSmsStore()
-
   useInputVerifyCodes()
+
+  useSignInResult()
 
   return (
     <div className={"flex flex-col gap-4 w-full items-center"}>
@@ -20,50 +19,81 @@ export const SmsSignIn = () => {
         }
       >
         <div>请输入发送到您手机的短信验证码</div>
-        <div className={"font-semibold inline-flex items-center gap-1"}>
-          {phone}
-          <EditIcon
-            className={"w-4 h-4 cursor-pointer"}
-            onClick={() => {
-              setStage("toSendSms")
-            }}
-          />
-        </div>
+
+        <ReInputPhone />
       </div>
 
-      <div className={"flex justify-center gap-2"}>
-        {[...Array(6)].map((value, index) => (
-          <DigitContainer
-            key={index}
-            focus={index === code.length}
-            value={index < code.length ? code[index] : ""}
-            onKeyDown={(event) => {
-              event.preventDefault()
-            }}
-            onChange={(event) => null}
-          />
-        ))}
-      </div>
+      <InputVerifyCode />
 
-      <div className={"text-muted-foreground text-xs flex items-center "}>
-        没有收到验证码？
-        {downtime <= 0 ? (
-          <span
-            onClick={() => {
-              // currently phone must exist
-              sendCode({ phone })
-            }}
-            className={"hover:text-primary hover:underline cursor-pointer"}
-          >
-            重新发送
-          </span>
-        ) : (
-          `(${downtime}秒)`
-        )}
-      </div>
+      <ResendVerifyCode />
+    </div>
+  )
+}
 
-      {isSigningIn && (
-        <ButtonWithLoading className={"w-full"} loading={isSigningIn} />
+const ReInputPhone = () => {
+  const { phone, setStage } = useSmsStore((state) => ({
+    phone: state.phone,
+    setStage: state.setStage,
+  }))
+
+  return (
+    <div className={"font-semibold inline-flex items-center gap-1"}>
+      {phone}
+      <EditIcon
+        className={"w-4 h-4 cursor-pointer"}
+        onClick={() => {
+          setStage("toSendSms")
+        }}
+      />
+    </div>
+  )
+}
+
+const InputVerifyCode = () => {
+  const { code } = useSmsStore((state) => ({
+    code: state.code,
+  }))
+
+  return (
+    <div className={"flex justify-center gap-2"}>
+      {[...Array(6)].map((value, index) => (
+        <DigitContainer
+          key={index}
+          focus={index === code.length}
+          value={index < code.length ? code[index] : ""}
+          onKeyDown={(event) => {
+            event.preventDefault()
+          }}
+          // suppress (un)control
+          onChange={(event) => null}
+        />
+      ))}
+    </div>
+  )
+}
+
+const ResendVerifyCode = () => {
+  const { phone, downtime, sendCode } = useSmsStore((state) => ({
+    phone: state.phone,
+    downtime: state.downtime,
+    sendCode: state.sendCode,
+  }))
+
+  return (
+    <div className={"text-muted-foreground text-xs flex items-center "}>
+      没有收到验证码？
+      {downtime <= 0 ? (
+        <span
+          onClick={() => {
+            // currently phone must exist
+            sendCode({ phone })
+          }}
+          className={"hover:text-primary hover:underline cursor-pointer"}
+        >
+          重新发送
+        </span>
+      ) : (
+        `(${downtime}秒)`
       )}
     </div>
   )

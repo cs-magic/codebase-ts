@@ -1,11 +1,12 @@
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
-import { SMS_CODE_DOWNTIME } from "@/config/const"
+import { SMS_CODE_DOWNTIME, SMS_PROVIDER_ID } from "@/config/const"
 import { $sendSms } from "@/server/sms"
 import { ISendSms, ISmsSignIn } from "@/schema/sms"
-import { sleep } from "@/lib/utils"
 import { SetState } from "@/schema/utils"
 import { Dispatch, SetStateAction } from "react"
+import { signIn } from "next-auth/react"
+import { useUiStore } from "@/store/ui.slice"
 
 type SmsStage = "toSendSms" | "toAuth"
 
@@ -20,12 +21,12 @@ export interface SmsSlice {
   code: string
   setCode: Dispatch<SetStateAction<string>>
 
-  sendingCode: boolean
-  downtime: number
   sendCode: (values: ISendSms) => void
+  downtime: number
+  sentOk?: boolean
 
-  isSigningIn: boolean
   smsSignIn: () => void
+  signInOk?: boolean
 }
 
 export const useSmsStore = create<SmsSlice>()(
@@ -56,7 +57,7 @@ export const useSmsStore = create<SmsSlice>()(
       }
     },
 
-    sendingCode: false,
+    sendingCodeStatus: "default",
     downtime: 0,
     /**
      * 在 immer 中异步操作的要领，就是不要在 immer 中异步
@@ -67,15 +68,17 @@ export const useSmsStore = create<SmsSlice>()(
       // 同步 immer
       setState((state) => {
         state.phone = phone
-        state.sendingCode = true
       })
 
+      // UI 跨 store 同步
+      useUiStore.getState().setLoading(true)
       // 异步
       const res = await $sendSms(phone)
+      useUiStore.getState().setLoading(false)
 
       // 同步 immer
       setState((state) => {
-        state.sendingCode = false
+        state.sentOk = res
 
         if (res) {
           state.stage = "toAuth"
@@ -94,22 +97,25 @@ export const useSmsStore = create<SmsSlice>()(
       })
     },
 
-    isSigningIn: false,
+    signInStatus: "default",
     smsSignIn: async () => {
       const values: ISmsSignIn = {
         phone: getState().phone,
         code: getState().code,
       }
+
       console.log("[sms] sign in: ", values)
-      setState((state) => {
-        state.isSigningIn = true
+      useUiStore.getState().setLoading(true)
+      const res = await signIn(SMS_PROVIDER_ID, {
+        ...values,
+        redirect: false,
       })
+      useUiStore.getState().setLoading(false)
 
-      await sleep(1000)
+      console.log("[sms] sign in result: ", res)
 
-      console.log("[sms] signed in.")
       setState((state) => {
-        state.isSigningIn = false
+        state.signInOk = res?.ok
       })
     },
   })),
