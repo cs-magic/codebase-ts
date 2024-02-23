@@ -1,3 +1,5 @@
+"use client"
+
 import { useSmsStore } from "@/store/sms.slice"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -10,11 +12,15 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { SeparatorContainer } from "@/components/containers"
 import { Input } from "@/components/ui/input"
 import { ISendSms, sendSmsSchema } from "@/schema/sms"
 import { ButtonWithLoading } from "@/components/buttons"
+import Link from "next/link"
+import { getWechatAuthorizationUrl } from "@/server/wechat/auth/funcs/client"
+import { cn } from "@/lib/utils"
+import { useBrowserEnvironment } from "@/hooks/use-browser-environment"
 
 export const SmsSendCode = () => {
   const { downtime, sendCode } = useSmsStore()
@@ -27,6 +33,8 @@ export const SmsSendCode = () => {
     },
   })
 
+  const { isWechat } = useBrowserEnvironment()
+
   return (
     <Form {...form}>
       <form
@@ -38,14 +46,21 @@ export const SmsSendCode = () => {
           欢迎回来！请登录以开启魔法世界！
         </Label>
 
-        <Button
-          size={"sm"}
-          className={"w-full bg-wechat text-white hover:bg-wechat/50"}
-        >
-          微信登录
-        </Button>
+        {isWechat && (
+          <>
+            <Link
+              href={getWechatAuthorizationUrl()}
+              className={cn(
+                buttonVariants({ size: "sm" }),
+                "w-full bg-wechat text-white hover:bg-wechat/50",
+              )}
+            >
+              微信登录
+            </Link>
 
-        <SeparatorContainer>或者</SeparatorContainer>
+            <SeparatorContainer>或者</SeparatorContainer>
+          </>
+        )}
 
         <FormField
           name={"phone"}

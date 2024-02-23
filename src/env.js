@@ -34,6 +34,7 @@ export const env = createEnv({
     ALI_SK: z.string(),
     TENCENT_AK: z.string(),
     TENCENT_SK: z.string(),
+    WECHAT_APP_SECRET: z.string(),
   },
 
   /**
@@ -60,6 +61,7 @@ export const env = createEnv({
     ALI_SK: process.env.ALI_SK,
     TENCENT_AK: process.env.TENCENT_AK,
     TENCENT_SK: process.env.TENCENT_SK,
+    WECHAT_APP_SECRET: process.env.WECHAT_APP_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
