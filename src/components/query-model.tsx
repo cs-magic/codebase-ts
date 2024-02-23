@@ -1,6 +1,6 @@
 "use client"
 
-import { useLlmStore } from "@/store/model.slice"
+import { useModelStore } from "@/store/model.slice"
 import { useRef } from "react"
 import { Textarea } from "@/components/textarea"
 import { toast } from "sonner"
@@ -10,7 +10,7 @@ import { ICreateConversationBody, IPostLlmRes } from "@/schema/api"
 import { useLlmOutput } from "@/hooks/use-llm-output"
 
 export const QueryModel = () => {
-  const { modelName, setCid, cid } = useLlmStore((state) => ({
+  const { modelName, setCid, cid } = useModelStore((state) => ({
     cid: state.conversationId,
     setCid: state.setConversationId,
     modelName: state.modelName,
@@ -20,10 +20,9 @@ export const QueryModel = () => {
   const { output } = useLlmOutput()
 
   return (
-    <div>
-      <div>ConversationID: {cid}</div>
-
+    <div className={"w-full"}>
       <Textarea
+        className={"w-full"}
         ref={refInput}
         onKeyDown={async (event) => {
           if (!refInput.current) return

@@ -17,9 +17,9 @@ export type OpenAIModelType =
   | "gpt-3.5-turbo-0613"
   | "gpt-3.5-turbo-16k-0613"
 
-export type LlmModelType = OpenAIModelType | "kimi"
+export type ModelType = OpenAIModelType | "kimi"
 
 export interface LlmModel {
-  id: LlmModelType
+  id: ModelType
   title: string
 }

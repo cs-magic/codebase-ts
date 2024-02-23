@@ -1,21 +1,17 @@
-import { LlmModelType } from "@/schema/llm"
+import { ModelType } from "@/schema/llm"
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { devtools, persist } from "zustand/middleware"
 
-export interface LlmSlice {
-  modelName: LlmModelType
-  setModelName: (modelName: LlmModelType) => void
+export interface ModelSlice {
+  modelName: ModelType
+  setModelName: (modelName: ModelType) => void
   conversationId: string | null
   setConversationId: (v: string) => void
   cleanConversationId: () => void
 }
 
-/**
- * zustand doesn't recommend `create without curried workaround`
- * see: https://github.com/pmndrs/zustand/blob/main/docs/guides/typescript.md#create-without-curried-workaround
- */
-export const useLlmStore = create<LlmSlice>()(
+export const useModelStore = create<ModelSlice>()(
   devtools(
     persist(
       immer((setState, getState, store) => ({
@@ -24,6 +20,7 @@ export const useLlmStore = create<LlmSlice>()(
           setState((state) => {
             state.modelName = modelName
           }),
+
         conversationId: null,
         setConversationId: (v) =>
           setState((state) => {

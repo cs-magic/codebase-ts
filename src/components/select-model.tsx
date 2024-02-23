@@ -1,6 +1,6 @@
 "use client"
 
-import { useLlmStore } from "@/store/model.slice"
+import { useModelStore } from "@/store/model.slice"
 import {
   Select,
   SelectContent,
@@ -13,14 +13,14 @@ import {
 import { llmModels } from "@/config/llm"
 
 export const SelectModel = () => {
-  const [model, setModel] = useLlmStore((state) => [
+  const [model, setModel] = useModelStore((state) => [
     state.modelName,
     state.setModelName,
   ])
 
   return (
     <Select value={model} onValueChange={setModel}>
-      <SelectTrigger>
+      <SelectTrigger className={"w-fit"}>
         <SelectValue placeholder={"Models"} />
       </SelectTrigger>
 

@@ -24,9 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`font-sans ${inter.variable} flex items-center justify-center min-h-screen`}
-      >
+      <body className={`font-sans ${inter.variable} h-screen`}>
         <ThemeProvider defaultTheme={"system"} attribute={"class"}>
           <TRPCReactProvider>
             {children}

@@ -1,9 +1,9 @@
-import { useLlmStore } from "@/store/model.slice"
+import { useModelStore } from "@/store/model.slice"
 import { useEffect, useState } from "react"
 import { ITokenEventData } from "@/schema/api"
 
 export const useLlmOutput = () => {
-  const { cid } = useLlmStore((state) => ({
+  const { cid } = useModelStore((state) => ({
     cid: state.conversationId,
   }))
   const [output, setOutput] = useState("")
