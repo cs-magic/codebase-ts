@@ -1,46 +1,15 @@
 import { Container } from "@/components/containers"
-import { Textarea } from "@/components/textarea"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { llmModels } from "@/config/llm"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { SelectModel } from "@/components/select-model"
+import { QueryModel } from "@/components/query-model"
 
 export default function HomePage() {
   return (
     <Container orientation={"vertical"}>
-      <div>Wat To AGI !</div>
+      <div>Way To AGI !</div>
 
-      <Select>
-        <SelectTrigger>
-          <SelectValue placeholder={"Models"} />
-        </SelectTrigger>
+      <SelectModel />
 
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Models</SelectLabel>
-
-            {llmModels.map((llmModel) => (
-              <SelectItem key={llmModel.id} value={llmModel.id}>
-                {llmModel.title}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <Textarea />
+      <QueryModel />
     </Container>
   )
 }
