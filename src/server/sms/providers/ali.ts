@@ -7,11 +7,7 @@ import { env } from "@/env"
  */
 import Dysmsapi20170525, { SendSmsRequest } from "@alicloud/dysmsapi20170525"
 import * as Client from "@alicloud/openapi-client"
-import { sleep } from "@/lib/utils"
 import { RuntimeOptions } from "@alicloud/tea-util"
-import { db } from "@/server/db"
-import { SMS_PROVIDER_ID } from "@/config/const"
-import { ISmsSignIn } from "@/schema/sms"
 
 const config = new Client.Config({
   // 必填，您的 AccessKey ID
@@ -25,9 +21,7 @@ config.endpoint = `dysmsapi.aliyuncs.com`
 
 const client = new Dysmsapi20170525(config)
 
-export const $sendSms = async (phone: string) => {
-  const code = Math.random().toString().slice(2, 8)
-
+export const $sendSmsViaAli = async (phone: string, code: string) => {
   const sendSmsRequest = new SendSmsRequest({
     phoneNumbers: phone,
     signName: "计算机魔法研究",
@@ -56,56 +50,9 @@ export const $sendSms = async (phone: string) => {
       new RuntimeOptions({}),
     )
     console.log("[sms] sent result: ", res)
-    const ok = res.statusCode === 200 && res.body.code === "OK"
-    if (ok) {
-      // todo: link account
-
-      const id = {
-        providerAccountId: phone,
-        provider: SMS_PROVIDER_ID,
-      }
-      const update = {
-        access_token: code,
-        // 10 m
-        expires_at: Date.now() / 10000 + 10 * 60,
-      }
-      const account = await db.account.upsert({
-        where: {
-          provider_providerAccountId: id,
-        },
-        create: {
-          ...id,
-          type: "credentials",
-          ...update,
-          user: {
-            create: {},
-          },
-        },
-        update: update,
-      })
-      console.log("[sms] account: ", account)
-    }
-    return ok
+    return res.statusCode === 200 && res.body.code === "OK"
   } catch (err) {
     console.log("[sms] sent error: ", err)
     return false
   }
-}
-
-export const $smsSignIn = async (values: ISmsSignIn) => {
-  const { phone, code } = values
-  const account = await db.account.findUnique({
-    where: {
-      provider_providerAccountId: {
-        providerAccountId: phone,
-        provider: SMS_PROVIDER_ID,
-      },
-      access_token: code,
-    },
-    include: { user: true },
-  })
-
-  if (!account) throw new Error("account not found")
-
-  return account.user
 }

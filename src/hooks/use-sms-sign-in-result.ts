@@ -1,27 +1,17 @@
 import { useSmsStore } from "@/store/sms.slice"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { toast } from "sonner"
 
 export const useSignInResult = () => {
-  const { signInStatus } = useSmsStore((state) => ({
-    signInStatus: state.signInOk,
+  const { signInOk } = useSmsStore((state) => ({
+    signInOk: state.signInOk,
   }))
   const router = useRouter()
 
   useEffect(() => {
-    switch (signInStatus) {
-      case true:
-        toast.success("登录成功！")
-        router.push("/")
-        break
-
-      case false:
-        toast.error("登录失败！")
-        break
-
-      default:
-        break
-    }
-  }, [signInStatus])
+    /**
+     * can't redirect in zustand, ref: https://chat.openai.com/c/3af56c80-278c-4890-9976-7a2852843c3b
+     */
+    if (signInOk === true) router.push("/")
+  }, [signInOk])
 }

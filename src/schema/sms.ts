@@ -12,3 +12,9 @@ export const smsSignInSchema = sendSmsSchema.and(
   }),
 )
 export type ISmsSignIn = z.infer<typeof smsSignInSchema>
+
+export type SmsProvider =
+  // 计算机魔法研究，无白名单
+  | "ali"
+  // 邢健的个人博客，有白名单
+  | "tencent"

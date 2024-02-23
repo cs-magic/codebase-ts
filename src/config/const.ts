@@ -9,3 +9,4 @@ export const PHONE_REGEX =
 // todo: server side NODE_ENV
 export const SMS_CODE_DOWNTIME = 3
 export const DEFAULT_AVATAR = "/cover_growth.jpg"
+export const SMS_EXPIRE_MINUTES = 10

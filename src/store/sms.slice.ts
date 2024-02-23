@@ -1,12 +1,14 @@
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { SMS_CODE_DOWNTIME, SMS_PROVIDER_ID } from "@/config/const"
-import { $sendSms } from "@/server/sms"
 import { ISendSms, ISmsSignIn } from "@/schema/sms"
 import { SetState } from "@/schema/utils"
 import { Dispatch, SetStateAction } from "react"
 import { signIn } from "next-auth/react"
 import { useUiStore } from "@/store/ui.slice"
+import { $sendSms } from "@/server/sms/functions"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 type SmsStage = "toSendSms" | "toAuth"
 
@@ -73,14 +75,16 @@ export const useSmsStore = create<SmsSlice>()(
       // UI 跨 store 同步
       useUiStore.getState().setLoading(true)
       // 异步
-      const res = await $sendSms(phone)
+      const ok = await $sendSms(phone, "tencent")
       useUiStore.getState().setLoading(false)
 
       // 同步 immer
       setState((state) => {
-        state.sentOk = res
+        state.sentOk = ok
+        if (ok) toast.success("验证码发送成功，请及时查收！")
+        else toast.error("验证码发送失败！")
 
-        if (res) {
+        if (ok) {
           state.stage = "toAuth"
           state.downtime = SMS_CODE_DOWNTIME
 
@@ -97,7 +101,6 @@ export const useSmsStore = create<SmsSlice>()(
       })
     },
 
-    signInStatus: "default",
     smsSignIn: async () => {
       const values: ISmsSignIn = {
         phone: getState().phone,
@@ -115,7 +118,12 @@ export const useSmsStore = create<SmsSlice>()(
       console.log("[sms] sign in result: ", res)
 
       setState((state) => {
-        state.signInOk = res?.ok
+        const ok = !!res?.ok
+        state.signInOk = ok
+
+        if (ok) {
+          toast.success("登录成功！")
+        } else toast.error("登录失败！")
       })
     },
   })),

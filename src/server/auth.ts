@@ -5,10 +5,8 @@ import {
   type NextAuthOptions,
 } from "next-auth"
 import { type Adapter } from "next-auth/adapters"
-import Credentials from "next-auth/providers/credentials"
 import { db } from "@/server/db"
-import { SMS_PROVIDER_ID } from "@/config/const"
-import { $smsSignIn } from "@/server/sms"
+import { SmsProvider } from "@/server/sms/provider"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -37,9 +35,16 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  session: {
+    // Credentials should use `jwt`, ref: https://github.com/nextauthjs/next-auth/issues/3970#issuecomment-1046347097
+    strategy: "jwt",
+    maxAge: 10 * 60,
+  },
+
   callbacks: {
     // compatible with credential providers
     jwt: ({ session, user, profile, token }) => {
+      console.log("[next-auth] jwt: ", { user, token })
       if (user) {
         token.sub = user.id
       }
@@ -59,20 +64,7 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
-    Credentials({
-      id: SMS_PROVIDER_ID,
-      credentials: {
-        phone: { type: "string" },
-        code: { type: "string" },
-      },
-      authorize: (credentials, req) => {
-        if (!credentials) throw new Error("no credentials")
-        const { code, phone } = credentials
-        if (!code || !phone) throw new Error("no phone or code")
-
-        return $smsSignIn(credentials)
-      },
-    }),
+    SmsProvider,
 
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,
