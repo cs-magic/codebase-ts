@@ -1,8 +1,8 @@
 "use client"
 
-import { ThemeProvider } from "next-themes"
-import { PropsWithChildren } from "react"
+import { ThemeProvider as NextThemeProvider } from "next-themes"
+import { ThemeProviderProps } from "next-themes/dist/types"
 
-export default function ThemeProvider_({ children }: PropsWithChildren) {
-  return <ThemeProvider defaultTheme={"dark"}>{children}</ThemeProvider>
+export default function ThemeProvider_(props: ThemeProviderProps) {
+  return <NextThemeProvider {...props} />
 }
