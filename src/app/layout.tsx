@@ -23,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning>
       <body className={`font-sans ${inter.variable} h-screen`}>
-        <ThemeProvider defaultTheme={"system"} attribute={"class"}>
+        <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
           <TRPCReactProvider>
             {children}
 

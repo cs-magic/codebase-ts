@@ -2,15 +2,18 @@ import { Container, IconContainer } from "@/components/containers"
 import { SelectModel } from "@/components/select-model"
 import { QueryModel } from "@/components/query-model"
 import { CircleUser } from "lucide-react"
+import Link from "next/link"
 
 export default function HomePage() {
   return (
     <div className={"w-full h-full p-4 flex flex-col"}>
       <div className={"w-full inline-flex items-center"}>
         <div className={"ml-auto"}>
-          <IconContainer>
-            <CircleUser />
-          </IconContainer>
+          <Link href={"/auth"}>
+            <IconContainer>
+              <CircleUser />
+            </IconContainer>
+          </Link>
         </div>
       </div>
 

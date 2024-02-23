@@ -1,5 +1,6 @@
 import { HTMLAttributes, PropsWithChildren } from "react"
 import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator"
 
 export type Orientation = "horizontal" | "vertical"
 
@@ -30,6 +31,18 @@ export const IconContainer = ({ children }: PropsWithChildren) => {
       }
     >
       {children}
+    </div>
+  )
+}
+
+export const SeparatorContainer = ({ children }: PropsWithChildren) => {
+  return (
+    <div className={"w-full flex items-center justify-center overflow-hidden"}>
+      <Separator orientation={"horizontal"} className={"grow"} />
+      <div className={" text-xs text-muted-foreground shrink-0 mx-4"}>
+        {children}
+      </div>
+      <Separator orientation={"horizontal"} className={"grow"} />
     </div>
   )
 }
