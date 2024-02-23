@@ -25,11 +25,11 @@ export interface SmsSlice {
   sendCode: (values: ISendSms) => void
 
   isSigningIn: boolean
-  smsSignIn: (values: ISmsSignIn) => void
+  smsSignIn: () => void
 }
 
 export const useSmsStore = create<SmsSlice>()(
-  immer((setState, getState) => ({
+  immer((setState, getState, store) => ({
     stage: "toSendSms",
     setStage: (stage) =>
       setState((state) => {
@@ -43,11 +43,18 @@ export const useSmsStore = create<SmsSlice>()(
       }),
 
     code: "",
-    setCode: (code) =>
+    setCode: (code) => {
       setState((state) => {
         // todo: generic ?
         state.code = typeof code === "function" ? code(state.code) : code
-      }),
+      })
+
+      // 直接在这里登录，没必要在前端 hook 了
+      // attention: 要在外面获取 getState，不能在 setState 里面，里面是 draft
+      if (getState().code.length === 6) {
+        getState().smsSignIn()
+      }
+    },
 
     sendingCode: false,
     downtime: 0,
@@ -88,11 +95,19 @@ export const useSmsStore = create<SmsSlice>()(
     },
 
     isSigningIn: false,
-    smsSignIn: async (values) => {
+    smsSignIn: async () => {
+      const values: ISmsSignIn = {
+        phone: getState().phone,
+        code: getState().code,
+      }
+      console.log("[sms] sign in: ", values)
       setState((state) => {
         state.isSigningIn = true
       })
+
       await sleep(1000)
+
+      console.log("[sms] signed in.")
       setState((state) => {
         state.isSigningIn = false
       })
