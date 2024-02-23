@@ -46,3 +46,25 @@ export const SeparatorContainer = ({ children }: PropsWithChildren) => {
     </div>
   )
 }
+
+export const AuthContainer = ({ children }: PropsWithChildren) => {
+  return (
+    <div
+      className={
+        " h-full mx-auto flex flex-col justify-center items-center gap-4 bg-muted"
+      }
+    >
+      <div
+        className={
+          "rounded-lg w-[480px] p-8 bg-background flex flex-col items-center gap-8"
+        }
+      >
+        <div className={"rounded-lg w-full"}>{children}</div>
+
+        <div className={"text-xs text-muted-foreground mt-8"}>
+          由<span className={"font-semibold mx-1"}>魔法社</span>提供安全支持
+        </div>
+      </div>
+    </div>
+  )
+}

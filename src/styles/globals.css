@@ -3,7 +3,10 @@
 @tailwind utilities;
  
 @layer base {
+
   :root {
+    --wechat: 118 99% 35%;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
