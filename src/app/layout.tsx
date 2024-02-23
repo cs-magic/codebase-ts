@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "@/trpc/react"
 import ThemeProvider from "@/providers/theme"
 import { Toaster } from "@/components/ui/sonner"
 import { SessionProvider } from "@/providers/session"
+import { LoadingAlertDialog } from "@/components/dialog"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,6 +33,8 @@ export default function RootLayout({
               {children}
 
               <Toaster />
+
+              <LoadingAlertDialog />
             </TRPCReactProvider>
           </SessionProvider>
         </ThemeProvider>

@@ -27,6 +27,8 @@ export default function WechatProvider<P extends IWechatAdaptedProfile>(
     id: WECHAT_PROVIDER_ID,
     name: "wx-auth",
     type: "oauth", // fixed
+    // necessary for OAUTH CALLBACK
+    checks: ["state"],
 
     authorization: getWechatAuthorizationUrl(),
 

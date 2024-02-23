@@ -7,6 +7,9 @@ import {
 import { type Adapter } from "next-auth/adapters"
 import { db } from "@/server/db"
 import { SmsProvider } from "@/server/sms/provider"
+import WechatProvider from "@/server/wechat/auth/provider"
+import { env } from "@/env"
+import { WECHAT_APP_ID } from "@/config/const"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -35,6 +38,8 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  debug: true,
+
   session: {
     // Credentials should use `jwt`, ref: https://github.com/nextauthjs/next-auth/issues/3970#issuecomment-1046347097
     strategy: "jwt",
@@ -42,6 +47,11 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
+    // ref: https://github.com/nextauthjs/next-auth/discussions/7491#discussioncomment-5954336
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
+
     // compatible with credential providers
     jwt: ({ session, user, profile, token }) => {
       console.log("[next-auth] jwt: ", { user, token })
@@ -64,6 +74,11 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
+    WechatProvider({
+      clientId: WECHAT_APP_ID,
+      clientSecret: env.WECHAT_APP_SECRET,
+    }),
+
     SmsProvider,
 
     // DiscordProvider({

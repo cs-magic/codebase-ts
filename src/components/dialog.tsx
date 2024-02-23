@@ -1,3 +1,5 @@
+"use client"
+
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog"
 import { LoaderIcon } from "lucide-react"
 import { useUiStore } from "@/store/ui.slice"

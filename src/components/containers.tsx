@@ -63,12 +63,12 @@ export const AuthContainer = ({ children }: PropsWithChildren) => {
   return (
     <div
       className={
-        " h-full mx-auto flex flex-col justify-center items-center gap-4 bg-muted"
+        " h-full mx-auto flex flex-col justify-center items-center gap-4 bg-muted p-4"
       }
     >
       <div
         className={
-          "rounded-lg w-[480px] p-8 bg-background flex flex-col items-center gap-8"
+          "rounded-lg w-full sm:w-[480px] p-8 bg-background flex flex-col items-center gap-8"
         }
       >
         <div className={"rounded-lg w-full"}>{children}</div>

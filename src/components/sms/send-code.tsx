@@ -12,15 +12,15 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Label } from "@/components/ui/label"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { SeparatorContainer } from "@/components/containers"
 import { Input } from "@/components/ui/input"
 import { ISendSms, sendSmsSchema } from "@/schema/sms"
 import { ButtonWithLoading } from "@/components/buttons"
-import Link from "next/link"
-import { getWechatAuthorizationUrl } from "@/server/wechat/auth/funcs/client"
 import { cn } from "@/lib/utils"
 import { useBrowserEnvironment } from "@/hooks/use-browser-environment"
+import { signIn } from "next-auth/react"
+import { WECHAT_PROVIDER_ID } from "@/server/wechat/auth/config"
 
 export const SmsSendCode = () => {
   const { downtime, sendCode } = useSmsStore()
@@ -48,15 +48,16 @@ export const SmsSendCode = () => {
 
         {isWechat && (
           <>
-            <Link
-              href={getWechatAuthorizationUrl()}
-              className={cn(
-                buttonVariants({ size: "sm" }),
-                "w-full bg-wechat text-white hover:bg-wechat/50",
-              )}
+            <Button
+              size={"sm"}
+              className={cn("w-full bg-wechat text-white hover:bg-wechat/50")}
+              onClick={(event) => {
+                event.preventDefault()
+                void signIn(WECHAT_PROVIDER_ID, { callbackUrl: "/" })
+              }}
             >
               微信登录
-            </Link>
+            </Button>
 
             <SeparatorContainer>或者</SeparatorContainer>
           </>
