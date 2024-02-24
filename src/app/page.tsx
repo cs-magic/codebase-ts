@@ -5,6 +5,7 @@ import { SelectModel } from "@/components/model/select-model"
 import { QueryModel } from "@/components/model/query-model"
 import { Branding } from "@/components/branding"
 import { Sponsors } from "@/components/sponsors"
+import { TV } from "@/components/model/tv"
 
 export default async function HomePage() {
   const session = await getServerSession()
@@ -23,6 +24,8 @@ export default async function HomePage() {
         className={"grow w-full sm:w-3/5 mx-auto "}
       >
         <Branding />
+
+        <TV />
 
         <SelectModel />
 
