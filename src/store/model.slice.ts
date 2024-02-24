@@ -1,9 +1,11 @@
-import { ModelType } from "@/schema/llm"
+import { ModelType, ScenarioType } from "@/schema/llm"
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { devtools, persist } from "zustand/middleware"
 
 export interface ModelSlice {
+  scenarioType: ScenarioType
+  setScenarioType: (scenarioType: ScenarioType) => void
   modelName: ModelType
   setModelName: (modelName: ModelType) => void
   conversationId: string | null
@@ -15,6 +17,12 @@ export const useModelStore = create<ModelSlice>()(
   devtools(
     persist(
       immer((setState, getState, store) => ({
+        scenarioType: "text2text",
+        setScenarioType: (scenarioType) =>
+          setState((state) => {
+            state.scenarioType = scenarioType
+          }),
+
         modelName: "gpt-3.5-turbo",
         setModelName: (modelName) =>
           setState((state) => {

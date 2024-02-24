@@ -20,8 +20,8 @@ export const QueryModel = () => {
   const refInput = useRef<HTMLTextAreaElement>(null)
   const { output } = useLlmOutput()
 
-  const addPost = api.post.add.useMutation()
-  const onAddPost = api.post.onAdd.useSubscription(undefined, {
+  const addMessage = api.message.add.useMutation()
+  const onAddMessage = api.message.onAdd.useSubscription(undefined, {
     onData: (data) => {
       console.log({ data })
     },
@@ -47,7 +47,7 @@ export const QueryModel = () => {
           event.preventDefault()
 
           console.log({ key, modelName, prompt })
-          addPost.mutate({ text: prompt })
+          addMessage.mutate({ text: prompt })
 
           switch (modelName) {
             case "gpt-3.5-turbo":

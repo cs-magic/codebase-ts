@@ -10,7 +10,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <ShadcnTextarea
         ref={ref}
-        className={cn("resize-none", className)}
+        className={cn("resize-none focus-visible:ring-1", className)}
         {...props}
       />
     )

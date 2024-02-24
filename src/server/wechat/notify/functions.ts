@@ -46,6 +46,7 @@ export const getWechatSignature = async (ticket: string, url: string) => {
   }
   const str = Object.keys(params)
     .sort()
+    // @ts-ignore
     .map((k) => `${k}=${params[k]}`)
     .join("&")
   const signature = sha1(str)
@@ -78,7 +79,7 @@ export async function sendWechatNotification(
     method: "POST",
     body,
   })
-  const resData = await res.json()
+  const resData = (await res.json()) as unknown
   console.log("[wx-sdk] notification res: ", resData)
   return resData
 }

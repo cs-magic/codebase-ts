@@ -1,5 +1,3 @@
-import { z } from "zod"
-
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -7,32 +5,45 @@ import {
 } from "@/server/api/trpc"
 import { db } from "@/server/db"
 import { observable } from "@trpc/server/observable"
-import { Post } from ".prisma/client"
+import { $Enums, Post } from "@prisma/client"
 import EventEmitter from "events"
+import { createMessageSchema } from "@/schema/message"
+import ConversationType = $Enums.ConversationType
 
 class MyEventEmitter extends EventEmitter {}
 
 const ee = new MyEventEmitter()
 
-export const postRouter = createTRPCRouter({
+export const messageRouter = createTRPCRouter({
   add: protectedProcedure
-    .input(
-      z.object({
-        id: z.string().optional(),
-        text: z.string(),
-      }),
-    )
+    .input(createMessageSchema)
     .mutation(async ({ input, ctx }) => {
-      const { name } = ctx.user
-      const post = await db.post.create({
+      const { id: userId } = ctx.user
+      const { text, id: conversationId = "" } = input
+      const message = await db.message.create({
         data: {
-          ...input,
-          name,
+          fromUser: {
+            connect: {
+              id: userId,
+            },
+          },
+          content: text,
+          toConversation: {
+            connectOrCreate: {
+              where: { id: conversationId },
+              create: {
+                type: ConversationType.LLM,
+                users: {
+                  connect: [{ id: userId }],
+                },
+              },
+            },
+          },
         },
       })
 
-      ee.emit("add", post)
-      return post
+      ee.emit("add", message)
+      return message
     }),
 
   onAdd: publicProcedure.subscription(() => {

@@ -49,11 +49,15 @@
     --popover-foreground: 210 40% 98%;
  
     --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
+    /*--primary-foreground: 222.2 47.4% 11.2%;*/
+    /* pink-500 （粉）*/
+    --primary-foreground: 330 81% 60%;
+
     --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
+    /*--secondary-foreground: 210 40% 98%;*/
+    /* indigo-500 (蓝)*/
+    --secondary-foreground: 239 84% 67%;
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
  
@@ -75,5 +79,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .primary-gradient {
+    @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-transparent bg-clip-text
   }
 }

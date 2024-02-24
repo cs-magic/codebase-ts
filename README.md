@@ -10,16 +10,20 @@
 yarn config set "strict-ssl" false -g
 ```
 
-### nginx
+### [UI] text with gradient color
+
+- How to do gradient text with Tailwind CSS, https://design2tailwind.com/blog/tailwindcss-gradient-text/
+
+### [Backend] nginx
 
 - redirect problem from `http` to `https`, see: https://serverfault.com/a/680592
   - solution: 把 `$servername` 改成 `$host` 就可以了
 
-### wechat-auth
+### [Core] wechat-auth
 
 虽然微信登录起步是访问一个 open-wechat 的网址，但不能直接点击跳转，而是在 provider 的 authorizationUrl 里配置好后，在程序里使用 `signIn` 去操作，否则会报 `State cookie was missing`。
 
-### zustand
+### [Core] zustand
 
 - zustand doesn't recommend `create without curried workaround`, see: https://github.com/pmndrs/zustand/blob/main/docs/guides/typescript.md#create-without-curried-workaround
 

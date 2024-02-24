@@ -13,7 +13,7 @@ export const UserButton = () => {
   return (
     <Link href={user ? "/dashboard" : "/auth"}>
       <IconContainer>
-        <CircleUser className={cn(user && "text-green-500")} />
+        <CircleUser className={cn(user && "text-primary-foreground")} />
       </IconContainer>
     </Link>
   )

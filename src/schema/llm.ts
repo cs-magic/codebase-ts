@@ -1,3 +1,20 @@
+export type SelectorItem<T = string> = {
+  id: T
+  title: string
+  children?: SelectorItem<T>[]
+}
+
+export type ScenarioType =
+  | "text2text"
+  | "text2image"
+  | "text2video"
+  | "text2music"
+  | "image2image"
+
+export type Scenario = SelectorItem<ScenarioType>
+
+export type CompanyId = "openai" | "moonshot"
+
 /**
  * ref: https://github.com/openai/openai-python/issues/952#issuecomment-1857207339
  */
@@ -19,7 +36,4 @@ export type OpenAIModelType =
 
 export type ModelType = OpenAIModelType | "kimi"
 
-export interface LlmModel {
-  id: ModelType
-  title: string
-}
+export type Model = SelectorItem<string>

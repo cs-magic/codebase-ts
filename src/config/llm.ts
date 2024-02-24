@@ -1,20 +1,50 @@
-import { LlmModel } from "@/schema/llm"
+import { Model, Scenario } from "@/schema/llm"
 
-export const llmModels: LlmModel[] = [
+export const scenarios: Scenario[] = [
+  { id: "text2text", title: "文生文" },
+  { id: "text2image", title: "文生图" },
+  { id: "text2video", title: "文生视频" },
+  { id: "text2music", title: "文生音乐" },
+  { id: "image2image", title: "图生图" },
+]
+
+export const llmModels: Model[] = [
   {
-    id: "gpt-3.5-turbo",
-    title: "ChatGPT 3.5",
+    id: "openai",
+    title: "Open AI",
+    children: [
+      {
+        id: "gpt-3.5-turbo",
+        title: "ChatGPT 3.5",
+      },
+      {
+        id: "gpt-4",
+        title: "ChatGPT 4",
+      },
+      {
+        id: "gpt-4-32k",
+        title: "ChatGPT 4 (32K)",
+      },
+    ],
   },
   {
-    id: "gpt-4",
-    title: "ChatGPT 4",
+    id: "moonshot",
+    title: "月之暗面",
+    children: [
+      {
+        id: "kimi",
+        title: "Kimi",
+      },
+    ],
   },
   {
-    id: "gpt-4-32k",
-    title: "ChatGPT 4 (32K)",
-  },
-  {
-    id: "kimi",
-    title: "Kimi",
+    id: "thu-wangguan",
+    title: "王冠",
+    children: [
+      {
+        id: "openchat-3.5",
+        title: "Open Chat 3.5",
+      },
+    ],
   },
 ]

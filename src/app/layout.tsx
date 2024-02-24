@@ -16,8 +16,8 @@ const inter = Inter({
 })
 
 export const metadata = {
-  title: "Way To AGI",
-  description: "Way To AGI",
+  title: "Sokka",
+  description: "Sokka | Soga | WayToAGI | CS-Magic | CSMagic",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 }
 
