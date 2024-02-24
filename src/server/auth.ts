@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // compatible with credential providers
     jwt: ({ session, user, profile, token }) => {
-      console.log("[next-auth] jwt: ", { user, token })
+      // console.log("[next-auth] jwt: ", { user, token })
       if (user) {
         token.sub = user.id
       }
@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     session: ({ session, user, token }) => {
-      console.log("[next-auth] session: ", { session, user })
+      // console.log("[next-auth] session: ", { session, user })
       return {
         ...session,
         user: {

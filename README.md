@@ -10,6 +10,14 @@
 yarn config set "strict-ssl" false -g
 ```
 
+### [DevOps] 控制台颜色
+
+首先，我们读了 trpc 的 loggerLink 源码，它是用 ansi/css 两种写法分别决定 node/browser 颜色的
+
+我尝试了 colors, chalk（[基于gpt](https://chat.openai.com/c/756f58ea-4d30-4b74-9c52-e4847dd2fdbf)），都只能 node 用
+
+最后在[ chalk 的一个 issue](https://github.com/chalk/chalk/issues/535#issuecomment-1072761585) 里顺着别人的路用了 `ansi-colors`
+
 ### [Core] Websocket Integration
 
 - vercel 不推荐，参考：

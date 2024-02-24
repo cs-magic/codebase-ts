@@ -1,19 +1,37 @@
 import { Channel } from "pusher-js"
 import { useEffect } from "react"
-import { EventType, EventData, pusherClient } from "@/puser/config"
+import { pusherClient } from "@/puser/config"
+import { EventCallback, EventType } from "@/puser/schema"
 
+import "colors"
+import c from "ansi-colors"
+
+let n = 0
 export const useBindPusherEvent = <T extends EventType>(
-  eventType: T,
-  f: (v: EventData<T>) => void,
-  options?: { channel?: Channel },
+  type: T,
+  f: EventCallback<T>,
+  options?: { channel?: Channel; enabled?: boolean },
 ) => {
-  const obj = options?.channel ?? pusherClient
+  const target = options?.channel ?? pusherClient
+  const enabled = options?.enabled !== false
+
+  const call: EventCallback<T> = (data) => {
+    ++n
+    console.log(c.bgBlueBright.black.bold(` >> #${n} ${type} `), data)
+    const result = f(data)
+    console.log(c.bgMagenta.whiteBright.bold(` << #${n} ${type} `), result)
+    return result
+  }
 
   useEffect(() => {
-    obj.bind(eventType, f)
+    if (!enabled) return
+
+    target.bind(type, call)
 
     return () => {
-      obj.unbind(eventType, f)
+      target.unbind(type, call)
     }
-  }, [options?.channel])
+  }, [options])
+
+  return { enabled, target }
 }

@@ -10,7 +10,7 @@ export const useLlmOutput = () => {
 
   useEffect(() => {
     if (!cid) return
-    console.log({ cid })
+    // console.log({ cid })
     const sse = new EventSource(`/api/llm?c=${cid}`)
     sse.addEventListener("token", (ev: MessageEvent<string>) => {
       const data = JSON.parse(ev.data) as ITokenEventData

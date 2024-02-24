@@ -3,8 +3,8 @@ import { db } from "@/server/db"
 import { $Enums } from "@prisma/client"
 import { createMessageSchema } from "@/schema/message"
 
-import { pusherSend } from "@/puser/config"
 import ConversationType = $Enums.ConversationType
+import { pusherSend } from "@/puser/utils"
 
 export const messageRouter = createTRPCRouter({
   add: protectedProcedure

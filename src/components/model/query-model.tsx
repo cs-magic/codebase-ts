@@ -1,7 +1,7 @@
 "use client"
 
 import { useModelStore } from "@/store/model.slice"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Textarea } from "@/components/textarea"
 import { toast } from "sonner"
 
@@ -10,8 +10,7 @@ import { useLlmOutput } from "@/hooks/use-llm-output"
 import { api } from "@/trpc/react"
 import { TODO } from "@/config/ui"
 
-import { EventData, pusherClient } from "@/puser/config"
-import { v4 } from "uuid"
+import { pusherClient } from "@/puser/config"
 import { Channel } from "pusher-js"
 import { useBindPusherEvent } from "@/puser/hooks"
 
@@ -29,7 +28,6 @@ export const QueryModel = () => {
 
   const [channelId, setChannelId] = useState("")
   const [channel, setChannel] = useState<Channel | undefined>(undefined)
-  console.log({ channelId, channel })
 
   useEffect(() => {
     if (channelId) setChannel(pusherClient.subscribe(channelId))
@@ -53,23 +51,10 @@ export const QueryModel = () => {
       console.log("onUserMessage: ", { data })
       toast.info(`onUserMessage: ${JSON.stringify(data)}`)
     },
-    { channel },
+    { channel, enabled: !!channel },
   )
 
-  useBindPusherEvent("onUserMessage", (data) => {
-    console.log("[global] onUserMessage: ", { data })
-    toast.info(`[global] onUserMessage: ${JSON.stringify(data)}`)
-  })
-
-  // useEffect(() => {
-  //   pusherClient.bind("onUserMessage", (data: EventData<"onUserMessage">) => {
-  //     console.log("[global] onUserMessage 2: ", { data })
-  //     toast.info("global")
-  //   })
-  //   return () => {
-  //     pusherClient.unbind("onUserMessage")
-  //   }
-  // }, [])
+  // console.log({ channelId, channel })
 
   return (
     <div className={"w-full"}>

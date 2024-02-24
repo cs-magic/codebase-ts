@@ -6,51 +6,39 @@ export const PUSHER_APP_KEY = "agi"
 export const PUSHER_APP_SECRET = "agi"
 export const PUSHER_CLUSTER = "0.0.0.0"
 export const PUSHER_HOST = "socket.cs-magic.cn"
+export const PUSHER_PORT: number | undefined = undefined
+
 /**
- * todo: how to without port ?
+ *
+ * @param port https下不需要端口，设置为 undefined 即可
+ * @param useTLS https下要使用 TLS
  */
-export const PUSHER_PORT = 6001
+export const initPusher = (port: number | undefined, useTLS: boolean) => {
+  const pusherServer = new Pusher({
+    host: PUSHER_HOST,
+    port: port !== undefined ? port.toString() : port,
+    useTLS,
 
-export const pusherServer = new Pusher({
-  appId: PUSHER_APP_ID,
-  key: PUSHER_APP_KEY,
-  secret: PUSHER_APP_SECRET,
-  cluster: PUSHER_CLUSTER,
+    appId: PUSHER_APP_ID,
+    key: PUSHER_APP_KEY,
+    secret: PUSHER_APP_SECRET,
+    cluster: PUSHER_CLUSTER,
+  })
 
-  host: PUSHER_HOST,
-  port: PUSHER_PORT.toString(),
-})
+  const pusherClient = new PusherJS(PUSHER_APP_KEY, {
+    wsHost: PUSHER_HOST,
+    wsPort: PUSHER_PORT,
 
-export const pusherClient = new PusherJS(PUSHER_APP_KEY, {
-  wsHost: PUSHER_HOST,
-  wsPort: PUSHER_PORT,
-  // When running the server in SSL mode, you may consider setting the forceTLS client option to true. When this option is set to true, the client will connect to the wss protocol instead of ws:
-  forceTLS: false,
-  disableStats: true,
-  // Make sure that enabledTransports is set to ['ws', 'wss']. If not set, in case of connection failure, the client will try other transports such as XHR polling, which soketi doesn't support.
-  enabledTransports: ["ws", "wss"],
-  cluster: PUSHER_CLUSTER,
-})
+    // When running the server in SSL mode, you may consider setting the forceTLS client option to true. When this option is set to true, the client will connect to the wss protocol instead of ws:
+    forceTLS: useTLS,
 
-export type EventType = "onNotification" | "onUserMessage"
-export type OnNotificationData = {
-  userId: string
-  content: string
+    disableStats: true,
+    // Make sure that enabledTransports is set to ['ws', 'wss']. If not set, in case of connection failure, the client will try other transports such as XHR polling, which soketi doesn't support.
+    enabledTransports: ["ws", "wss"],
+    cluster: PUSHER_CLUSTER,
+  })
+
+  return { pusherServer, pusherClient }
 }
-export type OnUserMessageData = {
-  fromUserId: string
-  channelId: string
-  content: string
-}
-export type EventData<T extends EventType> = T extends "onNotification"
-  ? OnNotificationData
-  : OnUserMessageData
 
-export const pusherSend = async <T extends EventType>(
-  channel: string,
-  eventType: T,
-  data: EventData<T>,
-) => {
-  console.log("[socket-server] sending: ", { eventType, data })
-  await pusherServer.trigger(channel, eventType, data)
-}
+export const { pusherServer, pusherClient } = initPusher(PUSHER_PORT, true)
