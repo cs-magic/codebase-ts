@@ -1,6 +1,7 @@
 import { WechatScopeType } from "@/server/wechat/auth/schema"
 import { WECHAT_AUTH_CALLBACK_URL } from "@/server/wechat/auth/config"
-import { WECHAT_APP_ID } from "@/config/const"
+
+import { WECHAT_APP_ID } from "@/config/system"
 
 /**
  * 只有该函数可以在客户端调用，用于拉起用户微信授权弹窗

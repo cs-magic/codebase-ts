@@ -1,21 +1,22 @@
 "use server"
 
-import { SMS_PROVIDER_ID } from "@/config/const"
 import { db } from "@/server/db"
-import { ISmsSignIn, SmsProvider } from "@/schema/sms"
+import { ISmsSignIn } from "@/schema/sms"
 import { $sendSmsViaTencent } from "./providers/tencent"
 import { $sendSmsViaAli } from "./providers/ali"
-import { v4 } from "uuid"
-import moment from "moment"
+import { SMS_PROVIDER_ID, USE_ALI_SMS, USE_TENCENT_SMS } from "@/config/system"
 
-export const $sendSms = async (
-  phone: string,
-  provider: SmsProvider = "ali",
-) => {
+export const $sendSms = async (phone: string) => {
   const code = Math.random().toString().slice(2, 8)
 
-  const smsClientSendCode =
-    provider === "ali" ? $sendSmsViaAli : $sendSmsViaTencent
+  let smsClientSendCode
+  if (USE_ALI_SMS) smsClientSendCode = $sendSmsViaAli
+  else if (USE_TENCENT_SMS) smsClientSendCode = $sendSmsViaTencent
+  else {
+    console.error("[sms] no sms client enabled")
+    return false
+  }
+
   const ok = await smsClientSendCode(phone, code)
 
   if (ok) {

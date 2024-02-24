@@ -4,11 +4,11 @@ import { useModelStore } from "@/store/model.slice"
 import { useRef } from "react"
 import { Textarea } from "@/components/textarea"
 import { toast } from "sonner"
-import { TODO } from "@/config/const"
 
 import { ICreateConversationBody, IPostLlmRes } from "@/schema/api"
 import { useLlmOutput } from "@/hooks/use-llm-output"
 import { api } from "@/trpc/react"
+import { TODO } from "@/config/ui"
 
 export const QueryModel = () => {
   const { modelName, setCid, cid } = useModelStore((state) => ({

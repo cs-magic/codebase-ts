@@ -1,18 +1,13 @@
-export const TODO = "研发小哥正在加🍗中！"
+import { env } from "@/env"
 
-export const SMS_PROVIDER_ID = "sms"
-
-// ref: https://stackoverflow.com/a/16702965/9422455
-export const PHONE_REGEX =
-  /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
-
-// todo: server side NODE_ENV
+export const SMS_PROVIDER_ID = "sms" // todo: server side NODE_ENV
 export const SMS_CODE_DOWNTIME = 3
 export const SMS_EXPIRE_MINUTES = 10
-
-export const APP_URL = "https://agi.cs-magic.cn"
-
+export const APP_URL = env.NEXT_PUBLIC_APP_URL
+export const WS_URL = env.NEXT_PUBLIC_WS_URL
 export const DATETIME_FORMAT = "YYYY-MM-DDThh:mm" // 根据MDN，日期选择组件只能精确到分钟，否则舒昱的iPhone 15 safari上会报错
 export const WECHAT_DATETIME_FORMAT = "YYYY-MM-DD hh:mm:ss" // 根据MDN，日期选择组件只能精确到分钟，否则舒昱的iPhone 15 safari上会报错
 export const WECHAT_APP_ID = "wx0fca1662e5518990"
 export const WECHAT_API_URL = "https://api.weixin.qq.com"
+export const USE_ALI_SMS = false
+export const USE_TENCENT_SMS = true

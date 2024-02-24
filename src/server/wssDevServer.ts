@@ -1,7 +1,25 @@
-import { applyWSSHandler } from "@trpc/server/adapters/ws"
+import {
+  applyWSSHandler,
+  CreateWSSContextFnOptions,
+} from "@trpc/server/adapters/ws"
 import { WebSocketServer } from "ws"
 import { appRouter } from "./api/root"
-import { createTRPCContext } from "@/server/api/trpc"
+import { headers } from "next/headers"
+import { createTRPCContext } from "@/server/api/context"
+
+const createWssContext = (opts: CreateWSSContextFnOptions) => {
+  const heads = new Headers(headers())
+  // heads.set("x-trpc-source", "rsc")
+  const wssHeaders = opts.req.headers
+  console.log("\n\n=====\n====\n", { heads, wssHeaders }, "\n\n====\n")
+
+  return createTRPCContext({
+    headers: {
+      ...heads,
+      ...wssHeaders,
+    },
+  })
+}
 
 const wss = new WebSocketServer({
   port: 3001,
@@ -9,7 +27,7 @@ const wss = new WebSocketServer({
 const handler = applyWSSHandler({
   wss,
   router: appRouter,
-  createContext: createTRPCContext,
+  createContext: createWssContext,
 })
 
 wss.on("connection", (ws) => {

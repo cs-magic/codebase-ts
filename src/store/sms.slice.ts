@@ -1,6 +1,5 @@
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
-import { SMS_CODE_DOWNTIME, SMS_PROVIDER_ID } from "@/config/const"
 import { ISendSms, ISmsSignIn } from "@/schema/sms"
 import { SetState } from "@/schema/utils"
 import { Dispatch, SetStateAction } from "react"
@@ -8,7 +7,7 @@ import { signIn } from "next-auth/react"
 import { useUiStore } from "@/store/ui.slice"
 import { $sendSms } from "@/server/sms/functions"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
+import { SMS_CODE_DOWNTIME, SMS_PROVIDER_ID } from "@/config/system"
 
 type SmsStage = "toSendSms" | "toAuth"
 
@@ -75,7 +74,7 @@ export const useSmsStore = create<SmsSlice>()(
       // UI 跨 store 同步
       useUiStore.getState().setLoading(true)
       // 异步
-      const ok = await $sendSms(phone, "tencent")
+      const ok = await $sendSms(phone)
       useUiStore.getState().setLoading(false)
 
       // 同步 immer

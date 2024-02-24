@@ -1,6 +1,14 @@
-import Credentials from "next-auth/providers/credentials"
-import { SMS_PROVIDER_ID } from "@/config/const"
 import { $smsSignIn } from "@/server/sms/functions"
+import { SMS_PROVIDER_ID } from "@/config/system"
+
+import CredentialsModule from "next-auth/providers/credentials"
+
+// sb tsx 需要用 default
+const Credentials = (
+  "default" in CredentialsModule ? CredentialsModule.default : CredentialsModule
+) as typeof CredentialsModule
+
+console.log({ Credentials })
 
 export const SmsProvider = Credentials({
   id: SMS_PROVIDER_ID,

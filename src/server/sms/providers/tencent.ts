@@ -3,7 +3,8 @@
  */
 import { v20210111 } from "tencentcloud-sdk-nodejs-sms/tencentcloud/services/sms/v20210111"
 import { env } from "@/env"
-import { SMS_EXPIRE_MINUTES } from "@/config/const"
+
+import { SMS_EXPIRE_MINUTES } from "@/config/system"
 
 export const TENCENT_SMS_SIGN_NAME = "邢健的个人博客"
 export const TENCENT_SMS_APP_ID = "1400518792"

@@ -8,7 +8,8 @@ import {
 import { sha1 } from "js-sha1"
 import { WECHAT_APP_SECRET } from "@/server/wechat/config"
 import { IWechatSDKToken } from "@/server/wechat/schema"
-import { WECHAT_APP_ID } from "@/config/const"
+
+import { WECHAT_APP_ID } from "@/config/system"
 
 /**
  * ref: https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html

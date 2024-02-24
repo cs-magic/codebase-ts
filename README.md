@@ -2,13 +2,29 @@
 
 ## Tech
 
-### install
+### [Init] install
 
 ```shell
 # ref: https://github.com/yarnpkg/berry/issues/3521#issuecomment-1907517793
 # 阿里的库会有证书过期问题
 yarn config set "strict-ssl" false -g
 ```
+
+### [Core] Websocket Integration
+
+- vercel 不推荐，参考：Do Vercel Serverless Functions support WebSocket connections?, https://vercel.com/guides/do-vercel-serverless-functions-support-websocket-connections#enabling-realtime-communication
+
+### [Polyfill] tsx 导入 Credentials
+
+```ts
+import CredentialsModule from "next-auth/providers/credentials"
+
+// sb tsx 需要用 default
+const Credentials = (
+  "default" in CredentialsModule ? CredentialsModule.default : CredentialsModule
+) as typeof CredentialsModule
+```
+
 
 ### [UI] text with gradient color
 

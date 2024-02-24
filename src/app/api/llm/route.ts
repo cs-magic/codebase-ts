@@ -1,3 +1,5 @@
+"use server"
+
 import { NextRequest, NextResponse } from "next/server"
 import { v4 } from "uuid"
 import { EventsManager } from "@/server/events-manager"

@@ -6,7 +6,8 @@ import {
   IWechatToken,
 } from "@/server/wechat/auth/schema"
 import { fetchWechatApi } from "@/server/wechat/functions"
-import { WECHAT_APP_ID } from "@/config/const"
+
+import { WECHAT_APP_ID } from "@/config/system"
 
 /**
  * 这个函数是 unsafe 的，一旦出错，说明要重新从前端拿 code 了

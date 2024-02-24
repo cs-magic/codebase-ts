@@ -9,7 +9,8 @@ import { db } from "@/server/db"
 import { SmsProvider } from "@/server/sms/provider"
 import WechatProvider from "@/server/wechat/auth/provider"
 import { env } from "@/env"
-import { WECHAT_APP_ID } from "@/config/const"
+
+import { WECHAT_APP_ID } from "@/config/system"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -47,11 +48,6 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    // ref: https://github.com/nextauthjs/next-auth/discussions/7491#discussioncomment-5954336
-    async redirect({ url, baseUrl }) {
-      return baseUrl
-    },
-
     // compatible with credential providers
     jwt: ({ session, user, profile, token }) => {
       console.log("[next-auth] jwt: ", { user, token })
