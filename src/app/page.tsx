@@ -1,5 +1,3 @@
-"use server"
-
 import { Container } from "@/components/containers"
 import { getServerSession } from "next-auth"
 import { UserButton } from "@/components/user-button"

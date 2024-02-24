@@ -1,18 +1,10 @@
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "@/server/api/trpc"
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc"
 import { db } from "@/server/db"
-import { observable } from "@trpc/server/observable"
-import { $Enums, Post } from "@prisma/client"
-import EventEmitter from "events"
+import { $Enums } from "@prisma/client"
 import { createMessageSchema } from "@/schema/message"
+
+import { pusherSend } from "@/puser/config"
 import ConversationType = $Enums.ConversationType
-
-class MyEventEmitter extends EventEmitter {}
-
-const ee = new MyEventEmitter()
 
 export const messageRouter = createTRPCRouter({
   add: protectedProcedure
@@ -42,20 +34,13 @@ export const messageRouter = createTRPCRouter({
         },
       })
 
-      ee.emit("add", message)
+      const channelId = message.toConversationId
+      void pusherSend(channelId, "onUserMessage", {
+        channelId,
+        content: text,
+        fromUserId: userId,
+      })
+
       return message
     }),
-
-  onAdd: publicProcedure.subscription(() => {
-    return observable<Post>((emit) => {
-      const onAdd = (data: Post) => {
-        emit.next(data)
-      }
-
-      ee.on("add", onAdd)
-      return () => {
-        ee.off("add", onAdd)
-      }
-    })
-  }),
 })

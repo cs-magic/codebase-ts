@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     // Credentials should use `jwt`, ref: https://github.com/nextauthjs/next-auth/issues/3970#issuecomment-1046347097
     strategy: "jwt",
-    maxAge: 10 * 60,
+    maxAge: 60 * 60, // 1 h
   },
 
   callbacks: {

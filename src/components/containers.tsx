@@ -98,7 +98,10 @@ export const DigitContainer = ({
   return (
     <Input
       ref={ref}
-      className={cn("w-12 h-12 rounded-lg text-3xl text-center", className)}
+      className={cn(
+        "w-8 h-8 sm:w-12 sm:h-12 rounded-lg text-xl sm:text-3xl text-center p-0",
+        className,
+      )}
       maxLength={1}
       {...props}
     />

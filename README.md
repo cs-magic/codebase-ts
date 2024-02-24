@@ -12,7 +12,10 @@ yarn config set "strict-ssl" false -g
 
 ### [Core] Websocket Integration
 
-- vercel 不推荐，参考：Do Vercel Serverless Functions support WebSocket connections?, https://vercel.com/guides/do-vercel-serverless-functions-support-websocket-connections#enabling-realtime-communication
+- vercel 不推荐，参考：
+  - Do Vercel Serverless Functions support WebSocket connections?, https://vercel.com/guides/do-vercel-serverless-functions-support-websocket-connections#enabling-realtime-communication
+  - (1) Websockets with nextjs 13 : nextjs, https://www.reddit.com/r/nextjs/comments/13360t3/websockets_with_nextjs_13/
+  - 
 
 ### [Polyfill] tsx 导入 Credentials
 

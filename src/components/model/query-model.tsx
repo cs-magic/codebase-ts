@@ -1,7 +1,7 @@
 "use client"
 
 import { useModelStore } from "@/store/model.slice"
-import { useRef } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Textarea } from "@/components/textarea"
 import { toast } from "sonner"
 
@@ -9,6 +9,11 @@ import { ICreateConversationBody, IPostLlmRes } from "@/schema/api"
 import { useLlmOutput } from "@/hooks/use-llm-output"
 import { api } from "@/trpc/react"
 import { TODO } from "@/config/ui"
+
+import { EventData, pusherClient } from "@/puser/config"
+import { v4 } from "uuid"
+import { Channel } from "pusher-js"
+import { useBindPusherEvent } from "@/puser/hooks"
 
 export const QueryModel = () => {
   const { modelName, setCid, cid } = useModelStore((state) => ({
@@ -21,14 +26,50 @@ export const QueryModel = () => {
   const { output } = useLlmOutput()
 
   const addMessage = api.message.add.useMutation()
-  const onAddMessage = api.message.onAdd.useSubscription(undefined, {
-    onData: (data) => {
-      console.log({ data })
+
+  const [channelId, setChannelId] = useState("")
+  const [channel, setChannel] = useState<Channel | undefined>(undefined)
+  console.log({ channelId, channel })
+
+  useEffect(() => {
+    if (channelId) setChannel(pusherClient.subscribe(channelId))
+    return () => {
+      pusherClient.unsubscribe(channelId)
+      setChannel(undefined)
+    }
+  }, [channelId])
+
+  useBindPusherEvent(
+    "onNotification",
+    (data) => {
+      toast.info(`onNotification: ${JSON.stringify(data)}`)
     },
-    onError: (err) => {
-      console.error({ err })
+    { channel },
+  )
+
+  useBindPusherEvent(
+    "onUserMessage",
+    (data) => {
+      console.log("onUserMessage: ", { data })
+      toast.info(`onUserMessage: ${JSON.stringify(data)}`)
     },
+    { channel },
+  )
+
+  useBindPusherEvent("onUserMessage", (data) => {
+    console.log("[global] onUserMessage: ", { data })
+    toast.info(`[global] onUserMessage: ${JSON.stringify(data)}`)
   })
+
+  // useEffect(() => {
+  //   pusherClient.bind("onUserMessage", (data: EventData<"onUserMessage">) => {
+  //     console.log("[global] onUserMessage 2: ", { data })
+  //     toast.info("global")
+  //   })
+  //   return () => {
+  //     pusherClient.unbind("onUserMessage")
+  //   }
+  // }, [])
 
   return (
     <div className={"w-full"}>
@@ -47,7 +88,11 @@ export const QueryModel = () => {
           event.preventDefault()
 
           console.log({ key, modelName, prompt })
-          addMessage.mutate({ text: prompt })
+          const message = await addMessage.mutateAsync({
+            text: prompt,
+            id: channelId,
+          })
+          setChannelId(message.toConversationId)
 
           switch (modelName) {
             case "gpt-3.5-turbo":
