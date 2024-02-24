@@ -5,38 +5,46 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "@/server/api/trpc"
+import { db } from "@/server/db"
+import { observable } from "@trpc/server/observable"
+import { Post } from ".prisma/client"
+import EventEmitter from "events"
+
+class MyEventEmitter extends EventEmitter {}
+
+const ee = new MyEventEmitter()
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      }
-    }),
-
-  create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      return ctx.db.post.create({
+  add: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().optional(),
+        text: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { name } = ctx.user
+      const post = await db.post.create({
         data: {
-          name: input.name,
-          createdBy: { connect: { id: ctx.session.user.id } },
+          ...input,
+          name,
         },
       })
+
+      ee.emit("add", post)
+      return post
     }),
 
-  getLatest: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.post.findFirst({
-      orderBy: { createdAt: "desc" },
-      where: { createdBy: { id: ctx.session.user.id } },
-    })
-  }),
+  onAdd: publicProcedure.subscription(() => {
+    return observable<Post>((emit) => {
+      const onAdd = (data: Post) => {
+        emit.next(data)
+      }
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!"
+      ee.on("add", onAdd)
+      return () => {
+        ee.off("add", onAdd)
+      }
+    })
   }),
 })

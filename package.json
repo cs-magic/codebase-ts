@@ -7,10 +7,13 @@
     "build": "next build",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "dev": "next dev",
+    "dev:wss": "cross-env PORT=3001 tsx watch src/server/wssDevServer.ts --tsconfig tsconfig.server.json ",
+    "dev:next": "next dev",
+    "dev": "yarn migrate-dev && run-p dev:*",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "migrate-dev": "prisma migrate dev"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "2.0.24",
@@ -61,6 +64,7 @@
     "tencentcloud-sdk-nodejs-sms": "^4.0.789",
     "tls": "^0.0.1",
     "uuid": "^9.0.1",
+    "ws": "^8.16.0",
     "zod": "^3.22.4",
     "zustand": "^4.5.1"
   },
@@ -72,6 +76,7 @@
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
+    "@types/ws": "^8.5.10",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "eslint": "^8.56.0",

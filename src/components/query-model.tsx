@@ -8,6 +8,7 @@ import { TODO } from "@/config/const"
 
 import { ICreateConversationBody, IPostLlmRes } from "@/schema/api"
 import { useLlmOutput } from "@/hooks/use-llm-output"
+import { api } from "@/trpc/react"
 
 export const QueryModel = () => {
   const { modelName, setCid, cid } = useModelStore((state) => ({
@@ -18,6 +19,16 @@ export const QueryModel = () => {
 
   const refInput = useRef<HTMLTextAreaElement>(null)
   const { output } = useLlmOutput()
+
+  const addPost = api.post.add.useMutation()
+  const onAddPost = api.post.onAdd.useSubscription(undefined, {
+    onData: (data) => {
+      console.log({ data })
+    },
+    onError: (err) => {
+      console.error({ err })
+    },
+  })
 
   return (
     <div className={"w-full"}>
@@ -36,6 +47,7 @@ export const QueryModel = () => {
           event.preventDefault()
 
           console.log({ key, modelName, prompt })
+          addPost.mutate({ text: prompt })
 
           switch (modelName) {
             case "gpt-3.5-turbo":
