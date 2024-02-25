@@ -11,7 +11,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "migrate-dev": "prisma migrate dev"
+    "migrate-dev": "prisma migrate dev",
+    "update": "DIST=.next-tmp && git add . && git stash && git pull -f && yarn && DIST=$DIST yarn build && rm -rf .next && mv $DIST .next"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "2.0.24",
