@@ -2,8 +2,8 @@
 
 import { Container } from "@/components/containers"
 import { Button } from "@/components/ui/button"
-import { checkReConstruction1 } from "@/app/api/llm/check-re-construction1"
-import { checkReConstruction2 } from "@/app/api/llm/check-reconstruction2"
+import { checkReConstruction1 } from "@/app/test/check-re-construction1"
+import { checkReConstruction2 } from "@/app/test/check-reconstruction2"
 
 export default function TestPage() {
   return (
