@@ -35,6 +35,8 @@ export const env = createEnv({
     TENCENT_AK: z.string(),
     TENCENT_SK: z.string(),
     WECHAT_APP_SECRET: z.string(),
+    PUSHER_APP_ID: z.string(),
+    PUSHER_APP_SECRET: z.string(),
   },
 
   /**
@@ -46,6 +48,7 @@ export const env = createEnv({
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
     NEXT_PUBLIC_APP_URL: z.string(),
     NEXT_PUBLIC_WS_URL: z.string(),
+    NEXT_PUBLIC_PUSHER_APP_KEY: z.string(),
   },
 
   /**
@@ -66,6 +69,9 @@ export const env = createEnv({
     WECHAT_APP_SECRET: process.env.WECHAT_APP_SECRET,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_WS_URL: process.env.NEXT_PUBLIC_WS_URL,
+    PUSHER_APP_ID: process.env.PUSHER_APP_ID,
+    NEXT_PUBLIC_PUSHER_APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
+    PUSHER_APP_SECRET: process.env.PUSHER_APP_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -1,4 +1,4 @@
-# Way To AGI
+# Sokka AI !
 
 ## Tech
 

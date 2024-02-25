@@ -1,5 +1,7 @@
-import { EventData, EventType } from "@/puser/schema"
-import { pusherServer } from "@/puser/config"
+"use server"
+
+import { EventData, EventType } from "@/lib/puser/schema"
+import { pusherServer } from "./init"
 
 export const pusherSend = async <T extends EventType>(
   channel: string,

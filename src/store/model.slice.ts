@@ -11,6 +11,9 @@ export interface ModelSlice {
   conversationId: string | null
   setConversationId: (v: string) => void
   cleanConversationId: () => void
+
+  channelId: string | null
+  setChannelId: (channelId: string | null) => void
 }
 
 export const useModelStore = create<ModelSlice>()(
@@ -37,6 +40,12 @@ export const useModelStore = create<ModelSlice>()(
         cleanConversationId: () =>
           setState((state) => {
             state.conversationId = null
+          }),
+
+        channelId: null,
+        setChannelId: (channelId) =>
+          setState((state) => {
+            state.channelId = channelId
           }),
       })),
       {
