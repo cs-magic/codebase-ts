@@ -15,7 +15,7 @@ export class WechatSDK {
 
   private async getToken() {
     if (!this.token) this.token = await getWechatToken()
-    return this.token!.access_token
+    return this.token.access_token
   }
 
   private async _getTicket() {

@@ -39,7 +39,7 @@ export const getWechatTicket = async (access_token: string) => {
 }
 
 export const getWechatSignature = async (ticket: string, url: string) => {
-  const params = {
+  const params: Record<string, string | number> = {
     noncestr: WECHAT_NONCE_STR,
     jsapi_ticket: ticket,
     timestamp: WECHAT_TIMESTAMP,
@@ -47,7 +47,6 @@ export const getWechatSignature = async (ticket: string, url: string) => {
   }
   const str = Object.keys(params)
     .sort()
-    // @ts-ignore
     .map((k) => `${k}=${params[k]}`)
     .join("&")
   const signature = sha1(str)
