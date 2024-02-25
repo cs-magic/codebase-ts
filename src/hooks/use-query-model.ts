@@ -5,6 +5,7 @@ import { ICreateConversationBody } from "@/schema/api"
 import { TODO } from "@/config/ui"
 
 import { triggerLLM } from "@/app/api/llm/actions"
+import { signIn } from "next-auth/react"
 
 export const useQueryModel = (fetchSSE: any) => {
   const { modelName, setChannelId, channelId } = useModelStore((state) => ({
@@ -15,8 +16,13 @@ export const useQueryModel = (fetchSSE: any) => {
 
   const addMessage = api.message.add.useMutation({
     onError: (error) => {
-      console.error(error)
-      toast.error("发送失败！")
+      console.error({ error })
+      if (error.data?.code === "UNAUTHORIZED") {
+        void signIn()
+        toast.error("您需要先登录才可以执行此操作！")
+      } else {
+        toast.error("发送失败！")
+      }
     },
     onSuccess: async (message) => {
       const { toConversationId: conversationId } = message

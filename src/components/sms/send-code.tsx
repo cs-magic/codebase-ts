@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils"
 import { useBrowserEnvironment } from "@/hooks/use-browser-environment"
 import { signIn } from "next-auth/react"
 import { WECHAT_PROVIDER_ID } from "@/server/wechat/auth/config"
+import { BrandTitle } from "@/components/branding"
 
 export const SmsSendCode = () => {
   const { downtime, sendCode } = useSmsStore()
@@ -41,9 +42,13 @@ export const SmsSendCode = () => {
         onSubmit={form.handleSubmit(sendCode)}
         className={"flex flex-col gap-4 w-full items-center"}
       >
-        <Label className={"text-semibold text-lg"}>登录魔法社</Label>
+        <div className={"text-semibold text-lg flex items-center gap-1"}>
+          登录
+          <BrandTitle className={"text-lg gap-2"} />
+        </div>
         <Label className={"text-muted-foreground text-xs"}>
-          欢迎回来！请登录以开启魔法世界！
+          欢迎回来！请登录以开启 <span className={"primary-gradient"}>A I</span>{" "}
+          世界！
         </Label>
 
         {isWechat && (

@@ -8,7 +8,7 @@ import { useState } from "react"
 import { type AppRouter } from "@/server/api/root"
 import { getUrl, transformer } from "./shared"
 
-const createQueryClient = () => new QueryClient()
+const createQueryClient = () => new QueryClient({})
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined
 const getQueryClient = () => {
@@ -20,7 +20,7 @@ const getQueryClient = () => {
   return (clientQueryClientSingleton ??= createQueryClient())
 }
 
-export const api = createTRPCReact<AppRouter>()
+export const api = createTRPCReact<AppRouter>({})
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
   const queryClient = getQueryClient()

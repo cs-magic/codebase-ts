@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
+import Link from "next/link"
 
 export type Orientation = "horizontal" | "vertical"
 
@@ -74,7 +75,15 @@ export const AuthContainer = ({ children }: PropsWithChildren) => {
         <div className={"rounded-lg w-full"}>{children}</div>
 
         <div className={"text-xs text-muted-foreground mt-8"}>
-          由<span className={"font-semibold mx-1"}>魔法社</span>提供安全支持
+          由
+          <Link
+            className={"font-semibold mx-1"}
+            href={"https://cs-magic.cn"}
+            target={"_blank"}
+          >
+            魔法社
+          </Link>
+          提供安全支持
         </div>
       </div>
     </div>

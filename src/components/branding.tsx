@@ -8,10 +8,20 @@ import {
 } from "@/config/system"
 import { SeparatorContainer } from "@/components/containers"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { HTMLAttributes } from "react"
 
-export const BrandingTitle = () => {
+export const BrandTitle = ({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => {
   return (
-    <h1 className={cn("text-6xl font-bold primary-gradient flex gap-4 mb-4")}>
+    <h1
+      className={cn(
+        "text-6xl gap-4 font-bold primary-gradient flex",
+        className,
+      )}
+      {...props}
+    >
       搜 嘎
       <span
         className={

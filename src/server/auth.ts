@@ -41,6 +41,10 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   debug: true,
 
+  pages: {
+    signIn: "/auth",
+  },
+
   session: {
     // Credentials should use `jwt`, ref: https://github.com/nextauthjs/next-auth/issues/3970#issuecomment-1046347097
     strategy: "jwt",

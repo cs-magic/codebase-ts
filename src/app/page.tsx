@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth"
 import { UserButton } from "@/components/user-button"
 import { SelectModel } from "@/components/model/select-model"
 import { QueryModel } from "@/components/model/query-model"
-import { BrandingTitle, BrandingBanners } from "@/components/branding"
+import { BrandTitle, BrandingBanners } from "@/components/branding"
 import { TV } from "@/components/model/tv"
 
 export default async function HomePage() {
@@ -22,7 +22,9 @@ export default async function HomePage() {
         orientation={"vertical"}
         className={"grow w-full sm:w-3/5 mx-auto "}
       >
-        <BrandingTitle />
+        <BrandTitle />
+
+        <div className={"h-4"} />
 
         {/*<TV />*/}
 
