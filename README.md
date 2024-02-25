@@ -9,6 +9,7 @@
 # 阿里的库会有证书过期问题
 yarn config set "strict-ssl" false -g
 ```
+### [NextJS] server action 在 dev 里可以放在 route 里，但 build 时会失败
 
 ### [DevOps] 控制台颜色
 

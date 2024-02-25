@@ -1,17 +1,15 @@
-import { useModelStore } from "@/store/model.slice"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ITokenEventData } from "@/schema/api"
 
-export const useLlmOutput = () => {
-  const { cid } = useModelStore((state) => ({
-    cid: state.conversationId,
-  }))
+export const
+    useFetchSSE = () => {
   const [output, setOutput] = useState("")
 
-  useEffect(() => {
-    if (!cid) return
+  const fetchSSE = async (channelId?: string) => {
+    console.log({ channelId })
+    if (!channelId) return
     // console.log({ cid })
-    const sse = new EventSource(`/api/llm?c=${cid}`)
+    const sse = new EventSource(`/api/llm?c=${channelId}`)
     sse.addEventListener("token", (ev: MessageEvent<string>) => {
       const data = JSON.parse(ev.data) as ITokenEventData
       console.log(data)
@@ -27,7 +25,7 @@ export const useLlmOutput = () => {
     return () => {
       sse.close()
     }
-  }, [cid])
+  }
 
-  return { output }
+  return { fetchSSE, output }
 }

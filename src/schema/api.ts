@@ -13,6 +13,7 @@ export type IGetConversationParams = {
 }
 
 export interface ICreateConversationBody {
+  conversationId?: string
   prompt: string
   modelName: ModelType
 }

@@ -14,4 +14,4 @@ export const pusherConfigTencent: IPusherServerConfig = {
   cluster: "0.0.0.0",
 }
 
-export const pusherConfig = pusherConfigAws
+export const pusherConfig = pusherConfigTencent

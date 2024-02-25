@@ -6,12 +6,24 @@ import { IEventsManager } from "@/schema/events-manager"
 import { NextRequest } from "next/server"
 
 export class EventsManager {
+  constructor() {
+    console.log("[constructed]: ", new Date())
+  }
+
   private manager: Record<string, IEventsManager> = {}
+
+  public printKeys(subject?: string) {
+    console.log(
+      `[${subject}] event-manager conversations: `,
+      Object.keys(this.manager),
+    )
+  }
 
   public async trigger(data: IConversationBody) {
     try {
       const { conversationId, modelName, prompt } = data
       this.manager[conversationId] = { events: [], endpoints: [] }
+      this.printKeys("trigger")
 
       const serverSend = async (eventMessage: IEvent) => {
         this.manager[conversationId]!.events.push(eventMessage)
@@ -69,6 +81,7 @@ export class EventsManager {
     const endpoint = new Endpoint()
 
     const init = async () => {
+      this.printKeys("read")
       if (conversationId && conversationId in this.manager) {
         const m = this.manager[conversationId]!
 
