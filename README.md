@@ -23,7 +23,10 @@ yarn config set "strict-ssl" false -g
 - vercel 不推荐，参考：
   - Do Vercel Serverless Functions support WebSocket connections?, https://vercel.com/guides/do-vercel-serverless-functions-support-websocket-connections#enabling-realtime-communication
   - (1) Websockets with nextjs 13 : nextjs, https://www.reddit.com/r/nextjs/comments/13360t3/websockets_with_nextjs_13/
-  - 
+
+- 使用 soketi
+  - pm2 的时候要注意，`soketi-pm2` 不支持 config，不如直接 `pm2 start soketi -- start --config=xx`
+    - [bug] PM2 doesn't pass through command line arguments on Windows · Issue #320 · soketi/soketi, https://github.com/soketi/soketi/issues/320
 
 ### [Polyfill] tsx 导入 Credentials
 

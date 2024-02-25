@@ -1,4 +1,5 @@
 import { env } from "@/env"
+import { BRANDING_IDOUBI_AVATAR, BRANDING_MARK_AVATAR } from "@/config/assets"
 
 export const SMS_PROVIDER_ID = "sms" // todo: server side NODE_ENV
 export const SMS_CODE_DOWNTIME = 3
@@ -11,3 +12,12 @@ export const WECHAT_APP_ID = "wx0fca1662e5518990"
 export const WECHAT_API_URL = "https://api.weixin.qq.com"
 export const USE_ALI_SMS = false
 export const USE_TENCENT_SMS = true
+
+export const SHOW_PARTNERS = false
+// 独立开发者，要圆形的
+export const INDIES_AVATARS: string[] = [
+  BRANDING_MARK_AVATAR,
+  BRANDING_IDOUBI_AVATAR,
+]
+// 企业banner
+export const SPONSORS_BANNERS: string[] = []
