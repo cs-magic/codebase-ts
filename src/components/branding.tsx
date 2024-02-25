@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { BRANDING_CS_MAGIC_DARK, BRANDING_V2AGI_DARK_SM } from "@/config/assets"
+import { BRANDING_V2AGI_DARK_SM, SokkaBrand } from "@/config/assets"
 import { ImageEqualHeight } from "@/components/images"
 import {
   INDIES_AVATARS,
@@ -25,12 +25,14 @@ export const BrandingTitle = () => {
 }
 
 export const BrandingBanners = () => {
-  const enterprises = [BRANDING_CS_MAGIC_DARK, BRANDING_V2AGI_DARK_SM]
+  const enterprises = [BRANDING_V2AGI_DARK_SM]
 
   return (
     <div className={"flex flex-col items-center gap-2"}>
       {/*  founders */}
       <div className={"flex justify-center gap-4 mt-auto h-8"}>
+        <SokkaBrand className={"h-full w-auto"} />
+
         {enterprises.map((item) => (
           <ImageEqualHeight src={item} key={item} />
         ))}
