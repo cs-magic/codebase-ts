@@ -40,7 +40,9 @@ export const IconContainer = ({
   return (
     <div
       className={cn(
-        "p-2 text-foreground/75 hover:bg-accent hover:text-foreground rounded-lg",
+        // "bg-cyan-100",
+        " w-8 h-8 p-1 center text-foreground/75 hover:bg-accent hover:text-foreground rounded-lg",
+        "[&>*]:w-full [&>*]:h-full", // 强制里面的 icon 填充大小，比如 react-icon 默认不够大
         className,
       )}
       {...props}
