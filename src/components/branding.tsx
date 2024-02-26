@@ -34,11 +34,11 @@ export const BrandTitle = ({
   )
 }
 
-export const BrandingBanners = () => {
+export const BrandingFooter = () => {
   const enterprises = [BRANDING_V2AGI_DARK_SM]
 
   return (
-    <div className={"flex flex-col items-center gap-2"}>
+    <div className={"flex flex-col items-center gap-2 mt-auto py-2"}>
       {/*  founders */}
       <div className={"flex justify-center gap-4 mt-auto h-8"}>
         <SokkaBrand className={"h-full w-auto"} />

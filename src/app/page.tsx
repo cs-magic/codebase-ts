@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth"
 import { UserButton } from "@/components/user-button"
 import { SelectModel } from "@/components/model/select-model"
 import { QueryModel } from "@/components/model/query-model"
-import { BrandTitle, BrandingBanners } from "@/components/branding"
+import { BrandTitle, BrandingFooter } from "@/components/branding"
 import { TV } from "@/components/model/tv"
 
 export default async function HomePage() {
@@ -11,13 +11,7 @@ export default async function HomePage() {
   console.log("[HomePage]: ", { session })
 
   return (
-    <div className={"w-full h-full p-4 flex flex-col"}>
-      <div className={"w-full inline-flex items-center"}>
-        <div className={"ml-auto"}>
-          <UserButton />
-        </div>
-      </div>
-
+    <div className={"p-4 w-full flex flex-col items-center justify-center"}>
       <Container
         orientation={"vertical"}
         className={"grow w-full sm:w-3/5 mx-auto "}
@@ -32,8 +26,6 @@ export default async function HomePage() {
 
         <QueryModel />
       </Container>
-
-      <BrandingBanners />
     </div>
   )
 }

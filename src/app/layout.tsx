@@ -9,6 +9,8 @@ import { SessionProvider } from "@/providers/session"
 import { LoadingAlertDialog } from "@/components/dialog"
 import { type Viewport } from "next"
 import AutoHeightProvider from "@/providers/AutoHeightProvider"
+import { BrandingFooter } from "@/components/branding"
+import { Header } from "@/components/header"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,13 +38,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh" suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable} h-screen`}>
+      <body className={`font-sans ${inter.variable} `}>
         <AutoHeightProvider>
-          <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
+          <ThemeProvider defaultTheme={"light"} attribute={"class"}>
             <SessionProvider>
               <TRPCReactProvider>
-                {children}
+                <main className={"flex flex-col min-h-screen"}>
+                  <Header />
 
+                  <div
+                    className={"grow flex flex-col justify-center items-center"}
+                  >
+                    {children}
+                  </div>
+
+                  <BrandingFooter />
+                </main>
                 <Toaster richColors />
 
                 <LoadingAlertDialog />
