@@ -16,7 +16,8 @@
         --popover: 0 0% 100%;
         --popover-foreground: 222.2 84% 4.9%;
 
-        --primary: 222.2 47.4% 11.2%;
+        /*--primary: 222.2 47.4% 11.2%;*/
+        --primary: 150 19% 10%;
         /*--primary-foreground: 210 40% 98%;*/
         /* pink-500 （粉）*/
         --primary-foreground: 330 81% 60%;
