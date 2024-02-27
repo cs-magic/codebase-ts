@@ -51,14 +51,14 @@ export default function RootLayout({
           <TRPCReactProvider>
             {/*ui layer */}
             <AutoHeightProvider>
-              <ThemeProvider defaultTheme={"light"} attribute={"class"}>
+              <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
                 <TooltipProvider>
                   <main className={"flex flex-col min-h-screen"}>
                     <Header />
 
                     <div
                       className={
-                        "grow flex flex-col justify-center items-center"
+                        "grow flex flex-col justify-center items-center "
                       }
                     >
                       {children}

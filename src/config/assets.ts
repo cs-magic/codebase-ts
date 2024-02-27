@@ -11,4 +11,5 @@ export const BRANDING_IDOUBI_AVATAR = "/branding/individual/idoubi_avatar.jpg"
 export const BRANDING_MARK_AVATAR = "/branding/individual/mark_avatar.jpg"
 
 import SokkaBrand from "@/../public/branding/enterprise/CS魔法社Logo-方正字汇-锐速体.svg"
-export { SokkaBrand }
+import V2AGIBrand from "@/../public/branding/enterprise/v2agi.svg"
+export { SokkaBrand, V2AGIBrand }
