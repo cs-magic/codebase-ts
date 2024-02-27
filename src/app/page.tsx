@@ -11,21 +11,22 @@ export default async function HomePage() {
   console.log("[HomePage]: ", { session })
 
   return (
-    <div className={"p-4 w-full flex flex-col items-center justify-center"}>
-      <Container
-        orientation={"vertical"}
-        className={"grow w-full sm:w-3/5 mx-auto "}
+    <Container
+      id={"main-container"}
+      orientation={"vertical"}
+      className={"grow sm:w-3/5 mx-auto flex flex-col justify-start"}
+    >
+      <div
+        className={"min-h-[160px] max-h-[320px] flex flex-col justify-end mb-8"}
       >
         <BrandTitle />
+      </div>
 
-        <div className={"h-4"} />
+      {/*<TV />*/}
 
-        {/*<TV />*/}
+      {/*<SelectModel />*/}
 
-        <SelectModel />
-
-        <QueryModel />
-      </Container>
-    </div>
+      <QueryModel />
+    </Container>
   )
 }

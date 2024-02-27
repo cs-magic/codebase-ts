@@ -11,6 +11,8 @@ import { type Viewport } from "next"
 import AutoHeightProvider from "@/providers/AutoHeightProvider"
 import { BrandingFooter } from "@/components/branding"
 import { Header } from "@/components/header"
+import { cn } from "@/lib/utils"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,29 +40,40 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh" suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable} `}>
-        <AutoHeightProvider>
-          <ThemeProvider defaultTheme={"light"} attribute={"class"}>
-            <SessionProvider>
-              <TRPCReactProvider>
-                <main className={"flex flex-col min-h-screen"}>
-                  <Header />
+      <body
+        className={cn(
+          `font-sans`,
+          // inter.variable
+        )}
+      >
+        {/*data layer*/}
+        <SessionProvider>
+          <TRPCReactProvider>
+            {/*ui layer */}
+            <AutoHeightProvider>
+              <ThemeProvider defaultTheme={"light"} attribute={"class"}>
+                <TooltipProvider>
+                  <main className={"flex flex-col min-h-screen"}>
+                    <Header />
 
-                  <div
-                    className={"grow flex flex-col justify-center items-center"}
-                  >
-                    {children}
-                  </div>
+                    <div
+                      className={
+                        "grow flex flex-col justify-center items-center"
+                      }
+                    >
+                      {children}
+                    </div>
 
-                  <BrandingFooter />
-                </main>
-                <Toaster richColors />
+                    <BrandingFooter />
+                  </main>
+                  <Toaster richColors />
 
-                <LoadingAlertDialog />
-              </TRPCReactProvider>
-            </SessionProvider>
-          </ThemeProvider>
-        </AutoHeightProvider>
+                  <LoadingAlertDialog />
+                </TooltipProvider>
+              </ThemeProvider>
+            </AutoHeightProvider>
+          </TRPCReactProvider>
+        </SessionProvider>
       </body>
     </html>
   )

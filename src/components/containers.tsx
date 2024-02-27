@@ -43,8 +43,8 @@ export const IconContainer = forwardRef<
       ref={ref}
       className={cn(
         // "bg-cyan-100",
-        " w-8 h-8 p-1",
-        "icon",
+        " w-8 h-8 p-1 [&>*]:w-full [&>*]:h-full center",
+        "cursor-pointer hover:bg-muted",
         className,
       )}
       {...props}

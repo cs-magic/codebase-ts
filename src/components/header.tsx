@@ -44,7 +44,9 @@ export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
   const { fromMode, toMode, image } = subAppIcon
   return (
     <div
-      className={"w-24 flex flex-col gap-1 items-center rounded-lg p-2 icon"}
+      className={
+        "w-24 flex flex-col gap-1 items-center rounded-lg p-2 interactive"
+      }
     >
       <AspectRatio ratio={1}>
         <Image

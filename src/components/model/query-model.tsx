@@ -1,40 +1,70 @@
 "use client"
 
-import { useRef } from "react"
-import { Textarea } from "@/components/textarea"
+import { useState } from "react"
+import { TextareaAuto } from "@/components/textarea"
 import { useFetchSSE } from "@/hooks/use-llm-output"
 import { useSocketChannel } from "@/lib/puser/client/hooks"
 import { useQueryModel } from "@/hooks/use-query-model"
+import { ArrowUpIcon, Paperclip } from "lucide-react"
+import { IconContainer } from "@/components/containers"
+import { cn } from "@/lib/utils"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export const QueryModel = () => {
-  const refInput = useRef<HTMLTextAreaElement>(null)
   const { output, fetchSSE } = useFetchSSE()
+  const [input, setInput] = useState("")
 
   const queryModel = useQueryModel(fetchSSE)
 
   void useSocketChannel()
 
+  const onSubmit = () => {
+    console.log({ input })
+    if (!input) return
+    queryModel(input)
+  }
+
   return (
     <div className={"w-full"}>
-      <Textarea
-        className={"w-full"}
-        ref={refInput}
-        onKeyDown={(event) => {
-          if (!refInput.current) return
+      <div className={"flex rounded-3xl border p-2"}>
+        <IconContainer className={"w-6 h-6 shrink-0 interactive"}>
+          <Paperclip />
+        </IconContainer>
 
-          const prompt = refInput.current.value
-          if (!prompt) return
+        <TextareaAuto
+          className={"px-2"}
+          autoFocus
+          // value={input}
+          onChange={(event) => setInput(event.currentTarget.value)}
+          onKeyDown={(event) => {
+            if (event.key !== "Enter" || event.nativeEvent.isComposing) return
+            // prevent add new line
+            event.preventDefault()
+            onSubmit()
+          }}
+        />
 
-          const key = event.key
-          if (key !== "Enter" || event.nativeEvent.isComposing) return
+        <Tooltip delayDuration={100}>
+          <TooltipTrigger asChild>
+            <IconContainer
+              className={cn(
+                "w-6 h-6 shrink-0",
+                input &&
+                  "bg-primary-foreground/90 hover:bg-primary-foreground/90 text-white rounded-full",
+              )}
+              onClick={onSubmit}
+            >
+              <ArrowUpIcon className={cn()} />
+            </IconContainer>
+          </TooltipTrigger>
 
-          // prevent add new line
-          event.preventDefault()
-
-          console.log({ key, prompt })
-          queryModel(prompt)
-        }}
-      />
+          <TooltipContent side={"bottom"}>发送</TooltipContent>
+        </Tooltip>
+      </div>
 
       <div>{output}</div>
     </div>
