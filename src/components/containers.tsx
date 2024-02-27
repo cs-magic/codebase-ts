@@ -2,6 +2,7 @@
 
 import {
   ComponentProps,
+  forwardRef,
   HTMLAttributes,
   PropsWithChildren,
   useEffect,
@@ -33,22 +34,24 @@ export const Container = ({
   )
 }
 
-export const IconContainer = ({
-  className,
-  ...props
-}: HTMLAttributes<HTMLDivElement>) => {
+export const IconContainer = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
   return (
     <div
+      ref={ref}
       className={cn(
         // "bg-cyan-100",
-        " w-8 h-8 p-1 center text-foreground/75 hover:bg-accent hover:text-foreground rounded-lg",
-        "[&>*]:w-full [&>*]:h-full", // 强制里面的 icon 填充大小，比如 react-icon 默认不够大
+        " w-8 h-8 p-1",
+        "icon",
         className,
       )}
       {...props}
     />
   )
-}
+})
+IconContainer.displayName = "IconContainer"
 
 export const SeparatorContainer = ({ children }: PropsWithChildren) => {
   return (

@@ -88,6 +88,12 @@
         @apply flex items-center justify-center;
     }
 
+    .icon {
+        /* 强制里面的 icon 填充大小，比如 react-icon 默认不够大 */
+        @apply [&>*]:w-full [&>*]:h-full;
+        @apply center text-foreground/75 hover:bg-accent hover:text-foreground rounded-lg;
+    }
+
     .primary-gradient {
         @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-transparent bg-clip-text
         /* for tv */
