@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { TextareaAuto } from "@/components/textarea"
 import { useFetchSSE } from "@/hooks/use-llm-output"
-import { useSocketChannel } from "@/lib/puser/client/hooks"
 import { useQueryModel } from "@/hooks/use-query-model"
 import { ArrowUpIcon, Paperclip } from "lucide-react"
 import { IconContainer } from "@/components/containers"
@@ -20,7 +19,7 @@ export const QueryModel = () => {
 
   const queryModel = useQueryModel(fetchSSE)
 
-  void useSocketChannel()
+  // void useSocketChannel()
 
   const onSubmit = () => {
     console.log({ input })

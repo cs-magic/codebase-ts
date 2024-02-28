@@ -1,5 +1,7 @@
+"use client"
+
 import { cn } from "@/lib/utils"
-import { BRANDING_V2AGI_DARK_SM, SokkaBrand, V2AGIBrand } from "@/config/assets"
+import { SokkaBrand, V2AGIBrand } from "@/config/assets"
 import { ImageEqualHeight } from "@/components/images"
 import {
   INDIES_AVATARS,
@@ -10,6 +12,8 @@ import { SeparatorContainer } from "@/components/containers"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { HTMLAttributes } from "react"
 import { BarChart } from "lucide-react"
+import { useSocketStore } from "@/store/socket"
+import { StatusIcon } from "@/components/icons"
 
 export const BrandTitle = ({
   className,
@@ -37,6 +41,10 @@ export const BrandTitle = ({
 
 export const BrandingFooter = () => {
   const enterprises: string[] = []
+  const { latency } = useSocketStore((state) => ({
+    state: state.state,
+    latency: state.latency,
+  }))
 
   return (
     <div className={"flex flex-col items-center gap-2 mt-auto p-2"}>
@@ -52,7 +60,19 @@ export const BrandingFooter = () => {
         ))}
 
         <div className={"grow"} />
-        <BarChart className={"mt-2 w-6 h-6"} />
+        <div className={cn("flex items-end gap-1 mt-2")}>
+          {latency === 0 ? (
+            <BarChart className={"animate-pulse w-4 h-4"} />
+          ) : (
+            <StatusIcon
+              level={latency < 500 ? 3 : latency < 1000 ? 2 : 1}
+              className={"w-4 h-4"}
+            />
+          )}
+          <span className={"text-xs text-muted-foreground"}>
+            {Math.floor(latency) + " ms"}
+          </span>
+        </div>
       </div>
 
       {SHOW_PARTNERS && <Partners />}

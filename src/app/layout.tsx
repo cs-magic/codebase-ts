@@ -41,12 +41,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh" suppressHydrationWarning>
-      <body
-        className={cn(
-          `font-sans`,
-          // inter.variable
-        )}
-      >
+      <body className={cn(`font-sans`, inter.variable)}>
         {/*data layer*/}
         <SocketProvider>
           <SessionProvider>

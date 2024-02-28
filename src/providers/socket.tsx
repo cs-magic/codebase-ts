@@ -1,24 +1,24 @@
 "use client"
 
 import { PropsWithChildren, useEffect } from "react"
-import { pusherClient } from "@/lib/puser/client/init"
+import { useSocketStore } from "@/store/socket"
 
 export default function SocketProvider({ children }: PropsWithChildren) {
-  /**
-   * log state
-   */
-  useEffect(() => {
-    let t: ReturnType<typeof setTimeout>
-    const f = () => {
-      console.log("state: ", pusherClient.connection.state)
-      t = setTimeout(f, 3000)
-    }
-    f()
+  const { init, clean } = useSocketStore((state) => ({
+    init: state.init,
+    clean: state.clean,
+  }))
 
-    return () => {
-      clearTimeout(t)
-    }
+  useEffect(() => {
+    init()
   }, [])
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", clean)
+    return () => {
+      window.removeEventListener("beforeunload", clean)
+    }
+  }, [clean])
 
   return <>{children}</>
 }

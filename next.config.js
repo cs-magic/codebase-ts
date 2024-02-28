@@ -6,6 +6,8 @@ await import("./src/env.js")
 
 /** @type {import("next").NextConfig} */
 const config = {
+  reactStrictMode: false,
+
   distDir: process.env.DIST ?? ".next",
 
   webpack(config) {

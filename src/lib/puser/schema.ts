@@ -1,4 +1,13 @@
-export type EventType = "onNotification" | "onUserMessage" | "ping"
+export type EventType =
+  // connection
+  | "pusher:ping"
+  | "pusher:pong"
+
+  // business
+  | "onNotification"
+  | "onUserMessage"
+  | "state_change"
+
 export type OnNotificationData = {
   userId: string
   content: string
@@ -23,3 +32,11 @@ export interface IPusherServerConfig {
   useTLS: boolean
   cluster: string
 }
+
+export type PusherConnectionState =
+  | "initialized"
+  | "connecting"
+  | "connected"
+  | "unavailable"
+  | "failed"
+  | "disconnected"
