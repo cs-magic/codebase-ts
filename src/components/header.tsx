@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
-import { DEFAULT_AVATAR } from "@/config/assets"
+import { DEFAULT_AVATAR, Text2ImageApp, Text2TextApp } from "@/config/assets"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 export const Header = () => {
@@ -38,19 +38,22 @@ export const Header = () => {
 export interface ISubAppIcon {
   fromMode: ModeType
   toMode: ModeType
-  image?: string
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+  Cover?: string | typeof Text2TextApp
 }
+
 export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
-  const { fromMode, toMode, image } = subAppIcon
+  const { fromMode, toMode, Cover } = subAppIcon
   return (
     <div
       className={
         "w-24 flex flex-col gap-1 items-center rounded-lg p-2 interactive"
       }
     >
+      {/*<Text2TextApp className={"w-24 h-24"} />*/}
       <AspectRatio ratio={1}>
         <Image
-          src={image ?? DEFAULT_AVATAR}
+          src={Cover ?? DEFAULT_AVATAR}
           alt={""}
           fill
           className={"object-cover rounded-lg"}
@@ -76,8 +79,8 @@ export const modes: Record<ModeType, IMode> = {
  * todo: images
  */
 export const subAppsIcons: ISubAppIcon[] = [
-  { fromMode: "text", toMode: "text" },
-  { fromMode: "text", toMode: "image" },
+  { fromMode: "text", toMode: "text", Cover: Text2TextApp },
+  { fromMode: "text", toMode: "image", Cover: Text2ImageApp },
   { fromMode: "image", toMode: "text" },
   { fromMode: "text", toMode: "sound" },
   { fromMode: "image", toMode: "sound" },
