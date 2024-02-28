@@ -1,7 +1,7 @@
 import { PusherConnectionState } from "@/lib/puser/schema"
 import { create } from "zustand"
 import { initPusherClient } from "@/lib/puser/client/init"
-import { pusherConfig } from "@/lib/puser/config"
+import { pusherServerConfigs, PusherServerId } from "@/lib/puser/config"
 import { devtools } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
 import PusherJS from "pusher-js"
@@ -10,6 +10,9 @@ import sum from "lodash/sum"
 import { FixedArray } from "@/schema/array"
 
 export interface ISocket {
+  serverId: PusherServerId
+  setServerId: (serverId: PusherServerId) => void
+
   client: PusherJS | null
   state: PusherConnectionState
   lastPingTime: number | null
@@ -24,6 +27,12 @@ export interface ISocket {
 export const useSocketStore = create<ISocket>()(
   devtools(
     immer((setState, getState, store) => ({
+      serverId: "tencent_wss",
+      setServerId: (serverId) =>
+        setState((state) => {
+          state.serverId = serverId
+        }),
+
       client: null,
       state: "initialized",
 
@@ -33,7 +42,7 @@ export const useSocketStore = create<ISocket>()(
       latency: 0,
 
       init: () => {
-        initPusherClient(pusherConfig, {
+        initPusherClient(pusherServerConfigs[getState().serverId], {
           onPing: () => {
             setState((state) => {
               state.lastPingTime = Date.now()

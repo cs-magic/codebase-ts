@@ -28,7 +28,7 @@ export type EventCallback<T extends EventType> = (v: EventData<T>) => any
 
 export interface IPusherServerConfig {
   host: string
-  port: number
+  port?: number
   useTLS: boolean
   cluster: string
 }

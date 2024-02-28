@@ -1,3 +1,5 @@
+"use client"
+
 import { IPusherServerConfig } from "@/lib/puser/schema"
 import PusherJS from "pusher-js"
 import { env } from "@/env"
@@ -5,15 +7,12 @@ import { env } from "@/env"
 export const initPusherClient = (
   config: IPusherServerConfig,
   options?: {
-    onBeforeInit?: () => void
-    onInit?: (client: PusherJS) => void
     onPing?: () => void
     onPong?: () => void
+    onInit?: (client: PusherJS) => void
   },
 ) => {
   const { host: wsHost, port: wsPort, useTLS: forceTLS, cluster } = config
-
-  if (options?.onBeforeInit) options.onBeforeInit()
 
   /**
    * 由于 pusher 的 ping 没有暴露给客户端
@@ -32,19 +31,29 @@ export const initPusherClient = (
       options.onPong()
   }
 
-  if (options?.onPing) options.onPing()
+  console.log("initializing pusher client")
   const pusherClient = new PusherJS(env.NEXT_PUBLIC_PUSHER_APP_KEY, {
     cluster,
     wsHost,
     wsPort,
     // When running the server in SSL mode, you may consider setting the forceTLS client option to true. When this option is set to true, the client will connect to the wss protocol instead of ws:
     forceTLS,
-    disableStats: true,
+
+    // ref: https://www.npmjs.com/package/pusher-js#enablestats-boolean
+    enableStats: true,
+
     // Make sure that enabledTransports is set to ['ws', 'wss']. If not set, in case of connection failure, the client will try other transports such as XHR polling, which soketi doesn't support.
     enabledTransports: ["ws", "wss"],
 
     // 客户端检查服务器的间隔，默认30秒
-    // activityTimeout: 3000,
+    activityTimeout: 3000,
+
+    pongTimeout: 3000,
+  })
+
+  console.log("binding error...")
+  pusherClient.connection.bind("error", function (error: any) {
+    console.error({ error })
   })
 
   if (options?.onInit) options.onInit(pusherClient)
