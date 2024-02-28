@@ -28,4 +28,7 @@ export const Text2TextApp = "/apps/t2t.png"
 // export const Text2ImageApp = () => (
 //   <Text2ImageApp_ className={t2iStyle} suppressHydrationWarning />
 // )
-export { SokkaBrand, V2AGIBrand }
+
+import Text2TextAppSVG from "../../public/apps/t2t.svg"
+import Text2ImageAppSVG from "../../public/apps/t2i.svg"
+export { SokkaBrand, V2AGIBrand, Text2TextAppSVG, Text2ImageAppSVG }

@@ -7,7 +7,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
-import { DEFAULT_AVATAR, Text2ImageApp, Text2TextApp } from "@/config/assets"
+import {
+  DEFAULT_AVATAR,
+  Text2ImageApp,
+  Text2ImageAppSVG,
+  Text2TextApp,
+  Text2TextAppSVG,
+} from "@/config/assets"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 export const Header = () => {
@@ -39,7 +45,7 @@ export interface ISubAppIcon {
   fromMode: ModeType
   toMode: ModeType
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  Cover?: string | typeof Text2TextApp
+  Cover?: string | React.VFC<React.SVGProps<SVGSVGElement>>
 }
 
 export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
@@ -52,12 +58,16 @@ export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
     >
       {/*<Text2TextApp className={"w-24 h-24"} />*/}
       <AspectRatio ratio={1}>
-        <Image
-          src={Cover ?? DEFAULT_AVATAR}
-          alt={""}
-          fill
-          className={"object-cover rounded-lg"}
-        />
+        {!Cover || typeof Cover === "string" ? (
+          <Image
+            src={Cover ?? DEFAULT_AVATAR}
+            alt={""}
+            fill
+            className={"object-cover rounded-lg"}
+          />
+        ) : (
+          <Cover className={"object-cover"} />
+        )}
       </AspectRatio>
 
       <div
@@ -79,8 +89,8 @@ export const modes: Record<ModeType, IMode> = {
  * todo: images
  */
 export const subAppsIcons: ISubAppIcon[] = [
-  { fromMode: "text", toMode: "text", Cover: Text2TextApp },
-  { fromMode: "text", toMode: "image", Cover: Text2ImageApp },
+  { fromMode: "text", toMode: "text", Cover: Text2TextAppSVG },
+  { fromMode: "text", toMode: "image", Cover: Text2ImageAppSVG },
   { fromMode: "image", toMode: "text" },
   { fromMode: "text", toMode: "sound" },
   { fromMode: "image", toMode: "sound" },
