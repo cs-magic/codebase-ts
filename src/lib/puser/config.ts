@@ -1,6 +1,12 @@
 import { IPusherServerConfig } from "@/lib/puser/schema"
+import { z } from "zod"
 
-export type PusherServerId = "aws" | "tencent_ws" | "tencent_wss"
+export const pusherServerIdSchema = z.union([
+  z.literal("aws"),
+  z.literal("tencent_ws"),
+  z.literal("tencent_wss"),
+])
+export type PusherServerId = z.infer<typeof pusherServerIdSchema>
 
 export const pusherServerConfigs: Record<PusherServerId, IPusherServerConfig> =
   {

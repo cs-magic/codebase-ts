@@ -34,11 +34,14 @@ export const messageRouter = createTRPCRouter({
       })
 
       const channelId = message.toConversationId
-      void pusherSend(channelId, "onUserMessage", {
-        channelId,
-        content: text,
-        fromUserId: userId,
-      })
+      const serverId = input.pusherServerId
+      if (serverId) {
+        void pusherSend(serverId, channelId, "onUserMessage", {
+          channelId,
+          content: text,
+          fromUserId: userId,
+        })
+      }
 
       return message
     }),
