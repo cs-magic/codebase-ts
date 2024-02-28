@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { checkReConstruction1 } from "./check-re-construction1"
 import { checkReConstruction2 } from "./check-reconstruction2"
