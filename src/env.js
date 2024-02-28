@@ -47,7 +47,6 @@ export const env = createEnv({
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
     NEXT_PUBLIC_APP_URL: z.string(),
-    NEXT_PUBLIC_WS_URL: z.string(),
     NEXT_PUBLIC_PUSHER_APP_KEY: z.string(),
   },
 
@@ -68,7 +67,6 @@ export const env = createEnv({
     TENCENT_SK: process.env.TENCENT_SK,
     WECHAT_APP_SECRET: process.env.WECHAT_APP_SECRET,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-    NEXT_PUBLIC_WS_URL: process.env.NEXT_PUBLIC_WS_URL,
     PUSHER_APP_ID: process.env.PUSHER_APP_ID,
     NEXT_PUBLIC_PUSHER_APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
     PUSHER_APP_SECRET: process.env.PUSHER_APP_SECRET,

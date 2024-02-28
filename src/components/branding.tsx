@@ -9,6 +9,7 @@ import {
 import { SeparatorContainer } from "@/components/containers"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { HTMLAttributes } from "react"
+import { BarChart } from "lucide-react"
 
 export const BrandTitle = ({
   className,
@@ -38,9 +39,10 @@ export const BrandingFooter = () => {
   const enterprises: string[] = []
 
   return (
-    <div className={"flex flex-col items-center gap-2 mt-auto py-2"}>
+    <div className={"flex flex-col items-center gap-2 mt-auto p-2"}>
       {/*  founders */}
-      <div className={"flex justify-center gap-4 mt-auto h-8"}>
+      <div className={"w-full flex items-center gap-4 mt-auto h-8"}>
+        <div className={"grow"} />
         <SokkaBrand className={"h-full w-auto"} />
 
         <V2AGIBrand className={"h-full w-auto text-primary"} />
@@ -48,6 +50,9 @@ export const BrandingFooter = () => {
         {enterprises.map((item) => (
           <ImageEqualHeight src={item} key={item} />
         ))}
+
+        <div className={"grow"} />
+        <BarChart className={"mt-2 w-6 h-6"} />
       </div>
 
       {SHOW_PARTNERS && <Partners />}

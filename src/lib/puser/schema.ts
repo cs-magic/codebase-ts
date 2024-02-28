@@ -1,4 +1,4 @@
-export type EventType = "onNotification" | "onUserMessage"
+export type EventType = "onNotification" | "onUserMessage" | "ping"
 export type OnNotificationData = {
   userId: string
   content: string

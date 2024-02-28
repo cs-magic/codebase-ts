@@ -1,28 +1,15 @@
 "use client"
 
-import { Container } from "@/components/containers"
-import { Button } from "@/components/ui/button"
-import { checkReConstruction1 } from "@/app/test/check-re-construction1"
-import { checkReConstruction2 } from "@/app/test/check-reconstruction2"
+import { ButtonLink } from "@/components/buttons"
 
 export default function TestPage() {
   return (
-    <Container orientation={"vertical"}>
-      <Button onClick={() => checkReConstruction1()}>
-        checkReConstruction 1
-      </Button>
+    <>
+      <ButtonLink href={"test/check-reconstruction"}>
+        Check Re-Construction
+      </ButtonLink>
 
-      <Button onClick={() => checkReConstruction2()}>
-        checkReConstruction 2
-      </Button>
-
-      <Button
-        onClick={() => {
-          void fetch("/api/llm2")
-        }}
-      >
-        checkReConstruction 3
-      </Button>
-    </Container>
+      <ButtonLink href={"test/socket"}>Socket</ButtonLink>
+    </>
   )
 }

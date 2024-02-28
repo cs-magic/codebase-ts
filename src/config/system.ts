@@ -5,7 +5,6 @@ export const SMS_PROVIDER_ID = "sms" // todo: server side NODE_ENV
 export const SMS_CODE_DOWNTIME = 3
 export const SMS_EXPIRE_MINUTES = 10
 export const APP_URL = env.NEXT_PUBLIC_APP_URL
-export const WS_URL = env.NEXT_PUBLIC_WS_URL
 export const DATETIME_FORMAT = "YYYY-MM-DDThh:mm" // 根据MDN，日期选择组件只能精确到分钟，否则舒昱的iPhone 15 safari上会报错
 export const WECHAT_DATETIME_FORMAT = "YYYY-MM-DD hh:mm:ss" // 根据MDN，日期选择组件只能精确到分钟，否则舒昱的iPhone 15 safari上会报错
 export const WECHAT_APP_ID = "wx0fca1662e5518990"
