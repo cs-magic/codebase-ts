@@ -9,7 +9,7 @@ export const pusherConfigAws: IPusherServerConfig = {
 
 export const pusherConfigTencent: IPusherServerConfig = {
   host: "socket.cs-magic.cn",
-  port: undefined,
+  port: 443, // tls 下这个参数是直接无视的
   useTLS: true,
   cluster: "0.0.0.0",
 }

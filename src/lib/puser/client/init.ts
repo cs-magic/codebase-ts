@@ -1,4 +1,4 @@
-import { EventType, IPusherServerConfig } from "@/lib/puser/schema"
+import { IPusherServerConfig } from "@/lib/puser/schema"
 import PusherJS from "pusher-js"
 import { env } from "@/env"
 
