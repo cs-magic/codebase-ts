@@ -6,8 +6,13 @@ import { devtools, persist } from "zustand/middleware"
 export interface ModelSlice {
   scenarioType: ScenarioType
   setScenarioType: (scenarioType: ScenarioType) => void
+
   modelName: ModelType
   setModelName: (modelName: ModelType) => void
+  models: ModelType[]
+  addModel: (model: ModelType) => void
+  delModel: (model: ModelType) => void
+
   conversationId: string | null
   setConversationId: (v: string) => void
   cleanConversationId: () => void
@@ -30,6 +35,16 @@ export const useModelStore = create<ModelSlice>()(
         setModelName: (modelName) =>
           setState((state) => {
             state.modelName = modelName
+          }),
+
+        models: ["gpt-4"],
+        addModel: (model) =>
+          setState((state) => {
+            state.models.push(model)
+          }),
+        delModel: (model) =>
+          setState((state) => {
+            state.models = state.models.filter((m) => m !== model)
           }),
 
         conversationId: null,

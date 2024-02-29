@@ -1,4 +1,4 @@
-import { Model, Scenario } from "@/schema/llm"
+import { IModel, Model, ModelType, Scenario } from "@/schema/llm"
 
 export const scenarios: Scenario[] = [
   { id: "text2text", title: "文生文" },
@@ -7,6 +7,17 @@ export const scenarios: Scenario[] = [
   { id: "text2music", title: "文生音乐" },
   { id: "image2image", title: "图生图" },
 ]
+
+export const supportedModels: Record<ModelType, IModel> = {
+  "gpt-3.5-turbo": {
+    id: "gpt-3.5-turbo",
+    title: "ChatGPT 3.5",
+    company: "openai",
+  },
+  "gpt-4": { id: "gpt-4", title: "ChatGPT 4", company: "openai" },
+  "gpt-4-32k": { id: "gpt-4-32k", title: "ChatGPT 4 (32K)", company: "openai" },
+  kimi: { id: "kimi", title: "Kimi Chat", company: "moonshot" },
+}
 
 export const llmModels: Model[] = [
   {

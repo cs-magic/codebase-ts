@@ -22,7 +22,7 @@ export default async function HomePage() {
 
       {/*<TV />*/}
 
-      {/*<SelectModel />*/}
+      <SelectModel />
 
       <QueryModel />
     </Container>
