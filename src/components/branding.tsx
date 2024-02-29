@@ -47,7 +47,7 @@ export const BrandingFooter = () => {
   }))
 
   return (
-    <div className={"flex flex-col items-center gap-2 mt-auto p-2"}>
+    <div className={"flex flex-col items-center gap-2 mt-auto p-4"}>
       {/*  founders */}
       <div className={"w-full flex items-center gap-4 mt-auto h-8"}>
         <div className={"grow"} />

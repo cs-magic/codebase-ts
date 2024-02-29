@@ -14,11 +14,9 @@ export default async function HomePage() {
     <Container
       id={"main-container"}
       orientation={"vertical"}
-      className={"grow sm:w-3/5 mx-auto flex flex-col justify-start"}
+      className={"max-w-2xl grow sm:w-3/5 mx-auto flex flex-col justify-start"}
     >
-      <div
-        className={"min-h-[160px] max-h-[320px] flex flex-col justify-end mb-8"}
-      >
+      <div className={"h-1/3 flex flex-col justify-end mb-8"}>
         <BrandTitle />
       </div>
 

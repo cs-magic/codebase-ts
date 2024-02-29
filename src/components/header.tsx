@@ -18,7 +18,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 export const Header = () => {
   return (
-    <div className={"w-full inline-flex items-center gap-2 p-2"}>
+    <div className={"w-full inline-flex items-center gap-2 p-4"}>
       <div className={"grow"} />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

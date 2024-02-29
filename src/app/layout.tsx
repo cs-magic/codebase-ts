@@ -50,7 +50,7 @@ export default function RootLayout({
               <AutoHeightProvider>
                 <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
                   <TooltipProvider>
-                    <main className={"flex flex-col min-h-screen"}>
+                    <main className={"flex flex-col h-screen"}>
                       <Header />
 
                       <div
