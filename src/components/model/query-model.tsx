@@ -12,6 +12,16 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { signIn, useSession } from "next-auth/react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 export const QueryModel = () => {
   const { output, fetchSSE } = useFetchSSE()
@@ -19,16 +29,34 @@ export const QueryModel = () => {
 
   const queryModel = useQueryModel(fetchSSE)
 
+  const session = useSession()
+  const [open, setOpen] = useState(false)
   // void useSocketChannel()
 
   const onSubmit = () => {
     console.log({ input })
     if (!input) return
+    if (session.status !== "authenticated") return setOpen(true)
     queryModel(input)
   }
 
   return (
     <div className={"w-full"}>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogTitle>发送失败</AlertDialogTitle>
+          <AlertDialogDescription>
+            您需要先登陆才能发送哦！
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => signIn()}>
+              点击跳转登录
+            </AlertDialogAction>
+            <AlertDialogCancel>放弃</AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <div className={"flex rounded-3xl border p-2"}>
         <IconContainer className={"w-6 h-6 shrink-0 interactive"}>
           <Paperclip />

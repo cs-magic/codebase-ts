@@ -30,6 +30,7 @@ export const SelectModels = () => {
       if (!models.includes(a) && models.includes(b)) return -1
       return a.localeCompare(b)
     })
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -50,8 +51,9 @@ export const SelectModels = () => {
                 ),
                 <span
                   key={cur}
-                  className={cn()
-                  // "underline underline-offset-4"
+                  className={
+                    cn()
+                    // "underline underline-offset-4"
                   }
                 >
                   {cur}

@@ -60,7 +60,7 @@ export const BrandingFooter = () => {
         ))}
 
         <div className={"grow"} />
-        <div className={cn("flex items-end gap-1 mt-2")}>
+        <div className={cn("flex items-end gap-1 mt-2 shrink-0")}>
           {latency === 0 ? (
             <BarChart className={"animate-pulse w-4 h-4"} />
           ) : (

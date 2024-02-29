@@ -68,7 +68,9 @@ export const SeparatorContainer = ({ children }: PropsWithChildren) => {
 export const AuthContainer = ({ children }: PropsWithChildren) => {
   return (
     <div
-      className={"grow w-full flex items-center justify-center gap-4 bg-muted"}
+      className={
+        "grow w-full flex items-center justify-center gap-4 bg-muted p-4"
+      }
     >
       <div
         className={

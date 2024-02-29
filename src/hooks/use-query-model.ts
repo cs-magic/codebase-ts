@@ -8,11 +8,12 @@ import { triggerLLM } from "@/app/api/llm/actions"
 import { signIn } from "next-auth/react"
 
 export const useQueryModel = (fetchSSE: any) => {
-  const { modelName, setChannelId, channelId } = useModelStore((state) => ({
-    modelName: state.modelName,
+  const { setChannelId, channelId, models } = useModelStore((state) => ({
     setChannelId: state.setChannelId,
     channelId: state.channelId,
+    models: state.models,
   }))
+  const modelName = models[0]
 
   const addMessage = api.message.add.useMutation({
     onError: (error) => {
@@ -50,6 +51,8 @@ export const useQueryModel = (fetchSSE: any) => {
   })
 
   return (text: string) => {
+    if (!models.length) return toast.error("至少要选中一个模型")
+
     return addMessage.mutate({ id: channelId, text })
   }
 }
