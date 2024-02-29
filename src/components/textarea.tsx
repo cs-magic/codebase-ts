@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { ComponentProps, forwardRef } from "react"
 
@@ -21,7 +23,7 @@ export const TextareaAuto = forwardRef<
       cacheMeasurements
       className={cn(
         "block", // 不加这个会导致高度超标
-        "grow resize-none focus-visible:outline-none bg-transparent",
+        "resize-none focus-visible:outline-none bg-transparent",
         className,
       )}
       {...props}

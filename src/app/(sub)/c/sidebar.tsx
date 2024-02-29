@@ -12,9 +12,9 @@ export const Sidebar = () => {
   console.log({ conversationList })
 
   return (
-    <div className={"w-60 shrink-0 p-4"}>
+    <div className={"w-60 shrink-0 p-4 h-full flex flex-col"}>
       <Button
-        className={"w-full gap-2 my-2"}
+        className={"w-full gap-2 my-2 shrink-0"}
         variant={"outline"}
         onClick={addConversation}
       >
@@ -22,9 +22,11 @@ export const Sidebar = () => {
         新建会话
       </Button>
 
-      {conversationList.map((basic) => (
-        <ConversationListComp basic={basic} key={basic.id} />
-      ))}
+      <div className={"grow overflow-auto"}>
+        {conversationList.map((basic) => (
+          <ConversationListComp basic={basic} key={basic.id} />
+        ))}
+      </div>
     </div>
   )
 }

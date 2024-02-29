@@ -14,6 +14,7 @@ import { HTMLAttributes } from "react"
 import { BarChart } from "lucide-react"
 import { useSocketStore } from "@/store/socket"
 import { StatusIcon } from "@/components/icons"
+import Link from "next/link"
 
 export const BrandTitle = ({
   withDescription,
@@ -21,7 +22,8 @@ export const BrandTitle = ({
   ...props
 }: HTMLAttributes<HTMLDivElement> & { withDescription?: boolean }) => {
   return (
-    <div
+    <Link
+      href={"/"}
       className={cn(
         "flex justify-center",
         // "w-[240px] "
@@ -45,7 +47,7 @@ export const BrandTitle = ({
       </h1>
 
       {/*{withDescription && <span className={"text-sm"}>全栈 AI 平台</span>}*/}
-    </div>
+    </Link>
   )
 }
 

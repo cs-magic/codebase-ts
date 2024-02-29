@@ -49,9 +49,9 @@ export const useQueryModel = (fetchSSE: any) => {
     },
   })
 
-  return async (text: string) => {
-    // return addMessage.mutate({ id: channelId, text })
-    const conversationId = await query(text)
-    router.push(`/c/${conversationId}`)
-  }
+  return query
+
+  // return async (text: string) => {
+  // return addMessage.mutate({ id: channelId, text })
+  // }
 }

@@ -20,9 +20,14 @@ export const llmRouter = createTRPCRouter({
     return db.pApp.findMany({ ...pAppSchema })
   }),
 
+  listConversations: protectedProcedure.query(async () => {
+    return db.conversation.findMany({ ...conversationSchema })
+  }),
+
   createConversation: protectedProcedure
     .input(createConversationSchema)
     .mutation(async ({ input, ctx }) => {
+      console.log({ input })
       const conversation = await db.conversation.create({
         data: {
           fromUserId: ctx.user.id,

@@ -40,7 +40,7 @@ export const QueryModel = () => {
     if (!input) return
     if (!pAppIds.length) return toast.error("至少需要选中一种模型")
     if (session.status !== "authenticated") return setOpen(true)
-    queryModel(input)
+    void queryModel(input)
   }
 
   return (
@@ -53,7 +53,7 @@ export const QueryModel = () => {
         </IconContainer>
 
         <TextareaAuto
-          className={"px-2"}
+          className={"px-2 grow"}
           autoFocus
           // value={input}
           onChange={(event) => setInput(event.currentTarget.value)}
