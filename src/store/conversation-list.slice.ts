@@ -8,43 +8,17 @@ import { useModelStore } from "@/store/model.slice"
 import { createConversation } from "@/store/createConversation"
 import { useEffect } from "react"
 import { api } from "@/trpc/react"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 export interface ConversationListSlice {
   data: IConversationBasic[]
-
-  addConversationWithoutQuery: () => Promise<string>
-  addConversationWithQuery: (query: string) => Promise<string>
 }
 
 export const useConversationListStore = create<ConversationListSlice>()(
   devtools(
     immer((setState, getState, store) => ({
       data: [],
-
-      addConversationWithoutQuery: async () => {
-        const pApps = useModelStore.getState().pAppIds
-        console.log({ pApps })
-
-        const newConversation = await createConversation({
-          pApps: pApps.map((id) => ({ id })),
-          type: "LLM",
-        })
-        console.log({ newConversation })
-
-        setState((state) => {
-          state.data.push(newConversation)
-        })
-        location.href = `/c/${newConversation.id}`
-        return newConversation.id
-      },
-
-      addConversationWithQuery: async (query) => {
-        console.log({ query })
-
-        const conversationId = await getState().addConversationWithoutQuery()
-        console.log({ conversationId })
-        return conversationId
-      },
     })),
   ),
 )
@@ -57,9 +31,60 @@ export const useInitConversationList = () => {
   const { data: conversations = [] } = api.llm.listConversations.useQuery()
 
   useEffect(() => {
-    console.log("[conversation-list] inited conversations: ", conversations)
+    console.log("inited conversations: ", conversations)
     useConversationListStore.setState((state) => {
       state.data = conversations
     })
   }, [conversations])
+}
+
+export const useAddConversationWithoutQuery = () => {
+  const router = useRouter()
+
+  return async () => {
+    const pApps = useModelStore.getState().pAppIds
+    console.log({ pApps })
+
+    const newConversation = await createConversation({
+      pApps: pApps.map((id) => ({ id })),
+      type: "LLM",
+    })
+    console.log({ newConversation })
+
+    useConversationListStore.setState((state) => {
+      // first
+      state.data.splice(0, 0, newConversation)
+    })
+    router.push(`/c/${newConversation.id}`)
+  }
+}
+
+export const useAddConversationWithQuery = () => {
+  const addConversationWithoutQuery = useAddConversationWithoutQuery()
+  // todo: prompt
+  return (prompt: string) => {
+    void addConversationWithoutQuery()
+  }
+}
+
+/**
+ * 不要用乐观更新，否则会乱
+ */
+export const useDeleteConversation = () => {
+  const deleteConversation = api.llm.delConversation.useMutation({})
+
+  return async (conversationId: string) => {
+    void deleteConversation
+      .mutateAsync(conversationId)
+      .catch((error) => {
+        console.error(error)
+        toast.error("删除失败！")
+      })
+      .then(() => {
+        toast.success("删除成功")
+        useConversationListStore.setState((state) => {
+          state.data = state.data.filter((d) => d.id !== conversationId)
+        })
+      })
+  }
 }

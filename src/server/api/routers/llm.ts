@@ -10,19 +10,31 @@ import {
   modelSchema,
   pAppSchema,
 } from "@/schema/conversation"
+import { z } from "zod"
 
 export const llmRouter = createTRPCRouter({
   listModels: publicProcedure.query(async () => {
-    return db.model.findMany({ ...modelSchema })
+    return db.model.findMany({ ...modelSchema, orderBy: { updatedAt: "desc" } })
   }),
 
   listPApps: publicProcedure.query(async () => {
-    return db.pApp.findMany({ ...pAppSchema })
+    return db.pApp.findMany({ ...pAppSchema, orderBy: { updatedAt: "desc" } })
   }),
 
   listConversations: protectedProcedure.query(async () => {
-    return db.conversation.findMany({ ...conversationSchema })
+    return db.conversation.findMany({
+      ...conversationSchema,
+      orderBy: { updatedAt: "desc" },
+    })
   }),
+
+  delConversation: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input }) => {
+      return db.conversation
+        .delete({ where: { id: input } })
+        .catch(console.error)
+    }),
 
   createConversation: protectedProcedure
     .input(createConversationSchema)

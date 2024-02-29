@@ -2,16 +2,14 @@ import { useModelStore } from "@/store/model.slice"
 import { api } from "@/trpc/react"
 import { toast } from "sonner"
 import { signIn } from "next-auth/react"
-import { useConversationListStore } from "@/store/conversation-list.slice"
+import { useAddConversationWithQuery } from "@/store/conversation-list.slice"
 import { useRouter } from "next/navigation"
 
 export const useQueryModel = (fetchSSE: any) => {
   const setChannelId = useModelStore((state) => state.setChannelId)
   const channelId = useModelStore((state) => state.channelId)
   const pAppIds = useModelStore((state) => state.pAppIds)
-  const query = useConversationListStore(
-    (state) => state.addConversationWithQuery,
-  )
+  const query = useAddConversationWithQuery()
   const pAppId = pAppIds[0]
   const router = useRouter()
 
