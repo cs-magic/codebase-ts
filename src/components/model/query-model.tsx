@@ -33,12 +33,12 @@ export const QueryModel = () => {
 
   const session = useSession()
   const [open, setOpen] = useState(false)
-  const models = useModelStore((state) => state.models)
+  const pAppIds = useModelStore((state) => state.pAppIds)
 
   const onSubmit = () => {
     console.log({ input })
     if (!input) return
-    if (!models.length) return toast.error("至少需要选中一种模型")
+    if (!pAppIds.length) return toast.error("至少需要选中一种模型")
     if (session.status !== "authenticated") return setOpen(true)
     queryModel(input)
   }

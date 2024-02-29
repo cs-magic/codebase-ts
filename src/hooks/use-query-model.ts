@@ -11,7 +11,7 @@ export const useQueryModel = (fetchSSE: any) => {
   const { setChannelId, channelId, models } = useModelStore((state) => ({
     setChannelId: state.setChannelId,
     channelId: state.channelId,
-    models: state.models,
+    models: state.pAppIds,
   }))
   const modelName = models[0]
 

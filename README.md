@@ -1,5 +1,12 @@
 # Sokka AI !
 
+## Architecture
+
+### conversation
+
+- conversation -- papp -- model -- company
+- papp -- message
+
 ## Tech
 
 ### [Init] install

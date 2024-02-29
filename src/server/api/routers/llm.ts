@@ -5,15 +5,19 @@ import {
 } from "@/server/api/trpc"
 import { db } from "@/server/db"
 import {
-  conversationModelSchema,
   conversationSchema,
   createConversationSchema,
   modelSchema,
+  pAppSchema,
 } from "@/schema/conversation"
 
 export const llmRouter = createTRPCRouter({
   listModels: publicProcedure.query(async () => {
     return db.model.findMany({ ...modelSchema })
+  }),
+
+  listPApps: publicProcedure.query(async () => {
+    return db.pApp.findMany({ ...pAppSchema })
   }),
 
   createConversation: protectedProcedure
@@ -23,10 +27,10 @@ export const llmRouter = createTRPCRouter({
         data: {
           fromUserId: ctx.user.id,
           type: input.type,
-          models: {
-            createMany: {
-              data: input.models,
-            },
+          pApps: {
+            connect: input.pApps.map((p) => ({
+              id: p.id,
+            })),
           },
         },
         ...conversationSchema,

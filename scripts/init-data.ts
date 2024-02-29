@@ -64,11 +64,22 @@ const initLLM = async () => {
     data: [{ id: "kimi", title: "Kimi Chat", companyId: "moonshot" }],
   })
 
+  const models = await db.model.findMany()
+  const createdPApps = await Promise.all(
+    models.map(
+      async (model) =>
+        await db.pApp.create({
+          data: { id: model.id, modelId: model.id, title: model.title },
+        }),
+    ),
+  )
+
   console.log({
     deletedCompanies,
     createdCompanies,
     createdOpenAIModels,
     createdKimiModels,
+    createdPApps,
   })
 }
 

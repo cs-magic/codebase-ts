@@ -5,15 +5,15 @@ import { UnexpectedError } from "@/schema/error"
 import { toast } from "sonner"
 import { Message } from "@prisma/client"
 
-import { IConversationModel } from "@/schema/conversation"
+import { IPApp } from "@/schema/conversation"
 
 export interface ConversationDetailSlice {
   conversationId: string | null
   setConversationId: (conversationId: string) => void
 
-  models: IConversationModel[]
-  setModels: (models: IConversationModel[]) => void
-  addModel: (model: IConversationModel) => void
+  models: IPApp[]
+  setModels: (models: IPApp[]) => void
+  addModel: (model: IPApp) => void
   delModel: (modelId: string) => void
 
   messages: Message[]

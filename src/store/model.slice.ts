@@ -3,16 +3,14 @@ import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { devtools, persist } from "zustand/middleware"
 
-import { IModel } from "@/schema/conversation"
-
 export interface ModelSlice {
   scenarioType: ScenarioType
   setScenarioType: (scenarioType: ScenarioType) => void
 
-  models: IModel[]
-  setModels: (models: IModel[]) => void
-  addModel: (model: IModel) => void
-  delModel: (modelId: string) => void
+  pAppIds: string[]
+  setPAppIds: (ids: string[]) => void
+  addPAppId: (id: string) => void
+  delPAppId: (id: string) => void
 
   channelId: string | null
   setChannelId: (channelId: string | null) => void
@@ -28,18 +26,18 @@ export const useModelStore = create<ModelSlice>()(
             state.scenarioType = scenarioType
           }),
 
-        models: [],
-        setModels: (models) =>
+        pAppIds: ["gpt-3.5-turbo"],
+        setPAppIds: (ids) =>
           setState((state) => {
-            state.models = models
+            state.pAppIds = ids
           }),
-        addModel: (model) =>
+        addPAppId: (id) =>
           setState((state) => {
-            state.models.push(model)
+            state.pAppIds.push(id)
           }),
-        delModel: (modelId) =>
+        delPAppId: (id) =>
           setState((state) => {
-            state.models = state.models.filter((m) => m.id !== modelId)
+            state.pAppIds = state.pAppIds.filter((m) => m !== id)
           }),
 
         channelId: null,
@@ -50,11 +48,11 @@ export const useModelStore = create<ModelSlice>()(
       })),
       {
         name: "v2agi",
-        version: 0.2,
+        version: 0.4,
         migrate: (state, version) => {
           const s = state as ModelSlice
-          if (version < 0.2) {
-            s.models = []
+          if (version < 0.4) {
+            s.pAppIds = ["gpt-3.5-turbo"]
           }
           return s
         },

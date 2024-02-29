@@ -3,21 +3,20 @@ import { ConversationType, Prisma } from "@prisma/client"
 import validator = Prisma.validator
 import ModelDefaultArgs = Prisma.ModelDefaultArgs
 import ModelGetPayload = Prisma.ModelGetPayload
-import ConversationModelDefaultArgs = Prisma.ConversationModelDefaultArgs
-import ConversationModelGetPayload = Prisma.ConversationModelGetPayload
 import ConversationDefaultArgs = Prisma.ConversationDefaultArgs
 import ConversationGetPayload = Prisma.ConversationGetPayload
+import PAppDefaultArgs = Prisma.PAppDefaultArgs
+import PAppGetPayload = Prisma.PAppGetPayload
 
 export const createConversationSchema = z.object({
-  models: z
+  pApps: z
     .object({
-      modelId: z.string(),
-      prompt: z.string().nullable(),
-      temperature: z.number().nullable(),
+      id: z.string(),
     })
     .array(),
   type: z.nativeEnum(ConversationType),
 })
+export type ICreateConversation = z.infer<typeof createConversationSchema>
 
 export const modelSchema = validator<ModelDefaultArgs>()({
   include: {
@@ -26,19 +25,16 @@ export const modelSchema = validator<ModelDefaultArgs>()({
 })
 export type IModel = ModelGetPayload<typeof modelSchema>
 
-export const conversationModelSchema =
-  validator<ConversationModelDefaultArgs>()({
-    include: {
-      model: modelSchema,
-    },
-  })
-export type IConversationModel = ConversationModelGetPayload<
-  typeof conversationModelSchema
->
+export const pAppSchema = validator<PAppDefaultArgs>()({
+  include: {
+    model: modelSchema,
+  },
+})
+export type IPApp = PAppGetPayload<typeof pAppSchema>
 
 export const conversationSchema = validator<ConversationDefaultArgs>()({
   include: {
-    models: true,
+    pApps: pAppSchema,
     fromUser: true,
   },
 })

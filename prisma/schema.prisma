@@ -61,9 +61,9 @@ model Conversation {
   fromUser   User   @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
   fromUserId String
 
-  type   ConversationType
-  models ConversationModel[]
-  title  String?
+  type  ConversationType
+  pApps PApp[]
+  title String?
 }
 
 enum ConversationType {
@@ -72,28 +72,12 @@ enum ConversationType {
   notification
 }
 
-model ConversationModel {
-  id        String   @id @default(nanoid(5))
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  model   Model  @relation(fields: [modelId], references: [id], onDelete: Cascade)
-  modelId String
-
-  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId String?
-
-  prompt      String?
-  temperature Float?
-  messages    Message[]
-}
-
 model Message {
   id        String   @id @default(nanoid(5))
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  conversationModel   ConversationModel @relation(fields: [conversationModelId], references: [id], onDelete: Cascade)
+  conversationModel   PApp   @relation(fields: [conversationModelId], references: [id], onDelete: Cascade)
   conversationModelId String
 
   content String
@@ -115,9 +99,25 @@ model Model {
   logo  String?
   url   String?
 
-  company       Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  companyId     String
-  conversations ConversationModel[]
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId String
+  pApps     PApp[]
+}
+
+model PApp {
+  id        String   @id @default(nanoid(5))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  model   Model   @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId String
+  title   String?
+
+  conversations Conversation[]
+
+  prompt      String?
+  temperature Float?
+  messages    Message[]
 }
 
 model Post {

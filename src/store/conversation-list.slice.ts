@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
 import { IConversationBasic } from "@/schema/conversation"
 import { createConversation } from "./actions"
+import { useModelStore } from "@/store/model.slice"
 
 export interface ConversationListSlice {
   data: IConversationBasic[]
@@ -16,8 +17,9 @@ export const useConversationListStore = create<ConversationListSlice>()(
       data: [],
 
       addConversation: async () => {
+        const pApps = useModelStore.getState().pAppIds
         const newConversation = await createConversation({
-          models: [],
+          pApps: pApps.map((id) => ({ id })),
           type: "LLM",
         })
         console.log({ newConversation })

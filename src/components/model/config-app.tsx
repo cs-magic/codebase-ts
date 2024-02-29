@@ -1,6 +1,6 @@
 "use client"
 
-import { SelectModels } from "@/components/model/select-models"
+import { SelectPApps } from "@/components/model/select-p-apps"
 import { SelectScenario } from "@/components/model/select-scenario"
 
 export const ConfigApp = () => {
@@ -8,7 +8,7 @@ export const ConfigApp = () => {
     <div className={"flex items-center gap-2"}>
       <SelectScenario />
 
-      <SelectModels />
+      <SelectPApps />
 
       {/*<SelectPrompt/>*/}
     </div>
