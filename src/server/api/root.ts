@@ -1,5 +1,6 @@
 import { messageRouter } from "@/server/api/routers/post"
 import { createTRPCRouter } from "@/server/api/trpc"
+import { llmRouter } from "@/server/api/routers/llm"
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { createTRPCRouter } from "@/server/api/trpc"
  */
 export const appRouter = createTRPCRouter({
   message: messageRouter,
+  llm: llmRouter,
 })
 
 // export type definition of API

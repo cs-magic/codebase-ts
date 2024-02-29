@@ -1,15 +1,15 @@
-import { ModelType, supportedCompanies } from "@/schema/llm"
 import { useModelStore } from "@/store/model.slice"
-import { supportedModels } from "@/config/llm"
 import { Button } from "@/components/ui/button"
 import { IconContainer } from "@/components/containers"
 import { MinusCircleIcon, PlusCircleIcon } from "lucide-react"
 
+import { IModel } from "@/schema/conversation"
+
 export const SelectModel = ({
-  modelType,
+  model,
   type,
 }: {
-  modelType: ModelType
+  model: IModel
   type: "toAdd" | "toDel"
 }) => {
   const { models, addModel, delModel } = useModelStore((state) => ({
@@ -18,8 +18,7 @@ export const SelectModel = ({
     delModel: state.delModel,
   }))
 
-  const model = supportedModels[modelType]
-  const hasModel = models.includes(modelType)
+  const hasModel = !!models.find((m) => m.id === model.id)
 
   return (
     <Button
@@ -36,8 +35,8 @@ export const SelectModel = ({
           "w-6 h-6 invisible group-hover:visible hover:text-primary-foreground"
         }
         onClick={(event) => {
-          const action = hasModel ? delModel : addModel
-          action(modelType)
+          if (hasModel) delModel(model.id)
+          else addModel(model)
         }}
       >
         {hasModel ? <MinusCircleIcon /> : <PlusCircleIcon />}
@@ -47,7 +46,7 @@ export const SelectModel = ({
 
       <span className={"grow"} />
       <span className={"text-muted-foreground text-sm"}>
-        by {supportedCompanies[model.company].title}
+        by {model.company.title}
       </span>
     </Button>
   )

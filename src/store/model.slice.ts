@@ -1,15 +1,19 @@
-import { ModelType, ScenarioType } from "@/schema/llm"
+import { ScenarioType } from "@/schema/llm"
 import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 import { devtools, persist } from "zustand/middleware"
+
+import { IModel } from "@/schema/conversation"
 
 export interface ModelSlice {
   scenarioType: ScenarioType
   setScenarioType: (scenarioType: ScenarioType) => void
 
-  models: ModelType[]
-  addModel: (model: ModelType) => void
-  delModel: (model: ModelType) => void
+  models: IModel[]
+  setModels: (models: IModel[]) => void
+  addModel: (model: IModel) => void
+  delModel: (modelId: string) => void
+
   channelId: string | null
   setChannelId: (channelId: string | null) => void
 }
@@ -24,14 +28,18 @@ export const useModelStore = create<ModelSlice>()(
             state.scenarioType = scenarioType
           }),
 
-        models: ["gpt-4"],
+        models: [],
+        setModels: (models) =>
+          setState((state) => {
+            state.models = models
+          }),
         addModel: (model) =>
           setState((state) => {
             state.models.push(model)
           }),
-        delModel: (model) =>
+        delModel: (modelId) =>
           setState((state) => {
-            state.models = state.models.filter((m) => m !== model)
+            state.models = state.models.filter((m) => m.id !== modelId)
           }),
 
         channelId: null,
@@ -42,7 +50,14 @@ export const useModelStore = create<ModelSlice>()(
       })),
       {
         name: "v2agi",
-        version: 0.1,
+        version: 0.2,
+        migrate: (state, version) => {
+          const s = state as ModelSlice
+          if (version < 0.2) {
+            s.models = []
+          }
+          return s
+        },
       },
     ),
   ),

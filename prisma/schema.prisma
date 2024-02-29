@@ -5,6 +5,17 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator json {
+  /// Always after the prisma-client-js generator
+  provider  = "prisma-json-types-generator"
+  namespace = "PrismaJson"
+  // clientOutput = "<finds it automatically>"
+  // (./ -> relative to schema, or an importable path to require() it)
+  // useType = "MyType"
+  // In case you need to use a type, export it inside the namespace and we will add a index signature to it
+  // (e.g.  export namespace PrismaJson { export type MyType = {a: 1, b: 2} }; will generate namespace.MyType["TYPE HERE"])
+}
+
 datasource db {
   provider = "postgresql"
   // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
@@ -16,7 +27,7 @@ datasource db {
 
 // Necessary for Next auth
 model Account {
-  id                String  @id @default(cuid())
+  id                String  @id @default(nanoid(5))
   userId            String
   type              String
   provider          String
@@ -33,40 +44,80 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model Company {
+  id    String  @id @default(nanoid(5))
+  title String
+  url   String?
+  logo  String?
+
+  models Model[]
+}
+
 model Conversation {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  users    User[]
-  messages Message[]
-
-  type ConversationType
-}
-
-enum ConversationType {
-  // 大语言模型的对话
-  LLM
-
-  // 用户聊天
-  Room
-
-  // 系统消息
-  Notification
-}
-
-model Message {
-  id        String   @id @default(cuid())
+  id        String   @id @default(nanoid(7))
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   fromUser   User   @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
   fromUserId String
 
-  toConversation   Conversation @relation(fields: [toConversationId], references: [id])
-  toConversationId String
+  type   ConversationType
+  models ConversationModel[]
+  title  String?
+}
+
+enum ConversationType {
+  LLM
+  chat
+  notification
+}
+
+model ConversationModel {
+  id        String   @id @default(nanoid(5))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  model   Model  @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId String
+
+  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String?
+
+  prompt      String?
+  temperature Float?
+  messages    Message[]
+}
+
+model Message {
+  id        String   @id @default(nanoid(5))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversationModel   ConversationModel @relation(fields: [conversationModelId], references: [id], onDelete: Cascade)
+  conversationModelId String
 
   content String
+  role    MessageRole
+}
+
+enum MessageRole {
+  user
+  assistant
+  system
+}
+
+model Model {
+  id        String   @id @default(nanoid(5))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String
+  logo  String?
+  url   String?
+
+  company       Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId     String
+  conversations ConversationModel[]
 }
 
 model Post {
@@ -82,7 +133,7 @@ model Post {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(nanoid(5))
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -90,7 +141,7 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @default(nanoid(5))
   name          String?
   email         String?   @unique
   emailVerified DateTime?
@@ -99,8 +150,7 @@ model User {
   sessions      Session[]
   posts         Post[]
 
-  sentMessages  Message[]
-  conversations Conversation[]
+  Conversation Conversation[]
 }
 
 model VerificationToken {

@@ -51,8 +51,6 @@ export const useQueryModel = (fetchSSE: any) => {
   })
 
   return (text: string) => {
-    if (!models.length) return toast.error("至少要选中一个模型")
-
     return addMessage.mutate({ id: channelId, text })
   }
 }

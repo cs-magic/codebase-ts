@@ -9,35 +9,43 @@ import {
 import Image from "next/image"
 import {
   DEFAULT_AVATAR,
-  Text2ImageApp,
   Text2ImageAppSVG,
-  Text2TextApp,
   Text2TextAppSVG,
 } from "@/config/assets"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { BrandTitle } from "@/components/branding"
 
 export const Header = () => {
   return (
-    <div className={"w-full inline-flex items-center gap-2 p-4"}>
-      <div className={"grow"} />
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <IconContainer>
-            <IoApps />
-          </IconContainer>
-        </DropdownMenuTrigger>
+    <div className={"w-full flex items-center gap-2 px-6 py-4"}>
+      <BrandTitle className={"text-2xl"} withDescription />
 
-        <DropdownMenuContent className={"mr-2"}>
-          <div className={"grid grid-cols-3 max-h-[480px] overflow-auto p-4"}>
-            {subAppsIcons.map((subApp, index) => (
-              <SubAppIcon subAppIcon={subApp} key={index} />
-            ))}
-          </div>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className={"grow"} />
+
+      <Apps />
 
       <UserButton />
     </div>
+  )
+}
+
+const Apps = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <IconContainer>
+          <IoApps />
+        </IconContainer>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent className={"mr-2"}>
+        <div className={"grid grid-cols-3 max-h-[480px] overflow-auto p-4"}>
+          {subAppsIcons.map((subApp, index) => (
+            <SubAppIcon subAppIcon={subApp} key={index} />
+          ))}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

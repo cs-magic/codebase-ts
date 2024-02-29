@@ -22,6 +22,8 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { useModelStore } from "@/store/model.slice"
+import { toast } from "sonner"
 
 export const QueryModel = () => {
   const { output, fetchSSE } = useFetchSSE()
@@ -31,31 +33,19 @@ export const QueryModel = () => {
 
   const session = useSession()
   const [open, setOpen] = useState(false)
-  // void useSocketChannel()
+  const models = useModelStore((state) => state.models)
 
   const onSubmit = () => {
     console.log({ input })
     if (!input) return
+    if (!models.length) return toast.error("至少需要选中一种模型")
     if (session.status !== "authenticated") return setOpen(true)
     queryModel(input)
   }
 
   return (
     <div className={"w-full"}>
-      <AlertDialog open={open} onOpenChange={setOpen}>
-        <AlertDialogContent>
-          <AlertDialogTitle>发送失败</AlertDialogTitle>
-          <AlertDialogDescription>
-            您需要先登陆才能发送哦！
-          </AlertDialogDescription>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={() => signIn()}>
-              点击跳转登录
-            </AlertDialogAction>
-            <AlertDialogCancel>放弃</AlertDialogCancel>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <CheckAuth open={open} setOpen={setOpen} />
 
       <div className={"flex rounded-3xl border p-2"}>
         <IconContainer className={"w-6 h-6 shrink-0 interactive"}>
@@ -97,3 +87,24 @@ export const QueryModel = () => {
     </div>
   )
 }
+
+const CheckAuth = ({
+  open,
+  setOpen,
+}: {
+  open: boolean
+  setOpen: (open: boolean) => void
+}) => (
+  <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialogContent>
+      <AlertDialogTitle>发送失败</AlertDialogTitle>
+      <AlertDialogDescription>您需要先登陆才能发送哦！</AlertDialogDescription>
+      <AlertDialogFooter>
+        <AlertDialogAction onClick={() => signIn()}>
+          点击跳转登录
+        </AlertDialogAction>
+        <AlertDialogCancel>放弃</AlertDialogCancel>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+)

@@ -16,35 +16,41 @@ import { useSocketStore } from "@/store/socket"
 import { StatusIcon } from "@/components/icons"
 
 export const BrandTitle = ({
+  withDescription,
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => {
+}: HTMLAttributes<HTMLDivElement> & { withDescription?: boolean }) => {
   return (
-    <h1
+    <div
       className={cn(
-        "text-6xl gap-4 font-bold primary-gradient flex",
-        className,
+        "flex justify-center",
+        // "w-[240px] "
       )}
-      {...props}
     >
-      搜 嘎
-      <span
-        className={
-          "rotate-12 scale-150 inline-block primary-gradient bg-gradient-to-t"
-        }
+      <h1
+        className={cn(
+          "text-6xl gap-4 font-bold primary-gradient flex",
+          className,
+        )}
+        {...props}
       >
-        {" !"}
-      </span>
-    </h1>
+        搜 嘎
+        <span
+          className={
+            "rotate-12 scale-150 inline-block primary-gradient bg-gradient-to-t"
+          }
+        >
+          {" !"}
+        </span>
+      </h1>
+
+      {/*{withDescription && <span className={"text-sm"}>全栈 AI 平台</span>}*/}
+    </div>
   )
 }
 
 export const BrandingFooter = () => {
   const enterprises: string[] = []
-  const { latency } = useSocketStore((state) => ({
-    state: state.state,
-    latency: state.latency,
-  }))
 
   return (
     <div className={"flex flex-col items-center gap-2 mt-auto p-4"}>
@@ -60,22 +66,31 @@ export const BrandingFooter = () => {
         ))}
 
         <div className={"grow"} />
-        <div className={cn("flex items-end gap-1 mt-2 shrink-0")}>
-          {latency === 0 ? (
-            <BarChart className={"animate-pulse w-4 h-4"} />
-          ) : (
-            <StatusIcon
-              level={latency < 500 ? 3 : latency < 1000 ? 2 : 1}
-              className={"w-4 h-4"}
-            />
-          )}
-          <span className={"text-xs text-muted-foreground"}>
-            {Math.floor(latency) + " ms"}
-          </span>
-        </div>
+
+        <AppStatus />
       </div>
 
       {SHOW_PARTNERS && <Partners />}
+    </div>
+  )
+}
+
+export const AppStatus = () => {
+  const latency = useSocketStore((state) => state.latency)
+
+  return (
+    <div className={cn("flex items-center gap-1 mt-2 shrink-0")}>
+      {latency === 0 ? (
+        <BarChart className={"animate-pulse w-4 h-4"} />
+      ) : (
+        <StatusIcon
+          level={latency < 500 ? 3 : latency < 1000 ? 2 : 1}
+          className={"w-4 h-4"}
+        />
+      )}
+      <span className={"text-xs text-muted-foreground"}>
+        {Math.floor(latency) + " ms"}
+      </span>
     </div>
   )
 }
