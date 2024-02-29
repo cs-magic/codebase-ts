@@ -1,7 +1,7 @@
 import { Container } from "@/components/containers"
 import { getServerSession } from "next-auth"
 import { UserButton } from "@/components/user-button"
-import { SelectModel } from "@/components/model/select-model"
+import { ConfigApp } from "@/components/model/config-app"
 import { QueryModel } from "@/components/model/query-model"
 import { BrandTitle, BrandingFooter } from "@/components/branding"
 import { TV } from "@/components/model/tv"
@@ -22,7 +22,7 @@ export default async function HomePage() {
 
       {/*<TV />*/}
 
-      <SelectModel />
+      <ConfigApp />
 
       <QueryModel />
     </Container>

@@ -41,20 +41,6 @@ export const useQueryModel = (fetchSSE: any) => {
           console.log({ llmResData })
           void fetchSSE(llmResData.conversationId)
           break
-
-        case "gpt-3.5-turbo-16k":
-        case "gpt-3.5-turbo-16k-0613":
-        case "gpt-3.5-turbo-0301":
-        case "gpt-3.5-turbo-0613":
-        case "gpt-3.5-turbo-1106":
-        case "gpt-4-32k-0314":
-        case "gpt-4-32k-0613":
-        case "gpt-4-0314":
-        case "gpt-4-0613":
-        case "gpt-4-1106-preview":
-        case "gpt-4-vision-preview":
-          throw new Error("Unsupported Yet!")
-
         case "kimi":
         default:
           toast.warning(TODO)
