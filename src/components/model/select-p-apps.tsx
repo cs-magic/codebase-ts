@@ -70,11 +70,11 @@ export const SelectPApps = () => {
             {pAppsInDB
               .filter(
                 (m) =>
-                  m.title?.toLowerCase().includes(filterPApps.toLowerCase()) ||
-                  m.model.title
+                  m.title?.toLowerCase().includes(filterPApps.toLowerCase()) ??
+                  (m.model.title
                     .toLowerCase()
                     .includes(filterPApps.toLowerCase()) ||
-                  m.model.company.title.toLowerCase().includes(filterPApps),
+                    m.model.company.title.toLowerCase().includes(filterPApps)),
               )
               .map((m) => (
                 <SelectPApp key={m.id} pApp={m} type={"toAdd"} />
