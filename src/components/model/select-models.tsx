@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 
 import { SelectModel } from "@/components/model/select-model"
+import { cn } from "@/lib/utils"
 
 export const SelectModels = () => {
   const { models } = useModelStore((state) => ({
@@ -47,7 +48,12 @@ export const SelectModels = () => {
                     vs
                   </span>
                 ),
-                <span key={cur} className={"underline underline-offset-4"}>
+                <span
+                  key={cur}
+                  className={cn()
+                  // "underline underline-offset-4"
+                  }
+                >
                   {cur}
                 </span>,
               ],

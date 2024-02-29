@@ -1,10 +1,8 @@
 import { Container } from "@/components/containers"
 import { getServerSession } from "next-auth"
-import { UserButton } from "@/components/user-button"
 import { ConfigApp } from "@/components/model/config-app"
 import { QueryModel } from "@/components/model/query-model"
-import { BrandTitle, BrandingFooter } from "@/components/branding"
-import { TV } from "@/components/model/tv"
+import { BrandTitle } from "@/components/branding"
 
 export default async function HomePage() {
   const session = await getServerSession()

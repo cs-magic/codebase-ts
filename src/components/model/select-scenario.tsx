@@ -1,6 +1,6 @@
 import { useModelStore } from "@/store/model.slice"
 import { Select, SelectContent, SelectValue } from "@/components/ui/select"
-import { SelectTrigger as SelectPrimitiveTrigger } from "@radix-ui/react-select/dist"
+import { SelectTrigger as SelectPrimitiveTrigger } from "@radix-ui/react-select"
 import { Text2ImageAppSVG, Text2TextAppSVG } from "@/config/assets"
 
 import { SelectModelItem } from "@/components/model/select-model-item"

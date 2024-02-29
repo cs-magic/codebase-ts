@@ -1,10 +1,10 @@
 import { ScenarioType } from "@/schema/llm"
 import { ElementType } from "react"
-import * as SelectPrimitive from "@radix-ui/react-select/dist"
+import * as SelectPrimitive from "@radix-ui/react-select"
 import {
   SelectItem as SelectPrimitiveItem,
   SelectItemText,
-} from "@radix-ui/react-select/dist"
+} from "@radix-ui/react-select"
 import { Check } from "lucide-react"
 
 export const SelectModelItem = ({
