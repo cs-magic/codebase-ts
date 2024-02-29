@@ -15,10 +15,10 @@ import {
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { BrandTitle } from "@/components/branding"
 
-export const Header = () => {
+export const Header = ({ withBrand }: { withBrand?: boolean }) => {
   return (
     <div className={"w-full flex items-center gap-2 px-6 py-4"}>
-      <BrandTitle className={"text-2xl"} withDescription />
+      {withBrand && <BrandTitle className={"text-2xl"} withDescription />}
 
       <div className={"grow"} />
 

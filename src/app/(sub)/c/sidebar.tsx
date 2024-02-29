@@ -1,12 +1,13 @@
+"use client"
 import { useConversationListStore } from "@/store/conversation-list.slice"
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
-import { ConversationListComp } from "@/app/c/conversation-list"
+import { ConversationListComp } from "./conversation-list"
 
 export const Sidebar = () => {
   const conversationList = useConversationListStore((state) => state.data)
   const addConversation = useConversationListStore(
-    (state) => state.addConversation,
+    (state) => state.addConversationWithoutQuery,
   )
   console.log({ conversationList })
 

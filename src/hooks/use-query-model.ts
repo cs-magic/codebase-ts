@@ -1,19 +1,19 @@
 import { useModelStore } from "@/store/model.slice"
 import { api } from "@/trpc/react"
 import { toast } from "sonner"
-import { ICreateConversationBody } from "@/schema/api"
-import { TODO } from "@/config/ui"
-
-import { triggerLLM } from "@/app/api/llm/actions"
 import { signIn } from "next-auth/react"
+import { useConversationListStore } from "@/store/conversation-list.slice"
+import { useRouter } from "next/navigation"
 
 export const useQueryModel = (fetchSSE: any) => {
-  const { setChannelId, channelId, models } = useModelStore((state) => ({
-    setChannelId: state.setChannelId,
-    channelId: state.channelId,
-    models: state.pAppIds,
-  }))
-  const modelName = models[0]
+  const setChannelId = useModelStore((state) => state.setChannelId)
+  const channelId = useModelStore((state) => state.channelId)
+  const pAppIds = useModelStore((state) => state.pAppIds)
+  const query = useConversationListStore(
+    (state) => state.addConversationWithQuery,
+  )
+  const pAppId = pAppIds[0]
+  const router = useRouter()
 
   const addMessage = api.message.add.useMutation({
     onError: (error) => {
@@ -26,31 +26,32 @@ export const useQueryModel = (fetchSSE: any) => {
       }
     },
     onSuccess: async (message) => {
-      const { toConversationId: conversationId } = message
-      setChannelId(conversationId)
-
-      switch (modelName) {
-        case "gpt-3.5-turbo":
-        case "gpt-4":
-        case "gpt-4-32k":
-          const body: ICreateConversationBody = {
-            prompt: message.content,
-            modelName,
-            conversationId,
-          }
-          const llmResData = await triggerLLM(body)
-          console.log({ llmResData })
-          void fetchSSE(llmResData.conversationId)
-          break
-        case "kimi":
-        default:
-          toast.warning(TODO)
-          break
-      }
+      // const { toConversationId: conversationId } = message
+      // setChannelId(conversationId)
+      // switch (pAppId) {
+      //   case "gpt-3.5-turbo":
+      //   case "gpt-4":
+      //   case "gpt-4-32k":
+      //     const body: ICreateConversationBody = {
+      //       prompt: message.content,
+      //       modelName: pAppId,
+      //       conversationId,
+      //     }
+      //     const llmResData = await triggerLLM(body)
+      //     console.log({ llmResData })
+      //     void fetchSSE(llmResData.conversationId)
+      //     break
+      //   case "kimi":
+      //   default:
+      //     toast.warning(TODO)
+      //     break
+      // }
     },
   })
 
-  return (text: string) => {
-    return addMessage.mutate({ id: channelId, text })
+  return async (text: string) => {
+    // return addMessage.mutate({ id: channelId, text })
+    const conversationId = await query(text)
+    router.push(`/c/${conversationId}`)
   }
 }

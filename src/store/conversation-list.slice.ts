@@ -8,7 +8,8 @@ import { useModelStore } from "@/store/model.slice"
 export interface ConversationListSlice {
   data: IConversationBasic[]
 
-  addConversation: () => void
+  addConversationWithoutQuery: () => Promise<string>
+  addConversationWithQuery: (query: string) => Promise<string>
 }
 
 export const useConversationListStore = create<ConversationListSlice>()(
@@ -16,7 +17,7 @@ export const useConversationListStore = create<ConversationListSlice>()(
     immer((setState, getState, store) => ({
       data: [],
 
-      addConversation: async () => {
+      addConversationWithoutQuery: async () => {
         const pApps = useModelStore.getState().pAppIds
         const newConversation = await createConversation({
           pApps: pApps.map((id) => ({ id })),
@@ -26,6 +27,13 @@ export const useConversationListStore = create<ConversationListSlice>()(
         setState((state) => {
           state.data.push(newConversation)
         })
+        return newConversation.id
+      },
+
+      addConversationWithQuery: async (query) => {
+        const conversationId = await getState().addConversationWithoutQuery()
+        console.log({ conversationId })
+        return conversationId
       },
     })),
   ),
