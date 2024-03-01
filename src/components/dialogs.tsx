@@ -4,6 +4,7 @@ import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog"
 import { LoaderIcon } from "lucide-react"
 import { uiState } from "@/store/ui"
 import { useSnapshot } from "valtio"
+import React from "react"
 
 export const LoadingAlertDialog = () => {
   const { loading } = useSnapshot(uiState)

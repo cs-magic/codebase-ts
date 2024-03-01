@@ -1,21 +1,17 @@
 "use client"
 
+import { api } from "@/lib/trpc/react"
+import { useSnapshot } from "valtio"
+import { pAppsState } from "@/store/conversation"
 import React, { useEffect, useState } from "react"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { ChevronDownIcon } from "lucide-react"
+import { uiState } from "@/store/ui"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
+import { SelectPApp } from "@/components/model/select-p-app"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 
-import { SelectPApp } from "@/components/model/select-p-app"
-import { api } from "@/lib/trpc/react"
-import { JoinComponents } from "@/components/join-components"
-import { useSnapshot } from "valtio"
-import { pAppsState } from "@/store/conversation"
-import { uiState } from "@/store/ui"
-
-export const SelectPApps = () => {
+export const SelectPAppsDialog = () => {
   const { data: pAppsInDB = [] } = api.llm.listPApps.useQuery()
   const { pApps } = useSnapshot(pAppsState)
 

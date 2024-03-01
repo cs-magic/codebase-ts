@@ -61,9 +61,10 @@ model Conversation {
   fromUser   User   @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
   fromUserId String
 
-  type  ConversationType
-  pApps PApp[]
-  title String?
+  type    ConversationType
+  pApps   PApp[]
+  title   String?
+  Message Message[]
 }
 
 enum ConversationType {
@@ -77,11 +78,20 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  conversationModel   PApp   @relation(fields: [conversationModelId], references: [id], onDelete: Cascade)
-  conversationModelId String
+  // 必与conversation相连
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+
+  // 子app回答的时候也可以与子app相连
+  pApp   PApp?   @relation(fields: [pAppId], references: [id], onDelete: Cascade)
+  pAppId String?
 
   content String
   role    MessageRole
+
+  parent   Message?  @relation("parent", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId String?
+  children Message[] @relation("parent")
 }
 
 enum MessageRole {
@@ -109,7 +119,7 @@ model PApp {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  model   Model   @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  model   Model  @relation(fields: [modelId], references: [id], onDelete: Cascade)
   modelId String
   title   String
 

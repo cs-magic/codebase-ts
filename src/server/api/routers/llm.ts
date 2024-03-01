@@ -97,4 +97,44 @@ export const llmRouter = createTRPCRouter({
         }),
       )
     }),
+
+  addPApp: conversationProcedure
+    .input(
+      // todo: type
+      z.object({
+        // 因为客户端也需要自己生成新的id，所以直接从客户端拿就好了
+        id: z.string(),
+        modelId: z.string(),
+        title: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      return db.conversation.update({
+        where: { id: ctx.conversation.id },
+        data: {
+          pApps: {
+            create: {
+              id: input.id,
+              modelId: input.modelId,
+              title: input.title,
+            },
+          },
+        },
+      })
+    }),
+
+  delPApp: conversationProcedure
+    .input(z.object({ pAppId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      return db.conversation.update({
+        where: { id: ctx.conversation.id },
+        data: {
+          pApps: {
+            delete: {
+              id: input.pAppId,
+            },
+          },
+        },
+      })
+    }),
 })

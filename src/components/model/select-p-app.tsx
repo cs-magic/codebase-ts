@@ -4,7 +4,8 @@ import { MinusCircleIcon, PlusCircleIcon } from "lucide-react"
 
 import { IPApp } from "@/schema/conversation"
 import { useSnapshot } from "valtio"
-import { addPApp, delPApp, pAppsState } from "@/store/conversation"
+import { pAppsState, useAddPApp, useDelPApp } from "@/store/conversation"
+import { nanoid } from "nanoid"
 
 export const SelectPApp = ({
   pApp,
@@ -15,6 +16,8 @@ export const SelectPApp = ({
 }) => {
   const { pApps } = useSnapshot(pAppsState)
   // console.log({ pApps, type, pApp })
+  const addPApp = useAddPApp()
+  const delPApp = useDelPApp()
 
   return (
     <Button
@@ -31,8 +34,13 @@ export const SelectPApp = ({
           "w-6 h-6 invisible group-hover:visible hover:text-primary-foreground"
         }
         onClick={(event) => {
-          if (type === "toDel") delPApp(pApp.id)
-          else addPApp(pApp)
+          if (type === "toDel") void delPApp(pApp.id)
+          else
+            void addPApp({
+              ...pApp,
+              // a new id, in case of duplication
+              id: nanoid(),
+            })
         }}
       >
         {type === "toDel" ? <MinusCircleIcon /> : <PlusCircleIcon />}

@@ -6,7 +6,7 @@ import { TRPCReactProvider } from "@/lib/trpc/react"
 import ThemeProvider from "@/providers/theme"
 import { Toaster } from "@/components/ui/sonner"
 import { SessionProvider } from "@/providers/session"
-import { LoadingAlertDialog } from "@/components/dialog"
+import { LoadingAlertDialog } from "@/components/dialogs"
 import { type Viewport } from "next"
 import AutoHeightProvider from "@/providers/AutoHeightProvider"
 import { Header } from "@/components/header"
@@ -15,7 +15,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import SocketProvider from "@/providers/socket"
 import { BrandingFooter } from "@/components/footer"
 import { AppStatus } from "@/components/branding"
-import { SelectPApps } from "@/components/model/select-p-apps"
+import { SelectPAppsDialog } from "@/components/model/select-p-apps-dialog"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,7 +63,7 @@ export default function RootLayout({
 
                       <LoadingAlertDialog />
 
-                      <SelectPApps />
+                      <SelectPAppsDialog />
 
                       <AppStatus />
                     </main>

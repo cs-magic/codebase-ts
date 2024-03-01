@@ -22,13 +22,34 @@ export const conversationsState = proxy<{
 }>({ conversations: [], conversationId: null })
 export const messagesState = proxy<IMessageInChat[]>([])
 
-export const addPApp = (pApp: IPAppClient) => {
-  pAppsState.pApps.push(pApp)
+export const useAddPApp = () => {
+  const conversationId = conversationsState.conversationId
+  const addPApp = api.llm.addPApp.useMutation()
+  return async (pApp: IPApp) => {
+    console.log("adding pApp: ", { conversationId, pApp })
+    if (conversationId) {
+      await addPApp.mutateAsync({
+        conversationId,
+        id: pApp.id,
+        modelId: pApp.modelId,
+        title: pApp.title,
+      })
+    }
+    pAppsState.pApps.push(pApp)
+  }
 }
-export const delPApp = (id: string) => {
-  // 至少要有1个
-  if (pAppsState.pApps.length === 1) return
-  remove(pAppsState.pApps, (i) => i.id === id)
+
+export const useDelPApp = () => {
+  const conversationId = conversationsState.conversationId
+  const delPApp = api.llm.delPApp.useMutation()
+  return async (pAppId: string) => {
+    // 至少要有1个
+    if (pAppsState.pApps.length === 1) return
+    // 更新数据库
+    if (conversationId) await delPApp.mutateAsync({ conversationId, pAppId })
+    // 更新本地
+    remove(pAppsState.pApps, (i) => i.id === pAppId)
+  }
 }
 
 export const useInitConversations = () => {
@@ -104,8 +125,10 @@ export const useQueryInChatLayout = () => {
       updatedAt: new Date(),
       content: query,
       role: "user",
+      conversationId,
+      pAppId: null,
+      parentId: null,
     })
-    toast.message("query: " + query)
   }
   return { queryInChatLayout }
 }

@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 
   const init = async () => {
     const sendToken = async (token: string, event = "token") => {
-      console.log(`client sending token: [${token}]`)
+      // console.log(`client sending token: [${token}]`)
       await writer.write(
         encoder.encode(`event: ${event}\ndata: ${JSON.stringify(token)}\n\n`),
       )
@@ -75,10 +75,11 @@ export const triggerLLM = async (context: {
       prompt: last(messages)!.content,
     })
     for await (const chunk of res) {
-      console.log("[llm] chunk: ", JSON.stringify(chunk))
-      const content = chunk.content as string
-      r.data += content
-      r.clients.forEach((c) => c.onEvent(content))
+      // console.log("[llm] chunk: ", JSON.stringify(chunk))
+      const token = chunk.content as string
+      console.log("[llm] token: ", { requestId, token })
+      r.data += token
+      r.clients.forEach((c) => c.onEvent(token))
     }
     r.finished = true
   }

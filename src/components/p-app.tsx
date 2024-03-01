@@ -5,10 +5,11 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { DEFAULT_AVATAR } from "@/config/assets"
 import { useSnapshot } from "valtio"
 import {
-  delPApp,
+  conversationsState,
   IPAppClient,
   messagesState,
   pAppsState,
+  useDelPApp,
 } from "@/store/conversation"
 import { cn } from "@/lib/utils"
 import { openSelectPApps } from "@/store/ui"
@@ -24,21 +25,30 @@ export const PAppComp = ({ pApp }: { pApp: IPAppClient }) => {
   const { pApps } = useSnapshot(pAppsState)
 
   const { id } = pApp
+  const { conversationId } = useSnapshot(conversationsState)
 
   useEffect(() => {
     if (!pApp.needFetchLLM) return
     void fetchSSE(`/api/llm?r=${id}`, {
       onToken: (token) => {
-        // should always use store, instead of proxy
-        if (last(messagesState)!.role === "user")
+        const lastUserMessage = last(
+          messagesState.filter((m) => m.role === "user"),
+        )!
+        const lastAssistantMessage = messagesState.find(
+          (m) => m.parentId === lastUserMessage.id && m.pAppId === id,
+        )
+        if (!lastAssistantMessage) {
           messagesState.push({
             role: "assistant",
             content: token,
             id: nanoid(),
             updatedAt: new Date(),
+            conversationId: conversationId!,
+            pAppId: id,
+            parentId: lastUserMessage.id,
           })
-        else {
-          last(messagesState)!.content += token
+        } else {
+          lastAssistantMessage.content += token
         }
       },
     })
@@ -46,6 +56,7 @@ export const PAppComp = ({ pApp }: { pApp: IPAppClient }) => {
 
   const needFetchLLM = pApp.needFetchLLM
   console.log({ pApp, needFetchLLM, messages })
+  const delPApp = useDelPApp()
 
   return (
     <div className={"w-full"}>
@@ -58,7 +69,7 @@ export const PAppComp = ({ pApp }: { pApp: IPAppClient }) => {
         <IconContainer
           className={cn(pApps.length === 1 && "text-muted-foreground")}
           onClick={() => {
-            delPApp(pApp.id)
+            void delPApp(pApp.id)
           }}
         >
           <MinusCircleIcon />
@@ -73,21 +84,29 @@ export const PAppComp = ({ pApp }: { pApp: IPAppClient }) => {
         </IconContainer>
       </div>
 
-      {messages.map((m, index) => (
-        <div key={index} className={"w-full flex gap-2 p-2"}>
-          <Avatar className={"shrink-0"}>
-            <AvatarImage
-              src={
-                m.role === "user"
-                  ? userAvatar
-                  : pApp?.model.logo ?? DEFAULT_AVATAR
-              }
-            />
-          </Avatar>
+      {messages
+        .filter(
+          (m) =>
+            // user
+            !m.pAppId ||
+            // assistant
+            m.pAppId === id,
+        )
+        .map((m, index) => (
+          <div key={index} className={"w-full flex gap-2 p-2"}>
+            <Avatar className={"shrink-0"}>
+              <AvatarImage
+                src={
+                  m.role === "user"
+                    ? userAvatar
+                    : pApp?.model.logo ?? DEFAULT_AVATAR
+                }
+              />
+            </Avatar>
 
-          <div>{m.content}</div>
-        </div>
-      ))}
+            <div>{m.content}</div>
+          </div>
+        ))}
     </div>
   )
 }

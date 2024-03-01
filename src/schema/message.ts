@@ -10,5 +10,11 @@ export const createMessageSchema = z.object({
 
 export type IMessageInChat = Pick<
   Message,
-  "id" | "updatedAt" | "content" | "role"
+  | "id"
+  | "updatedAt"
+  | "content"
+  | "role"
+  | "pAppId"
+  | "conversationId"
+  | "parentId"
 >
