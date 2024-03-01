@@ -9,7 +9,7 @@ import {
 } from "@/hooks/use-conversation"
 
 export const Sidebar = () => {
-  const conversations = useSnapshot(conversationsState)
+  const { conversations } = useSnapshot(conversationsState)
   const { addConversationWithoutPrompt } = useAddConversation()
   console.log({ conversations })
 

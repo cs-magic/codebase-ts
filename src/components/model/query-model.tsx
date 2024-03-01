@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { TextareaAuto } from "@/components/textarea"
+import { Textarea } from "@/components/textarea"
 import { useFetchSSE } from "@/hooks/use-llm-output"
 import { ArrowUpIcon, Paperclip } from "lucide-react"
 import { IconContainer } from "@/components/containers"
@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
 import { useSnapshot } from "valtio"
-import { pAppIdsState, useAddConversation } from "@/hooks/use-conversation"
+import { pAppsState, useAddConversation } from "@/hooks/use-conversation"
 
 export const QueryModel = () => {
   const { output, fetchSSE } = useFetchSSE()
@@ -33,12 +33,12 @@ export const QueryModel = () => {
 
   const session = useSession()
   const [open, setOpen] = useState(false)
-  const pAppIds = useSnapshot(pAppIdsState)
+  const { pApps } = useSnapshot(pAppsState)
 
   const onSubmit = () => {
     console.log({ input })
     if (!input) return
-    if (!pAppIds.length) return toast.error("至少需要选中一种模型")
+    if (!pApps.length) return toast.error("至少需要选中一种模型")
     if (session.status !== "authenticated") return setOpen(true)
     void addConversationWithPrompt(input)
   }
@@ -52,17 +52,12 @@ export const QueryModel = () => {
           <Paperclip />
         </IconContainer>
 
-        <TextareaAuto
+        <Textarea
           className={"px-2 grow"}
           autoFocus
           // value={input}
           onChange={(event) => setInput(event.currentTarget.value)}
-          onKeyDown={(event) => {
-            if (event.key !== "Enter" || event.nativeEvent.isComposing) return
-            // prevent add new line
-            event.preventDefault()
-            onSubmit()
-          }}
+          onQuery={onSubmit}
         />
 
         <Tooltip delayDuration={100}>

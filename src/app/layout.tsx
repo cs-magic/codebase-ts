@@ -51,7 +51,11 @@ export default function RootLayout({
                 <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
                   <TooltipProvider>
                     <main className={"flex flex-col h-screen"}>{children}</main>
-                    <Toaster richColors />
+                    <Toaster
+                      richColors
+                      position={"top-right"}
+                      duration={3000}
+                    />
 
                     <LoadingAlertDialog />
                   </TooltipProvider>

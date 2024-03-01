@@ -6,10 +6,10 @@ import { ComponentProps, forwardRef } from "react"
 import TextareaAutoSize from "react-textarea-autosize"
 import { useMounted } from "@/hooks/use-mounted"
 
-export const TextareaAuto = forwardRef<
+export const Textarea = forwardRef<
   HTMLTextAreaElement,
-  ComponentProps<typeof TextareaAutoSize>
->(({ className, minRows = 1, ...props }, ref) => {
+  ComponentProps<typeof TextareaAutoSize> & { onQuery?: (s: string) => void }
+>(({ className, minRows = 1, onKeyDown, onQuery, ...props }, ref) => {
   const mounted = useMounted()
   // avoid layout shift
   const rows = !mounted ? minRows : undefined
@@ -26,8 +26,19 @@ export const TextareaAuto = forwardRef<
         "resize-none focus-visible:outline-none bg-transparent",
         className,
       )}
+      onKeyDown={(event) => {
+        if (onKeyDown) return onKeyDown(event)
+        if (onQuery) {
+          if (event.key === "Enter" && !event.nativeEvent.isComposing) {
+            event.preventDefault()
+            const value = event.currentTarget.value
+            if (!value) return
+            onQuery(value)
+          }
+        }
+      }}
       {...props}
     />
   )
 })
-TextareaAuto.displayName = "TextareaAuto"
+Textarea.displayName = "TextareaAuto"

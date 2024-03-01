@@ -1,5 +1,5 @@
 import { proxy } from "valtio"
-import { IConversationBasic } from "@/schema/conversation"
+import { IConversationBasic, IPApp } from "@/schema/conversation"
 import { api } from "@/trpc/react"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
@@ -8,15 +8,19 @@ import { IMessageInChat } from "@/schema/message"
 import { nanoid } from "nanoid"
 import { remove } from "lodash"
 
-export const pAppIdsState = proxy<string[]>(["gpt-3.5-turbo"])
-export const conversationsState = proxy<IConversationBasic[]>([])
+export const pAppsState = proxy<{ pApps: IPApp[] }>({
+  pApps: [],
+})
+export const conversationsState = proxy<{
+  conversations: IConversationBasic[]
+}>({ conversations: [] })
 export const messagesState = proxy<IMessageInChat[]>([])
 
-export const addPAppId = (id: string) => {
-  pAppIdsState.push(id)
+export const addPApp = (pApp: IPApp) => {
+  pAppsState.pApps.push(pApp)
 }
 export const delPAppId = (id: string) => {
-  remove(pAppIdsState, (i) => i === id)
+  remove(pAppsState.pApps, (i) => i.id === id)
 }
 
 export const useInitConversationList = () => {
@@ -24,8 +28,7 @@ export const useInitConversationList = () => {
 
   useEffect(() => {
     console.log("inited conversations: ", conversations)
-    conversationsState.length = 0
-    conversationsState.push(...conversations)
+    conversationsState.conversations = conversations
   }, [conversations])
 }
 
@@ -34,7 +37,7 @@ export const useAddConversation = () => {
 
   const { isLoading, mutateAsync } = api.llm.createConversation.useMutation({
     onSuccess: (conversation) => {
-      conversationsState.splice(0, 0, conversation)
+      conversationsState.conversations.splice(0, 0, conversation)
       toast.success("新建会话成功")
       router.push(`/c/${conversation.id}`)
       messagesState.length = 0 // clean array
@@ -46,7 +49,7 @@ export const useAddConversation = () => {
   })
 
   const addConversationWithoutPrompt = () =>
-    mutateAsync({ pAppIds: pAppIdsState, type: "LLM" })
+    mutateAsync({ pApps: pAppsState.pApps, type: "LLM" })
 
   const addConversationWithPrompt = async (prompt: string) => {
     const conversation = await addConversationWithoutPrompt()
@@ -77,11 +80,11 @@ export const useDeleteConversation = () => {
       })
       .then(() => {
         toast.success("删除成功")
-        const index = conversationsState.findIndex(
+        const index = conversationsState.conversations.findIndex(
           (i) => i.id === conversationId,
         )
         if (index < 0) return
-        conversationsState.splice(index, 1)
+        conversationsState.conversations.splice(index, 1)
       })
   }
 }

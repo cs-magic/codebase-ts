@@ -9,7 +9,7 @@ import { immer } from "zustand/middleware/immer"
 import { IConversationBasic } from "@/schema/conversation"
 import { useConversationDetailStore } from "./zustand-slice"
 import { useSnapshot } from "valtio"
-import { pAppIdsState } from "@/hooks/use-conversation"
+import { pAppsState } from "@/hooks/use-conversation"
 
 export interface ConversationListSlice {
   data: IConversationBasic[]
@@ -26,7 +26,7 @@ export const useAddConversationWithoutQuery = () => {
   const router = useRouter()
 
   return async () => {
-    const pApps = useSnapshot(pAppIdsState)
+    const pApps = useSnapshot(pAppsState)
     console.log({ pApps })
 
     const { mutateAsync } = api.llm.createConversation.useMutation()

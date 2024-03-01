@@ -111,7 +111,7 @@ model PApp {
 
   model   Model   @relation(fields: [modelId], references: [id], onDelete: Cascade)
   modelId String
-  title   String?
+  title   String
 
   conversations Conversation[]
 

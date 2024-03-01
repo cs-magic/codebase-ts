@@ -4,7 +4,7 @@ import { MinusCircleIcon, PlusCircleIcon } from "lucide-react"
 
 import { IPApp } from "@/schema/conversation"
 import { useSnapshot } from "valtio"
-import { addPAppId, delPAppId, pAppIdsState } from "@/hooks/use-conversation"
+import { addPApp, delPAppId, pAppsState } from "@/hooks/use-conversation"
 
 export const SelectPApp = ({
   pApp,
@@ -13,9 +13,8 @@ export const SelectPApp = ({
   pApp: IPApp
   type: "toAdd" | "toDel"
 }) => {
-  const pAppIds = useSnapshot(pAppIdsState)
-  const hasPApp = !!pAppIds.find((p) => p === pApp.id)
-  console.log({ pAppIds, type, pApp })
+  const { pApps } = useSnapshot(pAppsState)
+  console.log({ pApps, type, pApp })
 
   return (
     <Button
@@ -23,8 +22,8 @@ export const SelectPApp = ({
       key={pApp.id}
       className={"w-full flex items-center p-2 rounded-lg group"}
       disabled={
-        (type === "toAdd" && (hasPApp || pAppIds.length >= 3)) ||
-        (type === "toDel" && pAppIds.length <= 1)
+        (type === "toAdd" && pApps.length >= 3) ||
+        (type === "toDel" && pApps.length <= 1)
       }
     >
       <IconContainer
@@ -32,14 +31,15 @@ export const SelectPApp = ({
           "w-6 h-6 invisible group-hover:visible hover:text-primary-foreground"
         }
         onClick={(event) => {
-          if (hasPApp) delPAppId(pApp.id)
-          else addPAppId(pApp.id)
+          if (type === "toDel") delPAppId(pApp.id)
+          else addPApp(pApp)
         }}
       >
-        {hasPApp ? <MinusCircleIcon /> : <PlusCircleIcon />}
+        {type === "toDel" ? <MinusCircleIcon /> : <PlusCircleIcon />}
       </IconContainer>
 
       <span className={"mx-2"}>{pApp.model.title}</span>
+      <span className={"mx-2 text-xs text-muted-foreground"}>{pApp.id}</span>
 
       <span className={"grow"} />
       <span className={"text-muted-foreground text-sm"}>

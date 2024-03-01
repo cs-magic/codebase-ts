@@ -18,7 +18,16 @@ export const llmRouter = createTRPCRouter({
   }),
 
   listPApps: publicProcedure.query(async () => {
-    return db.pApp.findMany({ ...pAppSchema, orderBy: { updatedAt: "desc" } })
+    return db.pApp.findMany({
+      // 只筛选官方p-app，不选自动生成的
+      where: {
+        id: {
+          equals: db.pApp.fields.modelId,
+        },
+      },
+      ...pAppSchema,
+      orderBy: { updatedAt: "desc" },
+    })
   }),
 
   getPApp: publicProcedure.input(z.string()).query(async ({ input }) => {
@@ -58,9 +67,7 @@ export const llmRouter = createTRPCRouter({
           fromUserId: ctx.user.id,
           type: input.type,
           pApps: {
-            connect: input.pAppIds.map((p) => ({
-              id: p,
-            })),
+            create: input.pApps,
           },
         },
         ...conversationSchema,

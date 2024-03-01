@@ -2,10 +2,10 @@
 
 import { PAppsComp } from "../../../components/p-app"
 import { useSnapshot } from "valtio"
-import { pAppIdsState } from "@/hooks/use-conversation"
+import { pAppsState } from "@/hooks/use-conversation"
 
 export default function ConversationPage() {
-  const pAppIds = useSnapshot(pAppIdsState)
+  const { pApps } = useSnapshot(pAppsState)
 
-  return <PAppsComp pAppIds={pAppIds} />
+  return <PAppsComp pApps={pApps} />
 }
