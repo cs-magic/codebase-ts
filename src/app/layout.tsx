@@ -9,11 +9,12 @@ import { SessionProvider } from "@/providers/session"
 import { LoadingAlertDialog } from "@/components/dialog"
 import { type Viewport } from "next"
 import AutoHeightProvider from "@/providers/AutoHeightProvider"
-import { BrandingFooter } from "@/components/branding"
 import { Header } from "@/components/header"
 import { cn } from "@/lib/utils"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import SocketProvider from "@/providers/socket"
+import { BrandingFooter } from "@/components/footer"
+import { AppStatus } from "@/components/branding"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,14 +51,19 @@ export default function RootLayout({
               <AutoHeightProvider>
                 <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
                   <TooltipProvider>
-                    <main className={"flex flex-col h-screen"}>{children}</main>
-                    <Toaster
-                      richColors
-                      position={"top-right"}
-                      duration={3000}
-                    />
+                    <main className={"flex flex-col h-screen"}>
+                      {children}
 
-                    <LoadingAlertDialog />
+                      <Toaster
+                        richColors
+                        position={"top-right"}
+                        duration={3000}
+                      />
+
+                      <LoadingAlertDialog />
+
+                      <AppStatus />
+                    </main>
                   </TooltipProvider>
                 </ThemeProvider>
               </AutoHeightProvider>
