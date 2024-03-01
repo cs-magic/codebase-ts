@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const writer = responseStream.writable.getWriter()
   const encoder = new TextEncoder()
   const send = (s: string) =>
-    writer.write(encoder.encode(`event: onData\ndata:${s}\n`))
+    writer.write(encoder.encode(s))
 
   const genData = async () =>
     await new Promise((resolve, reject) => {
@@ -40,6 +40,7 @@ export async function GET(req: NextRequest) {
 
       cmd.on("close", (code) => {
         console.log(`[cmd] close: child process exited with code ${code}`)
+        writer.close()
         resolve(true)
       })
     })
