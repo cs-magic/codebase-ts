@@ -15,10 +15,8 @@ import {
 } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 import { CheckAuth } from "./auth"
-import { fetchSSE } from "@/lib/sse"
 
 export const QueryInHomePage = () => {
-  const { output, fetchSSE } = fetchSSE()
   const [input, setInput] = useState("")
 
   const { queryInHomePage } = useQueryInHomePage()
@@ -69,8 +67,6 @@ export const QueryInHomePage = () => {
           <TooltipContent side={"bottom"}>发送</TooltipContent>
         </Tooltip>
       </div>
-
-      <div>{output}</div>
     </div>
   )
 }

@@ -12,7 +12,8 @@ import {
   pAppSchema,
 } from "@/schema/conversation"
 import { z } from "zod"
-import { triggerLLM } from "@/app/api/llm/route"
+
+import { triggerLLM } from "@/app/api/llm/triggerLLM"
 
 export const llmRouter = createTRPCRouter({
   listModels: publicProcedure.query(async () => {
