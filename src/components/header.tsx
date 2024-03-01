@@ -14,6 +14,8 @@ import {
 } from "@/config/assets"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { BrandTitle } from "@/components/branding"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 export const Header = ({ withBrand }: { withBrand?: boolean }) => {
   return (
@@ -39,7 +41,16 @@ const Apps = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className={"mr-2"}>
-        <div className={"grid grid-cols-3 max-h-[480px] overflow-auto p-4"}>
+        <div
+          className={cn(
+            "grid max-h-[480px] overflow-auto p-4",
+            subAppsIcons.length >= 3
+              ? "grid-cols-3"
+              : subAppsIcons.length === 2
+                ? "grid-cols-2"
+                : "grid-cols-1",
+          )}
+        >
           {subAppsIcons.map((subApp, index) => (
             <SubAppIcon subAppIcon={subApp} key={index} />
           ))}
@@ -50,6 +61,7 @@ const Apps = () => {
 }
 
 export interface ISubAppIcon {
+  id: string
   fromMode: ModeType
   toMode: ModeType
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
@@ -59,7 +71,8 @@ export interface ISubAppIcon {
 export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
   const { fromMode, toMode, Cover } = subAppIcon
   return (
-    <div
+    <Link
+      href={`/${subAppIcon.id}`}
       className={
         "w-24 flex flex-col gap-1 items-center rounded-lg p-2 interactive"
       }
@@ -81,7 +94,7 @@ export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
       <div
         className={"text-sm"}
       >{`${modes[fromMode].label} -> ${modes[toMode].label}`}</div>
-    </div>
+    </Link>
   )
 }
 
@@ -97,18 +110,18 @@ export const modes: Record<ModeType, IMode> = {
  * todo: images
  */
 export const subAppsIcons: ISubAppIcon[] = [
-  { fromMode: "text", toMode: "text", Cover: Text2TextAppSVG },
-  { fromMode: "text", toMode: "image", Cover: Text2ImageAppSVG },
-  { fromMode: "image", toMode: "text" },
-  { fromMode: "text", toMode: "sound" },
-  { fromMode: "image", toMode: "sound" },
-  { fromMode: "sound", toMode: "text" },
-  { fromMode: "sound", toMode: "image" },
-  { fromMode: "text", toMode: "video" },
-  { fromMode: "image", toMode: "video" },
-  { fromMode: "sound", toMode: "video" },
-  { fromMode: "video", toMode: "text" },
-  { fromMode: "video", toMode: "image" },
-  { fromMode: "video", toMode: "sound" },
-  { fromMode: "video", toMode: "video" },
+  { id: "tt", fromMode: "text", toMode: "text", Cover: Text2TextAppSVG },
+  { id: "ti", fromMode: "text", toMode: "image", Cover: Text2ImageAppSVG },
+  // { fromMode: "image", toMode: "text" },
+  // { fromMode: "text", toMode: "sound" },
+  // { fromMode: "image", toMode: "sound" },
+  // { fromMode: "sound", toMode: "text" },
+  // { fromMode: "sound", toMode: "image" },
+  // { fromMode: "text", toMode: "video" },
+  // { fromMode: "image", toMode: "video" },
+  // { fromMode: "sound", toMode: "video" },
+  // { fromMode: "video", toMode: "text" },
+  // { fromMode: "video", toMode: "image" },
+  // { fromMode: "video", toMode: "sound" },
+  // { fromMode: "video", toMode: "video" },
 ]

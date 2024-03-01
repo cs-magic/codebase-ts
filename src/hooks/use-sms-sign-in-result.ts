@@ -1,4 +1,4 @@
-import { useSmsStore } from "@/store/sms.slice"
+import { useSmsStore } from "@/store/sms"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 

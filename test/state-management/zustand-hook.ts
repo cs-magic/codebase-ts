@@ -40,7 +40,7 @@
 //       // first
 //       state.data.splice(0, 0, newConversation)
 //     })
-//     router.push(`/c/${newConversation.id}`)
+//     router.push(`/tt/${newConversation.id}`)
 //   }
 // }
 // export const useAddConversationWithQuery = () => {

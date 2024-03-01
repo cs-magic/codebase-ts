@@ -3,10 +3,7 @@ import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
 import { ConversationListComp } from "./conversation-list"
 import { useSnapshot } from "valtio"
-import {
-  conversationsState,
-  useAddConversation,
-} from "@/hooks/use-conversation"
+import { conversationsState, useAddConversation } from "@/store/conversation"
 
 export const Sidebar = () => {
   const { conversations } = useSnapshot(conversationsState)

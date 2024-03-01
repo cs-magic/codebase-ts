@@ -4,7 +4,7 @@
 // import { EventCallback, EventType } from "@/lib/puser/schema"
 //
 // import "colors"
-// import c from "ansi-colors"
+// import tt from "ansi-colors"
 // import { pusherClient } from "./init"
 // import { toast } from "sonner"
 // import { useModelStore } from "@/store/model.slice"
@@ -35,9 +35,9 @@
 //
 //   const call: EventCallback<T> = (data) => {
 //     ++n
-//     console.log(c.bgBlueBright.black.bold(` >> #${n} ${type} `), data)
+//     console.log(tt.bgBlueBright.black.bold(` >> #${n} ${type} `), data)
 //     const result = f(data)
-//     console.log(c.bgMagenta.whiteBright.bold(` << #${n} ${type} `), result)
+//     console.log(tt.bgMagenta.whiteBright.bold(` << #${n} ${type} `), result)
 //     return result
 //   }
 //

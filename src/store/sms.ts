@@ -4,7 +4,7 @@ import { ISendSms, ISmsSignIn } from "@/schema/sms"
 import { SetState } from "@/schema/utils"
 import { Dispatch, SetStateAction } from "react"
 import { signIn } from "next-auth/react"
-import { useUiStore } from "@/store/ui.slice"
+import { uiState } from "@/store/ui"
 import { $sendSms } from "@/server/sms/functions"
 import { toast } from "sonner"
 import { SMS_CODE_DOWNTIME, SMS_PROVIDER_ID } from "@/config/system"
@@ -72,10 +72,9 @@ export const useSmsStore = create<SmsSlice>()(
       })
 
       // UI 跨 store 同步
-      useUiStore.getState().setLoading(true)
-      // 异步
-      const ok = await $sendSms(phone)
-      useUiStore.getState().setLoading(false)
+      uiState.loading = true
+      const ok = await $sendSms(phone) // 异步
+      uiState.loading = false
 
       // 同步 immer
       setState((state) => {
@@ -107,12 +106,12 @@ export const useSmsStore = create<SmsSlice>()(
       }
 
       console.log("[sms] sign in: ", values)
-      useUiStore.getState().setLoading(true)
+      uiState.loading = true
       const res = await signIn(SMS_PROVIDER_ID, {
         ...values,
         redirect: false,
       })
-      useUiStore.getState().setLoading(false)
+      uiState.loading = false
 
       console.log("[sms] sign in result: ", res)
 

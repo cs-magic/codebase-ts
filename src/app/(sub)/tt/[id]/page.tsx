@@ -4,7 +4,7 @@ import { PAppsComp } from "@/components/p-app"
 import { api } from "@/trpc/react"
 import { useEffect } from "react"
 import { useSnapshot } from "valtio"
-import { pAppsState } from "@/hooks/use-conversation"
+import { pAppsState } from "@/store/conversation"
 
 export default function ConversationPage({
   params: { id },

@@ -39,7 +39,7 @@ export const useAddConversation = () => {
     onSuccess: (conversation) => {
       conversationsState.conversations.splice(0, 0, conversation)
       toast.success("新建会话成功")
-      router.push(`/c/${conversation.id}`)
+      router.push(`/tt/${conversation.id}`)
       messagesState.length = 0 // clean array
     },
     onError: (error) => {

@@ -4,7 +4,7 @@ import { MinusCircleIcon, PlusCircleIcon } from "lucide-react"
 
 import { IPApp } from "@/schema/conversation"
 import { useSnapshot } from "valtio"
-import { addPApp, delPAppId, pAppsState } from "@/hooks/use-conversation"
+import { addPApp, delPAppId, pAppsState } from "@/store/conversation"
 
 export const SelectPApp = ({
   pApp,

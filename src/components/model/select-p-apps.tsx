@@ -10,7 +10,7 @@ import { SelectPApp } from "@/components/model/select-p-app"
 import { api } from "@/trpc/react"
 import { JoinComponents } from "@/components/join-components"
 import { useSnapshot } from "valtio"
-import { pAppsState } from "@/hooks/use-conversation"
+import { pAppsState } from "@/store/conversation"
 
 export const SelectPApps = () => {
   const { data: pAppsInDB = [] } = api.llm.listPApps.useQuery()

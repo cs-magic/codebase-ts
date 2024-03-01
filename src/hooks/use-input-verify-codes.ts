@@ -1,5 +1,5 @@
 import { useKey } from "react-use"
-import { useSmsStore } from "@/store/sms.slice"
+import { useSmsStore } from "@/store/sms"
 
 /**
  * 输入六位验证码，并自动触发登录验证

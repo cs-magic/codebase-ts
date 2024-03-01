@@ -4,7 +4,7 @@ import { Sidebar } from "@/components/sidebar"
 import { Separator } from "@/components/ui/separator"
 import { PropsWithChildren } from "react"
 import { Textarea } from "@/components/textarea"
-import { useInitConversationList } from "@/hooks/use-conversation"
+import { useInitConversationList } from "@/store/conversation"
 import { toast } from "sonner"
 
 const ChatLayout = ({ children }: PropsWithChildren) => {

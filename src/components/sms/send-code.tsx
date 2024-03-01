@@ -1,6 +1,6 @@
 "use client"
 
-import { useSmsStore } from "@/store/sms.slice"
+import { useSmsStore } from "@/store/sms"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {

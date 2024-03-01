@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
 import { useSnapshot } from "valtio"
-import { pAppsState, useAddConversation } from "@/hooks/use-conversation"
+import { pAppsState, useAddConversation } from "@/store/conversation"
 
 export const QueryModel = () => {
   const { output, fetchSSE } = useFetchSSE()

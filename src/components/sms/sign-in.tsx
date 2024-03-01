@@ -1,4 +1,4 @@
-import { useSmsStore } from "@/store/sms.slice"
+import { useSmsStore } from "@/store/sms"
 import { Label } from "@/components/ui/label"
 import { EditIcon } from "lucide-react"
 import { DigitContainer } from "@/components/containers"

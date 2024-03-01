@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useDeleteConversation } from "@/hooks/use-conversation"
+import { useDeleteConversation } from "@/store/conversation"
 
 export const ConversationListComp = ({
   basic,
@@ -20,7 +20,7 @@ export const ConversationListComp = ({
 
   return (
     <Button variant={"ghost"} className={"w-full justify-start group"}>
-      <Link href={`/c/${basic.id}`} className={"grow text-left"}>
+      <Link href={`/tt/${basic.id}`} className={"grow text-left"}>
         {basic.id}
       </Link>
 
