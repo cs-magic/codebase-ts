@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const writer = responseStream.writable.getWriter()
   const encoder = new TextEncoder()
   const send = (s: string) =>
-    writer.write(encoder.encode(`event: onData\ndata:${s}\n\n`))
+    writer.write(encoder.encode(`event: onData\ndata:${s}\n`))
 
   const genData = async () =>
     await new Promise((resolve, reject) => {
