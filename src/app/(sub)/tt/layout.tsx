@@ -3,12 +3,13 @@
 import { Sidebar } from "@/components/sidebar"
 import { Separator } from "@/components/ui/separator"
 import { PropsWithChildren } from "react"
-import { Textarea } from "@/components/textarea"
-import { useInitConversationList } from "@/store/conversation"
-import { toast } from "sonner"
+import { useInitConversations } from "@/store/conversation"
+
+import { QueryInChatLayout } from "@/components/query-in-chat"
 
 const ChatLayout = ({ children }: PropsWithChildren) => {
-  useInitConversationList()
+  // 只能运行一次，不要有其他hook
+  useInitConversations()
 
   return (
     <div className={"w-full h-full overflow-auto flex border-y"}>
@@ -19,13 +20,7 @@ const ChatLayout = ({ children }: PropsWithChildren) => {
       <div className={"grow h-full flex flex-col"}>
         {children}
 
-        <Textarea
-          minRows={2}
-          className={
-            "rounded-lg border my-2 mx-auto w-full max-w-[720px] p-2 shrink-0"
-          }
-          onQuery={toast.message}
-        />
+        <QueryInChatLayout />
       </div>
     </div>
   )

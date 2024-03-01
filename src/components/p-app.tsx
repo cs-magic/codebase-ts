@@ -4,7 +4,7 @@ import { MinusCircleIcon, PlusCircleIcon, SettingsIcon } from "lucide-react"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { DEFAULT_AVATAR } from "@/config/assets"
 import { useSnapshot } from "valtio"
-import { delPAppId, messagesState, pAppsState } from "@/store/conversation"
+import { delPApp, messagesState, pAppsState } from "@/store/conversation"
 import { IPApp } from "@/schema/conversation"
 import { cn } from "@/lib/utils"
 import { openSelectPApps } from "@/store/ui"
@@ -28,7 +28,7 @@ export const PAppComp = ({ pApp }: { pApp: IPApp }) => {
         <IconContainer
           className={cn(pApps.length === 1 && "text-muted-foreground")}
           onClick={() => {
-            delPAppId(pApp.id)
+            delPApp(pApp.id)
           }}
         >
           <MinusCircleIcon />

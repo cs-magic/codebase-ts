@@ -4,7 +4,7 @@ import { MinusCircleIcon, PlusCircleIcon } from "lucide-react"
 
 import { IPApp } from "@/schema/conversation"
 import { useSnapshot } from "valtio"
-import { addPApp, delPAppId, pAppsState } from "@/store/conversation"
+import { addPApp, delPApp, pAppsState } from "@/store/conversation"
 
 export const SelectPApp = ({
   pApp,
@@ -31,7 +31,7 @@ export const SelectPApp = ({
           "w-6 h-6 invisible group-hover:visible hover:text-primary-foreground"
         }
         onClick={(event) => {
-          if (type === "toDel") delPAppId(pApp.id)
+          if (type === "toDel") delPApp(pApp.id)
           else addPApp(pApp)
         }}
       >

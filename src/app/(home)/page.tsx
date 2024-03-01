@@ -1,8 +1,8 @@
 import { Container } from "@/components/containers"
 import { getServerSession } from "next-auth"
 import { ConfigApp } from "@/components/model/config-app"
-import { QueryModel } from "@/components/model/query-model"
 import { BrandTitle } from "@/components/branding"
+import { QueryInHomePage } from "@/components/query"
 
 export default async function HomePage() {
   const session = await getServerSession()
@@ -22,7 +22,7 @@ export default async function HomePage() {
 
       <ConfigApp />
 
-      <QueryModel />
+      <QueryInHomePage />
     </Container>
   )
 }

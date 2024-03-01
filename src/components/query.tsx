@@ -1,35 +1,27 @@
 "use client"
 
-import { useState } from "react"
+import { pAppsState, useQueryInHomePage } from "@/store/conversation"
 import { Textarea } from "@/components/textarea"
 import { useFetchSSE } from "@/hooks/use-llm-output"
-import { ArrowUpIcon, Paperclip } from "lucide-react"
+import { useState } from "react"
+import { useSession } from "next-auth/react"
+import { useSnapshot } from "valtio"
+import { toast } from "sonner"
 import { IconContainer } from "@/components/containers"
-import { cn } from "@/lib/utils"
+import { ArrowUpIcon, Paperclip } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { signIn, useSession } from "next-auth/react"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { toast } from "sonner"
-import { useSnapshot } from "valtio"
-import { pAppsState, useAddConversation } from "@/store/conversation"
+import { cn } from "@/lib/utils"
+import { CheckAuth } from "./auth"
 
-export const QueryModel = () => {
+export const QueryInHomePage = () => {
   const { output, fetchSSE } = useFetchSSE()
   const [input, setInput] = useState("")
 
-  const { addConversationWithPrompt } = useAddConversation()
+  const { queryInHomePage } = useQueryInHomePage()
 
   const session = useSession()
   const [open, setOpen] = useState(false)
@@ -40,7 +32,7 @@ export const QueryModel = () => {
     if (!input) return
     if (!pApps.length) return toast.error("至少需要选中一种模型")
     if (session.status !== "authenticated") return setOpen(true)
-    void addConversationWithPrompt(input)
+    void queryInHomePage(input)
   }
 
   return (
@@ -82,24 +74,3 @@ export const QueryModel = () => {
     </div>
   )
 }
-
-const CheckAuth = ({
-  open,
-  setOpen,
-}: {
-  open: boolean
-  setOpen: (open: boolean) => void
-}) => (
-  <AlertDialog open={open} onOpenChange={setOpen}>
-    <AlertDialogContent>
-      <AlertDialogTitle>发送失败</AlertDialogTitle>
-      <AlertDialogDescription>您需要先登陆才能发送哦！</AlertDialogDescription>
-      <AlertDialogFooter>
-        <AlertDialogAction onClick={() => signIn()}>
-          点击跳转登录
-        </AlertDialogAction>
-        <AlertDialogCancel>放弃</AlertDialogCancel>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-)

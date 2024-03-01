@@ -1,4 +1,4 @@
-import { proxy } from "valtio"
+import { proxy, useSnapshot } from "valtio"
 import { IConversationBasic, IPApp } from "@/schema/conversation"
 import { api } from "@/trpc/react"
 import { toast } from "sonner"
@@ -7,31 +7,36 @@ import { useEffect } from "react"
 import { IMessageInChat } from "@/schema/message"
 import { nanoid } from "nanoid"
 import { remove } from "lodash"
+import { UnexpectedError } from "@/schema/error"
 
 export const pAppsState = proxy<{ pApps: IPApp[] }>({
   pApps: [],
 })
 export const conversationsState = proxy<{
+  conversationId: string | null
   conversations: IConversationBasic[]
-}>({ conversations: [] })
+}>({ conversations: [], conversationId: null })
 export const messagesState = proxy<IMessageInChat[]>([])
 
 export const addPApp = (pApp: IPApp) => {
   pAppsState.pApps.push(pApp)
 }
-export const delPAppId = (id: string) => {
+export const delPApp = (id: string) => {
   // 至少要有1个
   if (pAppsState.pApps.length === 1) return
   remove(pAppsState.pApps, (i) => i.id === id)
 }
 
-export const useInitConversationList = () => {
+export const useInitConversations = () => {
   const { data: conversations = [] } = api.llm.listConversations.useQuery()
 
   useEffect(() => {
     console.log("inited conversations: ", conversations)
     conversationsState.conversations = conversations
-  }, [conversations])
+  }, [
+    // 自己确保只运行一次
+    conversations,
+  ])
 }
 
 export const useAddConversation = () => {
@@ -53,21 +58,38 @@ export const useAddConversation = () => {
   const addConversationWithoutPrompt = () =>
     mutateAsync({ pApps: pAppsState.pApps, type: "LLM" })
 
-  const addConversationWithPrompt = async (prompt: string) => {
+  return {
+    addConversationWithoutPrompt,
+    isLoading,
+  }
+}
+
+export const useQueryInHomePage = () => {
+  const { addConversationWithoutPrompt, isLoading } = useAddConversation()
+  const { queryInChatLayout } = useQueryInChatLayout()
+  const queryInHomePage = async (query: string) => {
     const conversation = await addConversationWithoutPrompt()
+    queryInChatLayout(conversation.id, query)
+  }
+  return { queryInHomePage, isLoading }
+}
+
+/**
+ * todo: core logic
+ */
+export const useQueryInChatLayout = () => {
+  const queryInChatLayout = (conversationId: string | null, query: string) => {
+    if (!conversationId) return
+
     messagesState.push({
       id: nanoid(),
       updatedAt: new Date(),
-      content: prompt,
+      content: query,
       role: "user",
     })
+    toast.message("query: " + query)
   }
-
-  return {
-    addConversationWithoutPrompt,
-    addConversationWithPrompt,
-    isLoading,
-  }
+  return { queryInChatLayout }
 }
 
 export const useDeleteConversation = () => {
