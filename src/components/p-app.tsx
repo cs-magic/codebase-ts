@@ -19,12 +19,13 @@ import { nanoid } from "nanoid"
 import { fetchSSE } from "@/lib/sse"
 
 export const PAppComp = ({ pApp }: { pApp: IPAppClient }) => {
+  const { id } = pApp
+
   const session = useSession()
   const userAvatar = session.data?.user?.image ?? DEFAULT_AVATAR
+
   const messages = useSnapshot(messagesState)
   const { pApps } = useSnapshot(pAppsState)
-
-  const { id } = pApp
   const { conversationId } = useSnapshot(conversationsState)
 
   useEffect(() => {
