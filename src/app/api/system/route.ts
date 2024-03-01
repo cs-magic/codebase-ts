@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
 
       cmd.on("close", (code) => {
         console.log(`[cmd] close: child process exited with code ${code}`)
-        writer.close()
+        void writer.close()
         resolve(true)
       })
     })
