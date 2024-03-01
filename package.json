@@ -12,7 +12,10 @@
     "lint": "next lint",
     "start": "next start",
     "migrate-dev": "prisma migrate dev",
-    "update": "DIST=.next-tmp && git add . && git stash && git pull -f && yarn && DIST=$DIST yarn build && rm -rf .next && mv $DIST .next"
+    "checkout": "cd /var && rm -rf sokka-ai && git clone https://github.com/markshawn2020/sokka-ai",
+    "postcheckout": "cp .env /var/sokka-ai/ && cd /var/sokka-ai && yarn && yarn build",
+    "postpostcheckout": "rm -rf .next public && mv /var/sokka-ai/public /var/sokka-ai/.next .",
+    "update": " git add . && git stash && git pull -f && yarn checkout"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "2.0.24",
