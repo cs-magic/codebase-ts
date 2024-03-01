@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const payload: string[] = []
 
   await new Promise((resolve, reject) => {
-    const cmd = spawn("which yarn && yarn update", { shell: true })
+    const cmd = spawn("which yarn && yarn -v && yarn update", { shell: true })
 
     cmd.stdout.on("data", (data: Buffer) => {
       console.log(`[cmd] stdout: ${data.toString()}`)
