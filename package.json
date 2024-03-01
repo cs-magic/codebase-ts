@@ -12,9 +12,9 @@
     "lint": "next lint",
     "start": "next start",
     "migrate-dev": "prisma migrate dev",
-    "checkout": "cd /var && rm -rf sokka-ai && git clone https://github.com/markshawn2020/sokka-ai",
-    "postcheckout": "cp .env /var/sokka-ai/ && cd /var/sokka-ai && yarn && yarn build",
-    "postpostcheckout": "rm -rf .next public && mv /var/sokka-ai/public /var/sokka-ai/.next .",
+    "checkout": "cd /tmp && rm -rf sokka-ai && git clone https://github.com/markshawn2020/sokka-ai",
+    "postcheckout": "cp .env /tmp/sokka-ai/ && cd /tmp/sokka-ai && yarn && yarn build",
+    "postpostcheckout": "rm -rf .next public && mv /tmp/sokka-ai/public /tmp/sokka-ai/.next .",
     "update": " git add . && git stash && git pull -f && yarn checkout"
   },
   "dependencies": {
