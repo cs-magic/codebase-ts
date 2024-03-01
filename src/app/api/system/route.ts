@@ -4,22 +4,32 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET(req: NextRequest) {
   const payload: string[] = []
 
-  /**
-   * 防止被编译的时候运行
-   */
-  if(new URL(req.url).searchParams.get("update")) {
+  const { searchParams } = new URL(req.url)
+  const useSSE = searchParams.get("useSSE")
+  const update = searchParams.get("update")
+
+  const responseStream = new TransformStream()
+  const writer = responseStream.writable.getWriter()
+  const encoder = new TextEncoder()
+  const send = (s: string) =>
+    writer.write(encoder.encode(`event: onData\ndata:${s}\n\n`))
+
+  const genData = async () =>
     await new Promise((resolve, reject) => {
       const cmd = spawn("which yarn && yarn -v && yarn update", { shell: true })
 
       cmd.stdout.on("data", (data: Buffer) => {
-        console.log(`[cmd] stdout: ${data.toString()}`)
+        const s = data.toString()
+        console.log(`[cmd] stdout: ${s}`)
         // payload.stdOut.push(typeof data)
-        payload.push(data.toString())
+        payload.push(s)
+        void send(s)
       })
 
       cmd.stderr.on("data", (data: string) => {
         console.log(`[cmd] stderr: ${data}`)
         payload.push(data)
+        void send(data)
       })
 
       cmd.on("error", (error) => {
@@ -32,8 +42,23 @@ export async function GET(req: NextRequest) {
         resolve(true)
       })
     })
-  }
 
+  /**
+   * 防止被编译的时候运行
+   */
+  if (update) {
+    if (useSSE) {
+      void genData()
+      return new Response(responseStream.readable, {
+        headers: {
+          "Content-Type": "text/event-stream",
+          Connection: "keep-alive",
+          "Cache-Control": "no-cache, no-transform",
+        },
+      })
+    }
+    await genData()
+  }
 
   return new Response(payload.join("\n"), { status: 200 })
 }
