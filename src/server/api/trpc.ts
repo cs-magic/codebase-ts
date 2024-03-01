@@ -9,8 +9,10 @@
 
 import { initTRPC, TRPCError } from "@trpc/server"
 import superjson from "superjson"
-import { ZodError } from "zod"
+import { z, ZodError } from "zod"
 import { Context } from "@/server/api/context"
+import { db } from "../db"
+import { conversationSchema } from "@/schema/conversation"
 
 /**
  * 2. INITIALIZATION
@@ -76,3 +78,21 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   })
 })
+
+export const conversationProcedure = protectedProcedure
+  .input(z.object({ conversationId: z.string() }))
+  .use(async ({ ctx, next, input }) => {
+    const conversation = await db.conversation.findUniqueOrThrow({
+      where: {
+        id: input.conversationId,
+        fromUserId: ctx.user.id,
+      },
+      ...conversationSchema,
+    })
+
+    return next({
+      ctx: {
+        conversation,
+      },
+    })
+  })

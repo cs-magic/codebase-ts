@@ -1,5 +1,4 @@
 import { callChatGPT } from "@/server/llm/openai"
-import { OpenAIModelType } from "@/schema/llm"
 
 import { IConversationBody, IEvent } from "@/schema/api"
 import { IEventsManager } from "@/schema/events-manager"
@@ -12,18 +11,10 @@ export class EventsManager {
 
   private manager: Record<string, IEventsManager> = {}
 
-  public printKeys(subject?: string) {
-    console.log(
-      `[${subject}] event-manager conversations: `,
-      Object.keys(this.manager),
-    )
-  }
-
   public async trigger(data: IConversationBody) {
     try {
       const { conversationId, modelName, prompt } = data
       this.manager[conversationId] = { events: [], endpoints: [] }
-      this.printKeys("trigger")
 
       const serverSend = async (eventMessage: IEvent) => {
         this.manager[conversationId]!.events.push(eventMessage)
@@ -35,7 +26,7 @@ export class EventsManager {
 
       const stream = await callChatGPT({
         prompt, // todo
-        modelName: modelName,
+        modelId: modelName,
       })
 
       for await (const chunk of stream) {
@@ -81,7 +72,6 @@ export class EventsManager {
     const endpoint = new Endpoint()
 
     const init = async () => {
-      this.printKeys("read")
       if (conversationId && conversationId in this.manager) {
         const m = this.manager[conversationId]!
 

@@ -2,7 +2,7 @@ import "@/styles/globals.css"
 
 import { Inter } from "next/font/google"
 
-import { TRPCReactProvider } from "@/trpc/react"
+import { TRPCReactProvider } from "@/lib/trpc/react"
 import ThemeProvider from "@/providers/theme"
 import { Toaster } from "@/components/ui/sonner"
 import { SessionProvider } from "@/providers/session"

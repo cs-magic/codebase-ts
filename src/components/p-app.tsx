@@ -4,18 +4,48 @@ import { MinusCircleIcon, PlusCircleIcon, SettingsIcon } from "lucide-react"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { DEFAULT_AVATAR } from "@/config/assets"
 import { useSnapshot } from "valtio"
-import { delPApp, messagesState, pAppsState } from "@/store/conversation"
-import { IPApp } from "@/schema/conversation"
+import {
+  delPApp,
+  IPAppClient,
+  messagesState,
+  pAppsState,
+} from "@/store/conversation"
 import { cn } from "@/lib/utils"
 import { openSelectPApps } from "@/store/ui"
+import { useEffect } from "react"
+import { last } from "lodash"
+import { nanoid } from "nanoid"
+import { fetchSSE } from "@/lib/sse"
 
-export const PAppComp = ({ pApp }: { pApp: IPApp }) => {
+export const PAppComp = ({ pApp }: { pApp: IPAppClient }) => {
   const session = useSession()
   const userAvatar = session.data?.user?.image ?? DEFAULT_AVATAR
   const messages = useSnapshot(messagesState)
   const { pApps } = useSnapshot(pAppsState)
 
-  console.log({ messages })
+  const { id } = pApp
+
+  useEffect(() => {
+    if (!pApp.needFetchLLM) return
+    void fetchSSE(`/api/llm?r=${id}`, {
+      onToken: (token) => {
+        // should always use store, instead of proxy
+        if (last(messagesState)!.role === "user")
+          messagesState.push({
+            role: "assistant",
+            content: token,
+            id: nanoid(),
+            updatedAt: new Date(),
+          })
+        else {
+          last(messagesState)!.content += token
+        }
+      },
+    })
+  }, [pApp.needFetchLLM])
+
+  const needFetchLLM = pApp.needFetchLLM
+  console.log({ pApp, needFetchLLM, messages })
 
   return (
     <div className={"w-full"}>

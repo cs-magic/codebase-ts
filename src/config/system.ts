@@ -20,3 +20,5 @@ export const INDIES_AVATARS: string[] = [
 ]
 // 企业banner
 export const SPONSORS_BANNERS: string[] = []
+
+export const REFETCH_TRPC_ON_WINDOW_FOCUS_ENABLED = false

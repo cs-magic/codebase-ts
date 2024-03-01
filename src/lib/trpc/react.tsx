@@ -7,8 +7,16 @@ import { useState } from "react"
 
 import { type AppRouter } from "@/server/api/root"
 import { getUrl, transformer } from "./shared"
+import { REFETCH_TRPC_ON_WINDOW_FOCUS_ENABLED } from "@/config/system"
 
-const createQueryClient = () => new QueryClient({})
+const createQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: REFETCH_TRPC_ON_WINDOW_FOCUS_ENABLED,
+      },
+    },
+  })
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined
 const getQueryClient = () => {

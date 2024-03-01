@@ -14,7 +14,7 @@ export const SelectPApp = ({
   type: "toAdd" | "toDel"
 }) => {
   const { pApps } = useSnapshot(pAppsState)
-  console.log({ pApps, type, pApp })
+  // console.log({ pApps, type, pApp })
 
   return (
     <Button

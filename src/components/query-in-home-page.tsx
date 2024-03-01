@@ -2,7 +2,6 @@
 
 import { pAppsState, useQueryInHomePage } from "@/store/conversation"
 import { Textarea } from "@/components/textarea"
-import { useFetchSSE } from "@/hooks/use-llm-output"
 import { useState } from "react"
 import { useSession } from "next-auth/react"
 import { useSnapshot } from "valtio"
@@ -16,9 +15,10 @@ import {
 } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 import { CheckAuth } from "./auth"
+import { fetchSSE } from "@/lib/sse"
 
 export const QueryInHomePage = () => {
-  const { output, fetchSSE } = useFetchSSE()
+  const { output, fetchSSE } = fetchSSE()
   const [input, setInput] = useState("")
 
   const { queryInHomePage } = useQueryInHomePage()

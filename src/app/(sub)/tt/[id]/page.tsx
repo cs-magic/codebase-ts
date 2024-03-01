@@ -1,10 +1,13 @@
 "use client"
 
-import { api } from "@/trpc/react"
+import { api } from "@/lib/trpc/react"
 import { useEffect } from "react"
 import { useSnapshot } from "valtio"
 import { conversationsState, pAppsState } from "@/store/conversation"
 import { PAppsComp } from "@/components/p-apps"
+import { useSession } from "next-auth/react"
+import { UnexpectedError } from "@/schema/error"
+import { SSE } from "@/server/sse"
 
 export default function ConversationPage({
   params: { id },

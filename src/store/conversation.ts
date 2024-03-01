@@ -1,6 +1,6 @@
 import { proxy, useSnapshot } from "valtio"
 import { IConversationBasic, IPApp } from "@/schema/conversation"
-import { api } from "@/trpc/react"
+import { api } from "@/lib/trpc/react"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
@@ -9,7 +9,11 @@ import { nanoid } from "nanoid"
 import { remove } from "lodash"
 import { UnexpectedError } from "@/schema/error"
 
-export const pAppsState = proxy<{ pApps: IPApp[] }>({
+export type IPAppClient = IPApp & {
+  needFetchLLM?: boolean
+}
+
+export const pAppsState = proxy<{ pApps: IPAppClient[] }>({
   pApps: [],
 })
 export const conversationsState = proxy<{
@@ -18,7 +22,7 @@ export const conversationsState = proxy<{
 }>({ conversations: [], conversationId: null })
 export const messagesState = proxy<IMessageInChat[]>([])
 
-export const addPApp = (pApp: IPApp) => {
+export const addPApp = (pApp: IPAppClient) => {
   pAppsState.pApps.push(pApp)
 }
 export const delPApp = (id: string) => {
@@ -78,8 +82,22 @@ export const useQueryInHomePage = () => {
  * todo: core logic
  */
 export const useQueryInChatLayout = () => {
+  const doQuery = api.llm.queryConversation.useMutation({
+    onSuccess: (data) => {
+      data.forEach(({ requestId, result }) => {
+        if (result) {
+          const p = pAppsState.pApps.find((p) => p.id === requestId)
+          console.log({ p, requestId })
+          if (p) p.needFetchLLM = true
+        }
+      })
+    },
+  })
+
   const queryInChatLayout = (conversationId: string | null, query: string) => {
     if (!conversationId) return
+
+    doQuery.mutate({ conversationId, query })
 
     messagesState.push({
       id: nanoid(),
@@ -97,7 +115,7 @@ export const useDeleteConversation = () => {
 
   return async (conversationId: string) => {
     void deleteConversation
-      .mutateAsync(conversationId)
+      .mutateAsync({ conversationId })
       .catch((error) => {
         console.error(error)
         toast.error("删除失败！")

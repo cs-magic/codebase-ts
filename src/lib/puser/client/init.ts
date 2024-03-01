@@ -21,7 +21,7 @@ export const initPusherClient = (
    * @param message
    */
   PusherJS.log = (message: string) => {
-    console.log({ message })
+    // console.log({ message })
     const exists = (events: string[]) => events.some((s) => message.includes(s))
 
     if (exists(["pusher:ping", "initialized -> connecting"]) && options?.onPing)

@@ -1,4 +1,5 @@
 import {
+  conversationProcedure,
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
@@ -11,10 +12,14 @@ import {
   pAppSchema,
 } from "@/schema/conversation"
 import { z } from "zod"
+import { triggerLLM } from "@/app/api/llm/route"
 
 export const llmRouter = createTRPCRouter({
   listModels: publicProcedure.query(async () => {
-    return db.model.findMany({ ...modelSchema, orderBy: { updatedAt: "desc" } })
+    return db.model.findMany({
+      ...modelSchema,
+      ...{ orderBy: { updatedAt: "desc" } },
+    })
   }),
 
   listPApps: publicProcedure.query(async () => {
@@ -41,22 +46,16 @@ export const llmRouter = createTRPCRouter({
     })
   }),
 
-  getConversations: protectedProcedure
-    .input(z.object({ conversationId: z.string() }))
-    .query(async ({ input }) => {
-      return db.conversation.findUniqueOrThrow({
-        where: { id: input.conversationId },
-        ...conversationSchema,
-      })
-    }),
+  // todo: 感觉还是装饰器模式更直观一些， ref: https://trpc.io/docs/server/procedures#reusable-base-procedures
+  getConversations: conversationProcedure.query(async ({ input, ctx }) => {
+    return ctx.conversation
+  }),
 
-  delConversation: protectedProcedure
-    .input(z.string())
-    .mutation(async ({ input }) => {
-      return db.conversation
-        .delete({ where: { id: input } })
-        .catch(console.error)
-    }),
+  delConversation: conversationProcedure.mutation(async ({ input }) => {
+    return db.conversation
+      .delete({ where: { id: input.conversationId } })
+      .catch(console.error)
+  }),
 
   createConversation: protectedProcedure
     .input(createConversationSchema)
@@ -74,5 +73,28 @@ export const llmRouter = createTRPCRouter({
       })
       console.log({ conversation })
       return conversation
+    }),
+
+  queryConversation: conversationProcedure
+    .input(
+      z.object({
+        query: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      console.log({ input })
+      const { conversation } = ctx
+
+      return Promise.all(
+        conversation.pApps.map(async (p) => {
+          const requestId = p.id
+          const result = await triggerLLM({
+            requestId,
+            modelId: p.modelId,
+            messages: [{ content: input.query, role: "user" }],
+          })
+          return { requestId, result }
+        }),
+      )
     }),
 })

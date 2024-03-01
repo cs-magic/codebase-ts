@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 
 import { SelectPApp } from "@/components/model/select-p-app"
-import { api } from "@/trpc/react"
+import { api } from "@/lib/trpc/react"
 import { JoinComponents } from "@/components/join-components"
 import { useSnapshot } from "valtio"
 import { pAppsState } from "@/store/conversation"
@@ -21,7 +21,7 @@ export const SelectPApps = () => {
 
   const [filterPApps, setFilterPApps] = useState("")
 
-  console.log({ pApps, pAppsInDB })
+  // console.log({ pApps, pAppsInDB })
 
   useEffect(() => {
     if (!pApps.length && pAppsInDB.length) {

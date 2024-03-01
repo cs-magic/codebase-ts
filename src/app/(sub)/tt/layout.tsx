@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { PropsWithChildren } from "react"
 import { useInitConversations } from "@/store/conversation"
 
-import { QueryInChatLayout } from "@/components/query-in-chat"
+import { QueryInChatLayout } from "@/components/query-in-chat-layout"
 
 const ChatLayout = ({ children }: PropsWithChildren) => {
   // 只能运行一次，不要有其他hook

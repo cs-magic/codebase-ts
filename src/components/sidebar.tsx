@@ -8,7 +8,7 @@ import { conversationsState, useAddConversation } from "@/store/conversation"
 export const Sidebar = () => {
   const { conversations } = useSnapshot(conversationsState)
   const { addConversationWithoutPrompt } = useAddConversation()
-  console.log({ conversations })
+  // console.log({ conversations })
 
   return (
     <div className={"w-60 shrink-0 p-4 h-full flex flex-col"}>
