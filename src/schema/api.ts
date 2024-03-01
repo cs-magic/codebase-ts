@@ -1,5 +1,3 @@
-import { ModelType } from "@/schema/llm"
-
 export type ITokenEventData = {
   id: string
   content: string
@@ -15,11 +13,7 @@ export type IGetConversationParams = {
 export interface ICreateConversationBody {
   conversationId?: string
   prompt: string
-  modelName: ModelType
+  modelName: string
 }
 
 export type IConversationBody = ICreateConversationBody & IGetConversationParams
-
-export interface IPostLlmRes {
-  conversationId: string
-}

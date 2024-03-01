@@ -1,9 +1,10 @@
 "use client"
 
-import { Sidebar } from "@/app/(sub)/c/sidebar"
+import { Sidebar } from "@/components/sidebar"
 import { Separator } from "@/components/ui/separator"
-import { useInitConversationList } from "@/store/conversation-list.slice"
 import { PropsWithChildren } from "react"
+import { TextareaAuto } from "@/components/textarea"
+import { useInitConversationList } from "@/hooks/use-conversation"
 
 const ChatLayout = ({ children }: PropsWithChildren) => {
   useInitConversationList()
@@ -14,7 +15,14 @@ const ChatLayout = ({ children }: PropsWithChildren) => {
 
       <Separator orientation={"vertical"} />
 
-      <div className={"grow h-full flex flex-col gap-2"}>{children}</div>
+      <div className={"grow h-full flex flex-col gap-2"}>
+        {children}
+
+        <TextareaAuto
+          minRows={2}
+          className={"rounded-lg border m-2 p-2 shrink-0"}
+        />
+      </div>
     </div>
   )
 }

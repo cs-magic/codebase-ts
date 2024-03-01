@@ -9,11 +9,7 @@ import PAppDefaultArgs = Prisma.PAppDefaultArgs
 import PAppGetPayload = Prisma.PAppGetPayload
 
 export const createConversationSchema = z.object({
-  pApps: z
-    .object({
-      id: z.string(),
-    })
-    .array(),
+  pAppIds: z.string().array(),
   type: z.nativeEnum(ConversationType),
 })
 export type ICreateConversation = z.infer<typeof createConversationSchema>

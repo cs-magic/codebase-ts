@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { TextareaAuto } from "@/components/textarea"
 import { useFetchSSE } from "@/hooks/use-llm-output"
-import { useQueryModel } from "@/hooks/use-query-model"
 import { ArrowUpIcon, Paperclip } from "lucide-react"
 import { IconContainer } from "@/components/containers"
 import { cn } from "@/lib/utils"
@@ -22,25 +21,26 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { useModelStore } from "@/store/model.slice"
 import { toast } from "sonner"
+import { useSnapshot } from "valtio"
+import { pAppIdsState, useAddConversation } from "@/hooks/use-conversation"
 
 export const QueryModel = () => {
   const { output, fetchSSE } = useFetchSSE()
   const [input, setInput] = useState("")
 
-  const queryModel = useQueryModel(fetchSSE)
+  const { addConversationWithPrompt } = useAddConversation()
 
   const session = useSession()
   const [open, setOpen] = useState(false)
-  const pAppIds = useModelStore((state) => state.pAppIds)
+  const pAppIds = useSnapshot(pAppIdsState)
 
   const onSubmit = () => {
     console.log({ input })
     if (!input) return
     if (!pAppIds.length) return toast.error("至少需要选中一种模型")
     if (session.status !== "authenticated") return setOpen(true)
-    void queryModel(input)
+    void addConversationWithPrompt(input)
   }
 
   return (

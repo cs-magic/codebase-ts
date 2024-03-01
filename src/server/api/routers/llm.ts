@@ -21,12 +21,25 @@ export const llmRouter = createTRPCRouter({
     return db.pApp.findMany({ ...pAppSchema, orderBy: { updatedAt: "desc" } })
   }),
 
+  getPApp: publicProcedure.input(z.string()).query(async ({ input }) => {
+    return db.pApp.findUniqueOrThrow({ where: { id: input }, ...pAppSchema })
+  }),
+
   listConversations: protectedProcedure.query(async () => {
     return db.conversation.findMany({
       ...conversationSchema,
       orderBy: { updatedAt: "desc" },
     })
   }),
+
+  getConversations: protectedProcedure
+    .input(z.object({ conversationId: z.string() }))
+    .query(async ({ input }) => {
+      return db.conversation.findUniqueOrThrow({
+        where: { id: input.conversationId },
+        ...conversationSchema,
+      })
+    }),
 
   delConversation: protectedProcedure
     .input(z.string())
@@ -45,8 +58,8 @@ export const llmRouter = createTRPCRouter({
           fromUserId: ctx.user.id,
           type: input.type,
           pApps: {
-            connect: input.pApps.map((p) => ({
-              id: p.id,
+            connect: input.pAppIds.map((p) => ({
+              id: p,
             })),
           },
         },

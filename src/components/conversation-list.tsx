@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useDeleteConversation } from "@/store/conversation-list.slice"
+import { useDeleteConversation } from "@/hooks/use-conversation"
 
 export const ConversationListComp = ({
   basic,

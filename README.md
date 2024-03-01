@@ -7,6 +7,10 @@
 - conversation -- papp -- model -- company
 - papp -- message
 
+### api ref
+
+- openai: https://github.com/openai/openai-python/issues/952#issuecomment-1857207339
+
 ## Tech
 
 ### [Init] install

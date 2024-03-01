@@ -36,14 +36,16 @@ export const Container = ({
 
 export const IconContainer = forwardRef<
   HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  HTMLAttributes<HTMLDivElement> & { size?: "sm" | "lg" }
+>(({ className, size, ...props }, ref) => {
   return (
     <div
       ref={ref}
       className={cn(
-        // "bg-cyan-100",
-        " w-8 h-8 p-1 [&>*]:w-full [&>*]:h-full center",
+        // 外部6，内部4是最佳的小图标比例
+        " w-6 h-6",
+        size === "lg" && "w-8 h-8",
+        " p-1 [&>*]:w-full [&>*]:h-full center",
         "cursor-pointer hover:bg-muted",
         className,
       )}

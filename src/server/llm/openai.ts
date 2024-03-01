@@ -5,7 +5,6 @@
  */
 
 import { ChatOpenAI } from "@langchain/openai"
-import { OpenAIModelType } from "@/schema/llm"
 
 export const callChatGPT = async ({
   prompt,
@@ -13,7 +12,7 @@ export const callChatGPT = async ({
   temperature = 0.9,
 }: {
   prompt: string
-  modelName: OpenAIModelType
+  modelName: string // https://github.com/openai/openai-python/issues/952#issuecomment-1857207339
   temperature?: number
 }) => {
   const model = new ChatOpenAI({

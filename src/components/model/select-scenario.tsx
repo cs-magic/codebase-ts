@@ -1,17 +1,19 @@
-import { useModelStore } from "@/store/model.slice"
 import { Select, SelectContent, SelectValue } from "@/components/ui/select"
 import { SelectTrigger as SelectPrimitiveTrigger } from "@radix-ui/react-select"
 import { Text2ImageAppSVG, Text2TextAppSVG } from "@/config/assets"
 
 import { SelectModelItem } from "@/components/model/select-model-item"
+import { useSnapshot } from "valtio"
+import { scenarioState } from "@/hooks/use-scenario"
+import { ScenarioType } from "@/schema/llm"
 
 export const SelectScenario = () => {
-  const { scenario, setScenario } = useModelStore((state) => ({
-    scenario: state.scenarioType,
-    setScenario: state.setScenarioType,
-  }))
+  const { type } = useSnapshot(scenarioState)
   return (
-    <Select value={scenario} onValueChange={setScenario}>
+    <Select
+      value={type}
+      onValueChange={(v: ScenarioType) => (scenarioState.type = v)}
+    >
       <SelectPrimitiveTrigger>
         <SelectValue />
       </SelectPrimitiveTrigger>

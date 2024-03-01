@@ -1,4 +1,3 @@
-import { useModelStore } from "@/store/model.slice"
 import React, { useState } from "react"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
@@ -10,10 +9,12 @@ import { Input } from "@/components/ui/input"
 import { SelectPApp } from "@/components/model/select-p-app"
 import { api } from "@/trpc/react"
 import { JoinComponents } from "@/components/join-components"
+import { useSnapshot } from "valtio"
+import { pAppIdsState } from "@/hooks/use-conversation"
 
 export const SelectPApps = () => {
   const { data: pAppsInDB = [] } = api.llm.listPApps.useQuery()
-  const pAppIds = useModelStore((state) => state.pAppIds)
+  const pAppIds = useSnapshot(pAppIdsState)
 
   const [filterPApps, setFilterPApps] = useState("")
 

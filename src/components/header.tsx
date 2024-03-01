@@ -33,7 +33,7 @@ const Apps = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <IconContainer>
+        <IconContainer size={"lg"}>
           <IoApps />
         </IconContainer>
       </DropdownMenuTrigger>

@@ -1,15 +1,15 @@
-"use client"
-
+import { nanoid } from "nanoid"
+import { api } from "@/trpc/react"
+import { toast } from "sonner"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
 import { IConversationBasic } from "@/schema/conversation"
-import { useModelStore } from "@/store/model.slice"
-import { createConversation } from "@/store/createConversation"
-import { useEffect } from "react"
-import { api } from "@/trpc/react"
-import { toast } from "sonner"
-import { useRouter } from "next/navigation"
+import { useConversationDetailStore } from "./zustand-slice"
+import { useSnapshot } from "valtio"
+import { pAppIdsState } from "@/hooks/use-conversation"
 
 export interface ConversationListSlice {
   data: IConversationBasic[]
@@ -22,31 +22,16 @@ export const useConversationListStore = create<ConversationListSlice>()(
     })),
   ),
 )
-
-/**
- * 直接导出 hook，不要用 `use server`，写法反而麻烦
- * 而且 nextjs 限制在组件没有 mount 之前就更新数据状态
- */
-export const useInitConversationList = () => {
-  const { data: conversations = [] } = api.llm.listConversations.useQuery()
-
-  useEffect(() => {
-    console.log("inited conversations: ", conversations)
-    useConversationListStore.setState((state) => {
-      state.data = conversations
-    })
-  }, [conversations])
-}
-
 export const useAddConversationWithoutQuery = () => {
   const router = useRouter()
 
   return async () => {
-    const pApps = useModelStore.getState().pAppIds
+    const pApps = useSnapshot(pAppIdsState)
     console.log({ pApps })
 
-    const newConversation = await createConversation({
-      pApps: pApps.map((id) => ({ id })),
+    const { mutateAsync } = api.llm.createConversation.useMutation()
+    const newConversation = await mutateAsync({
+      pAppIds: pApps,
       type: "LLM",
     })
     console.log({ newConversation })
@@ -58,15 +43,24 @@ export const useAddConversationWithoutQuery = () => {
     router.push(`/c/${newConversation.id}`)
   }
 }
-
 export const useAddConversationWithQuery = () => {
   const addConversationWithoutQuery = useAddConversationWithoutQuery()
   // todo: prompt
   return (prompt: string) => {
     void addConversationWithoutQuery()
+    useConversationDetailStore.setState((state) => {
+      state.messages.push({
+        id: nanoid(),
+        content: prompt,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        role: "user",
+        // todo
+        conversationModelId: "",
+      })
+    })
   }
 }
-
 /**
  * 不要用乐观更新，否则会乱
  */
@@ -87,4 +81,18 @@ export const useDeleteConversation = () => {
         })
       })
   }
+}
+/**
+ * 直接导出 hook，不要用 `use server`，写法反而麻烦
+ * 而且 nextjs 限制在组件没有 mount 之前就更新数据状态
+ */
+export const useInitConversationList = () => {
+  const { data: conversations = [] } = api.llm.listConversations.useQuery()
+
+  useEffect(() => {
+    console.log("inited conversations: ", conversations)
+    useConversationListStore.setState((state) => {
+      state.data = conversations
+    })
+  }, [conversations])
 }

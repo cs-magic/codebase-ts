@@ -35,7 +35,7 @@ export class EventsManager {
 
       const stream = await callChatGPT({
         prompt, // todo
-        modelName: modelName as OpenAIModelType,
+        modelName: modelName,
       })
 
       for await (const chunk of stream) {

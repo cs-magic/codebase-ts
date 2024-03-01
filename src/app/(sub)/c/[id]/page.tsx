@@ -1,18 +1,16 @@
-import { TextareaAuto } from "@/components/textarea"
+"use client"
+
+import { PAppsComp } from "@/components/p-app"
+import { api } from "@/trpc/react"
 
 export default function ConversationPage({
-  params: { conversationId },
+  params: { id },
 }: {
-  params: { conversationId: string }
+  params: { id: string }
 }) {
-  return (
-    <div className={"p-4 h-full flex flex-col"}>
-      <div className={"grow"} />
-      <TextareaAuto
-        className={"w-full border shrink-0 rounded-xl"}
-        minRows={2}
-        autoFocus
-      />
-    </div>
-  )
+  const { data: conversation } = api.llm.getConversations.useQuery({
+    conversationId: id,
+  })
+
+  return <PAppsComp pAppIds={conversation?.pApps.map((p) => p.id) ?? []} />
 }

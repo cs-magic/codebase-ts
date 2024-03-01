@@ -1,9 +1,10 @@
-import { useModelStore } from "@/store/model.slice"
 import { Button } from "@/components/ui/button"
 import { IconContainer } from "@/components/containers"
 import { MinusCircleIcon, PlusCircleIcon } from "lucide-react"
 
 import { IPApp } from "@/schema/conversation"
+import { useSnapshot } from "valtio"
+import { addPAppId, delPAppId, pAppIdsState } from "@/hooks/use-conversation"
 
 export const SelectPApp = ({
   pApp,
@@ -12,10 +13,7 @@ export const SelectPApp = ({
   pApp: IPApp
   type: "toAdd" | "toDel"
 }) => {
-  const pAppIds = useModelStore((state) => state.pAppIds)
-  const addPApp = useModelStore((state) => state.addPAppId)
-  const delPApp = useModelStore((state) => state.delPAppId)
-
+  const pAppIds = useSnapshot(pAppIdsState)
   const hasPApp = !!pAppIds.find((p) => p === pApp.id)
   console.log({ pAppIds, type, pApp })
 
@@ -34,8 +32,8 @@ export const SelectPApp = ({
           "w-6 h-6 invisible group-hover:visible hover:text-primary-foreground"
         }
         onClick={(event) => {
-          if (hasPApp) delPApp(pApp.id)
-          else addPApp(pApp.id)
+          if (hasPApp) delPAppId(pApp.id)
+          else addPAppId(pApp.id)
         }}
       >
         {hasPApp ? <MinusCircleIcon /> : <PlusCircleIcon />}
