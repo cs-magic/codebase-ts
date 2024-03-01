@@ -21,7 +21,9 @@ const ChatLayout = ({ children }: PropsWithChildren) => {
 
         <Textarea
           minRows={2}
-          className={"rounded-lg border m-2 p-2 shrink-0"}
+          className={
+            "rounded-lg border my-2 mx-auto w-full max-w-[720px] p-2 shrink-0"
+          }
           onQuery={toast.message}
         />
       </div>

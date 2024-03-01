@@ -20,6 +20,8 @@ export const addPApp = (pApp: IPApp) => {
   pAppsState.pApps.push(pApp)
 }
 export const delPAppId = (id: string) => {
+  // 至少要有1个
+  if (pAppsState.pApps.length === 1) return
   remove(pAppsState.pApps, (i) => i.id === id)
 }
 

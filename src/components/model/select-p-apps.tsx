@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
@@ -11,6 +13,7 @@ import { api } from "@/trpc/react"
 import { JoinComponents } from "@/components/join-components"
 import { useSnapshot } from "valtio"
 import { pAppsState } from "@/store/conversation"
+import { uiState } from "@/store/ui"
 
 export const SelectPApps = () => {
   const { data: pAppsInDB = [] } = api.llm.listPApps.useQuery()
@@ -26,26 +29,10 @@ export const SelectPApps = () => {
       if (gptPApp) pAppsState.pApps.push(gptPApp)
     }
   }, [pAppsInDB, pApps])
+  const { selectPAppsOpen, selectPAppsOnOpenChange } = useSnapshot(uiState)
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={"outline"}>
-          <span className={"text-muted-foreground"}>模型：</span>
-
-          <JoinComponents
-            components={pApps.map((p) => (
-              <span key={p.id}>{p.title}</span>
-            ))}
-            separator={
-              <span className={"text-sm text-muted-foreground mx-1"}>vs</span>
-            }
-          />
-
-          <ChevronDownIcon className={"w-4 h-4 text-muted-foreground ml-1"} />
-        </Button>
-      </DialogTrigger>
-
+    <Dialog open={selectPAppsOpen} onOpenChange={selectPAppsOnOpenChange}>
       <DialogContent>
         <div className={"flex flex-col gap-2"}>
           <div>

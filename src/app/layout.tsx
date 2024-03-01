@@ -15,6 +15,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import SocketProvider from "@/providers/socket"
 import { BrandingFooter } from "@/components/footer"
 import { AppStatus } from "@/components/branding"
+import { SelectPApps } from "@/components/model/select-p-apps"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,6 +62,8 @@ export default function RootLayout({
                       />
 
                       <LoadingAlertDialog />
+
+                      <SelectPApps />
 
                       <AppStatus />
                     </main>
