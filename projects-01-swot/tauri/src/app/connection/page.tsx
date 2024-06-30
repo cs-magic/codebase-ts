@@ -1,8 +1,8 @@
 "use client"
 
-import { columns, DataTable } from "@/app/swot/connection/contacts.table"
-import { StandardCard } from "../../../../../../packages-common/common/deps/ui/components/standard-card"
-import { useUserIsAdmin } from "../../../../../../packages-common/common/deps/hooks/use-user"
+import { columns, DataTable } from "@/app/connection/contacts.table"
+import { StandardCard } from "@cs-magic/common/deps/ui/components/standard-card"
+import { useUserIsAdmin } from "@cs-magic/common/deps/hooks/use-user"
 import {
   botContactsAtom,
   botLoggedInAtom,
@@ -13,7 +13,7 @@ import {
   botSocketOpenedAtom,
   botUserAtom,
   ScanStatus,
-} from "../../../../../../packages-common/common/deps/store/bot.atom"
+} from "@cs-magic/common/deps/store/bot.atom"
 import { logger } from "@cs-magic/log/logger"
 import { IWechatBotTransfer } from "@cs-magic/wechaty/schema/bot.utils"
 import { useAtom } from "jotai"
@@ -46,7 +46,9 @@ export default function BotPage() {
 
   const socket = useInit<WebSocket>(() => {
     console.log("-- initing socket --")
-    const socket = new WebSocket(env.NEXT_PUBLIC_SOCKET_URL!)
+    const socketUrl = env.NEXT_PUBLIC_SOCKET_URL!
+    console.log({ socketUrl })
+    const socket = new WebSocket(socketUrl)
 
     socket.addEventListener("error", console.error)
 

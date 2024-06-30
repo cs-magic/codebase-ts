@@ -4,14 +4,14 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/styles/globals.css",
+    "config": "tailwind.config.js",
+    "css": "globals.css",
     "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""
   },
   "aliases": {
-    "components": "../../packages-common/common/deps/ui-shadcn/components",
-    "utils": "../../packages-common/common/deps/ui-shadcn/utils"
+    "components": "@cs-magic/common/deps/ui-shadcn/components",
+    "utils": "@cs-magic/common/deps/ui-shadcn/utils"
   }
 }
