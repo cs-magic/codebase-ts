@@ -4,14 +4,12 @@
   ],
   "compilerOptions": {
     "composite": true,
-    "outDir": "dist/esm"
+    "outDir": "dist",
   },
-  "include": [
-    "./src/**/*",
-    "./src/**/*.json"
-  ],
+  "include": ["src"],
   "references": [
-    {
-    }
+    {"path": "../common"},
+    {"path": "../llm"},
+    {"path": "../wechat"},
   ]
 }

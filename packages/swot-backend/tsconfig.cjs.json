@@ -4,12 +4,9 @@
     "outDir": "dist/cjs",
     "module": "CommonJS"
   },
-  "include": [
-    "./src/**/*",
-    "./src/**/*.json"
-  ],
   "references": [
-    {
-    }
+    {"path": "../common"},
+    {"path": "../llm"},
+    {"path": "../swot-bot"}
   ]
 }
