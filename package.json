@@ -74,7 +74,7 @@
   },
   "git": {
     "scripts": {
-      "pre-push": "npx git-scripts-pre-push"
+      "pre-push": "npm version patch"
     }
   }
 }
