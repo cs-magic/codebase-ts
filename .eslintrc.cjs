@@ -50,7 +50,8 @@ const config = {
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unnecessary-type-assertion":"warn",
-    "@typescript-eslint/no-unsafe-argument": "warn"
+    "@typescript-eslint/no-unsafe-argument": "warn",
+    "@typescript-eslint/no-unsafe-enum-comparison": 'warn',
   },
 }
 
