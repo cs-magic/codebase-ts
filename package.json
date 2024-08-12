@@ -1,10 +1,10 @@
 {
   "name": "cs-magic",
   "version": "0.8.962",
-  "author": "markshawn2020 <shawninjuly@gmail.com>",
+  "author": "markshawn2020 <mark@cs-magic.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MarkShawn2020/codebase.git"
+    "url": "https://github.com/cs-magic/codebase.git"
   },
   "license": "MIT",
   "private": true,
