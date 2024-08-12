@@ -1,3 +1,3 @@
-import ConnectionPage from "@cs-magic/swot-frontend/pages/connection/page"
+import ConnectionPage from "@cs-magic/common-frontend/pages/connection/page"
 
 export default ConnectionPage

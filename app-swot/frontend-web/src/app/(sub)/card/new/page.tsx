@@ -1,5 +1,5 @@
-import { NewCard } from "@cs-magic/swot-frontend/components/new-card"
-import { genPageTitle } from "@cs-magic/swot-frontend/utils/get-page-title"
+import { NewCard } from "@cs-magic/common-frontend/components/new-card"
+import { genPageTitle } from "@cs-magic/common-frontend/utils/get-page-title"
 
 export const metadata = {
   title: genPageTitle("新建卡片"),

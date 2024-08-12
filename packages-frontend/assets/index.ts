@@ -5,6 +5,7 @@ import Text2ImageAppSVG from "./products/t2i.svg"
 import Text2TextAppSVG from "./products/t2t.svg"
 
 import WechatQrcodeSusan3 from "./promotion/wechat-qrcode-susan-3.png"
+import WechatQrcodeMark from "./promotion/wechat-qrcode-mark.png"
 import VonwaonBitmap16Font from "./fonts/VonwaonBitmap-16px.ttf"
 
 export {
@@ -14,5 +15,6 @@ export {
   Text2ImageAppSVG,
   CsMagicBlackLogoSvg,
   WechatQrcodeSusan3,
+  WechatQrcodeMark,
   VonwaonBitmap16Font,
 }

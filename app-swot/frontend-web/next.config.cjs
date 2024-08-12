@@ -1,13 +1,15 @@
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
-// await import("@/env.mjs")
 
-import webpack from "webpack"
+
+const path = require("path")
+const webpack = require("webpack")
+const dotenv = require("dotenv")
+
+// Load environment variables from the custom .env path
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
 
 /** @type {import("next").NextConfig} */
-const config = {
+module.exports = {
   reactStrictMode: false,
 
   distDir: process.env.DIST ?? ".next",
@@ -96,5 +98,3 @@ const config = {
     ]
   },
 }
-
-export default config

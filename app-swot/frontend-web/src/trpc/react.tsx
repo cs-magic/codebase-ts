@@ -7,7 +7,7 @@ import { useMemo } from "react"
 import { api } from "./client"
 import { REFETCH_TRPC_ON_WINDOW_FOCUS_ENABLED } from "./config"
 import { getUrl, transformer } from "./shared"
-import { trpcReactLogEnabledAtom } from "@cs-magic/swot-frontend/components/config-trpc-log-enabled"
+import { trpcReactLogEnabledAtom } from "@cs-magic/common-frontend/components/config-trpc-log-enabled"
 
 const createQueryClient = () =>
   new QueryClient({

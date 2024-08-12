@@ -10,9 +10,9 @@ import {
   FlexContainer,
   Label,
 } from "@cs-magic/react-ui"
-import { UserInputAvatar } from "@cs-magic/swot-frontend/components/user-input-avatar"
-import { UserInputName } from "@cs-magic/swot-frontend/components/user-input-name"
-import { UserSignOutButton } from "@cs-magic/swot-frontend/components/user-sign-out-button"
+import { UserInputAvatar } from "@cs-magic/common-frontend/components/user-input-avatar"
+import { UserInputName } from "@cs-magic/common-frontend/components/user-input-name"
+import { UserSignOutButton } from "@cs-magic/common-frontend/components/user-sign-out-button"
 import { EditIcon } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"

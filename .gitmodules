@@ -4,3 +4,6 @@
 [submodule "packages/eval-ai"]
 	path = app-eval-ai/web
 	url = https://github.com/cs-magic/eval-ai
+[submodule "app-poketto/web"]
+	path = app-poketto/web
+	url = https://github.com/cs-magic/poketto
