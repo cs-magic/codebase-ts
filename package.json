@@ -71,5 +71,10 @@
   "packageManager": "yarn@4.1.1",
   "ct3aMetadata": {
     "initVersion": "7.27.0"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "npx git-scripts-pre-push"
+    }
   }
 }
