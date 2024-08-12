@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "../../tsconfig.dom.json"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "rootDir": "src",
+//    "module": "CommonJS",
+//    "moduleResolution": "Node"
+  },
+  "include": [
+    "./src/**/*",
+    "./src/**/*.json"
+  ],
+  "references": [
+    {"path": "../../packages/common"},
+    {"path": "../next-hooks"}
+  ]
+}

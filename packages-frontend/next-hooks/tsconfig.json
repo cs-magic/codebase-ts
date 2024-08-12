@@ -4,21 +4,14 @@
   ],
   "compilerOptions": {
     "outDir": "dist",
-    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "rootDir": "src",
-//    "module": "CommonJS",
-//    "moduleResolution": "Node"
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
   },
   "include": [
     "./src/**/*",
     "./src/**/*.json"
   ],
   "references": [
-    {
-      "path": "../common"
-    },
-    {
-      "path": "../next-hooks"
-    }
+    {"path": "../react-hooks"},
   ]
 }

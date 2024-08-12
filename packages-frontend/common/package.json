@@ -1,5 +1,5 @@
 {
-  "name": "@cs-magic/swot-frontend",
+  "name": "@cs-magic/common-frontend",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
@@ -31,7 +31,7 @@
     "next": "^14.2.5",
     "next-auth": "^4.24.7",
     "pusher-js": "^8.4.0-rc2",
-    "react": "^18.3.1",
+    "react": "*",
     "react-dom": "^18.3.1",
     "react-use": "^17.5.1",
     "sonner": "^1.5.0",

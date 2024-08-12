@@ -14,14 +14,8 @@
   },
   "include": ["./src/**/*"],
   "references": [
-    {
-      "path": "../common"
-    },
-    {
-      "path": "../llm"
-    },
-    {
-      "path": "../react-hooks"
-    }
+    {"path": "../../packages/common"},
+    {"path": "../../packages/llm"},
+    {"path": "../react-hooks"}
   ],
 }

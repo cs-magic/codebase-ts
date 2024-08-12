@@ -3,17 +3,19 @@
     "../../tsconfig.dom.json"
   ],
   "compilerOptions": {
-    "outDir": "dist",
     "rootDir": "src",
+    "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo"
   },
   "include": [
     "./src/**/*",
-    "./src/**/*.json"
+    "./src/**/*.json",
   ],
   "references": [
-    {
-      "path": "../react-hooks"
-    },
+    {"path": "../../packages/common"},
+    {"path": "../react-hooks"},
+    {"path": "../react-ui"},
+    {"path": "../next-hooks"},
+    {"path": "../next-auth"},
   ]
 }
