@@ -16,7 +16,7 @@
     "__tests__/*"
   ],
   "scripts": {
-    "prepare": "ts-patch install -s && prisma generate",
+    "prepare": "ts-patch install -s && yarn add -D zod-prisma-types && prisma generate",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "test": "jest",
@@ -70,7 +70,8 @@
     "typescript-eslint": "^7.16.1",
     "typescript-transform-paths": "^3.4.7",
     "webpack": "^5.93.0",
-    "webpack-bundle-analyzer": "^4.10.2"
+    "webpack-bundle-analyzer": "^4.10.2",
+    "zod-prisma-types": "^3.1.8"
   },
   "packageManager": "yarn@4.1.1",
   "ct3aMetadata": {

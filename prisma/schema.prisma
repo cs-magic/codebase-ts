@@ -7,7 +7,7 @@ generator client {
 }
 
 generator zod {
-  provider                         = "npx zod-prisma-types"
+  provider                         = "zod-prisma-types"
   output                           = "./generated/zod" // default is ./generated/zod
   useMultipleFiles                 = true // default is false
   writeBarrelFiles                 = true // default is true
