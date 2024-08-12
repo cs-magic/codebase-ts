@@ -10,9 +10,9 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "packages-frontend/*",
-    "private-app-*/*",
-    "app-*/*",
+    "packages_frontend/*",
+    "private_app-*/*",
+    "app_*/*",
     "__tests__/*"
   ],
   "scripts": {
