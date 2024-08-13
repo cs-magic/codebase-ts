@@ -1,9 +1,9 @@
 [submodule "app_home/web"]
 	path = app_home/web
-	url = git@github.com/cs-magic/cs-magic.git
+	url = git@github.com:cs-magic/cs-magic.git
 [submodule "app_eval-ai/web"]
 	path = app_eval-ai/web
     url = git@github.com:cs-magic/eval-ai.git
 [submodule "app_poketto/web"]
 	path = app_poketto/web
-	url = git@github.com/cs-magic/poketto.git
+	url = git@github.com:cs-magic/poketto.git
