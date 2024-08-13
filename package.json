@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "prepare": "ts-patch install -s",
-    "postinstall": "run-p db:generate",
+    "patch": "patch-package",
+    "postinstall": "run-p db:generate patch",
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",

@@ -1,24 +1,19 @@
-
-
 const path = require("path")
 const webpack = require("webpack")
 const dotenv = require("dotenv")
 
 // Load environment variables from the custom .env path
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") })
 
+const DIST = process.env.DIST
+const distDir = DIST ?? ".next"
+console.log({ DIST, distDir })
 
 /** @type {import("next").NextConfig} */
 module.exports = {
   reactStrictMode: false,
 
-  distDir: process.env.DIST ?? ".next",
-
-  experimental: {
-    // 支持 自己的 esm package 导入（比如 @cs-magic/next-auth）
-    // ref: https://nextjs.org/docs/messages/import-esm-externals
-    esmExternals: 'loose'
-  },
+  distDir,
 
   webpack(config, { dev, isServer }) {
     // 以下是gpt给的，为了解决wechaty的问题，但没用，无法启动
