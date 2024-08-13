@@ -1,10 +1,10 @@
 import { type NextRequest } from "next/server"
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
-import { env } from "@cs-magic/common"
 
 import { createTRPCContext } from "@/trpc/context"
 
 import { appRouter } from "../index"
+import { env } from "@cs-magic/common/dist/env/index.js"
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when

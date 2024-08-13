@@ -1,4 +1,3 @@
-import { ScenarioType } from "@cs-magic/common"
 import { ElementType } from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import {
@@ -6,6 +5,7 @@ import {
   SelectItemText,
 } from "@radix-ui/react-select"
 import { Check } from "lucide-react"
+import { ScenarioType } from "@cs-magic/common/dist/schema/scenario.js"
 
 export const SelectModel = ({
   value,

@@ -1,7 +1,6 @@
+import { cn } from "@/shadcn/utils"
 import Image from "next/image"
 import React, { ComponentProps } from "react"
-
-import { cn } from "@cs-magic/common"
 
 export const ImageEqualHeight = ({
   src,

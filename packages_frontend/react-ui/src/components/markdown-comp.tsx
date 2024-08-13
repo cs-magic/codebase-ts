@@ -1,10 +1,10 @@
 "use client"
 
-import { cn } from "@cs-magic/common"
+import { cn } from "@/shadcn/utils"
 import React, { HTMLAttributes, LegacyRef } from "react"
 import Markdown, { ExtraProps } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import darcula from "react-syntax-highlighter/dist/esm/styles/prism/darcula"
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
 
@@ -59,17 +59,16 @@ export const MarkdownComp = ({
           }
 
           return (
-            <></>
-            // <SyntaxHighlighter
-            //   ref={ref as LegacyRef<SyntaxHighlighter>}
-            //   {...rest}
-            //   PreTag="div"
-            //   language={language}
-            //   style={darcula}
-            //   className={"w-full"}
-            // >
-            //   {String(children).replace(/\n$/, "")}
-            // </SyntaxHighlighter>
+            <SyntaxHighlighter
+              ref={ref as LegacyRef<SyntaxHighlighter>}
+              {...rest}
+              PreTag="div"
+              language={language}
+              style={darcula}
+              className={"w-full"}
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
           )
         },
       }}

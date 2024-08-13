@@ -2,11 +2,11 @@
   "name": "@cs-magic/swot-web",
   "version": "0.1.0",
   "scripts": {
-    "lint": "next lint",
     "dev": "next dev -p 40326 | pino-pretty",
     "build": "next build",
     "start": "next start -p 40326 | pino-pretty",
     "cicd": "DIST=.next-tmp && rm -rf $DIST && DIST=$DIST yarn build && rm -rf .next && mv $DIST .next && DIST=.next yarn start",
+    "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch"
   },

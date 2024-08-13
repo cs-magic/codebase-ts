@@ -1,10 +1,10 @@
+import { moment } from "@cs-magic/common/dist/datetime/index.js"
 import { useAtom } from "jotai"
 import Image from "next/image"
 import { QRCodeSVG } from "qrcode.react"
 import { forwardRef } from "react"
 
-import { cn, IUserSummary, moment } from "@cs-magic/common"
-import { AspectRatio, VerticalAspectRatio } from "@cs-magic/react-ui"
+import { AspectRatio } from "@cs-magic/react-ui/shadcn/ui/aspect-ratio"
 import { ICardPreview } from "@cs-magic/swot-backend/schema"
 
 import { Tags } from "./card-content-tags"
@@ -18,6 +18,9 @@ import {
 import { cardWatermarkTextAtom } from "../store/card.request.atom"
 import { getPlatformName } from "../utils/card-platform/get-platform-name"
 import CsMagicBlackLogoSvg from "@cs-magic/assets/branding/cs-magic_logo_1280.svg"
+import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
+import { VerticalAspectRatio } from "@cs-magic/react-ui/components/aspect-ratio"
 
 /**
  * null optional nullish

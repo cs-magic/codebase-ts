@@ -1,13 +1,11 @@
+import { WECHAT_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/wechat/config.js"
+import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema.js"
 import {
   adaptWechatAuthToken,
   getWechatAuthorizationUrl,
   getWechatAuthToken,
   getWechatUserProfile,
-  IWechatAdaptedToken,
-  IWechatProfile,
-  logger,
-  WECHAT_PROVIDER_ID,
-} from "@cs-magic/common"
+} from "@cs-magic/common/dist/auth/providers/wechat/utils.js"
 import { Profile } from "next-auth"
 
 // noinspection ES6PreferShortImport: 因为next-auth的packages.json的exports里规定了从 ./providers/* 里导出, see: https://github.com/nextauthjs/next-auth/issues/8263#issuecomment-1671918326
@@ -50,7 +48,7 @@ export function WechatProvider<P extends IWechatAdaptedProfile>(
         const { id, access_token } = tokens
         if (!id || !access_token) throw new Error("missing id | access_token")
         const userInfo = await getWechatUserProfile(access_token, id)
-        logger.info("[common", {
+        console.info("[common", {
           tokens,
           userInfo,
         })
@@ -76,7 +74,7 @@ export function WechatProvider<P extends IWechatAdaptedProfile>(
         wxid: profile.openid,
         wxidVerified: new Date(),
       }
-      logger.info("[common", {
+      console.info("[common", {
         profile,
         profileOut,
       })

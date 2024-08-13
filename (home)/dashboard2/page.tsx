@@ -1,14 +1,14 @@
 "use client"
 
-import { env } from "@cs-magic/common"
-import { useInit } from "@cs-magic/react-hooks"
-import { socketStatusMap } from "@cs-magic/common"
-import { FlexContainer } from "@cs-magic/react-ui"
-import { LabelLine } from "@cs-magic/react-ui"
+import { FlexContainer } from "@cs-magic/eval-ai/packages/common-ui/components/flex-container"
+import { LabelLine } from "@cs-magic/eval-ai/packages/common-ui/components/label-line"
+import { useInit } from "@cs-magic/react-hooks/dist/hooks/use-init.js"
 import { useState } from "react"
 import DDS_lanhupage_0 from "./comp"
 import { IWechatPreference } from "@cs-magic/swot-backend/dist/schema/bot-preference.js"
 import { IWechatBotTransfer } from "@cs-magic/swot-backend/dist/schema/bot-utils.js"
+import { env } from "@cs-magic/common/dist/env/get-env.js"
+import { socketStatusMap } from "@cs-magic/common/dist/transport/schema.js"
 
 export default function SwotDashboardPage() {
   const [preference, setPreference] = useState<IWechatPreference | null>(null)

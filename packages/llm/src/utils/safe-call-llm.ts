@@ -1,10 +1,3 @@
-import {
-  SEPARATOR_BOX,
-  logger,
-  formatError,
-  formatString,
-} from "@cs-magic/common"
-import { env, logEnv } from "@cs-magic/common"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import OpenAI from "openai"
 import { v4 } from "uuid"
@@ -18,6 +11,11 @@ import {
 import { callLlm } from "./call-llm.js"
 import { formatLlmMessage } from "./format-llm-message.js"
 import { model2provider } from "./model2provider.js"
+import { env } from "@cs-magic/common/dist/env/get-env.js"
+import logger from "@cs-magic/common/dist/log/index.js"
+import { SEPARATOR_BOX } from "@cs-magic/common/dist/const.js"
+import { formatError } from "@cs-magic/common/dist/utils/format-error.js"
+import { formatString } from "@cs-magic/common/dist/utils/format-string.js"
 
 // logEnv("api_key")
 

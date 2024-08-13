@@ -1,13 +1,15 @@
 "use client"
 
-import { IUploadFile } from "@cs-magic/common"
 import { useUploadFiles } from "@cs-magic/react-hooks"
-import { VerticalAspectRatio } from "@cs-magic/react-ui"
-import { ButtonWithLoading } from "@cs-magic/react-ui"
-import { FileComp } from "@cs-magic/react-ui"
-import { FlexContainer } from "@cs-magic/react-ui"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/react-ui"
-import { cn } from "@cs-magic/common"
+import { VerticalAspectRatio } from "@cs-magic/react-ui/dist/components/aspect-ratio.js"
+import { ButtonWithLoading } from "@cs-magic/react-ui/dist/components/button-with-loading.js"
+import { FileComp } from "@cs-magic/react-ui/dist/components/file.js"
+import { FlexContainer } from "@cs-magic/react-ui/dist/components/flex-container.js"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@cs-magic/react-ui/dist/shadcn/ui/tooltip.js"
 import MdEditor from "@uiw/react-md-editor"
 import { produce } from "immer"
 import { useAtom } from "jotai"
@@ -15,6 +17,8 @@ import { useState } from "react"
 import { useDrop } from "react-use"
 import { toast } from "sonner"
 import { cardNewContentAtom } from "../store/card.atom"
+import { IUploadFile } from "@cs-magic/common/dist/oss/schema.js"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 
 export function NewCard() {
   const [v, setV] = useAtom(cardNewContentAtom)

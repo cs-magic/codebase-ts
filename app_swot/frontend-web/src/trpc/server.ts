@@ -1,4 +1,3 @@
-import { env } from "@cs-magic/common"
 import {
   createTRPCProxyClient,
   loggerLink,
@@ -14,6 +13,7 @@ import { createTRPCContext } from "./context"
 import { transformer } from "./shared"
 
 import "server-only"
+import { env } from "@cs-magic/common/dist/env/get-env.js"
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when

@@ -1,9 +1,6 @@
-import { cn } from "@cs-magic/common"
-import Image from "next/image"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 import Link from "next/link"
 import { HTMLAttributes } from "react"
-
-import { config } from "@cs-magic/common"
 
 export const BrandingTitle = ({
   withDescription,
@@ -37,7 +34,7 @@ export const BrandingTitle = ({
         )}
         {...props}
       >
-        {config.website.title}
+        {"飞脑助手"}
       </h1>
 
       {/*{withDescription && <span className={"text-sm"}>全栈 AI 平台</span>}*/}

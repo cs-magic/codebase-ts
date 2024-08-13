@@ -1,8 +1,9 @@
-import { getOssUrl, parseJsonSafe } from "@cs-magic/common"
+import { getOssUrl } from "@cs-magic/common/dist/oss/utils.js"
 import { ICardInnerPreview, ICardPreview } from "@cs-magic/swot-backend/schema"
 import { atom } from "jotai"
 import { getOssKeyWithSuffix } from "../utils/get-oss-key-with-suffix"
 import { cardUserAtom } from "./card.user.atom"
+import { parseJsonSafe } from "@cs-magic/common/dist/utils/parse-json.js"
 
 export const cardArticleUrlAtom = atom("")
 // atomWithStorage("url.toParse", "")

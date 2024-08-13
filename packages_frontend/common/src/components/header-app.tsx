@@ -1,10 +1,8 @@
-import { MSG_TODO } from "@cs-magic/common"
-import { AspectRatio } from "@cs-magic/react-ui"
+import { MSG_TODO } from "@cs-magic/common/dist/const.js"
+import { AspectRatio } from "@cs-magic/react-ui/shadcn/ui/aspect-ratio"
 import Image from "next/image"
 import Link from "next/link"
 import { toast } from "sonner"
-
-import { config } from "@cs-magic/common"
 
 export interface ISubAppIcon {
   id: string
@@ -33,7 +31,7 @@ export const SubAppIcon = ({ subAppIcon }: { subAppIcon: ISubAppIcon }) => {
       <AspectRatio ratio={1}>
         {!Cover || typeof Cover === "string" ? (
           <Image
-            src={Cover ?? config.website.avatar.default}
+            src={Cover ?? ""}
             alt={""}
             fill
             className={"rounded-lg object-cover"}

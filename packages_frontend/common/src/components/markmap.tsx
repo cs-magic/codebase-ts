@@ -1,6 +1,5 @@
 "use client"
 
-import { AspectRatio } from "@cs-magic/react-ui"
 import { mapLevelsMaxAtom, mapSpacingVerticalAtom } from "@cs-magic/react-hooks"
 import { cardMindmapRenderedAtom } from "../store/card.rendered.atom"
 import { useAtom, useSetAtom } from "jotai"
@@ -9,6 +8,7 @@ import { Transformer } from "markmap-lib"
 import { Markmap } from "markmap-view"
 import { useEffect, useRef, useState } from "react"
 import React from "react"
+import { AspectRatio } from "@cs-magic/react-ui/shadcn/ui/aspect-ratio"
 
 const transformer = new Transformer()
 
@@ -91,5 +91,5 @@ export default function MarkMap({ content }: { content?: string }) {
     </div>
   )
 
-  // logger.info("-- markmap: %o", { content, ratio, state: refMm.current?.state })
+  // console.info("-- markmap: %o", { content, ratio, state: refMm.current?.state })
 }

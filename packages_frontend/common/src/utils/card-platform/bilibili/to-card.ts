@@ -1,9 +1,9 @@
 "use server"
 
-import { IBilibiliVideoDetail } from "@cs-magic/common"
-import { getBilibiliIFrameUrl } from "@cs-magic/common"
 import { Card, Prisma } from "@prisma/client"
 import { prisma } from "@cs-magic/common/dist/db/prisma.js"
+import { IBilibiliVideoDetail } from "@cs-magic/common/dist/bilibili/schema.js"
+import { getBilibiliIFrameUrl } from "@cs-magic/common/dist/bilibili/utils.js"
 
 export const bilibili2card = (
   inputData: IBilibiliVideoDetail,

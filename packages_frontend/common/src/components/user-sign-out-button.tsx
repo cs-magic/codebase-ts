@@ -1,4 +1,4 @@
-import { Button } from "@cs-magic/react-ui"
+import { Button } from "@cs-magic/react-ui/shadcn/ui/button"
 import { signOut } from "next-auth/react"
 
 export const UserSignOutButton = () => {

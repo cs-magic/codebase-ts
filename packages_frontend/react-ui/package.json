@@ -11,9 +11,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build-source": "tspc -b",
-    "copy-files": "copyfiles -u 1 src/**/*.css dist/",
-    "build": "run-p build-source copy-files",
+    "build": "tspc -b",
     "postinstall": "yarn build"
   },
   "dependencies": {

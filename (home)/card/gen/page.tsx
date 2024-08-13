@@ -1,5 +1,3 @@
-// import { Card } from "../../../../components/card"
-import { genPageTitle } from "@cs-magic/common-frontend/utils/get-page-title"
 import dynamic from "next/dynamic"
 
 // ref: https://nextjs.org/docs/messages/react-hydration-error#solution-2-disabling-ssr-on-specific-components
@@ -11,7 +9,7 @@ const CardNoSSR = dynamic(
 )
 
 export const metadata = {
-  title: genPageTitle("渲染卡片"),
+  title: "卡片渲染 | 飞脑",
 }
 
 export default async function GenCardViaFrontendPage() {

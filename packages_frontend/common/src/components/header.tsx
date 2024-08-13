@@ -1,26 +1,45 @@
 "use client"
 
-import { IconContainer } from "@cs-magic/react-ui"
+import { MenuIcon } from "lucide-react"
+import Link from "next/link"
+import React, { PropsWithChildren } from "react"
+
+import { IconContainer } from "@cs-magic/react-ui/dist/components/icon-container.js"
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@cs-magic/react-ui"
-import { Sheet, SheetContent, SheetTrigger } from "@cs-magic/react-ui"
-import { cn } from "@cs-magic/common"
-import { MenuIcon } from "lucide-react"
-import Link from "next/link"
-import React, { PropsWithChildren } from "react"
+} from "@cs-magic/react-ui/dist/shadcn/ui/navigation-menu.js"
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@cs-magic/react-ui/dist/shadcn/ui/sheet.js"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 
-import { config } from "@cs-magic/common"
 import { BrandingTitle } from "./branding-title"
 import { UserButton } from "./header-user"
 
+const menus = [
+  {
+    href: "/card/new",
+    title: "新建卡片",
+  },
+  {
+    href: "/card/gen",
+    title: "渲染卡片",
+  },
+  {
+    href: "/dashboard",
+    title: "飞脑控制台",
+  },
+]
+
 const Menus = () => (
   <>
-    {config.website.menus.map((m, index) => (
+    {menus.map((m, index) => (
       <LinkItem href={m.href} key={index}>
         {m.title}
       </LinkItem>

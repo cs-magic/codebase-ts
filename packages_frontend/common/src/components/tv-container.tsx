@@ -1,18 +1,21 @@
 "use client"
+import { useAtom } from "jotai"
+
 import {
   getTvScale,
   tvFullScreenAtom,
   tvScreenOnAtom,
 } from "@cs-magic/react-hooks"
-import { FlexContainer } from "@cs-magic/react-ui"
-import { cn } from "@cs-magic/common"
+
+import { range } from "lodash-es"
+import { PropsWithChildren, useRef } from "react"
+import { useFullscreen, useMeasure } from "react-use"
+import { FlexContainer } from "@cs-magic/react-ui/components/flex-container"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
+
 import { Controls } from "./tv-controls"
 
 import "../styles/tv.css"
-import { useAtom } from "jotai"
-import range from "lodash/range"
-import { PropsWithChildren, useRef } from "react"
-import { useFullscreen, useMeasure } from "react-use"
 
 /**
  * tv, ref: https://codepen.io/manz/pen/MWoRMja

@@ -3,9 +3,7 @@
 import { useAtomValue } from "jotai"
 import React from "react"
 
-import { cn } from "@cs-magic/common"
 import { useSearchParam } from "@cs-magic/next-hooks"
-import { AtomSelector, Separator, StandardCard } from "@cs-magic/react-ui"
 import {
   cardPreviewEngineTypeSchema,
   GenCardApproach,
@@ -16,6 +14,10 @@ import { cardPreviewAtom } from "../store/card.atom"
 import { cardPreviewEngineAtom } from "../store/card.rendered.atom"
 
 import { CardPreviewContainer } from "./card-preview-container"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
+import { StandardCard } from "@cs-magic/react-ui/components/standard-card"
+import { AtomSelector } from "@cs-magic/react-ui/components/atom-switcher"
+import { Separator } from "@cs-magic/react-ui/shadcn/ui/separator"
 
 export const Card = () => {
   const preview = useAtomValue(cardPreviewAtom)

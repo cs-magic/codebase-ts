@@ -1,4 +1,3 @@
-import { logger } from "@cs-magic/common"
 import { useEffect, useState } from "react"
 import ansiColors from "ansicolors"
 import { useRouter } from "next/navigation"
@@ -19,7 +18,7 @@ export const useEnhancedRouter = () => {
   const addLog = () => {
     const replace = router.replace.bind(router)
     router.replace = (...args) => {
-      logger.info(
+      console.info(
         ansiColors.red(`router.replace: ${location.href} --> ${args[0]}`),
       )
       return replace(...args)
@@ -27,7 +26,7 @@ export const useEnhancedRouter = () => {
 
     const push = router.push.bind(router)
     router.push = (...args) => {
-      logger.info(
+      console.info(
         ansiColors.red(`router.push: ${location.href} --> ${args[0]}`),
       )
       return push(...args)

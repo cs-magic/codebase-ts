@@ -1,10 +1,10 @@
 "use client"
 
-import { IUserSummary } from "@cs-magic/common"
 import { useSession } from "next-auth/react"
 import { userImageAtom, userNameAtom } from "@cs-magic/react-hooks"
 import { useAtom } from "jotai"
 import { useEffect } from "react"
+import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
 
 export const useUserSummary = () => {
   const user = useSession().data?.user

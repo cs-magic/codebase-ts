@@ -1,9 +1,9 @@
-import type {
+import {
   ITransChannel,
   ITransClient,
   ITransEvent,
   ResponseFinalStatus,
-} from "@cs-magic/common"
+} from "@cs-magic/common/dist/sse/schema.js"
 
 export interface ILLMManagerTraditional {
   //////////////////////////////

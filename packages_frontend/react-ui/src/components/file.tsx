@@ -1,10 +1,12 @@
-import { cn, IUploadFile } from "@cs-magic/common"
 import { Check } from "lucide-react"
 import Image from "next/image"
 import React, { HTMLAttributes } from "react"
 
+import { IUploadFile } from "@cs-magic/common/dist/oss/schema.js"
+
 import { FlexContainer } from "./flex-container"
 import { Loading } from "./loading"
+import { cn } from "@/shadcn/utils"
 import { AspectRatio } from "@/shadcn/ui/aspect-ratio"
 
 export const FileComp = ({

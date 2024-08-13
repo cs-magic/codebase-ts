@@ -1,10 +1,11 @@
-import { api, backendApi } from "@cs-magic/common"
 import { md5 } from "js-md5"
 import OpenAI, { type ClientOptions } from "openai"
 import ZhipuAi from "zhipuai-sdk-nodejs-v4"
 
 import type { ILlmQueryConfig } from "../schema/llm.api.js"
 import { type LlmProviderType } from "../schema/llm.providers.js"
+import { api } from "@cs-magic/common/dist/api/api.js"
+import { backendApi } from "@cs-magic/common/dist/api/backend-api.js"
 
 export type ICompletion = OpenAI.Chat.Completions.ChatCompletion
 

@@ -1,9 +1,6 @@
 "use client"
 
-import { useEnvironments } from "@cs-magic/react-hooks"
-import { UnexpectedError } from "@cs-magic/common"
-import { Loading } from "@cs-magic/react-ui"
-import { Label } from "@cs-magic/react-ui"
+import { useEnvironments } from "@cs-magic/react-hooks/dist/hooks/use-environments.js"
 import { Auth } from "@cs-magic/common-frontend/components/auth"
 import { AuthSmsSignIn } from "@cs-magic/common-frontend/components/auth-sms-sign-in"
 import { AuthUpdateProfile } from "@cs-magic/common-frontend/components/auth-update-profile"
@@ -11,6 +8,9 @@ import { AuthWechatSignIn } from "@cs-magic/common-frontend/components/auth-wech
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { UnexpectedError } from "@cs-magic/common/dist/schema/error.js"
+import { Label } from "@cs-magic/react-ui/shadcn/ui/label"
+import { Loading } from "@cs-magic/react-ui/components/loading"
 
 export default function AuthPage() {
   const session = useSession()

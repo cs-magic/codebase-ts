@@ -1,5 +1,5 @@
-import { Badge } from "@cs-magic/react-ui"
-import { cn } from "@cs-magic/common"
+import { Badge } from "@cs-magic/react-ui/shadcn/ui/badge"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 
 export const Tags = ({ tags }: { tags: string[] | null | undefined }) => {
   if (!tags?.length) return null

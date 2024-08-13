@@ -1,10 +1,13 @@
 "use client"
 
-import { cn } from "@cs-magic/common"
-import { Atom, useMounted } from "@cs-magic/react-hooks"
 import { useAtom } from "jotai"
 import React, { ComponentProps, forwardRef } from "react"
 import ReactTextareaAutoSize from "react-textarea-autosize"
+
+import { Atom } from "@cs-magic/react-hooks/dist/store/jotai.types.js"
+import { useMounted } from "@cs-magic/react-hooks/dist/hooks/use-mounted.js"
+
+import { cn } from "@/shadcn/utils"
 
 const TextareaInner = forwardRef<
   HTMLTextAreaElement,

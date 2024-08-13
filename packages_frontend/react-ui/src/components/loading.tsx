@@ -1,9 +1,11 @@
 "use client"
 
-import { uiLoadingAlertDialogAtom } from "@cs-magic/react-hooks"
 import { useAtom } from "jotai"
 import { LoaderIcon } from "lucide-react"
 import React from "react"
+
+import { uiLoadingAlertDialogAtom } from "@cs-magic/react-hooks/dist/store/ui.atom.js"
+
 import { FlexContainer } from "./flex-container"
 import { AlertDialog, AlertDialogContent } from "@/shadcn/ui/alert-dialog"
 

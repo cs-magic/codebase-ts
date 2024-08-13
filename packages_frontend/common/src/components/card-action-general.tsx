@@ -1,7 +1,6 @@
 "use client"
 
-import { ButtonWithLoading } from "@cs-magic/react-ui"
-import { cn } from "@cs-magic/common"
+import { ButtonWithLoading } from "@cs-magic/react-ui/components/button-with-loading"
 import { atom, PrimitiveAtom, useAtom } from "jotai"
 import capitalize from "lodash/capitalize"
 import { HTMLAttributes } from "react"
@@ -13,6 +12,7 @@ import {
   cardUploadingAtom,
 } from "../store/card.actions.atom"
 import { ActionType } from "@cs-magic/swot-backend/schema"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 
 const tAtom = atom(false)
 

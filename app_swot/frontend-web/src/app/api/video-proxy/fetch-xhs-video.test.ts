@@ -1,7 +1,7 @@
 "use server"
 
-import { FetchApproach } from "@cs-magic/common"
-import { sampleXiaoHongShuVideoUrl } from "@cs-magic/common"
+import { FetchApproach } from "@cs-magic/common/dist/api/schema.js"
+import { sampleXiaoHongShuVideoUrl } from "@cs-magic/common/dist/sample.js"
 import axios from "axios"
 
 import nodeFetch from "node-fetch"

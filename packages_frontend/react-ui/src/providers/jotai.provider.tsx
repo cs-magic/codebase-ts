@@ -13,8 +13,7 @@ export function JotaiProvider({ children }: PropsWithChildren) {
     <>
       <Provider>
         {/*<DevTools />*/}
-        he
-        {/*{children}*/}
+        {children}
       </Provider>
     </>
   )

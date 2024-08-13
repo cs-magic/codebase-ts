@@ -1,4 +1,3 @@
-import { logger } from "@cs-magic/common"
 import { useAtom, useSetAtom } from "jotai"
 import { cardArticleUrlAtom, cardInnerInputAtom } from "../store/card.atom"
 import { cardGenOptionsAtom } from "../store/card.gen.atom"
@@ -18,8 +17,8 @@ export const InputCardAction = ({ type }: { type: Action1Type }) => {
     switch (type) {
       case "generate":
         const generated = await genCardFromUrl(inputUrl, options)
-        logger.info("generated: %o", generated)
-        logger.info(JSON.stringify(generated))
+        console.info("generated: %o", generated)
+        console.info(JSON.stringify(generated))
         setCardInnerInput(JSON.stringify(generated))
         break
 

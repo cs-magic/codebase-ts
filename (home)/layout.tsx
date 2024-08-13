@@ -1,7 +1,8 @@
-import { FlexContainer } from "@cs-magic/react-ui/dist/components/flex-container.js"
-import { cn } from "@cs-magic/common"
-import { Header } from "@cs-magic/common-frontend/components/header"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 import { PropsWithChildren } from "react"
+
+import { FlexContainer } from "@cs-magic/react-ui/dist/components/flex-container.js"
+import { Header } from "@cs-magic/common-frontend/components/header"
 
 export default function SubLayout({ children }: PropsWithChildren) {
   // console.log(ansiColors.red("== SubLayout =="))

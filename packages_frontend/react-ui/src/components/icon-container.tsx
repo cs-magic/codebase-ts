@@ -1,7 +1,12 @@
+"use client"
+
 import React, { ComponentProps, forwardRef } from "react"
 
-import { cn } from "@cs-magic/common"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shadcn/ui/tooltip"
+
+// todo: why cn not okay
+import { cn } from "@/shadcn/utils"
+import clsx from "clsx"
 
 export const IconContainer = forwardRef<
   HTMLButtonElement,
@@ -14,15 +19,18 @@ export const IconContainer = forwardRef<
     <Tooltip disableHoverableContent delayDuration={100}>
       <TooltipTrigger
         ref={ref}
-        className={cn(
-          // 外部6，内部4是最佳的小图标比例
-          " w-6 h-6",
-          size === "lg" && "w-8 h-8",
-          " p-1 [&>*]:w-full [&>*]:h-full center",
-          "cursor-pointer",
-          // "hover:bg-muted",
-          className,
-        )}
+        className={
+          // clsx
+          cn(
+            // 外部6，内部4是最佳的小图标比例
+            " w-6 h-6",
+            size === "lg" && "w-8 h-8",
+            " p-1 [&>*]:w-full [&>*]:h-full center",
+            "cursor-pointer",
+            // "hover:bg-muted",
+            className,
+          )
+        }
         {...props}
       />
 

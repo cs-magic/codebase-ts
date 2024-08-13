@@ -1,13 +1,11 @@
 "use client"
 
-import { ApiMethod } from "@cs-magic/common"
-import { sleep } from "@cs-magic/common"
-import { FlexContainer } from "@cs-magic/react-ui"
-import { LabelLine } from "@cs-magic/react-ui"
-import { Badge } from "@cs-magic/react-ui"
-import { Button } from "@cs-magic/react-ui"
-import { Input } from "@cs-magic/react-ui"
-import { Label } from "@cs-magic/react-ui"
+import { FlexContainer } from "@cs-magic/react-ui/dist/components/flex-container.js"
+import { LabelLine } from "@cs-magic/react-ui/dist/components/label-line.js"
+import { Badge } from "@cs-magic/react-ui/dist/shadcn/ui/badge.js"
+import { Button } from "@cs-magic/react-ui/dist/shadcn/ui/button.js"
+import { Input } from "@cs-magic/react-ui/dist/shadcn/ui/input.js"
+import { Label } from "@cs-magic/react-ui/dist/shadcn/ui/label.js"
 import {
   Select,
   SelectContent,
@@ -15,9 +13,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@cs-magic/react-ui"
-import { StandardCard } from "@cs-magic/react-ui"
-import { TextareaAuto } from "@cs-magic/react-ui"
+} from "@cs-magic/react-ui/dist/shadcn/ui/select.js"
+import { StandardCard } from "@cs-magic/react-ui/dist/components/standard-card.js"
+import { TextareaAuto } from "@cs-magic/react-ui/dist/components/textarea-auto.js"
 
 import { produce } from "immer"
 import { useAtom } from "jotai"
@@ -27,6 +25,8 @@ import { useCopyToClipboard } from "react-use"
 
 import { serverFetch } from "./actions"
 import { cookie2headers } from "./utils"
+import { ApiMethod } from "@cs-magic/common/dist/api/schema.js"
+import { sleep } from "@cs-magic/common/dist/datetime/utils.js"
 
 export type ValidateStatus =
   | "to-validate"

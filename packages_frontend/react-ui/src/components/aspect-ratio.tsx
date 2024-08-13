@@ -1,8 +1,7 @@
 "use client"
+import { cn } from "@/shadcn/utils"
 import React, { HTMLAttributes } from "react"
 import { useMeasure } from "react-use"
-
-import { cn } from "@cs-magic/common"
 
 export const VerticalAspectRatio = ({
   ratio,

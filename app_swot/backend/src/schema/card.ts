@@ -1,10 +1,9 @@
-import { IUserSummary } from "@cs-magic/common"
-import { LlmModelType } from "@cs-magic/llm"
 import { PlatformType, Prisma, $Enums } from "@prisma/client"
 import { z } from "zod"
 
 import { ISummaryParsed } from "./summary.js"
 import { IWechatArticleComment, IWechatArticleStat } from "./wxmp-article.js"
+import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
 
 export type ICardStat = {
   reads?: number

@@ -1,5 +1,5 @@
+import { cn } from "@/shadcn/utils"
 import * as React from "react"
-import { cn } from "@cs-magic/common"
 
 export interface InputWithEnterProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

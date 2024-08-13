@@ -1,25 +1,30 @@
-import { cn } from "@cs-magic/common"
-import { devEnabledAtom } from "@cs-magic/react-hooks"
+"use client"
+
+import { useHotkeys } from "@mantine/hooks"
+import { useAtom } from "jotai"
+import { SettingsIcon } from "lucide-react"
+import { useState } from "react"
+
+import { devEnabledAtom } from "@cs-magic/react-hooks/dist/store/dev.atom.js"
+
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 import {
-  IconContainer,
   Sheet,
   SheetContent,
   SheetTrigger,
+} from "@cs-magic/react-ui/shadcn/ui/sheet"
+import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@cs-magic/react-ui"
+} from "@cs-magic/react-ui/shadcn/ui/tabs"
+import { IconContainer } from "@cs-magic/react-ui/components/icon-container"
 
 import { ConfigDevCard } from "./config-dev-card"
 import { ConfigLogCard } from "./config-log-card"
 import { ConfigSMSCard } from "./config-sms"
 import { UserSignOutButton } from "./user-sign-out-button"
-import { useHotkeys } from "@mantine/hooks"
-import { useAtom } from "jotai"
-import { SettingsIcon } from "lucide-react"
-import * as process from "process"
-import { useState } from "react"
 
 export const DevConfig = () => {
   const [devEnabled] = useAtom(devEnabledAtom)
@@ -74,7 +79,7 @@ export const DevConfig = () => {
             <ConfigLogCard />
           </TabsContent>
 
-          <TabsContent value={"trpc"}>{/*<ConfigTRPCCard />*/}</TabsContent>
+          {/*<TabsContent value={"trpc"}><ConfigTRPCCard /></TabsContent>*/}
 
           <TabsContent value={"dev"}>
             <ConfigDevCard />

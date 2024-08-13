@@ -1,6 +1,6 @@
 "use client"
 
-import { uiAlertDialogOpen } from "@cs-magic/react-hooks"
+import { uiAlertDialogOpen } from "@cs-magic/react-hooks/dist/store/ui.atom.js"
 import { useAtom } from "jotai"
 import React, { PropsWithChildren } from "react"
 import { AlertDialog, AlertDialogContent } from "@/shadcn/ui/alert-dialog"

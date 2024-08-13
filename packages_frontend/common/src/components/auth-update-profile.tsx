@@ -1,7 +1,8 @@
 "use client"
 
 import { userImageAtom, userNameAtom } from "@cs-magic/react-hooks"
-import { Button, Label } from "@cs-magic/react-ui"
+import { Button } from "@cs-magic/react-ui/shadcn/ui/button"
+import { Label } from "@cs-magic/react-ui/shadcn/ui/label"
 import { useAtom } from "jotai"
 import { UserInputAvatar } from "./user-input-avatar"
 import { UserInputName } from "./user-input-name"

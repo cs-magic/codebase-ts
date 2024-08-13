@@ -1,6 +1,8 @@
 import React from "react"
-import { IBilibiliVideo } from "@cs-magic/common"
-import { getBilibiliIFrameUrl } from "@cs-magic/common"
+import {
+  IBilibiliVideo,
+  getBilibiliIFrameUrl,
+} from "@cs-magic/common/dist/bilibili/index.js"
 
 /**
  *

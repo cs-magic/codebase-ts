@@ -1,12 +1,10 @@
 "use client"
 
-import { config } from "@cs-magic/common"
-import { moment } from "@cs-magic/common"
-import { cn } from "@cs-magic/common"
-
+import { moment } from "@cs-magic/common/dist/datetime/index.js"
 import { CalendarHeartIcon, MilestoneIcon } from "lucide-react"
 import { CardFooterItem } from "./card-footer-item"
 import { CardOuterPreview } from "@cs-magic/swot-backend/schema"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
 
 export const CardFooter = ({
   outPreview,
@@ -23,7 +21,7 @@ export const CardFooter = ({
           value={moment().format("YYYY-MM-DD")}
         />
         {/*<CardFooterItem Icon={FingerprintIcon} value={outPreview?.id} />*/}
-        <CardFooterItem Icon={MilestoneIcon} value={config.version} />
+        <CardFooterItem Icon={MilestoneIcon} value={"0.1.0"} />
       </div>
     </div>
   )

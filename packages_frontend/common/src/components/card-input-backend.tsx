@@ -1,4 +1,4 @@
-import { TextareaAuto } from "@cs-magic/react-ui"
+import { TextareaAuto } from "@cs-magic/react-ui/components/textarea-auto"
 import { useAtom } from "jotai"
 import React from "react"
 import { cardInnerInputAtom } from "../store/card.atom"

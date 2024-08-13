@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react"
 
-import { cn } from "@cs-magic/common"
 import { Card, CardContent, CardHeader, CardTitle } from "@/shadcn/ui/card"
+import { cn } from "@/shadcn/utils"
 
 export const StandardCard = ({
   title,

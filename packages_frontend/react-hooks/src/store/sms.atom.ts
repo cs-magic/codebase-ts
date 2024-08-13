@@ -1,13 +1,12 @@
-import { Nullable } from "@cs-magic/common"
-import { atom } from "jotai"
-import { atomWithStorage } from "jotai/utils"
-
+import { Nullable } from "@cs-magic/common/dist/schema/base.js"
 import {
   ISendSms,
   ISmsSignIn,
   SmsProviderType,
   SmsStage,
-} from "@cs-magic/common"
+} from "@cs-magic/common/dist/sms.schema.js"
+import { atom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 
 //////////////////////////////
 // base

@@ -1,6 +1,6 @@
-import { WECHAT_PROVIDER_ID } from "@cs-magic/common"
-import { Button } from "@cs-magic/react-ui"
-import { cn } from "@cs-magic/common"
+import { WECHAT_PROVIDER_ID } from "@cs-magic/common/dist/auth/index.js"
+import { cn } from "@cs-magic/react-ui/shadcn/utils"
+import { Button } from "@cs-magic/react-ui/shadcn/ui/button"
 import { signIn } from "next-auth/react"
 
 export const AuthWechatSignIn = () => (

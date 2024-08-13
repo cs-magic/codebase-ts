@@ -1,4 +1,4 @@
-import { IUserSummary } from "@cs-magic/common"
+import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 

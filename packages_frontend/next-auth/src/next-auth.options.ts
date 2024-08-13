@@ -1,14 +1,16 @@
+import { tokenExpireSeconds } from "@cs-magic/common/dist/auth/config.js"
 import { CallbacksOptions, type NextAuthOptions } from "next-auth"
 import { Adapter } from "next-auth/adapters"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { Provider } from "next-auth/providers/index"
 
-import { env, IWechatProfile, tokenExpireSeconds } from "@cs-magic/common"
 import { prisma } from "@cs-magic/common/dist/db/prisma.js"
 
 import { ProfileUpdateProvider } from "./providers/profile-update.js"
 // import { SmsProvider } from "./providers/sms.js"
 import { WechatProvider } from "./providers/wechat.js"
+import { env } from "@cs-magic/common/dist/env/get-env.js"
+import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema.js"
 
 const providers: Provider[] = [
   ProfileUpdateProvider,

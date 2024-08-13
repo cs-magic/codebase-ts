@@ -1,8 +1,8 @@
-import { uiInnerHeight, uiViewportHeight } from "../store"
-import { isServer } from "@cs-magic/common"
+import { isServer } from "@cs-magic/common/dist/env/is-server.js"
 import { useAtom } from "jotai"
 import { useCallback, useEffect, useState } from "react"
 
+import { uiInnerHeight, uiViewportHeight } from "../store"
 import { useDisplayAutoScrollTop } from "./use-display-auto-scroll-top"
 
 /**

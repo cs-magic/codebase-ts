@@ -1,12 +1,5 @@
 import { backendTypeSchema, llmModelTypeSchema } from "@cs-magic/llm"
-import {
-  AtomSelector,
-  AtomSwitcher,
-  Input,
-  LabelLine,
-  Separator,
-  Switch,
-} from "@cs-magic/react-ui"
+
 import { PrimitiveAtom, useAtom } from "jotai"
 import { cardAuthorWithTitleAtom } from "../store/card.atom"
 import {
@@ -25,6 +18,13 @@ import { InputCardAction } from "./card-action-input"
 import { CardInputUrl } from "./card-input-url"
 import { CardInputUser } from "./card-input-user"
 import { mapSpacingVerticalAtom } from "@cs-magic/react-hooks"
+import { Separator } from "@cs-magic/react-ui/shadcn/ui/separator"
+import {
+  AtomSelector,
+  AtomSwitcher,
+} from "@cs-magic/react-ui/components/atom-switcher"
+import { LabelLine } from "@cs-magic/react-ui/components/label-line"
+import { Input } from "@cs-magic/react-ui/shadcn/ui/input"
 
 export const CardInputFrontend = () => {
   const [mapSpacingVertical, setMapSpacingVertical] = useAtom(

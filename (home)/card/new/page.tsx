@@ -1,8 +1,7 @@
 import { NewCard } from "@cs-magic/common-frontend/components/new-card"
-import { genPageTitle } from "@cs-magic/common-frontend/utils/get-page-title"
 
 export const metadata = {
-  title: genPageTitle("新建卡片"),
+  title: "卡片生成 | 飞脑",
 }
 
 export default async function NewCardPage() {

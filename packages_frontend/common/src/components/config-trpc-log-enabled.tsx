@@ -1,5 +1,5 @@
-import { LabelLine } from "@cs-magic/react-ui"
-import { Switch } from "@cs-magic/react-ui"
+import { LabelLine } from "@cs-magic/react-ui/dist/components/label-line.js"
+import { Switch } from "@cs-magic/react-ui/shadcn/ui/switch"
 import { atom, useAtom } from "jotai"
 
 // todo

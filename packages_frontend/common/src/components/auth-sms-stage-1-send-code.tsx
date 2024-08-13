@@ -1,25 +1,24 @@
 "use client"
 
-import { ISendSms, sendSmsSchema } from "@cs-magic/common"
 import {
-  smsCodeCurCountdownSecondsAtom,
-  userPhoneAtom,
-} from "@cs-magic/react-hooks"
-import { useSmsSendCode } from "@cs-magic/next-hooks"
-
-import {
-  ButtonWithLoading,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "@cs-magic/react-ui"
+} from "@cs-magic/react-ui/dist/shadcn/ui/form.js"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAtom, useSetAtom } from "jotai"
 import { useForm } from "react-hook-form"
+import { ISendSms, sendSmsSchema } from "@cs-magic/common/dist/sms.schema.js"
+import { Input } from "@cs-magic/react-ui/shadcn/ui/input"
+import { ButtonWithLoading } from "@cs-magic/react-ui/components/button-with-loading"
+import {
+  smsCodeCurCountdownSecondsAtom,
+  userPhoneAtom,
+} from "@cs-magic/react-hooks/dist/store/sms.atom.js"
+import { useSmsSendCode } from "@cs-magic/next-hooks/dist/hooks/use-sms-send-code.js"
 
 export const AuthSmsStage1SendCode = () => {
   const [downtime] = useAtom(smsCodeCurCountdownSecondsAtom)

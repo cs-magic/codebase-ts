@@ -1,6 +1,6 @@
 "use server"
 
-import { IXiaoHongShuNotePageData } from "@cs-magic/common"
+import { IXiaoHongShuNotePageData } from "@cs-magic/common/dist/xhs/index.js"
 import { Card, Prisma } from "@prisma/client"
 import { prisma } from "@cs-magic/common/dist/db/prisma.js"
 

@@ -1,12 +1,12 @@
-import type {
+import remove from "lodash/remove.js"
+
+import type { ILLMManagerTraditional } from "./schema.js"
+import {
   ITransChannel,
   ITransClient,
   ITransEvent,
   ResponseFinalStatus,
-} from "@cs-magic/common"
-import remove from "lodash/remove.js"
-
-import type { ILLMManagerTraditional } from "./schema.js"
+} from "@cs-magic/common/dist/sse/schema.js"
 
 export class StaticLLMManager implements ILLMManagerTraditional {
   static triggers: Record<string, ITransChannel> = {}

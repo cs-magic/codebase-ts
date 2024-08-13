@@ -4,8 +4,8 @@ const config = {
   darkMode: ["class"],
   content: [
     "./src/**/*.{ts,tsx}",
-    "../../packages/**/*.{ts,tsx}",
-    "../../packages_frontend/**/*.{ts,tsx}",
+    "../../packages_frontend/common/*.{ts,tsx}",
+    "../../packages_frontend/react-ui/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {

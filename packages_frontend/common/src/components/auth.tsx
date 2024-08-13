@@ -1,7 +1,10 @@
 "use client"
 
 import { useEnvironments } from "@cs-magic/react-hooks"
-import { JoinComponents, Label, SeparatorContainer } from "@cs-magic/react-ui"
+import { JoinComponents } from "@cs-magic/react-ui/components/join-components"
+import { Label } from "@cs-magic/react-ui/shadcn/ui/label"
+import { SeparatorContainer } from "@cs-magic/react-ui/components/separator-container"
+
 import { AuthSmsSignIn } from "./auth-sms-sign-in"
 import { AuthWechatSignIn } from "./auth-wechat-sign-in"
 import { BrandingTitle } from "./branding-title"

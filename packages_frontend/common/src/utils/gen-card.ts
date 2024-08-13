@@ -1,9 +1,6 @@
-import {
-  extractFirstUrl,
-  isWxmpArticleUrl,
-  logger,
-  NotImplementedError,
-} from "@cs-magic/common"
+import { NotImplementedError } from "@cs-magic/common/dist/schema/error.js"
+import { extractFirstUrl } from "@cs-magic/common/dist/utils/extract-first-url.js"
+import { isWxmpArticleUrl } from "@cs-magic/common/dist/utils/is-wxmp-article-url.js"
 import { wxmpUrl2preview } from "@cs-magic/swot-backend/dist/bot/utils/wxmp-url2preview.js"
 import {
   GenWxmpArticleCardFetchOptions,
@@ -20,7 +17,7 @@ export const genCardFromUrl = async (
   options?: GenWxmpArticleCardFetchOptions,
 ): Promise<ICardInnerPreview> => {
   const urlParsed = extractFirstUrl(inputUrlLike)
-  logger.info("-- genCardFromUrl: %o", { inputUrlLike, urlParsed })
+  console.info("-- genCardFromUrl: %o", { inputUrlLike, urlParsed })
   if (!urlParsed)
     throw new Error(`invalid url to be parsed from ${inputUrlLike}`)
 

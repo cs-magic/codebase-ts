@@ -8,7 +8,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogTitle,
-} from "@cs-magic/react-ui"
+} from "@cs-magic/react-ui/shadcn/ui/alert-dialog"
 import { useAtom } from "jotai"
 
 import { signIn } from "next-auth/react"
