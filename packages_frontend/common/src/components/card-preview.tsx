@@ -17,7 +17,7 @@ import {
 } from "../store/card.rendered.atom"
 import { cardWatermarkTextAtom } from "../store/card.request.atom"
 import { getPlatformName } from "../utils/card-platform/get-platform-name"
-import CsMagicBlackLogoSvg from "@cs-magic/assets/branding/cs-magic_logo_1280.svg"
+import CsMagicBlackLogoSvg from "@/../../../assets/branding/cs-magic_logo_1280.svg"
 import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
 import { cn } from "@cs-magic/react-ui/shadcn/utils"
 import { VerticalAspectRatio } from "@cs-magic/react-ui/components/aspect-ratio"

@@ -1,5 +1,5 @@
-import Text2ImageAppSVG from "@cs-magic/assets/products/t2i.svg"
-import Text2TextAppSVG from "@cs-magic/assets/products/t2t.svg"
+import Text2ImageAppSVG from "@/../../../assets/products/t2i.svg"
+import Text2TextAppSVG from "@/../../../assets/products/t2t.svg"
 import {
   Select,
   SelectContent,

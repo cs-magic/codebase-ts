@@ -16,6 +16,13 @@ module.exports = {
   distDir,
 
   webpack(config, { dev, isServer }) {
+    if (!isServer) {
+      config.externals = {
+        ...config.externals,
+        // "@cs-magic/llm": "@cs-magic/llm", // Treat 'some-package' as external
+      }
+    }
+
     // 以下是gpt给的，为了解决wechaty的问题，但没用，无法启动
     // if (!isServer) {
     //   config.node = {

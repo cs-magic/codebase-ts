@@ -166,5 +166,8 @@
     "typescript": "^5.3.3",
     "webpack": "^5.93.0",
     "wtfnode": "^0.9.1"
-  }
+  },
+  "files": [
+    "../../node_modules/@cs-magic/llm/dist"
+  ]
 }
