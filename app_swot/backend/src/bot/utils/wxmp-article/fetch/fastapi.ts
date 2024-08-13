@@ -1,4 +1,4 @@
-import { backendApi } from "@cs-magic/common"
+import { backendApi } from "@cs-magic/common/dist/api"
 import { Prisma } from "@prisma/client"
 import { SummaryOptions } from "../../../../schema/index.js"
 

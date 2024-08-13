@@ -1,5 +1,4 @@
-import { logger } from "@cs-magic/common"
-
+import logger from "@cs-magic/common/dist/log"
 import { createWechatyBot } from "../../bot/index.js"
 import { IContext } from "../schema.js"
 import { syncClients } from "./sync-clients.js"

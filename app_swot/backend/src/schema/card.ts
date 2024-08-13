@@ -4,6 +4,7 @@ import { z } from "zod"
 import { ISummaryParsed } from "./summary.js"
 import { IWechatArticleComment, IWechatArticleStat } from "./wxmp-article.js"
 import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
+import { LlmModelType } from "@cs-magic/llm/dist/schema/llm.models.js"
 
 export type ICardStat = {
   reads?: number

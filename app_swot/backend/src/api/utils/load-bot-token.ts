@@ -1,7 +1,7 @@
-import { parseJsonSafe } from "@cs-magic/common"
 import fs, { promises } from "fs"
 
 import { IWechatData, wechatyDataPath } from "./handle-message.js"
+import { parseJsonSafe } from "@cs-magic/common/dist/utils/parse-json.js"
 
 export const loadBotToken = async () => {
   if (fs.existsSync(wechatyDataPath)) {

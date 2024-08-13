@@ -1,12 +1,9 @@
-// Legacy octal escape is not permitted in strict mode
-import {
-  formatError,
-  formatString,
-  logger,
-  LogLevel,
-  moment,
-  SEPARATOR_LINE,
-} from "@cs-magic/common"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const"
+import logger from "@cs-magic/common/dist/log"
+import { moment } from "@cs-magic/common/dist/datetime/moment.js"
+import { formatError, formatString } from "@cs-magic/common/dist/utils"
+import { LogLevel } from "@cs-magic/eval-ai/packages/common-log/schema"
+
 // import qrcodeTerminal from "qrcode-terminal" // cjs package
 import { ScanStatus, Wechaty } from "wechaty"
 

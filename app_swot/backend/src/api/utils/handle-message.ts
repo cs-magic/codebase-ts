@@ -1,7 +1,6 @@
 import { dumpFile } from "@cs-magic/common/dist/dump-file.js"
+import { formatError } from "@cs-magic/common/dist/utils/format-error.js"
 import path from "path"
-
-import { formatError, logger } from "@cs-magic/common"
 
 import {
   BotCommandType,
@@ -15,6 +14,7 @@ import {
   getConvPreference,
   parseLimitedCommand,
 } from "../../bot/utils/index.js"
+import logger from "@cs-magic/common/dist/log/index.js"
 
 export const wechatyDataPath = path.join(process.cwd(), "wechaty.data.json")
 

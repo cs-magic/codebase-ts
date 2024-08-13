@@ -1,4 +1,3 @@
-import { logger, SEPARATOR_LINE } from "@cs-magic/common"
 import {
   commandsSchema,
   type CommandType,
@@ -21,6 +20,8 @@ import { RoomPlugin } from "./plugins/room.plugin.js"
 import { SystemPlugin } from "./plugins/system.plugin.js"
 import { TaskPlugin } from "./plugins/task.plugin.js"
 import { TestPlugin } from "./plugins/test.plugin.js"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import logger from "@cs-magic/common/dist/log/index.js"
 
 export const handleMessage = async (bot: Wechaty, message: Message) => {
   const tmm = {

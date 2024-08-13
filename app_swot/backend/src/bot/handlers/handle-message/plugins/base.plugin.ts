@@ -1,13 +1,11 @@
+import { prisma } from "@cs-magic/common/dist/db/prisma.js"
 import {
-  evalObject,
-  formatString,
   IUserSummaryFilled,
-  logger,
-  LogLevel,
   NotImplementedError,
   wechatMessageDetailSchema,
-} from "@cs-magic/common"
-import { prisma } from "@cs-magic/common/dist/db/prisma.js"
+} from "@cs-magic/common/dist/schema"
+import { evalObject, formatString } from "@cs-magic/common/dist/utils"
+import { LogLevel } from "@cs-magic/eval-ai/packages/common-log/schema"
 
 import set from "lodash/set.js"
 import { Message, Sayable, type Wechaty } from "wechaty"
@@ -27,6 +25,7 @@ import {
   getConvPreference,
   parseText,
 } from "../../../utils/index.js"
+import logger from "@cs-magic/common/dist/log/index.js"
 
 export class BasePlugin {
   public message: Message

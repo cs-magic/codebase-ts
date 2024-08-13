@@ -4,7 +4,7 @@ import {
   IWechatArticleStat,
 } from "../../../../../schema"
 import { getWechatArticleUrlFromShortId } from "../../utils"
-import { api } from "@cs-magic/common"
+import { api } from "@cs-magic/common/dist/api"
 
 const wxapiApi = axios.create({
   ...api,

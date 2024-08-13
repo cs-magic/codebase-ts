@@ -1,4 +1,4 @@
-import type { LangType } from "@cs-magic/common"
+import { LangType } from "@cs-magic/common/dist/i18n"
 import { z } from "zod"
 
 import { Priority } from "./common.js"

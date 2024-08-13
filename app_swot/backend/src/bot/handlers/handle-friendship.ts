@@ -1,4 +1,6 @@
-import { config, logger, moment, SEPARATOR_LINE } from "@cs-magic/common"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const"
+import logger from "@cs-magic/common/dist/log"
+import { moment } from "@cs-magic/common/dist/datetime/moment.js"
 import { Friendship, types, Wechaty } from "wechaty"
 
 /**
@@ -33,7 +35,7 @@ ${SEPARATOR_LINE}
   - 其他定时提醒功能、社群管理功能（待完善）
 您也可以把我拉到其他群里，产生的费用您可以自行向群友收取。
 ${SEPARATOR_LINE}
-- BUG 反馈请联系飞脑客服：${config.company["customer-service"].wxid}
+- BUG 反馈请联系飞脑客服
 - 飞脑十分注重用户隐私，与您的聊天记录不会共享于他人
 - 续费请扫码：XXX (新朋友免费赠送100飞币)
 - 当前版本：${bot.context?.version}

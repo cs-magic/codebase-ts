@@ -1,4 +1,4 @@
-import { SEPARATOR_BOX } from "@cs-magic/common"
+import { SEPARATOR_BOX } from "@cs-magic/common/dist/const"
 import { prisma } from "@cs-magic/common/dist/db/prisma.js"
 
 export const listMessagesOfSpecificTopic = async (

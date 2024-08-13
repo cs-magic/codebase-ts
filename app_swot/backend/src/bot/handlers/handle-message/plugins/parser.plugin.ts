@@ -1,9 +1,7 @@
 import {
   isWxmpArticleUrl,
-  logger,
   parseTitleFromWechatUrlMessage,
-  parseUrlFromWechatUrlMessage,
-} from "@cs-magic/common"
+} from "@cs-magic/common/dist/utils"
 import { z } from "zod"
 
 import { FeatureMap, FeatureType } from "../../../../schema/index.js"
@@ -11,6 +9,8 @@ import { getQuotedMessage, parseText } from "../../../utils/index.js"
 import { link2card } from "../../../utils/link2card.js"
 import { BasePlugin } from "./base.plugin.js"
 import { CardSimulator } from "@cs-magic/common/dist/spider/card-simulator.js"
+import { parseUrlFromWechatUrlMessage } from "@cs-magic/common/dist/utils/parse-url-from-wechat-url-message.js"
+import logger from "@cs-magic/common/dist/log/index.js"
 
 const commandTypeSchema = z.enum([""])
 type CommandType = z.infer<typeof commandTypeSchema>

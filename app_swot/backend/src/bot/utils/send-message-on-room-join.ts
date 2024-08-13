@@ -1,4 +1,6 @@
-import { logger, moment, SEPARATOR_LINE } from "@cs-magic/common"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import logger from "@cs-magic/common/dist/log/index.js"
+import { moment } from "@cs-magic/common/dist/datetime/moment.js"
 import { Wechaty } from "wechaty"
 
 export const sendMessageOnRoomJoin = async (bot: Wechaty, roomId: string) => {

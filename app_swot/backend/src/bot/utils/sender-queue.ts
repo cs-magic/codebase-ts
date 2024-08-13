@@ -1,4 +1,6 @@
-import { formatError, logger, sleep } from "@cs-magic/common"
+import logger from "@cs-magic/common/dist/log/index.js"
+import { formatError } from "@cs-magic/common/dist/utils/index.js"
+import { sleep } from "@cs-magic/eval-ai/packages/common-algo/utils.js"
 import { QueueTask } from "../../schema/index.js"
 
 export class SenderQueue {

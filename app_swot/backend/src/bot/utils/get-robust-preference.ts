@@ -1,4 +1,3 @@
-import { parseJsonSafe } from "@cs-magic/common"
 import merge from "lodash/merge.js"
 import omit from "lodash/omit.js"
 
@@ -8,6 +7,7 @@ import {
   IWechatData,
   IWechatPreference,
 } from "../../schema/index.js"
+import { parseJsonSafe } from "@cs-magic/common/dist/utils/parse-json.js"
 
 export const getRobustPreference = (
   row: {

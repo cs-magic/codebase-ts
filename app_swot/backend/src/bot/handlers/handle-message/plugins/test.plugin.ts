@@ -1,4 +1,4 @@
-import { logger } from "@cs-magic/common"
+import logger from "@cs-magic/common/dist/log"
 import { safeCallLLM } from "@cs-magic/llm/dist/utils/safe-call-llm.js"
 import last from "lodash/last.js"
 import { types } from "wechaty"
