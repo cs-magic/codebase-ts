@@ -1,7 +1,7 @@
 import logger from "@cs-magic/common/dist/log/index.js"
 import { formatError } from "@cs-magic/common/dist/utils/index.js"
-import { sleep } from "@cs-magic/eval-ai/packages/common-algo/utils.js"
 import { QueueTask } from "../../schema/index.js"
+import { sleep } from "@cs-magic/common/dist/datetime/utils.js"
 
 export class SenderQueue {
   static queue: QueueTask[]

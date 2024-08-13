@@ -1,9 +1,10 @@
-import logger from "@cs-magic/common/dist/log"
-import { safeCallLLM } from "@cs-magic/llm/dist/utils/safe-call-llm.js"
-import last from "lodash/last.js"
+import { last } from "lodash-es"
 import { types } from "wechaty"
 import { FileBox } from "file-box"
 import yargsParser from "yargs-parser"
+
+import logger from "@cs-magic/common/dist/log/index.js"
+import { safeCallLLM } from "@cs-magic/llm/dist/utils/safe-call-llm.js"
 
 import { BasePlugin } from "./base.plugin.js"
 

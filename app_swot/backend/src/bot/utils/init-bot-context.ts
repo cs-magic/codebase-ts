@@ -1,15 +1,15 @@
-import { SEPARATOR_LINE } from "@cs-magic/common/dist/const"
-import logger, { LogLevel } from "@cs-magic/common/dist/log"
 import { Wechaty } from "wechaty"
 import yaml from "js-yaml"
 
-import { QueueTask } from "../../schema/index.js"
-import { BotData, IBotContext } from "../schema.js"
-
-import { getConvPreference } from "./get-conv-preference.js"
-import { SenderQueue } from "./sender-queue.js"
 import { formatAction } from "@cs-magic/common/dist/utils/format-action.js"
 import { formatDuration } from "@cs-magic/common/dist/utils/format-duration.js"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import logger, { LogLevel } from "@cs-magic/common/dist/log/index.js"
+
+import { QueueTask } from "../../schema/index.js"
+import { BotData, IBotContext } from "../schema.js"
+import { getConvPreference } from "./get-conv-preference.js"
+import { SenderQueue } from "./sender-queue.js"
 
 export const initBotContext = async (bot: Wechaty): Promise<IBotContext> => {
   const name = "飞脑"

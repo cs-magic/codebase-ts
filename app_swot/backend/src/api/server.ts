@@ -1,14 +1,14 @@
-import logger from "@cs-magic/common/dist/log"
-import fw from "@fastify/websocket"
-
 import Fastify from "fastify"
-import remove from "lodash-es/remove.js"
+import fw from "@fastify/websocket"
+import { remove } from "lodash-es"
+
+import logger from "@cs-magic/common/dist/log/index.js"
+import { genNanoId } from "@cs-magic/common/dist/utils/gen-nano-id.js"
 
 import { IContext } from "./schema.js"
 import { startBot } from "./utils/start-bot.js"
 import { syncClients } from "./utils/sync-clients.js"
 import { handleMessage } from "./utils/handle-message.js"
-import { genNanoId } from "@cs-magic/common/dist/utils/gen-nano-id.js"
 
 export const initServer = () => {
   logger.info("fastify initializing...")

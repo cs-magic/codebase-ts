@@ -1,5 +1,7 @@
-import { api } from "@cs-magic/common/dist/api"
-import { parseMetaFromHtml } from "@cs-magic/common/dist/html"
+import { api } from "@cs-magic/common/dist/api/api.js"
+
+import { parseMetaFromHtml } from "@cs-magic/common/dist/html/index.js"
+
 import { parse } from "node-html-parser"
 
 export const getWechatArticleUrlFromShortId = (shortId: string) =>

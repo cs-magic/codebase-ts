@@ -1,5 +1,6 @@
-import logger from "@cs-magic/common/dist/log"
 import { RoomInvitation, Wechaty } from "wechaty"
+
+import logger from "@cs-magic/common/dist/log/index.js"
 
 /**
  * 只有在邀请需要确认时才会触发，小群不会触发 room-invite，但在接受后会触发 room-join

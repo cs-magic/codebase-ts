@@ -1,14 +1,15 @@
-import logger from "@cs-magic/common/dist/log"
+import { FileBox } from "file-box"
+
+import logger from "@cs-magic/common/dist/log/index.js"
 import {
   BaseSimulator,
   CardSimulator,
 } from "@cs-magic/common/dist/spider/index.js"
-import { FileBox } from "file-box"
+import { env } from "@cs-magic/common/dist/env/get-env.js"
+import { IUserSummaryFilled } from "@cs-magic/common/dist/schema/user.summary.js"
 
 import { wxmpUrl2preview } from "../../bot/index.js"
 import { IWechatPreference } from "../../schema/index.js"
-import { IUserSummaryFilled } from "@cs-magic/common/dist/schema/user.summary.js"
-import { env } from "@cs-magic/common/dist/env/get-env.js"
 
 const uniParser = new CardSimulator()
 const simulator = new BaseSimulator("playwright", {

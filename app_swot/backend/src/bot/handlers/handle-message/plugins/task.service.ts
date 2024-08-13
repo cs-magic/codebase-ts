@@ -1,20 +1,19 @@
-import { SEPARATOR_LINE } from "@cs-magic/common/dist/const"
-import { prisma } from "@cs-magic/common/dist/db/prisma.js"
-
-import { Priority } from "../../../../schema/index.js"
-import chain from "lodash/chain.js"
-import omit from "lodash/omit.js"
-import sortBy from "lodash/sortBy.js"
+import { chain, omit, sortBy } from "lodash-es"
 import { Job } from "node-schedule"
 import { Message } from "wechaty-puppet/payloads"
 
 import { type TaskStatus } from "@prisma/client"
+
 import {
   ITaskDetail,
   taskDetailSchema,
 } from "@cs-magic/common/dist/schema/task.js"
 import logger from "@cs-magic/common/dist/log/index.js"
 import { parseFunction } from "@cs-magic/common/dist/utils/parse-function.js"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import { prisma } from "@cs-magic/common/dist/db/prisma.js"
+
+import { Priority } from "../../../../schema/index.js"
 
 export type ITaskWithIndex = ITaskDetail & {
   index: number

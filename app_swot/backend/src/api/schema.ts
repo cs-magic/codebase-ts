@@ -1,5 +1,6 @@
 import { Wechaty } from "wechaty"
 import { WebSocket } from "ws"
+
 import { IWechatBotScan } from "../schema/index.js"
 
 export interface IContext {

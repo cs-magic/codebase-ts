@@ -1,15 +1,15 @@
-import { SEPARATOR_LINE } from "@cs-magic/common/dist/const"
-import { ILlmMessage } from "@cs-magic/common/dist/schema"
+import { types } from "wechaty"
+import { z } from "zod"
+
+import logger from "@cs-magic/common/dist/log/index.js"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import { ILlmMessage } from "@cs-magic/common/dist/schema/message.js"
 import { safeCallLLM } from "@cs-magic/llm/dist/utils/safe-call-llm.js"
 import { trimMessages } from "@cs-magic/llm/dist/utils/trim-messages.js"
 
 import { FeatureMap, FeatureType } from "../../../../schema/index.js"
-
-import { types } from "wechaty"
-import { z } from "zod"
 import { listMessagesOfLatestTopic } from "../../../utils/index.js"
 import { BasePlugin } from "./base.plugin.js"
-import logger from "@cs-magic/common/dist/log/index.js"
 
 const commandTypeSchema = z.enum([
   "enable",

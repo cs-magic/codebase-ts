@@ -1,15 +1,16 @@
+import { set } from "lodash-es"
+import { Message, Sayable, type Wechaty } from "wechaty"
+import { deserializeMsg, puppetVersion } from "wechaty-puppet"
+
+import logger from "@cs-magic/common/dist/log/index.js"
+import { LogLevel } from "@cs-magic/common/dist/log/schema.js"
 import { prisma } from "@cs-magic/common/dist/db/prisma.js"
 import {
   IUserSummaryFilled,
   NotImplementedError,
   wechatMessageDetailSchema,
-} from "@cs-magic/common/dist/schema"
-import { evalObject, formatString } from "@cs-magic/common/dist/utils"
-import { LogLevel } from "@cs-magic/eval-ai/packages/common-log/schema"
-
-import set from "lodash/set.js"
-import { Message, Sayable, type Wechaty } from "wechaty"
-import { deserializeMsg, puppetVersion } from "wechaty-puppet"
+} from "@cs-magic/common/dist/schema/index.js"
+import { evalObject, formatString } from "@cs-magic/common/dist/utils/index.js"
 
 import {
   FeatureMap,
@@ -25,7 +26,6 @@ import {
   getConvPreference,
   parseText,
 } from "../../../utils/index.js"
-import logger from "@cs-magic/common/dist/log/index.js"
 
 export class BasePlugin {
   public message: Message

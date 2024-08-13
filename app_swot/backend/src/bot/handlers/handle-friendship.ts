@@ -1,5 +1,5 @@
-import { SEPARATOR_LINE } from "@cs-magic/common/dist/const"
-import logger from "@cs-magic/common/dist/log"
+import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import logger from "@cs-magic/common/dist/log/index.js"
 import { moment } from "@cs-magic/common/dist/datetime/moment.js"
 import { Friendship, types, Wechaty } from "wechaty"
 

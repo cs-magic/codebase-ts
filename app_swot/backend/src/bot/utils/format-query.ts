@@ -1,5 +1,5 @@
-import { SEPARATOR_BOX } from "@cs-magic/common/dist/const"
-import { SEPARATOR_LINE } from "@cs-magic/common/dist/const.js"
+import { SEPARATOR_LINE, SEPARATOR_BOX } from "@cs-magic/common/dist/const.js"
+
 import { CommandStyle } from "../../schema/bot-preference.js"
 
 /**

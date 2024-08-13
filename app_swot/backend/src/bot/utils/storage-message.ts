@@ -1,7 +1,8 @@
-import { prisma } from "@cs-magic/common/dist/db/prisma.js"
-import logger from "@cs-magic/common/dist/log"
-import omit from "lodash/omit.js"
+import { omit } from "lodash-es"
 import { Message, types } from "wechaty"
+
+import { prisma } from "@cs-magic/common/dist/db/prisma.js"
+import logger from "@cs-magic/common/dist/log/index.js"
 
 /**
  * 存储信息

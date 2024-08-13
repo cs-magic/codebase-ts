@@ -1,10 +1,12 @@
 import axios from "axios"
+
+import { api } from "@cs-magic/common/dist/api/index.js"
+
 import {
   IWechatArticleComment,
   IWechatArticleStat,
-} from "../../../../../schema"
-import { getWechatArticleUrlFromShortId } from "../../utils"
-import { api } from "@cs-magic/common/dist/api"
+} from "../../../../../schema/index.js"
+import { getWechatArticleUrlFromShortId } from "../../utils.js"
 
 const wxapiApi = axios.create({
   ...api,
