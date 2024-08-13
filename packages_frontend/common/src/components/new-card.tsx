@@ -1,6 +1,7 @@
 "use client"
 
-import { useUploadFiles } from "@cs-magic/react-hooks"
+import clsx from "clsx"
+import { useUploadFiles } from "@cs-magic/react-hooks/dist/hooks/use-upload-file.js"
 import { VerticalAspectRatio } from "@cs-magic/react-ui/dist/components/aspect-ratio.js"
 import { ButtonWithLoading } from "@cs-magic/react-ui/dist/components/button-with-loading.js"
 import { FileComp } from "@cs-magic/react-ui/dist/components/file.js"
@@ -16,9 +17,10 @@ import { useAtom } from "jotai"
 import { useState } from "react"
 import { useDrop } from "react-use"
 import { toast } from "sonner"
-import { cardNewContentAtom } from "../store/card.atom"
 import { IUploadFile } from "@cs-magic/common/dist/oss/schema.js"
-import { cn } from "@cs-magic/react-ui/shadcn/utils"
+// import { cn } from "@cs-magic/react-ui/shadcn/utils"
+
+import { cardNewContentAtom } from "../store/card.atom"
 
 export function NewCard() {
   const [v, setV] = useAtom(cardNewContentAtom)
@@ -60,10 +62,13 @@ export function NewCard() {
 
   return (
     <FlexContainer
-      className={cn(
-        // "bg-cyan-950",
-        " items-center",
-      )}
+      className={
+        // cn
+        clsx(
+          // "bg-cyan-950",
+          " items-center",
+        )
+      }
     >
       <FlexContainer orientation={"vertical"}>
         <MdEditor

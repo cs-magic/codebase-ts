@@ -1,6 +1,5 @@
 import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary.js"
 import { atom } from "jotai"
-import { atomWithStorage } from "jotai/utils"
 
 export const cardUserIdAtom = atom("")
 // atomWithStorage("card.user.id", "")
