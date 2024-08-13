@@ -13,7 +13,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tspc -b",
+    "build": "tspc -b && copyfiles -u1 src/**/*.css dist",
     "postinstall": "yarn build"
   },
   "dependencies": {

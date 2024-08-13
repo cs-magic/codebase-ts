@@ -1,16 +1,26 @@
-import { FlexContainer } from "@cs-magic/react-ui"
+import { FlexContainer } from "@cs-magic/react-ui/dist/components/flex-container.js"
+import { cn } from "@cs-magic/common"
 import { Header } from "@cs-magic/common-frontend/components/header"
-import { Footer } from "@cs-magic/common-frontend/components/footer"
-import React, { PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 
-export default function HomeLayout({ children }: PropsWithChildren) {
+export default function SubLayout({ children }: PropsWithChildren) {
+  // console.log(ansiColors.red("== SubLayout =="))
+
   return (
-    <FlexContainer orientation={"vertical"} className={"!p-0"}>
+    <FlexContainer
+      orientation={"vertical"}
+      className={cn(
+        "mx-auto h-full max-w-[1080px] !gap-0 overflow-hidden !p-0 ",
+        // "bg-cyan-800"
+      )}
+    >
       <Header />
 
-      <div className={"w-full grow overflow-auto"}>{children}</div>
+      <div className={"flex w-full grow flex-col overflow-hidden border-t"}>
+        {children}
+      </div>
 
-      <Footer />
+      {/*<Footer />*/}
     </FlexContainer>
   )
 }
