@@ -1,3 +1,5 @@
+"use server"
+
 import { ILlmRes, LlmModelType } from "@cs-magic/llm"
 
 import { ICardInnerPreview, IMedia } from "../../schema/card.js"
