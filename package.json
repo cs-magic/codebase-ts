@@ -50,6 +50,7 @@
     "@types/lodash-es": "^4",
     "@types/node": "^22.0.0",
     "@types/webpack-bundle-analyzer": "^4",
+    "@types/wtfnode": "^0",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
     "@zerollup/ts-transform-paths": "^1.7.18",
@@ -71,6 +72,7 @@
     "typescript-transform-paths": "^3.4.7",
     "webpack": "^5.93.0",
     "webpack-bundle-analyzer": "^4.10.2",
+    "wtfnode": "^0.9.1",
     "zod-prisma-types": "^3.1.8"
   },
   "packageManager": "yarn@4.1.1",

@@ -154,7 +154,6 @@
     "@types/react-syntax-highlighter": "^15.5.11",
     "@types/video-react": "^0.15.6",
     "@types/ws": "^8.5.10",
-    "@types/wtfnode": "^0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.34",
@@ -164,10 +163,6 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3",
-    "webpack": "^5.93.0",
-    "wtfnode": "^0.9.1"
-  },
-  "files": [
-    "../../node_modules/@cs-magic/llm/dist"
-  ]
+    "webpack": "^5.93.0"
+  }
 }

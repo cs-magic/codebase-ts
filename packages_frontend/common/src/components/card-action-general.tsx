@@ -14,8 +14,6 @@ import {
 import { ActionType } from "@cs-magic/swot-backend/schema"
 import { cn } from "@cs-magic/react-ui/shadcn/utils"
 
-const tAtom = atom(false)
-
 export const GeneralCardAction = ({
   disabled,
   type,
@@ -37,7 +35,6 @@ export const GeneralCardAction = ({
   }
 
   const [v, setV] = useAtom(atomMap[type])
-  const [v2, setV2] = useAtom(tAtom)
 
   return (
     <ButtonWithLoading
