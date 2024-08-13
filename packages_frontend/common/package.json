@@ -17,7 +17,6 @@
     "postinstall": "yarn build"
   },
   "dependencies": {
-    "@cs-magic/assets": "workspace:^",
     "@cs-magic/common": "workspace:^",
     "@cs-magic/next-hooks": "workspace:^",
     "@cs-magic/react-hooks": "workspace:^",
