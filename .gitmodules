@@ -17,3 +17,6 @@
 [submodule "app_thinkow"]
 	path = app_thinkow
 	url = git@github.com:cs-magic/thinkow.git
+[submodule "app_home"]
+	path = app_home
+	url = git@github.com:cs-magic/cs-magic.git
