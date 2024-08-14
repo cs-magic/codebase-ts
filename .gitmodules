@@ -1,15 +1,19 @@
 [submodule "app_home/web"]
 	path = app_home/web
 	url = git@github.com:cs-magic/cs-magic.git
-[submodule "app_eval-ai/web"]
-	path = app_eval-ai/web
-    url = git@github.com:cs-magic/eval-ai.git
-[submodule "app_poketto/web"]
-	path = app_poketto/web
-	url = git@github.com:cs-magic/poketto.git
-[submodule "app_thinkow"]
-	path = app_thinkow
-	url = git@github.com:cs-magic/thinkow.git
+
 [submodule "app_swot"]
 	path = app_swot
 	url = git@github.com:cs-magic/app_swot.git
+
+[submodule "app_poketto/web"]
+	path = app_poketto/web
+	url = git@github.com:cs-magic/poketto.git
+
+[submodule "app_eval-ai/web"]
+	path = app_eval-ai/web
+    url = git@github.com:cs-magic/eval-ai.git
+
+[submodule "app_thinkow"]
+	path = app_thinkow
+	url = git@github.com:cs-magic/thinkow.git
