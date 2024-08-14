@@ -7,3 +7,6 @@
 [submodule "app_poketto/web"]
 	path = app_poketto/web
 	url = git@github.com:cs-magic/poketto.git
+[submodule "app_thinkow"]
+	path = app_thinkow
+	url = git@git.com:cs-magic/thinkow
