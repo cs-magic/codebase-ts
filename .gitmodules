@@ -6,8 +6,8 @@
 	path = app_swot
 	url = git@github.com:cs-magic/app_swot.git
 
-[submodule "app_poketto/web"]
-	path = app_poketto/web
+[submodule "app_poketto"]
+	path = app_poketto
 	url = git@github.com:cs-magic/poketto.git
 
 [submodule "app_eval-ai/web"]
