@@ -20,3 +20,6 @@
 [submodule "app_home"]
 	path = app_home
 	url = git@github.com:cs-magic/cs-magic.git
+[submodule "app_eval-ai"]
+	path = app_eval-ai
+	url = git@github.com:cs-magic/eval-ai.git
