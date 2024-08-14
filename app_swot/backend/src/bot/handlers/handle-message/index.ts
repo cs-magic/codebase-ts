@@ -114,6 +114,7 @@ export const handleMessage = async (bot: Wechaty, message: Message) => {
             )
         }
       } else {
+        return // 暂时先关闭回复 // todo: 更像真人的AI社交助理
         await new ChatterPlugin(bot, message).safeReplyWithAI()
       }
     }
