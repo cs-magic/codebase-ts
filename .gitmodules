@@ -9,7 +9,7 @@
 	url = git@github.com:cs-magic/poketto.git
 [submodule "app_thinkow"]
 	path = app_thinkow
-	url = git@git.com:cs-magic/thinkow.git
+	url = git@github.com:cs-magic/thinkow.git
 [submodule "app_swot"]
 	path = app_swot
-	url = git@git.com:cs-magic/app_swot.git
+	url = git@github.com:cs-magic/app_swot.git
