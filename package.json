@@ -15,7 +15,7 @@
   "scripts": {
     "preinstall": "npx run-p install-patch db:generate install-wechaty",
     "install-patch": "npx ts-patch install -s && patch-package",
-    "install-wechaty": "PATH=$PATH:$(pwd)/node_modules/.bin run-p .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
+    "install-wechaty": "PATH=$PATH:$(pwd)/node_modules/.bin run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",
