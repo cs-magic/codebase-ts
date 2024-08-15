@@ -17,7 +17,7 @@
   "scripts": {
     "postinstall": "yarn dist",
     "build": "tspc -b && tspc -b tsconfig.cjs.json",
-    "clean": "shx rm -fr dist",
+    "clean": "npx shx rm -fr dist",
     "dist": "npm-run-all clean build dist:commonjs",
     "dist:commonjs": "jq -n \"{ type: \\\"commonjs\\\" }\" > dist/cjs/package.json",
     "lint": "npm-run-all lint:es lint:ts lint:md",
