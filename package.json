@@ -13,12 +13,11 @@
     "__tests__/*"
   ],
   "scripts": {
-    "prepare": "ts-patch install -s",
-    "patch": "patch-package",
-    "postinstall": "run-p db:generate patch",
-    "db:generate": "prisma generate",
-    "db:migrate:dev": "prisma migrate dev",
-    "db:migrate:deploy": "prisma migrate deploy",
+    "prepare": "npx run-p install-patch db:generate",
+    "install-patch": "npx ts-patch install -s && patch-package",
+    "db:generate": "npx prisma generate",
+    "db:migrate:dev": "npx prisma migrate dev",
+    "db:migrate:deploy": "npx prisma migrate deploy",
     "test": "jest",
     "lint": "echo 'skip eslint'"
   },
