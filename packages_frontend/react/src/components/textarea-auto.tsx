@@ -4,10 +4,9 @@ import { useAtom } from "jotai"
 import React, { ComponentProps, forwardRef } from "react"
 import ReactTextareaAutoSize from "react-textarea-autosize"
 
-import { Atom } from "@cs-magic/react-hooks/dist/store/jotai.types.js"
-import { useMounted } from "@cs-magic/react-hooks/dist/hooks/use-mounted.js"
-
 import { cn } from "@/shadcn/utils"
+import { Atom } from "@/store/jotai.types"
+import { useMounted } from "@/hooks/use-mounted"
 
 const TextareaInner = forwardRef<
   HTMLTextAreaElement,

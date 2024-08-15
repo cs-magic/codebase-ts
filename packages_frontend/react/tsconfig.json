@@ -3,16 +3,17 @@
     "../../tsconfig.dom.json"
   ],
   "compilerOptions": {
+    "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo",
-    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": [
-    "./src/**/*",
-    "./src/**/*.json"
-  ],
+  "include": ["./src/**/*"],
   "references": [
     {"path": "../../packages/common"},
-    {"path": "../next-hooks"}
-  ]
+    {"path": "../../packages/llm"},
+  ],
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@cs-magic/react-ui",
+  "name": "@cs-magic/react",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -7,6 +7,8 @@
     ".": "./dist/index.js",
     "./components/*": "./dist/components/*.js",
     "./shadcn/*": "./dist/shadcn/*.js",
+    "./providers/*": "./dist/providers/*.js",
+    "./src/*": "./src/*.js",
     "./*": "./*"
   },
   "scripts": {
@@ -16,7 +18,6 @@
   },
   "dependencies": {
     "@cs-magic/common": "workspace:^",
-    "@cs-magic/react-hooks": "workspace:^",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",

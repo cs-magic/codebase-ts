@@ -1,8 +1,11 @@
 {
-  "name": "@cs-magic/next-auth",
+  "name": "@cs-magic/next",
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./hooks/*": "./dist/hooks/*.js",
+    "./providers/*": "./dist/providers/*.js",
+    "./src/*": "./src/*.js",
     "./*": "./*"
   },
   "packageManager": "yarn@4.1.1",
