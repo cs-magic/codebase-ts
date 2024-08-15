@@ -13,8 +13,8 @@
     "__tests__/*"
   ],
   "scripts": {
-    "postinstall": "ts-patch install -s && patch-package",
-    "preinstall": "npx run-p db:generate install-wechaty",
+    "postinstall": "echo '[postinstall]' && ts-patch install -s && patch-package",
+    "preinstall": "echo '[preinstall]' &&  npx run-p db:generate install-wechaty",
     "install-wechaty": "PATH=$PATH:$(pwd)/node_modules/.bin run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
