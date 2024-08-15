@@ -15,6 +15,8 @@
     "postinstall": "yarn build"
   },
   "dependencies": {
+    "@cs-magic/common": "workspace:^",
+    "@cs-magic/react": "workspace:^",
     "next": "^14.2.5",
     "next-auth": "^4.24.7",
     "react": "*",
