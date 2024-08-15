@@ -55,6 +55,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@types/ali-oss": "^6.16.11",
     "@types/ansicolors": "^0",
     "@types/async-lock": "^1.4.2",
     "@types/lodash-es": "^4",
