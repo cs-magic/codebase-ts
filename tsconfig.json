@@ -18,6 +18,8 @@
     "resolveJsonModule": true,
     "lib": [
       "ESNext",
+
+      // 不加dom的话如果用了 windows 等变量会报错
       "dom",
       "dom.iterable"
     ],
