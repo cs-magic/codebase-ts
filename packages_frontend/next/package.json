@@ -26,6 +26,6 @@
   "devDependencies": {
     "@types/react": "*",
     "@types/react-dom": "*",
-    "ts-patch": "^3.2.1"
+    "ts-patch": "*"
   }
 }
