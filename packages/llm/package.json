@@ -20,5 +20,8 @@
     "tiktoken": "^1.0.15",
     "web-streams-polyfill": "^4.0.0",
     "zhipuai-sdk-nodejs-v4": "^0.1.12"
+  },
+  "devDependencies": {
+    "ts-patch": "^3.2.1"
   }
 }
