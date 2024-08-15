@@ -17,7 +17,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "lib": [
-      "ESNext"
+      "ESNext",
+      "dom",
+      "dom.iterable"
     ],
     /* Base Options: */
     "allowJs": false,
