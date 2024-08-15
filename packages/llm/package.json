@@ -16,12 +16,14 @@
   "dependencies": {
     "@cs-magic/common": "workspace:^",
     "js-md5": "^0.8.3",
+    "js-yaml": "^4.1.0",
     "openai": "^4.52.7",
     "tiktoken": "^1.0.15",
     "web-streams-polyfill": "^4.0.0",
     "zhipuai-sdk-nodejs-v4": "^0.1.12"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "ts-patch": "^3.2.1"
   }
 }
