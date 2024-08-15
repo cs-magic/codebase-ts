@@ -13,7 +13,8 @@
     "__tests__/*"
   ],
   "scripts": {
-    "prepare": "npx run-p install-patch db:generate",
+    "prepare": "npx run-p install-patch db:generate install-shx",
+    "install-shx": "yarn add -D shx",
     "install-patch": "npx ts-patch install -s && patch-package",
     "db:generate": "npx prisma generate",
     "db:migrate:dev": "npx prisma migrate dev",
