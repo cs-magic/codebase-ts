@@ -15,9 +15,8 @@
     "npm": ">=7"
   },
   "scripts": {
-    "postinstall": "yarn dist",
-    "build": "npx tspc -b && tspc -b tsconfig.cjs.json",
-    "clean": "npx shx rm -fr dist",
+    "build": "tspc -b && tspc -b tsconfig.cjs.json",
+    "clean": "shx rm -fr dist",
     "dist": "npm-run-all clean build dist:commonjs",
     "dist:commonjs": "jq -n \"{ type: \\\"commonjs\\\" }\" > dist/cjs/package.json",
     "lint": "npm-run-all lint:es lint:ts lint:md",
