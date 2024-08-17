@@ -10,8 +10,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tspc -b",
-    "postinstall": "yarn build"
+    "build": "tspc -b"
   },
   "dependencies": {
     "@cs-magic/common": "workspace:^",

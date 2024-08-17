@@ -13,9 +13,10 @@
     "__tests__/*"
   ],
   "scripts": {
-    "postinstall": "run-p patch db:generate install-wechaty",
+    "postinstall": "run-s patch db:generate build-wechaty build-swot",
     "patch": "ts-patch install -s && patch-package",
-    "install-wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
+    "build-swot": "yarn workspace @cs-magic/swot-backend build",
+    "build-wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",

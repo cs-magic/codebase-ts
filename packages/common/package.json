@@ -7,11 +7,9 @@
     "./db/*": "./dist/db/*.js",
     "./*": "./*"
   },
-  "packageManager": "yarn@4.1.1",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tspc -b",
-    "postinstall": "yarn build"
+    "build": "tspc -b"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "^3.0.0",
