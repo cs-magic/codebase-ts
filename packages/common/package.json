@@ -64,7 +64,6 @@
     "@types/triple-beam": "^1",
     "@types/uuid": "^10",
     "@types/winston": "^2.4.4",
-    "@types/yargs-parser": "^21",
-    "ts-patch": "*"
+    "@types/yargs-parser": "^21"
   }
 }
