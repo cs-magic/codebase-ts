@@ -8,7 +8,7 @@
 
 ```mermaid
 graph LR;
-    subgraph general
+    subgraph general_eco
         prisma --> common & llm & general;
         common --> llm & general;
         llm --> general;
