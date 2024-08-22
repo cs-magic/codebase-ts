@@ -53,6 +53,8 @@ const config = {
     "@typescript-eslint/no-unsafe-argument": "warn",
     "@typescript-eslint/no-unsafe-enum-comparison": 'warn',
     "@typescript-eslint/no-var-requires":"warn",
+    "@typescript-eslint/restrict-template-expressions": "warn",
+    "@typescript-eslint/restrict-plus-operands": "warn",
   },
 }
 

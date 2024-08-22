@@ -8,6 +8,7 @@ import { useSwitchLocale } from "@/hooks/use-locale"
 export const LocaleSwitcher = () => {
   const { t, i18n } = useTranslation(LocaleNameSpace.manufacture)
   const switchLocale = useSwitchLocale()
+
   return (
     <IconLanguage
       className={
@@ -15,9 +16,13 @@ export const LocaleSwitcher = () => {
       }
       size={ICON_SIZE_MD}
       onClick={() => {
-        switchLocale(
-          i18n.language === LocaleType.zh_CN ? LocaleType.en : LocaleType.zh_CN,
-        )
+        const curLang = i18n.language
+        const nextLang =
+          // default is zh_CN
+          curLang === LocaleType.en ? LocaleType.zh_CN : LocaleType.en
+        console.log(`changing locale: ${curLang} --> ${nextLang}`)
+
+        void switchLocale(nextLang)
       }}
     />
   )

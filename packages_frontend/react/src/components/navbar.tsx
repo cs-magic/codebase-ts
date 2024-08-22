@@ -1,36 +1,35 @@
+"use client"
+
 import { clsx } from "clsx"
-import { useTranslation } from "next-i18next"
 import Link from "next/link"
 
 import { uri } from "@/config"
-import { useSimplifiedChinese } from "@/hooks/use-locale"
 import { NavigationMenu, NavigationMenuList } from "@/shadcn/ui/navigation-menu"
 import { ButtonLink } from "@/components/button-link"
-import { LocaleSwitcher } from "@/components/locale-switcher"
+// todo: added localeSwitcher, after fixing: `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`
+// import { LocaleSwitcher } from "@/components/locale-switcher"
 import { CompanyLogo } from "@/components/company-logo"
+import { ReactNode } from "react"
 
-export const Navbar = ({ product }: { product?: "swot" | "poketto" }) => {
-  const { t } = useTranslation()
-  const isChinese = useSimplifiedChinese()
-
+export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
   return (
     <nav
       className={clsx(
         "fixed top-0 z-50 bg-black/[.50] backdrop-blur-lg w-full flex py-3 px-4 lg:px-8 justify-between items-center font-light gap-2",
       )}
     >
-      <div className={clsx("inline-flex-center gap-2 px-2")}>
+      <div className={clsx("flex items-center gap-2 px-2 h-12")}>
         <Link
           className={"inline-flex-center gap-2 whitespace-nowrap"}
           href={uri.home}
         >
           <CompanyLogo width={32} height={32} />
 
-          {!product && (
+          {!productBanner && (
             <h1
               className={clsx(
                 // 'font-semibold',
-                isChinese && "tracking-[0.3rem]",
+                "tracking-[0.3rem]",
               )}
             >
               CS 魔法社
@@ -38,7 +37,20 @@ export const Navbar = ({ product }: { product?: "swot" | "poketto" }) => {
           )}
         </Link>
 
-        {product && <div>{product}</div>}
+        {productBanner && (
+          <>
+            <svg height="32" role="separator" viewBox="0 0 32 32" width="32">
+              <path
+                d="M22 5L9 28"
+                stroke="white"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+            </svg>
+
+            {productBanner}
+          </>
+        )}
       </div>
 
       <div className={"flex items-center gap-2"}>
@@ -63,7 +75,7 @@ export const Navbar = ({ product }: { product?: "swot" | "poketto" }) => {
 
             <ButtonLink href={"https://cs-magic.canny.io"}>反馈</ButtonLink>
 
-            <LocaleSwitcher />
+            {/*<LocaleSwitcher />*/}
 
             {/*<PrimaryActionButton />*/}
           </NavigationMenuList>
