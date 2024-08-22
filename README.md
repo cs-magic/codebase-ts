@@ -36,7 +36,7 @@ graph LR;
     
     subgraph swot_frontend_eco
         frontend_common_eco --> swot_frontend;
-        swot_backend --> swot-frontend;
+        swot_backend_eco --> swot-frontend;
         swot-frontend --> swot-web & swot-pc;
     end
 ```
