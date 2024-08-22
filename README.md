@@ -46,9 +46,8 @@ graph LR;
 - you should install `jq` at the system level which is required by `wechaty-puppet`
     - mac: `brew install jq`
     - ubuntu: `sudo apt install jq`
-- installation: `yarn`
 - configure env （refer to `env.sample`）
-- db migrate: `yarn workspace @cs-magic/prisma db:migrate:dev`
+- installation: `yarn` (db migration will auto exec)
 
 ## Run
 
