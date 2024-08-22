@@ -38,11 +38,11 @@ graph LR;
 
 ## Preparation
 
-- wechaty-puppet 相关需要安装 `jq`，而且不能用 yarn 装，要在系统级别 (2024-06-13)：
+- you should install `jq` at the system level which is required by `wechaty-puppet`
     - mac: `brew install jq`
     - ubuntu: `sudo apt install jq`
 - installation: `yarn`
-- env 配置（参考 env.sample）
+- configure env （refer to `env.sample`）
 - db migrate: `yarn workspace @cs-magic/prisma db:migrate:dev`
 
 ## Run
@@ -67,7 +67,7 @@ yarn workspace swot-pc build:mac
 yarn workspace @cs-magic/swot-frontend start
 
 # start pc after build
-# 双击安装 packages/swot-pc/dist/swot-pc-${version}.dmg
+# double click to install: packages/swot-pc/dist/swot-pc-${version}.dmg
 ```
 
 ## References 
@@ -78,6 +78,6 @@ yarn workspace @cs-magic/swot-frontend start
 ## TODO
 
 - [ ] fix eval-ai running prisma
-- [ ] 【重要】server function split for swot-pc
+- [ ] server function split for swot-pc
 - [ ] `react-hooks` split next/next-auth
-- [ ] `next` 需要从 18.3.0 降为 18.2.0 否则 dev 运行 `@cs-magic/homepage` 会有 warning
+- [ ] `NextJS`  18.3.0 --> 18.2.0, o.w. there is warning when dev running `@cs-magic/homepage
