@@ -21,7 +21,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
       <div className={clsx("flex items-center gap-2 px-2 h-12")}>
         <Link
           className={"inline-flex-center gap-2 whitespace-nowrap"}
-          href={uri.home}
+          href={uri.company}
         >
           <CompanyLogo width={32} height={32} />
 

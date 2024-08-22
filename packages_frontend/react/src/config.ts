@@ -15,6 +15,7 @@ export const uri = {
     us: "/about/us",
     faq: "/about/faq",
   },
+  company: "https://cs-magic.cn",
   product: {
     sokka: "https://sokka.cs-magic.cn",
     poketto: "https://poketto.cs-magic.cn",
