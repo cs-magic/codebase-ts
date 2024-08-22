@@ -8,9 +8,9 @@ import { prisma } from "@cs-magic/common/dist/db/prisma.js"
 import { env } from "@cs-magic/common/dist/env/get-env.js"
 import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema.js"
 
-import { ProfileUpdateProvider } from "./providers/profile-update.js"
+import { ProfileUpdateProvider } from "@/providers/profile-update"
 // import { SmsProvider } from "./providers/sms.js"
-import { WechatProvider } from "./providers/wechat.js"
+import { WechatProvider } from "@/providers/wechat"
 
 const providers: Provider[] = [
   ProfileUpdateProvider,

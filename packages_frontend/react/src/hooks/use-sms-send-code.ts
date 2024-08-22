@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import { toast } from "sonner"
 
-import { uiLoadingAlertDialogAtom } from "@cs-magic/react/dist/store/ui.atom.js"
+import { uiLoadingAlertDialogAtom } from "@/store/ui.atom"
 import {
   smsCodeCurCountdownSecondsAtom,
   smsCodeExpireSecondsAtom,
@@ -14,7 +14,7 @@ import {
   smsProviderTypeAtom,
   smsSendCodePayloadAtom,
   smsStageAtom,
-} from "@cs-magic/react/dist/store/sms.atom.js"
+} from "@/store/sms.atom"
 import { $sendSmsViaAli } from "@cs-magic/common/dist/auth/providers/sms/providers/ali.js"
 import { $sendSmsViaTencent } from "@cs-magic/common/dist/auth/providers/sms/providers/tencent.js"
 import { $sendSms } from "@cs-magic/common/dist/auth/providers/sms/actions.js"
