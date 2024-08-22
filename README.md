@@ -20,7 +20,7 @@ graph LR;
         wechaty-puppet-wechat4u --> wechaty;
     end
     
-    subgraph frontend_common
+    subgraph frontend_common_eco
         general --> react;
         react --> frontend_common;
         assets --> frontend_common;
@@ -35,7 +35,7 @@ graph LR;
         wechaty_eco --> swot-backend;
     end
     
-    subgraph swot_frontend
+    subgraph swot_frontend_eco
         frontend_common --> swot_frontend;
         swot_backend --> swot-frontend;
         react-hooks --> react-ui & next-hooks & swot-frontend;
