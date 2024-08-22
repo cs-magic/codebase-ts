@@ -35,12 +35,8 @@ graph LR;
     end
     
     subgraph swot_frontend_eco
-        frontend_common --> swot_frontend;
+        frontend_common_eco --> swot_frontend;
         swot_backend --> swot-frontend;
-        react-hooks --> react-ui & next-hooks & swot-frontend;
-        react-ui --> swot-frontend;
-        next-hooks --> next-auth & swot-frontend;
-        next-auth --> swot-frontend;
         swot-frontend --> swot-web & swot-pc;
     end
 ```
