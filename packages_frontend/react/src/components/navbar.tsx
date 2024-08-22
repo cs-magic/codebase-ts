@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/button-link"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { CompanyLogo } from "@/components/company-logo"
 
-export const Navbar = () => {
+export const Navbar = ({ product }: { product?: "swot" | "poketto" }) => {
   const { t } = useTranslation()
   const isChinese = useSimplifiedChinese()
 
@@ -25,15 +25,20 @@ export const Navbar = () => {
           href={uri.home}
         >
           <CompanyLogo width={32} height={32} />
-          <h1
-            className={clsx(
-              // 'font-semibold',
-              isChinese && "tracking-[0.3rem]",
-            )}
-          >
-            CS 魔法社
-          </h1>
+
+          {!product && (
+            <h1
+              className={clsx(
+                // 'font-semibold',
+                isChinese && "tracking-[0.3rem]",
+              )}
+            >
+              CS 魔法社
+            </h1>
+          )}
         </Link>
+
+        {product && <div>{product}</div>}
       </div>
 
       <div className={"flex items-center gap-2"}>

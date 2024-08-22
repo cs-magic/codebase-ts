@@ -31,6 +31,9 @@
 
     /* Strictness */
     "strict": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     /* AND if you're building for a library: */
@@ -44,10 +47,7 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
     "strictFunctionTypes": true,
-    "noImplicitThis": true,
     "alwaysStrict": true,
     "skipDefaultLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
