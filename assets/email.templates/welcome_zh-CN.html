@@ -1,0 +1,707 @@
+<!--ref: https://github.com/ActiveCampaign/postmark-templates/blob/main/templates-inlined/basic-full/welcome/content.html-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="color-scheme: light dark; supported-color-schemes: light dark;"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <meta content="light dark" name="color-scheme" />
+  <meta content="light dark" name="supported-color-schemes" />
+  <title></title>
+  <style media="all" rel="stylesheet" type="text/css">
+      /* Base ------------------------------ */
+
+      @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&amp;display=swap");
+
+      body {
+          width: 100% !important;
+          height: 100%;
+          margin: 0;
+          -webkit-text-size-adjust: none;
+      }
+
+      a {
+          color: #3869D4;
+      }
+
+      a img {
+          border: none;
+      }
+
+      td {
+          word-break: break-word;
+      }
+
+      .preheader {
+          display: none !important;
+          visibility: hidden;
+          mso-hide: all;
+          font-size: 1px;
+          line-height: 1px;
+          max-height: 0;
+          max-width: 0;
+          opacity: 0;
+          overflow: hidden;
+      }
+
+      /* Type ------------------------------ */
+
+      body,
+      td,
+      th {
+          font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+      }
+
+      h1 {
+          margin-top: 0;
+          color: #333333;
+          font-size: 22px;
+          font-weight: bold;
+          text-align: left;
+      }
+
+      h2 {
+          margin-top: 0;
+          color: #333333;
+          font-size: 16px;
+          font-weight: bold;
+          text-align: left;
+      }
+
+      h3 {
+          margin-top: 0;
+          color: #333333;
+          font-size: 14px;
+          font-weight: bold;
+          text-align: left;
+      }
+
+      td,
+      th {
+          font-size: 16px;
+      }
+
+      p,
+      ul,
+      ol,
+      blockquote {
+          margin: .4em 0 1.1875em;
+          font-size: 16px;
+          line-height: 1.625;
+      }
+
+      p.sub {
+          font-size: 13px;
+      }
+
+      /* Utilities ------------------------------ */
+
+      .align-right {
+          text-align: right;
+      }
+
+      .align-left {
+          text-align: left;
+      }
+
+      .align-center {
+          text-align: center;
+      }
+
+      .u-margin-bottom-none {
+          margin-bottom: 0;
+      }
+
+      /* Buttons ------------------------------ */
+
+      .button {
+          background-color: #3869D4;
+          border-top: 10px solid #3869D4;
+          border-right: 18px solid #3869D4;
+          border-bottom: 10px solid #3869D4;
+          border-left: 18px solid #3869D4;
+          display: inline-block;
+          color: #FFF;
+          text-decoration: none;
+          border-radius: 3px;
+          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+          -webkit-text-size-adjust: none;
+          box-sizing: border-box;
+      }
+
+      .button--green {
+          background-color: #22BC66;
+          border-top: 10px solid #22BC66;
+          border-right: 18px solid #22BC66;
+          border-bottom: 10px solid #22BC66;
+          border-left: 18px solid #22BC66;
+      }
+
+      .button--red {
+          background-color: #FF6136;
+          border-top: 10px solid #FF6136;
+          border-right: 18px solid #FF6136;
+          border-bottom: 10px solid #FF6136;
+          border-left: 18px solid #FF6136;
+      }
+
+      @media only screen and (max-width: 500px) {
+          .button {
+              width: 100% !important;
+              text-align: center !important;
+          }
+      }
+
+      /* Attribute list ------------------------------ */
+
+      .attributes {
+          margin: 0 0 21px;
+      }
+
+      .attributes_content {
+          background-color: #F4F4F7;
+          padding: 16px;
+      }
+
+      .attributes_item {
+          padding: 0;
+      }
+
+      /* Related Items ------------------------------ */
+
+      .related {
+          width: 100%;
+          margin: 0;
+          padding: 25px 0 0 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+      }
+
+      .related_item {
+          padding: 10px 0;
+          color: #CBCCCF;
+          font-size: 15px;
+          line-height: 18px;
+      }
+
+      .related_item-title {
+          display: block;
+          margin: .5em 0 0;
+      }
+
+      .related_item-thumb {
+          display: block;
+          padding-bottom: 10px;
+      }
+
+      .related_heading {
+          border-top: 1px solid #CBCCCF;
+          text-align: center;
+          padding: 25px 0 10px;
+      }
+
+      /* Discount Code ------------------------------ */
+
+      .discount {
+          width: 100%;
+          margin: 0;
+          padding: 24px;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+          background-color: #F4F4F7;
+          border: 2px dashed #CBCCCF;
+      }
+
+      .discount_heading {
+          text-align: center;
+      }
+
+      .discount_body {
+          text-align: center;
+          font-size: 15px;
+      }
+
+      /* Social Icons ------------------------------ */
+
+      .social {
+          width: auto;
+      }
+
+      .social td {
+          padding: 0;
+          width: auto;
+      }
+
+      .social_icon {
+          height: 20px;
+          margin: 0 8px 10px 8px;
+          padding: 0;
+      }
+
+      /* Data table ------------------------------ */
+
+      .purchase {
+          width: 100%;
+          margin: 0;
+          padding: 35px 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+      }
+
+      .purchase_content {
+          width: 100%;
+          margin: 0;
+          padding: 25px 0 0 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+      }
+
+      .purchase_item {
+          padding: 10px 0;
+          color: #51545E;
+          font-size: 15px;
+          line-height: 18px;
+      }
+
+      .purchase_heading {
+          padding-bottom: 8px;
+          border-bottom: 1px solid #EAEAEC;
+      }
+
+      .purchase_heading p {
+          margin: 0;
+          color: #85878E;
+          font-size: 12px;
+      }
+
+      .purchase_footer {
+          padding-top: 15px;
+          border-top: 1px solid #EAEAEC;
+      }
+
+      .purchase_total {
+          margin: 0;
+          text-align: right;
+          font-weight: bold;
+          color: #333333;
+      }
+
+      .purchase_total--label {
+          padding: 0 15px 0 0;
+      }
+
+      body {
+          background-color: #F4F4F7;
+          color: #51545E;
+      }
+
+      p {
+          color: #51545E;
+      }
+
+      p.sub {
+          color: #6B6E76;
+      }
+
+      .email-wrapper {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+          background-color: #F4F4F7;
+      }
+
+      .email-content {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+      }
+
+      /* Masthead ----------------------- */
+
+      .email-masthead {
+          padding: 25px 0;
+          text-align: center;
+      }
+
+      .email-masthead_logo {
+          width: 94px;
+      }
+
+      .email-masthead_name {
+          font-size: 16px;
+          font-weight: bold;
+          color: #A8AAAF;
+          text-decoration: none;
+          text-shadow: 0 1px 0 white;
+      }
+
+      /* Body ------------------------------ */
+
+      .email-body {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+          background-color: #FFFFFF;
+      }
+
+      .email-body_inner {
+          width: 570px;
+          margin: 0 auto;
+          padding: 0;
+          -premailer-width: 570px;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+          background-color: #FFFFFF;
+      }
+
+      .email-footer {
+          width: 570px;
+          margin: 0 auto;
+          padding: 0;
+          -premailer-width: 570px;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+          text-align: center;
+      }
+
+      .email-footer p {
+          color: #6B6E76;
+      }
+
+      .body-action {
+          width: 100%;
+          margin: 30px auto;
+          padding: 0;
+          -premailer-width: 100%;
+          -premailer-cellpadding: 0;
+          -premailer-cellspacing: 0;
+          text-align: center;
+      }
+
+      .body-sub {
+          margin-top: 25px;
+          padding-top: 25px;
+          border-top: 1px solid #EAEAEC;
+      }
+
+      .content-cell {
+          padding: 35px;
+      }
+
+      /*Media Queries ------------------------------ */
+
+      @media only screen and (max-width: 600px) {
+          .email-body_inner,
+          .email-footer {
+              width: 100% !important;
+          }
+      }
+
+      @media (prefers-color-scheme: dark) {
+          body,
+          .email-body,
+          .email-body_inner,
+          .email-content,
+          .email-wrapper,
+          .email-masthead,
+          .email-footer {
+              background-color: #333333 !important;
+              color: #FFF !important;
+          }
+
+          p,
+          ul,
+          ol,
+          blockquote,
+          h1,
+          h2,
+          h3,
+          span,
+          .purchase_item {
+              color: #FFF !important;
+          }
+
+          .attributes_content,
+          .discount {
+              background-color: #222 !important;
+          }
+
+          .email-masthead_name {
+              text-shadow: none !important;
+          }
+      }
+
+      :root {
+          color-scheme: light dark;
+          supported-color-schemes: light dark;
+      }
+  </style>
+  <!--[if mso]>
+  <style type="text/css">
+    .f-fallback {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+  <![endif]-->
+  <style media="all" rel="stylesheet" type="text/css">
+      body {
+          width: 100% !important;
+          height: 100%;
+          margin: 0;
+          -webkit-text-size-adjust: none;
+      }
+
+      body {
+          font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+      }
+
+      body {
+          background-color: #F4F4F7;
+          color: #51545E;
+      }
+  </style>
+</head>
+<body
+  bgcolor="#F4F4F7"
+  style="width: 100% !important; height: 100%; -webkit-text-size-adjust: none; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; background-color: #F4F4F7; color: #51545E; margin: 0;">
+<span class="preheader"
+      style="display: none !important; visibility: hidden; mso-hide: all; font-size: 1px; line-height: 1px; max-height: 0; max-width: 0; opacity: 0; overflow: hidden;">Thanks for trying out {{ProductName}}. We’ve pulled together some information and resources to help you get started.</span>
+<table bgcolor="#F4F4F7"
+       cellpadding="0"
+       cellspacing="0"
+       class="email-wrapper"
+       role="presentation"
+       style="width: 100%; -premailer-width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; background-color: #F4F4F7; margin: 0; padding: 0;"
+       width="100%">
+  <tr>
+    <td align="center"
+        style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">
+      <table cellpadding="0"
+             cellspacing="0"
+             class="email-content"
+             role="presentation"
+             style="width: 100%; -premailer-width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; margin: 0; padding: 0;"
+             width="100%">
+
+        <tr>
+          <td align="center"
+              class="email-masthead"
+              style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; text-align: center; padding: 25px 0;">
+            <a class="f-fallback email-masthead_name"
+               href="https://example.com"
+               style="color: #A8AAAF; font-size: 16px; font-weight: bold; text-decoration: none; text-shadow: 0 1px 0 white;">
+              {{ProductName}}
+            </a>
+
+          </td>
+
+        </tr>
+
+        <!--        logo -->
+        <!--        <svg xmlns="http://www.w3.org/2000/svg"-->
+        <!--             fill="white"-->
+        <!--             viewBox="0 0 1280 1280"-->
+        <!--             width="256"-->
+        <!--             height="256"-->
+        <!--        >-->
+        <!--          <rect width="100%" height="100%" fill="black"/>-->
+
+        <!--          <path class="cls-1"-->
+        <!--                d="M1196.56,991.34h-.44l.21-.38-26.77-46.36h-.42l.21-.37-26.77-46.36h-.44l.23-.39-26.75-46.33h-.47l.23-.39-26.75-46.34H926.76l26.75,46.34.24.39,26.75,46.33.21.39,26.77,46.34.21.39,26.75,46.33.24.41,26.76,46.33.22.4h53.51l.22-.39.23.39h53.5l.23-.39.23.39h53.52l.21-.39ZM1007.24,851.15l.24-.39.23.39Zm27,46.72.23-.39.21.39Zm54.17-.39.23.39h-.44Zm-27-46.72.23.39h-.44Zm-.21,93.84.23-.39.22.39Zm27,46.74.24-.41.23.41Zm27-46.74.21-.39.22.39Zm27,46.74.21-.38.23.38Z"/>-->
+        <!--          <path class="cls-1"-->
+        <!--                d="M926.32,617.49H818.84l26.75,46.33.23.41,26.75,46.34.23.38,26.75,46.34.23.39H953.3l.22-.39.21.39h53.52l.21-.37.23.37h53.52l.23-.37L1034.67,711h-.44l.21-.38-26.75-46.34h-.44l.23-.39-26.77-46.35H926.32Zm-27,46.74.21-.39.23.39Zm27,46.72.22-.38.22.38Zm54.17-.38.22.38h-.44Zm-27-46.73.22.39h-.43Z"/>-->
+        <!--          <path class="cls-1"-->
+        <!--                d="M845.37,477.31H737.91l26.75,46.33.21.38,26.77,46.35.22.39h53.51l.22-.39.23.39h53.5l.23-.39.23.39H953.3l.21-.37L926.74,524h-.44l.23-.38-26.75-46.33H845.37Zm-27,46.71.22-.38.23.38Zm54.18-.37.21.37h-.43Z"/>-->
+        <!--          <path class="cls-1"-->
+        <!--                d="M926.3,991.34l.23-.39L899.76,944.6h-.44l.23-.37-26.77-46.36h-.42l.21-.37-26.75-46.35h-.45l.22-.37-26.76-46.36h-.43l.21-.38-26.76-46.36h-.44l.21-.39L764.87,711h-.44l.21-.38-26.75-46.34h-.44l.21-.39-26.75-46.35h-.44l.22-.39-26.76-46.34h-.43l.21-.37L656.94,524h-.42l.21-.37L630,477.31h-.44l.21-.38L603,430.57h-.44l.21-.37L576,383.84h-.43l.22-.39L549,337.1h-.44l.22-.37-26.76-46.35h-54.4L440.9,336.73l.21.37h-.44l-26.76,46.36.22.38h-.43l-26.76,46.34.22.39h-.44L360,476.92l.23.39h-.46L333,523.65l.23.37h-.44L306,570.39l.21.37h-.42L279,617.1l.22.39h-.45L252,663.84l.22.39h-.45l-26.75,46.34.21.38h-.44l-26.75,46.34.21.39h-.44L171.1,804l.23.39h-.46l-26.75,46.34.23.39h-.45L117.13,897.5l.23.37h-.44L90.17,944.21l.21.39h-.44L63.17,991l.23.39H63l-26.77,46.34.23.39h53.5l.25-.39.22.39H143.9l.22-.39.23.39h53.49l.24-.39,26.75-46.34.23-.41,26.75-46.33.23-.39,26.75-46.34.23-.39,26.75-46.33.22-.39,26.76-46.34L333,804l26.75-46.35.23-.39L386.72,711l.21-.38,26.75-46.34.23-.39,26.75-46.35.24-.39,26.75-46.34.23-.39.23.39h53.52l.21-.37.21.37,26.76,46.36.23.37,26.75,46.35.23.39,26.75,46.34.21.38,26.77,46.34.23.39L656.73,804l.23.39,26.75,46.34.22.39,26.76,46.33.22.39,26.77,46.36.21.37L764.66,991l.21.38,26.77,46.34.22.39h53.51l.22-.39.23.39h53.5l.23-.39.23.39h53.5l.23-.39-26.75-46.34Zm-809.38,0,.22-.39.23.39Zm27-46.74.22-.39.21.39Zm27,46.74.23-.39.21.39Zm0-93.47.23-.39.23.39Zm27,46.73.23-.39.23.39Zm0-93.45.23-.39.23.39Zm27,46.72.23-.39.22.39Zm0-93.45.23-.39.22.39ZM252,757.29l.21.39h-.44Zm-.23,93.86.23-.39.22.39ZM279,710.57l.21.38h-.43Zm-.23,93.85L279,804l.22.39Zm27-46.74.22-.39.23.39Zm0-93.45.22-.39.23.39Zm27,46.72.21-.38.21.38Zm0-93.46.22-.39.23.39Zm27,46.74.23-.39.23.39Zm0-93.47.21-.39.23.39Zm27,46.73.21-.39.23.39Zm0-93.47.22-.38.22.38Zm27,46.74.22-.39.21.39Zm0-93.45.22-.39.23.39Zm27,46.71.23-.38.21.38Zm0-93.45.23-.39.21.39Zm27,46.74.23-.39.21.39Zm0-93.47.23-.38.21.38Zm54.19-.38.21.38h-.44ZM494.63,524l.21-.38.23.38Zm0-93.45.23-.39.21.39Zm0-93.47.23-.37.21.37Zm27,140.21.23-.39.22.39Zm27,46.71.21-.37.22.37Zm0-93.45.22-.39.22.39Zm54.18,93.08.21.37h-.42Zm-27.19,47.11.21-.37.21.37Zm0-93.45.21-.38.23.38Zm27,140.18.21-.37.23.37Zm27,46.74.23-.39.23.39Zm0-93.47.21-.37.23.37Zm27,140.19.21-.38.23.38Zm0-93.46.21-.39.23.39Zm27,140.19.21-.37.22.37Zm0-93.45.23-.39.22.39Zm27,140.19.22-.39.22.39Zm0-93.47.22-.38.22.38Zm27,140.2.22-.39.23.39Zm0-93.47.21-.37.23.37Zm27,140.19.21-.37.21.37Zm0-93.45.22-.39.23.39Zm27,140.18.21-.37.21.37Zm0-93.45.23-.37.21.37Zm27,140.19.22-.38.22.38Zm0-93.47.21-.37.22.37Zm27,46.73.21-.37.21.37Zm27,46.74.22-.39.23.39Z"/>-->
+        <!--          <polygon class="cls-1"-->
+        <!--                   points="791.41 383.84 737.89 383.84 737.45 383.84 683.93 383.84 710.7 430.18 710.93 430.57 764.43 430.57 764.66 430.18 764.88 430.57 818.39 430.57 818.62 430.18 818.83 430.57 872.35 430.57 872.57 430.18 845.8 383.84 845.37 383.84 791.85 383.84 791.41 383.84"/>-->
+        <!--          <polygon class="cls-1"-->
+        <!--                   points="656.96 337.1 710.48 337.1 710.7 336.73 710.91 337.1 764.45 337.1 764.66 336.73 764.87 337.1 818.39 337.1 818.62 336.73 791.85 290.38 791.41 290.38 737.89 290.38 737.45 290.38 683.93 290.38 683.5 290.38 629.98 290.38 656.75 336.73 656.96 337.1"/>-->
+        <!--        </svg>-->
+
+        <!-- Email Body -->
+        <tr>
+          <td bgcolor="#FFFFFF"
+              cellpadding="0"
+              cellspacing="0"
+              class="email-body"
+              style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; width: 100%; -premailer-width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; background-color: #FFFFFF; margin: 0; padding: 0;"
+              width="100%">
+            <table align="center"
+                   bgcolor="#FFFFFF"
+                   cellpadding="0"
+                   cellspacing="0"
+                   class="email-body_inner"
+                   role="presentation"
+                   style="width: 570px; -premailer-width: 570px; -premailer-cellpadding: 0; -premailer-cellspacing: 0; background-color: #FFFFFF; margin: 0 auto; padding: 0;"
+                   width="570">
+              <!-- Body content -->
+              <tr>
+                <td class="content-cell"
+                    style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 35px;">
+                  <div class="f-fallback">
+                    <h1 align="left"
+                        style="margin-top: 0; color: #333333; font-size: 22px; font-weight: bold; text-align: left;">欢迎， {{username}}!</h1>
+                    <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">
+                      感谢试用{{ProductName}}！
+                      您可以直接点击以下链接，用您常用的浏览器打开，即可自动登录：</p>
+                    <!-- Action -->
+                    <table align="center"
+                           cellpadding="0"
+                           cellspacing="0"
+                           class="body-action"
+                           role="presentation"
+                           style="width: 100%; -premailer-width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; text-align: center; margin: 30px auto; padding: 0;"
+                           width="100%">
+                      <tr>
+                        <td align="center"
+                            style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">
+                          <!-- Border based button
+       https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
+                          <table border="0"
+                                 cellpadding="0"
+                                 cellspacing="0"
+                                 role="presentation"
+                                 width="100%">
+                            <tr>
+                              <td align="center"
+                                  style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">
+                                <a class="f-fallback button"
+                                   href="{{action_url}}"
+                                   style="color:
+                                    #FFF; background-color: #3869D4; display: inline-block; text-decoration: none;
+                                    border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+                                    -webkit-text-size-adjust: none; box-sizing: border-box; border-color: #3869D4;
+                                    border-style: solid; border-width: 10px 18px;"
+                                   target="_blank">立即跳转登录 {{ProductName}}</a>
+                              </td>
+                            </tr>
+                          </table>
+
+                        </td>
+                      </tr>
+
+                    </table>
+
+                    <p class="f-fallback sub" style="font-size: 13px; line-height: 1.625; color: #6B6E76; margin: .4em 0 1.1875em;">
+                      注意：您只可以点击该链接一次，如需再次尝试，请重新申请一份登录邮件！
+                    </p>
+
+                    <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">
+                      以下是您的登录信息，以防遗忘：</p>
+                    <table cellpadding="0"
+                           cellspacing="0"
+                           class="attributes"
+                           role="presentation"
+                           style="margin: 0 0 21px;"
+                           width="100%">
+                      <tr>
+                        <td bgcolor="#F4F4F7"
+                            class="attributes_content"
+                            style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; background-color: #F4F4F7; padding: 16px;">
+                          <table cellpadding="0"
+                                 cellspacing="0"
+                                 role="presentation"
+                                 width="100%">
+                            <tr>
+                              <td class="attributes_item"
+                                  style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 0;">
+                                    <span class="f-fallback">
+              <strong>登录地址：</strong> {{login_url}}
+            </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="attributes_item"
+                                  style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 0;">
+                                    <span class="f-fallback">
+              <strong>用户名：</strong> {{username}}
+            </span>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">
+                      如果您有任何问题，请联系：
+                      <a href="mailto:{{support_email}}"
+                         style="color: #3869D4;">我们的用户支持团队</a>。
+                      我们会很快回复您！
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">
+                      再次感谢，
+                      <br />来自 {{ProductName}} 团队</p>
+
+                    <!-- Sub copy -->
+                    <table class="body-sub"
+                           role="presentation"
+                           style="margin-top: 25px; padding-top: 25px; border-top-width: 1px; border-top-color: #EAEAEC; border-top-style: solid;">
+                      <tr>
+                        <td
+                          style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">
+                          <p class="f-fallback sub" style="font-size: 13px; line-height: 1.625; color: #6B6E76; margin: .4em 0 1.1875em;">
+                            友情提醒：如果您不方便直接点击该按钮，您可以选择复制以下链接然后粘贴到您想打开的浏览器内：</p>
+                          <p class="f-fallback sub" style="font-size: 13px; line-height: 1.625; color: #6B6E76;
+                              margin: .4em 0 1.1875em;"><a href="{{action_url}}">{{action_url}}</a></p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">
+            <table align="center"
+                   cellpadding="0"
+                   cellspacing="0"
+                   class="email-footer"
+                   role="presentation"
+                   style="width: 570px; -premailer-width: 570px; -premailer-cellpadding: 0; -premailer-cellspacing: 0; text-align: center; margin: 0 auto; padding: 0;"
+                   width="570">
+              <tr>
+                <td align="center"
+                    class="content-cell"
+                    style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 35px;">
+                  <p align="center"
+                     class="f-fallback sub align-center"
+                     style="font-size: 13px; line-height: 1.625; text-align: center; color: #6B6E76; margin: .4em 0 1.1875em;">
+                    <a href="{{companyUrl}}">
+                      {{CompanyName}}
+                    </a>
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
