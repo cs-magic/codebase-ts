@@ -11,8 +11,8 @@ import {
   pusherServerIdAtom,
 } from "../store"
 import { sum } from "lodash-es"
-import { pusherServerConfigs } from "@cs-magic/common/dist/pusher/config.js"
-import { initPusherClient } from "@cs-magic/common/dist/pusher/client/init.js"
+import { pusherServerConfigs } from "@cs-magic/common/dist/pusher/config"
+import { initPusherClient } from "@cs-magic/common/dist/pusher/client/init"
 
 export const usePusherClient = () => {
   const [serverId] = useAtom(pusherServerIdAtom)

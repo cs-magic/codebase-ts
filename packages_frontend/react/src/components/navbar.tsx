@@ -4,7 +4,7 @@ import { clsx } from "clsx"
 import Link from "next/link"
 
 import { uri } from "@/config"
-import { NavigationMenu, NavigationMenuList } from "@/shadcn/ui/navigation-menu"
+import { NavigationMenu, NavigationMenuList } from "@cs-magic/shadcn/dist/ui/navigation-menu"
 import { ButtonLink } from "@/components/button-link"
 // todo: added localeSwitcher, after fixing: `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`
 // import { LocaleSwitcher } from "@/components/locale-switcher"

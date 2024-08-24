@@ -1,9 +1,9 @@
-import { LogLevel } from "@cs-magic/common/dist/log/schema.js"
+import { LogLevel } from "@cs-magic/common/dist/log/schema"
 import {
   PusherConnectionState,
   PusherServerId,
-} from "@cs-magic/common/dist/pusher/schema.js"
-import { FixedArray } from "@cs-magic/common/dist/schema/fixed-array.js"
+} from "@cs-magic/common/dist/pusher/schema"
+import { FixedArray } from "@cs-magic/common/dist/schema/fixed-array"
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import Pusher from "pusher"

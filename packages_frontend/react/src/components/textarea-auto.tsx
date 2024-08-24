@@ -4,7 +4,7 @@ import { useAtom } from "jotai"
 import React, { ComponentProps, forwardRef } from "react"
 import ReactTextareaAutoSize from "react-textarea-autosize"
 
-import { cn } from "@/shadcn/utils"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import { Atom } from "@/store/jotai.types"
 import { useMounted } from "@/hooks/use-mounted"
 

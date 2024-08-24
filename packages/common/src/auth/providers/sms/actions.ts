@@ -21,6 +21,9 @@ export const $sendSms = async (
   sendApproach: IProviderSendSms,
   userId?: string,
 ) => {
+
+  if(!userId) throw new Error("todo: without userId")
+
   const code = Math.random().toString().slice(2, 8)
 
   const ok = await sendApproach(phone, code, expireSeconds)
@@ -46,17 +49,15 @@ export const $sendSms = async (
         expires_at,
 
         // sms 首次登录只需要更新account的条目就行，甚至是别人的手机号
-        user: userId
-          ? {
+        user: {
               // link account or fallback create
               connectOrCreate: {
                 where: { id: userId },
-                create: {},
+                create: {
+                  platformId: userId,
+                  platformType: "sms"
+                },
               },
-            }
-          : {
-              // create account
-              create: {},
             },
       },
       update: {

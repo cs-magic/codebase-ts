@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "@/shadcn/utils"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import React, { HTMLAttributes, LegacyRef } from "react"
 import Markdown, { ExtraProps } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"

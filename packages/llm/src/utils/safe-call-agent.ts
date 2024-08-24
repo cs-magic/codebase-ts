@@ -1,10 +1,10 @@
-import logger from "@cs-magic/common/dist/log/index.js"
+import logger from "@cs-magic/common/dist/log/index"
 import type { ILlmQueryConfig } from "../schema/llm.api.js"
 import type { LlmModelType } from "../schema/llm.models.js"
 import { loadAgent } from "./load-agent.js"
 import { safeCallLLM } from "./safe-call-llm.js"
-import { ILlmMessage } from "@cs-magic/common/dist/schema/message.js"
-import { compressContent } from "@cs-magic/common/dist/utils/compress-content.js"
+import { ILlmMessage } from "@cs-magic/common/dist/schema/message"
+import { compressContent } from "@cs-magic/common/dist/utils/compress-content"
 
 // const __filename = fileURLToPath(import.meta.url)
 

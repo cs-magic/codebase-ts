@@ -9,6 +9,7 @@
     "./shadcn/*": "./dist/shadcn/*.js",
     "./providers/*": "./dist/providers/*.js",
     "./src/*": "./src/*.js",
+    "./dist/*": "./dist/*.js",
     "./*": "./*"
   },
   "scripts": {
@@ -17,7 +18,8 @@
   },
   "dependencies": {
     "@cs-magic/common": "workspace:^",
-    "@hookform/resolvers": "^3.9.0",
+    "@cs-magic/shadcn": "workspace:^",
+    "@hookform/resolvers": "*",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -35,6 +37,7 @@
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@tabler/icons-react": "^3.12.0",
     "@types/react-syntax-highlighter": "^15.5.11",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -47,7 +50,7 @@
     "next-themes": "*",
     "react": "*",
     "react-dom": "*",
-    "react-hook-form": "^7.52.1",
+    "react-hook-form": "*",
     "react-i18next": "*",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.5.0",
@@ -59,7 +62,7 @@
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "unist-util-visit-parents": "^6.0.1",
-    "zod": "^3.23.8"
+    "zod": "*"
   },
   "devDependencies": {
     "@types/eslint": "^9",

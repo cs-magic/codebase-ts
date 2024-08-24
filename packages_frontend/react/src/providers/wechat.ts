@@ -1,11 +1,11 @@
-import { WECHAT_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/wechat/config.js"
-import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema.js"
+import { WECHAT_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/wechat/config"
+import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema"
 import {
   adaptWechatAuthToken,
   getWechatAuthorizationUrl,
   getWechatAuthToken,
   getWechatUserProfile,
-} from "@cs-magic/common/dist/auth/providers/wechat/utils.js"
+} from "@cs-magic/common/dist/auth/providers/wechat/utils"
 import { Profile } from "next-auth"
 
 // noinspection ES6PreferShortImport: 因为next-auth的packages.json的exports里规定了从 ./providers/* 里导出, see: https://github.com/nextauthjs/next-auth/issues/8263#issuecomment-1671918326

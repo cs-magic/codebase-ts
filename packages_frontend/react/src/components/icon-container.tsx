@@ -2,10 +2,10 @@
 
 import React, { ComponentProps, forwardRef } from "react"
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/shadcn/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/shadcn/dist/ui/tooltip"
 
 // todo: why cn not okay
-import { cn } from "@/shadcn/utils"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import clsx from "clsx"
 
 export const IconContainer = forwardRef<

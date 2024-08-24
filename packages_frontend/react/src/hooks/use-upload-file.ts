@@ -1,5 +1,5 @@
-import { uploadFile } from "@cs-magic/common/dist/oss/oss.server.js"
-import { IUploadFile } from "@cs-magic/common/dist/oss/schema.js"
+import { uploadFile } from "@cs-magic/common/dist/oss/oss.server"
+import { IUploadFile } from "@cs-magic/common/dist/oss/schema"
 import { useState } from "react"
 
 export const useUploadFile = () => {

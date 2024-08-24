@@ -1,6 +1,6 @@
-import { PROFILE_UPDATE_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/profile/const.js"
-import { prisma } from "@cs-magic/common/dist/db/prisma.js"
-import { userDetailSchema } from "@cs-magic/common/dist/schema/user.detail.js"
+import { PROFILE_UPDATE_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/profile/const"
+import { prisma } from "@cs-magic/common/dist/db/prisma"
+import { userDetailSchema } from "@cs-magic/common/dist/schema/user.detail"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 export const ProfileUpdateProvider = CredentialsProvider({

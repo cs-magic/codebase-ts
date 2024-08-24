@@ -9,8 +9,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shadcn/ui/select"
-import { Switch } from "@/shadcn/ui/switch"
+} from "@cs-magic/shadcn/dist/ui/select"
+import { Switch } from "@cs-magic/shadcn/dist/ui/switch"
 
 /**
  * @param atom

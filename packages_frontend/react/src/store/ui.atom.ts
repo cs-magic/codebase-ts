@@ -1,4 +1,4 @@
-import { IDimension } from "@cs-magic/common/dist/schema/ui.js"
+import { IDimension } from "@cs-magic/common/dist/schema/ui"
 import { atom } from "jotai"
 
 /**

@@ -6,7 +6,7 @@ import {
   ITransClient,
   ITransEvent,
   ResponseFinalStatus,
-} from "@cs-magic/common/dist/sse/schema.js"
+} from "@cs-magic/common/dist/sse/schema"
 
 export class StaticLLMManager implements ILLMManagerTraditional {
   static triggers: Record<string, ITransChannel> = {}

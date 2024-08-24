@@ -1,4 +1,4 @@
-import { ITransEvent } from "@cs-magic/common/dist/sse/schema.js"
+import { ITransEvent } from "@cs-magic/common/dist/sse/schema"
 import { WritableStreamDefaultWriter } from "web-streams-polyfill"
 
 export const llmEncoder = new TextEncoder()

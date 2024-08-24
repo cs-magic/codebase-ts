@@ -1,4 +1,4 @@
-import { ILlmMessage } from "@cs-magic/common/dist/schema/message.js"
+import { ILlmMessage } from "@cs-magic/common/dist/schema/message"
 import { sum } from "lodash-es"
 import { encoding_for_model } from "tiktoken"
 import type { LlmModelType } from "../schema/llm.models.js"

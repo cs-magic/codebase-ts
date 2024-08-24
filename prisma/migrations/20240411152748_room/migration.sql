@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "WechatRoom" ALTER COLUMN "avatar" DROP NOT NULL,
-ALTER COLUMN "topic" DROP NOT NULL;

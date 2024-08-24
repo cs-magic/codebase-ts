@@ -5,7 +5,7 @@ import { LoaderIcon } from "lucide-react"
 import React from "react"
 
 import { FlexContainer } from "./flex-container"
-import { AlertDialog, AlertDialogContent } from "@/shadcn/ui/alert-dialog"
+import { AlertDialog, AlertDialogContent } from "@cs-magic/shadcn/dist/ui/alert-dialog"
 import { uiLoadingAlertDialogAtom } from "@/store/ui.atom"
 
 export const Loading = () => (

@@ -1,5 +1,5 @@
 "use client"
-import { cn } from "@/shadcn/utils"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import React, { HTMLAttributes } from "react"
 import { useMeasure } from "react-use"
 

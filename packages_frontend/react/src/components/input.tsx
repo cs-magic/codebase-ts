@@ -1,4 +1,4 @@
-import { cn } from "@/shadcn/utils"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import * as React from "react"
 
 export interface InputWithEnterProps

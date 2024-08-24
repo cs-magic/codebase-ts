@@ -64,6 +64,5 @@
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
   },
-  "include": [],
   "exclude": ["node_modules", "dist"]
 }

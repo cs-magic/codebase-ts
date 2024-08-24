@@ -1,4 +1,4 @@
-import { isWechatBrowser } from "@cs-magic/common/dist/env/is-wechat-browser.js"
+import { isWechatBrowser } from "@cs-magic/common/dist/env/is-wechat-browser"
 import { useEffect, useState } from "react"
 
 /**

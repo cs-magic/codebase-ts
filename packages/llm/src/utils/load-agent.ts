@@ -2,7 +2,7 @@ import fs from "fs"
 import yaml from "js-yaml"
 import path from "path"
 
-import { assetsDir } from "@cs-magic/common/dist/path.js"
+import { assetsDir } from "@cs-magic/common/dist/path"
 
 import type { IAgentReq } from "../schema/llm.api.js"
 import type { AgentType } from "./safe-call-agent.js"

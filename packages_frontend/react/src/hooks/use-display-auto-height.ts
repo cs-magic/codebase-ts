@@ -1,4 +1,4 @@
-import { isServer } from "@cs-magic/common/dist/env/is-server.js"
+import { isServer } from "@cs-magic/common/dist/env/is-server"
 import { useAtom } from "jotai"
 import { useCallback, useEffect, useState } from "react"
 

@@ -15,9 +15,9 @@ import {
   smsSendCodePayloadAtom,
   smsStageAtom,
 } from "@/store/sms.atom"
-import { $sendSmsViaAli } from "@cs-magic/common/dist/auth/providers/sms/providers/ali.js"
-import { $sendSmsViaTencent } from "@cs-magic/common/dist/auth/providers/sms/providers/tencent.js"
-import { $sendSms } from "@cs-magic/common/dist/auth/providers/sms/actions.js"
+import { $sendSmsViaAli } from "@cs-magic/common/dist/auth/providers/sms/providers/ali"
+import { $sendSmsViaTencent } from "@cs-magic/common/dist/auth/providers/sms/providers/tencent"
+import { $sendSms } from "@cs-magic/common/dist/auth/providers/sms/actions"
 
 export const useSmsSendCode = () => {
   const [smsProviderType] = useAtom(smsProviderTypeAtom)

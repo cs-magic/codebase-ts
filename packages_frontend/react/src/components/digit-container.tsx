@@ -1,10 +1,10 @@
 "use client"
 
-import { cn } from "@/shadcn/utils"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import React, { ComponentProps, useEffect, useRef } from "react"
 
-import { Input } from "@/shadcn/ui/input"
-import { SMS_DIGIT_SIZE } from "@cs-magic/common/dist/config.js"
+import { Input } from "@cs-magic/shadcn/dist/ui/input"
+import { SMS_DIGIT_SIZE } from "@cs-magic/common/dist/config"
 
 export const DigitContainer = ({
   className,

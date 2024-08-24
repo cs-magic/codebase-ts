@@ -2,7 +2,7 @@ import {
   ITransChannel,
   ITransEvent,
   ResponseFinalStatus,
-} from "@cs-magic/common/dist/sse/schema.js"
+} from "@cs-magic/common/dist/sse/schema"
 
 export interface ILLMManagerPusher {
   //////////////////////////////

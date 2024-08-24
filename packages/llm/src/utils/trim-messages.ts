@@ -1,7 +1,7 @@
-import { ILlmMessage } from "@cs-magic/common/dist/schema/message.js"
+import { ILlmMessage } from "@cs-magic/common/dist/schema/message"
 import type { LlmModelType } from "../schema/llm.models.js"
 import { calculateToken } from "./calculate-token.js"
-import logger from "@cs-magic/common/dist/log/index.js"
+import logger from "@cs-magic/common/dist/log/index"
 
 /**
  * avoid context overflow

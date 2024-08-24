@@ -1,8 +1,8 @@
-import { redis } from "@cs-magic/common/dist/db/redis.js"
+import { redis } from "@cs-magic/common/dist/db/redis"
 
 import type { ILLMManagerTraditional } from "./schema.js"
-import { ITransClient, ITransEvent } from "@cs-magic/common/dist/sse/schema.js"
-import logger from "@cs-magic/common/dist/log/index.js"
+import { ITransClient, ITransEvent } from "@cs-magic/common/dist/sse/schema"
+import logger from "@cs-magic/common/dist/log/index"
 
 export class RedisLLMManager implements ILLMManagerTraditional {
   private triggerId: string

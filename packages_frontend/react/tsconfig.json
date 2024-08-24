@@ -11,8 +11,9 @@
       "@/*": ["./src/*", "../../assets/*"]
     }
   },
-  "include": ["./src/**/*", "../../assets/**/*"],
+  "include": ["src"],
   "references": [
+    {"path": "../shadcn"},
     {"path": "../../packages/common"},
     {"path": "../../packages/llm"},
   ],
