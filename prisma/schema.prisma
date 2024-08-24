@@ -2,8 +2,20 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native"]
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native"]
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+generator json {
+  /// Always after the prisma-client-js generator
+  provider  = "npx prisma-json-types-generator"
+  namespace = "PrismaJson"
+  // clientOutput = "<finds it automatically>"
+  // (./ -> relative to schema, or an importable path to require() it)
+  // useType = "MyType"
+  // In case you need to use a type, export it inside the namespace and we will add a index signature to it
+  // (e.g.  export namespace PrismaJson { export type MyType = {a: 1, b: 2} }; will generate namespace.MyType["TYPE HERE"])
 }
 
 generator zod {
@@ -33,7 +45,13 @@ datasource db {
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
   url      = env("DATABASE_URL")
+
+  extensions = [vector]
 }
+
+// -----------------------------------------------------------------------------
+// models
+// -----------------------------------------------------------------------------
 
 // Necessary for Next auth
 model Account {
@@ -49,6 +67,8 @@ model Account {
   id_token          String? // @db.Text
   session_state     String?
 
+  refresh_token_expires_in Int? // github necessary
+
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
@@ -56,7 +76,7 @@ model Account {
 }
 
 model App {
-  id        String   @id @default(nanoid(5))
+  id        String   @id @default(nanoid(5)) @db.VarChar(5)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
