@@ -22,7 +22,7 @@ generator json {
 
 generator zod {
   provider = "zod-prisma-types"
-  output   = "../generated/zod" // default is ./generated/zod
+  output   = "./generated/zod" // default is ./generated/zod
 }
 
 datasource db {

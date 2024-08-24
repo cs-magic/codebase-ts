@@ -5,6 +5,9 @@
   "repository": "git@github.com:cs-magic/codebase.git",
   "license": "MIT",
   "private": true,
+  "exports": {
+    ".": "./index.js"
+  },
   "workspaces": [
     "packages/*",
     "packages_frontend/*",
@@ -13,7 +16,8 @@
     "__tests__/*"
   ],
   "scripts": {
-    "postinstall": "run-s patch build-wechaty",
+    "postinstall": "run-s patch db:generate build-wechaty",
+    "db:generate": "prisma generate",
     "patch": "ts-patch install -s && patch-package",
     "build-wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
@@ -96,11 +100,12 @@
     "dotenv-cli": "^7.4.2",
     "patch-package": "^8.0.0",
     "pino-pretty": "^11.2.1",
+    "prisma": "^5",
     "rimraf": "^6.0.1",
     "shx": "^0.3.4",
     "ts-patch": "^3.2.1",
     "ttypescript": "^1.5.15",
-    "typescript-transform-paths": "*"
+    "typescript-transform-paths": "^3.5.0"
   },
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {

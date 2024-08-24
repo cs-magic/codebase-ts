@@ -4,7 +4,7 @@ private-app_*
 **/*.memory-card.json
 
 # zod
-packages/prisma/prisma/generated
+prisma/generated
 
 **/.logs
 **/.next
@@ -26,8 +26,8 @@ packages/prisma/prisma/generated
 /coverage
 
 # database
-/packages/prisma/prisma/db.sqlite
-/packages/prisma/prisma/db.sqlite-journal
+/prisma/db.sqlite
+/prisma/db.sqlite-journal
 
 # next.js
 /.next/
