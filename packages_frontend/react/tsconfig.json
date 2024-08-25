@@ -18,8 +18,8 @@
   },
   "include": ["src"],
   "references": [
-    {"path": "../shadcn"},
     {"path": "../../packages/common"},
     {"path": "../../packages/llm"},
+    {"path": "../shadcn"},
   ],
 }
