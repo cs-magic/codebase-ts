@@ -4,9 +4,10 @@ function update() {
 
   echo "== GIT UPDATE SUBMODULES STARTED =="
   git submodule foreach '
-    echo "Processing $name ($path)..."
+#    echo "Processing $name ($path)..."
     if [ -z "$(git status --porcelain)" ]; then
 #      echo "The submodule $name is clean."
+      :
     else
       git add . && git commit -m \"$1\"; git push
     fi
