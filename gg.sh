@@ -16,9 +16,9 @@ function update() {
 #  git submodule foreach --quiet 'echo $path' | parallel -j 8 "git add . && git commit -m \"$1\"; git push"
   echo "<< GIT UPDATE SUBMODULES FINISHED"
 
-  echo ">> GIT UPDATE MAIN STARTED =="
+  echo ">> GIT UPDATE MAIN STARTED"
   git add . && git commit -m \"$1\"; git push
-  echo "<< GIT UPDATE MAIN FINISHED =="
+  echo "<< GIT UPDATE MAIN FINISHED"
 
   echo "<< GIT UPDATE FINISHED"
 }
