@@ -7,13 +7,8 @@ import type { PuppetVersion } from "./version.js"
  * @param messageText
  * @param version
  */
-export const deserializeMsg = (
-  messageText: string,
-  version: PuppetVersion = "mark@2024-04-19",
-) => {
-  const m = /^「(.*?)：(.*?)」\n- - - - - - - - - - - - - - -\n(.*)$/ms.exec(
-    messageText,
-  )
+export const deserializeMsg = (messageText: string, version: PuppetVersion = "mark@2024-04-19") => {
+  const m = /^「(.*?)：(.*?)」\n- - - - - - - - - - - - - - -\n(.*)$/ms.exec(messageText)
 
   if (!m) return null
 

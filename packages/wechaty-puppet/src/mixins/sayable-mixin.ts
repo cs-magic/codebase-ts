@@ -1,5 +1,4 @@
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 import { MessageType } from "../schemas/message.js"
 import { SayablePayload, sayablePayloads } from "../schemas/sayable.js"
@@ -7,20 +6,14 @@ import { SayablePayload, sayablePayloads } from "../schemas/sayable.js"
 import type { MessageMixin } from "./message-mixin.js"
 import type { PostMixin } from "./post-mixin.js"
 
-const sayableMixin = <
-  MixinBase extends typeof PuppetSkeleton & MessageMixin & PostMixin,
->(
-  mixinBase: MixinBase,
-) => {
+const sayableMixin = <MixinBase extends typeof PuppetSkeleton & MessageMixin & PostMixin>(mixinBase: MixinBase) => {
   abstract class SayableMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
       log.verbose("PuppetSayableMixin", "constructor()")
     }
 
-    async sayablePayload(
-      sayableId: string,
-    ): Promise<undefined | SayablePayload> {
+    async sayablePayload(sayableId: string): Promise<undefined | SayablePayload> {
       log.verbose("PuppetMessageMixin", "sayablePayload(%s)", sayableId)
 
       const payload = await this.messagePayload(sayableId)

@@ -1,8 +1,8 @@
 import { redis } from "@cs-magic/common/dist/db/redis"
+import logger from "@cs-magic/common/dist/log/index"
+import { ITransClient, ITransEvent } from "@cs-magic/common/dist/sse/schema"
 
 import type { ILLMManagerTraditional } from "./schema.js"
-import { ITransClient, ITransEvent } from "@cs-magic/common/dist/sse/schema"
-import logger from "@cs-magic/common/dist/log/index"
 
 export class RedisLLMManager implements ILLMManagerTraditional {
   private triggerId: string
@@ -28,13 +28,9 @@ export class RedisLLMManager implements ILLMManagerTraditional {
    * todo: redis get trigger()
    */
   public async getTrigger() {
-    const events = (await redis.lrange(`${this.triggerId}-events`, 0, -1)).map(
-      (e) => JSON.parse(e),
-    ) as ITransEvent[]
+    const events = (await redis.lrange(`${this.triggerId}-events`, 0, -1)).map((e) => JSON.parse(e)) as ITransEvent[]
 
-    const clients = (
-      await redis.lrange(`${this.triggerId}-clients`, 0, -1)
-    ).map((e) => {
+    const clients = (await redis.lrange(`${this.triggerId}-clients`, 0, -1)).map((e) => {
       const client = JSON.parse(e) as ITransClient
       logger.info({ client })
       return client

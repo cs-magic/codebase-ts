@@ -17,46 +17,23 @@
  *   limitations under the License.
  *
  */
-import * as PUPPET      from 'wechaty-puppet'
-import type {
-  FileBoxInterface,
-}                       from 'file-box'
-import {
-  concurrencyExecuter,
-}                       from 'rx-queue'
-import type {
-  Constructor,
-}                       from 'clone-class'
+import type { Constructor } from "clone-class"
+import type { FileBoxInterface } from "file-box"
+import { concurrencyExecuter } from "rx-queue"
+import * as PUPPET from "wechaty-puppet"
 
-import {
-  log,
-}                           from '../config.js'
+import { log } from "../config.js"
+import { stringifyFilter } from "../helper-functions/stringify-filter.js"
+import { deliverSayableConversationPuppet } from "../sayable/mod.js"
+import type { Sayable, SayableSayer } from "../sayable/mod.js"
+import { ContactEventEmitter } from "../schemas/mod.js"
+import { poolifyMixin, validationMixin, wechatifyMixin } from "../user-mixins/mod.js"
 
-import { ContactEventEmitter }        from '../schemas/mod.js'
+import type { ContactSelfImpl } from "./contact-self.js"
+import type { MessageInterface } from "./message.js"
+import type { TagInterface } from "./tag.js"
 
-import {
-  poolifyMixin,
-  wechatifyMixin,
-  validationMixin,
-}                                     from '../user-mixins/mod.js'
-import {
-  deliverSayableConversationPuppet,
-}                                     from '../sayable/mod.js'
-import type {
-  SayableSayer,
-  Sayable,
-}                                     from '../sayable/mod.js'
-import { stringifyFilter }            from '../helper-functions/stringify-filter.js'
-
-import type { MessageInterface }  from './message.js'
-import type { TagInterface }      from './tag.js'
-import type { ContactSelfImpl }   from './contact-self.js'
-
-const MixinBase = wechatifyMixin(
-  poolifyMixin(
-    ContactEventEmitter,
-  )<ContactImplInterface>(),
-)
+const MixinBase = wechatifyMixin(poolifyMixin(ContactEventEmitter)<ContactImplInterface>())
 
 /**
  * All wechat contacts(friend) will be encapsulated as a Contact.
@@ -66,8 +43,7 @@ const MixinBase = wechatifyMixin(
  * This function is depending on the Puppet Implementation, see [puppet-compatible-table](https://github.com/wechaty/wechaty/wiki/Puppet#3-puppet-compatible-table)
  */
 class ContactMixin extends MixinBase implements SayableSayer {
-
-  static Type   = PUPPET.types.Contact
+  static Type = PUPPET.types.Contact
   static Gender = PUPPET.types.ContactGender
 
   /**
@@ -93,12 +69,10 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * const contactFindByName = await bot.Contact.find({ name:"ruirui"} )
    * const contactFindByAlias = await bot.Contact.find({ alias:"lijiarui"} )
    */
-  static async find (
-    query : string | PUPPET.filters.Contact,
-  ): Promise<undefined | ContactInterface> {
-    log.silly('Contact', 'find(%s)', JSON.stringify(query, stringifyFilter))
+  static async find(query: string | PUPPET.filters.Contact): Promise<undefined | ContactInterface> {
+    log.silly("Contact", "find(%s)", JSON.stringify(query, stringifyFilter))
 
-    if (typeof query === 'object' && query.id) {
+    if (typeof query === "object" && query.id) {
       let contact: ContactImpl
       if (this.wechaty.puppet.currentUserId === query.id) {
         /**
@@ -127,24 +101,23 @@ class ContactMixin extends MixinBase implements SayableSayer {
     }
 
     if (contactList.length > 1) {
-      log.warn('Contact', 'find() got more than 1 result: %d total', contactList.length)
+      log.warn("Contact", "find() got more than 1 result: %d total", contactList.length)
     }
 
-    for (const [ idx, contact ] of contactList.entries()) {
+    for (const [idx, contact] of contactList.entries()) {
       // use puppet.contactValidate() to confirm double confirm that this contactId is valid.
       // https://github.com/wechaty/wechaty-puppet-padchat/issues/64
       // https://github.com/wechaty/wechaty/issues/1345
       const valid = await this.wechaty.puppet.contactValidate(contact.id)
       if (valid) {
-        log.silly('Contact', 'find() contact<id=%s> is valid, return it', idx, contact.id)
+        log.silly("Contact", "find() contact<id=%s> is valid, return it", idx, contact.id)
         return contact
       } else {
-        log.silly('Contact', 'find() contact<id=%s> is invalid, skip it', idx, contact.id)
+        log.silly("Contact", "find() contact<id=%s> is invalid, skip it", idx, contact.id)
       }
-
     }
 
-    log.warn('Contact', 'find() all of %d contacts are invalid', contactList.length)
+    log.warn("Contact", "find() all of %d contacts are invalid", contactList.length)
     return undefined
   }
 
@@ -167,15 +140,14 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * const contactList = await bot.Contact.findAll({ name: 'ruirui' })    // find all of the contacts whose name is 'ruirui'
    * const contactList = await bot.Contact.findAll({ alias: 'lijiarui' }) // find all of the contacts whose alias is 'lijiarui'
    */
-  static async findAll (
-    query? : string | PUPPET.filters.Contact,
-  ): Promise<ContactInterface[]> {
-    log.verbose('Contact', 'findAll(%s)', JSON.stringify(query, stringifyFilter) || '')
+  static async findAll(query?: string | PUPPET.filters.Contact): Promise<ContactInterface[]> {
+    log.verbose("Contact", "findAll(%s)", JSON.stringify(query, stringifyFilter) || "")
 
     try {
       const contactIdList: string[] = await this.wechaty.puppet.contactSearch(query)
 
-      const idToContact = async (id: string) => this.wechaty.Contact.find({ id }).catch(e => this.wechaty.emitError(e))
+      const idToContact = async (id: string) =>
+        this.wechaty.Contact.find({ id }).catch((e) => this.wechaty.emitError(e))
 
       /**
        * we need to use concurrencyExecuter to reduce the parallel number of the requests
@@ -192,18 +164,17 @@ class ContactMixin extends MixinBase implements SayableSayer {
       }
 
       return contactList
-
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'this.wechaty.puppet.contactFindAll() rejected: %s', (e as Error).message)
+      log.error("Contact", "this.wechaty.puppet.contactFindAll() rejected: %s", (e as Error).message)
       return [] // fail safe
     }
   }
 
   // TODO
   // eslint-disable-next-line no-use-before-define
-  static async delete (contact: ContactInterface): Promise<void> {
-    log.verbose('Contact', 'static delete(%s)', contact.id)
+  static async delete(contact: ContactInterface): Promise<void> {
+    log.verbose("Contact", "static delete(%s)", contact.id)
   }
 
   /**
@@ -214,16 +185,16 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const tags = await wechaty.Contact.tags()
    */
-  static async tags (): Promise<TagInterface[]> {
-    log.verbose('Contact', 'static tags() for %s', this)
+  static async tags(): Promise<TagInterface[]> {
+    log.verbose("Contact", "static tags() for %s", this)
 
     try {
       const tagIdList = await this.wechaty.puppet.tagContactList()
-      const tagList = tagIdList.map(id => this.wechaty.Tag.load(id))
+      const tagList = tagIdList.map((id) => this.wechaty.Tag.load(id))
       return tagList
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'static tags() exception: %s', (e as Error).message)
+      log.error("Contact", "static tags() exception: %s", (e as Error).message)
       return []
     }
   }
@@ -239,25 +210,20 @@ class ContactMixin extends MixinBase implements SayableSayer {
   /**
    * @hideconstructor
    */
-  constructor (
-    public readonly id: string,
-  ) {
+  constructor(public readonly id: string) {
     super()
-    log.silly('Contact', `constructor(${id})`)
+    log.silly("Contact", `constructor(${id})`)
   }
 
   /**
    * @ignore
    */
-  override toString (): string {
+  override toString(): string {
     if (!this.payload) {
       return this.constructor.name
     }
 
-    const identity = this.payload.alias
-                    || this.payload.name
-                    || this.id
-                    || 'loading...'
+    const identity = this.payload.alias || this.payload.name || this.id || "loading..."
 
     return `Contact<${identity}>`
   }
@@ -330,10 +296,8 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * await contact.say(location)
    * const msg = await contact.say(location)
    */
-  async say (
-    sayable: Sayable,
-  ): Promise<void | MessageInterface> {
-    log.verbose('Contact', 'say(%s)', sayable)
+  async say(sayable: Sayable): Promise<void | MessageInterface> {
+    log.verbose("Contact", "say(%s)", sayable)
 
     const msgId = await deliverSayableConversationPuppet(this.wechaty.puppet)(this.id)(sayable)
 
@@ -352,13 +316,13 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const name = contact.name()
    */
-  name (): string {
-    return (this.payload && this.payload.name) || ''
+  name(): string {
+    return (this.payload && this.payload.name) || ""
   }
 
-  async alias ()                  : Promise<undefined | string>
-  async alias (newAlias:  string) : Promise<void>
-  async alias (empty:     null)   : Promise<void>
+  async alias(): Promise<undefined | string>
+  async alias(newAlias: string): Promise<void>
+  async alias(empty: null): Promise<void>
 
   /**
    * GET / SET / DELETE the alias for a contact
@@ -391,18 +355,14 @@ class ContactMixin extends MixinBase implements SayableSayer {
    *   console.log(`failed to delete ${contact.name()}'s alias!`)
    * }
    */
-  async alias (newAlias?: null | string): Promise<void | undefined | string> {
-    log.silly('Contact', 'alias(%s)',
-      newAlias === undefined
-        ? ''
-        : newAlias,
-    )
+  async alias(newAlias?: null | string): Promise<void | undefined | string> {
+    log.silly("Contact", "alias(%s)", newAlias === undefined ? "" : newAlias)
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
-    if (typeof newAlias === 'undefined') {
+    if (typeof newAlias === "undefined") {
       return this.payload.alias
     }
 
@@ -411,7 +371,9 @@ class ContactMixin extends MixinBase implements SayableSayer {
       await this.wechaty.puppet.contactPayloadDirty(this.id)
       this.payload = await this.wechaty.puppet.contactPayload(this.id)
       if (newAlias && newAlias !== this.payload.alias) {
-        log.warn('Contact', 'alias(%s) sync with server fail: set(%s) is not equal to get(%s)',
+        log.warn(
+          "Contact",
+          "alias(%s) sync with server fail: set(%s) is not equal to get(%s)",
           newAlias,
           newAlias,
           this.payload.alias,
@@ -419,7 +381,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
       }
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'alias(%s) rejected: %s', newAlias, (e as Error).message)
+      log.error("Contact", "alias(%s) rejected: %s", newAlias, (e as Error).message)
     }
   }
 
@@ -445,16 +407,16 @@ class ContactMixin extends MixinBase implements SayableSayer {
    *   console.log(`failed to change ${contact.name()} phone!`)
    * }
    */
-  async phone (): Promise<string[]>
-  async phone (phoneList: string[]): Promise<void>
-  async phone (phoneList?: string[]): Promise<string[] | void> {
-    log.silly('Contact', 'phone(%s)', phoneList === undefined ? '' : JSON.stringify(phoneList))
+  async phone(): Promise<string[]>
+  async phone(phoneList: string[]): Promise<void>
+  async phone(phoneList?: string[]): Promise<string[] | void> {
+    log.silly("Contact", "phone(%s)", phoneList === undefined ? "" : JSON.stringify(phoneList))
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
-    if (typeof phoneList === 'undefined') {
+    if (typeof phoneList === "undefined") {
       return this.payload.phone
     }
 
@@ -464,25 +426,25 @@ class ContactMixin extends MixinBase implements SayableSayer {
       this.payload = await this.wechaty.puppet.contactPayload(this.id)
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'phone(%s) rejected: %s', JSON.stringify(phoneList), (e as Error).message)
+      log.error("Contact", "phone(%s) rejected: %s", JSON.stringify(phoneList), (e as Error).message)
     }
   }
 
-  async corporation (): Promise<undefined | string>
-  async corporation (remark: string | null): Promise<void>
-  async corporation (remark?: string | null): Promise<void | undefined | string> {
-    log.silly('Contact', 'corporation(%s)', remark)
+  async corporation(): Promise<undefined | string>
+  async corporation(remark: string | null): Promise<void>
+  async corporation(remark?: string | null): Promise<void | undefined | string> {
+    log.silly("Contact", "corporation(%s)", remark)
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
-    if (typeof remark === 'undefined') {
+    if (typeof remark === "undefined") {
       return this.payload.corporation
     }
 
     if (this.payload.type !== PUPPET.types.Contact.Individual) {
-      throw new Error('Can not set corporation remark on non individual contact.')
+      throw new Error("Can not set corporation remark on non individual contact.")
     }
 
     try {
@@ -491,20 +453,20 @@ class ContactMixin extends MixinBase implements SayableSayer {
       this.payload = await this.wechaty.puppet.contactPayload(this.id)
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'corporation(%s) rejected: %s', remark, (e as Error).message)
+      log.error("Contact", "corporation(%s) rejected: %s", remark, (e as Error).message)
     }
   }
 
-  async description (): Promise<undefined | string>
-  async description (newDescription: string | null): Promise<void>
-  async description (newDescription?: string | null): Promise<void | undefined | string> {
-    log.silly('Contact', 'description(%s)', newDescription)
+  async description(): Promise<undefined | string>
+  async description(newDescription: string | null): Promise<void>
+  async description(newDescription?: string | null): Promise<void | undefined | string> {
+    log.silly("Contact", "description(%s)", newDescription)
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
-    if (typeof newDescription === 'undefined') {
+    if (typeof newDescription === "undefined") {
       return this.payload.description
     }
 
@@ -514,21 +476,21 @@ class ContactMixin extends MixinBase implements SayableSayer {
       this.payload = await this.wechaty.puppet.contactPayload(this.id)
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'description(%s) rejected: %s', newDescription, (e as Error).message)
+      log.error("Contact", "description(%s) rejected: %s", newDescription, (e as Error).message)
     }
   }
 
-  title (): string | null {
+  title(): string | null {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     return this.payload.title || null
   }
 
-  coworker (): boolean {
+  coworker(): boolean {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     return !!this.payload.coworker
@@ -547,8 +509,8 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const isFriend = contact.friend()
    */
-  friend (): undefined | boolean {
-    log.verbose('Contact', 'friend()')
+  friend(): undefined | boolean {
+    log.verbose("Contact", "friend()")
     return this.payload?.friend
   }
 
@@ -570,9 +532,9 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * await bot.start()
    * const isOfficial = contact.type() === bot.Contact.Type.Official
    */
-  type (): PUPPET.types.Contact {
+  type(): PUPPET.types.Contact {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
     return this.payload.type
   }
@@ -585,7 +547,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const isStar = contact.star()
    */
-  star (): undefined | boolean {
+  star(): undefined | boolean {
     return this.payload?.star
   }
 
@@ -597,10 +559,8 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const gender = contact.gender() === bot.Contact.Gender.Male
    */
-  gender (): PUPPET.types.ContactGender {
-    return this.payload
-      ? this.payload.gender
-      : PUPPET.types.ContactGender.Unknown
+  gender(): PUPPET.types.ContactGender {
+    return this.payload ? this.payload.gender : PUPPET.types.ContactGender.Unknown
   }
 
   /**
@@ -610,7 +570,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const province = contact.province()
    */
-  province (): undefined | string {
+  province(): undefined | string {
     return this.payload?.province
   }
 
@@ -621,7 +581,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const city = contact.city()
    */
-  city (): undefined | string {
+  city(): undefined | string {
     return this.payload?.city
   }
 
@@ -637,8 +597,8 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * await file.toFile(name, true)
    * console.log(`Contact: ${contact.name()} with avatar file: ${name}`)
    */
-  async avatar (): Promise<FileBoxInterface> {
-    log.verbose('Contact', 'avatar()')
+  async avatar(): Promise<FileBoxInterface> {
+    log.verbose("Contact", "avatar()")
 
     const fileBox = await this.wechaty.puppet.contactAvatar(this.id)
     return fileBox
@@ -651,16 +611,16 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const tags = await contact.tags()
    */
-  async tags (): Promise<TagInterface[]> {
-    log.verbose('Contact', 'tags() for %s', this)
+  async tags(): Promise<TagInterface[]> {
+    log.verbose("Contact", "tags() for %s", this)
 
     try {
       const tagIdList = await this.wechaty.puppet.tagContactList(this.id)
-      const tagList = tagIdList.map(id => this.wechaty.Tag.load(id))
+      const tagList = tagIdList.map((id) => this.wechaty.Tag.load(id))
       return tagList
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'tags() exception: %s', (e as Error).message)
+      log.error("Contact", "tags() exception: %s", (e as Error).message)
       return []
     }
   }
@@ -672,7 +632,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * await contact.sync()
    */
-  async sync (): Promise<void> {
+  async sync(): Promise<void> {
     await this.wechaty.puppet.contactPayloadDirty(this.id)
     await this.ready(true)
   }
@@ -685,23 +645,23 @@ class ContactMixin extends MixinBase implements SayableSayer {
    *
    * @ignore
    */
-  async ready (
-    forceSync = false,
-  ): Promise<void> {
-    log.silly('Contact', 'ready() @ %s with id="%s"', this.wechaty.puppet, this.id)
+  async ready(forceSync = false): Promise<void> {
+    log.silly("Contact", 'ready() @ %s with id="%s"', this.wechaty.puppet, this.id)
 
-    if (!forceSync && this.isReady()) { // already ready
-      log.silly('Contact', 'ready() isReady() true')
+    if (!forceSync && this.isReady()) {
+      // already ready
+      log.silly("Contact", "ready() isReady() true")
       return
     }
 
     try {
       this.payload = await this.wechaty.puppet.contactPayload(this.id)
       // log.silly('Contact', `ready() this.wechaty.puppet.contactPayload(%s) resolved`, this)
-
     } catch (e) {
       this.wechaty.emitError(e)
-      log.verbose('Contact', 'ready() this.wechaty.puppet.contactPayload(%s) exception: %s',
+      log.verbose(
+        "Contact",
+        "ready() this.wechaty.puppet.contactPayload(%s) exception: %s",
         this.id,
         (e as Error).message,
       )
@@ -709,8 +669,8 @@ class ContactMixin extends MixinBase implements SayableSayer {
     }
   }
 
-  async readMark (hasRead: boolean): Promise<void>
-  async readMark (): Promise<boolean>
+  async readMark(hasRead: boolean): Promise<void>
+  async readMark(): Promise<boolean>
 
   /**
    * Mark the conversation as read
@@ -722,23 +682,23 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * await contact.readMark()
    */
 
-  async readMark (hasRead?: boolean): Promise<void | boolean> {
+  async readMark(hasRead?: boolean): Promise<void | boolean> {
     try {
-      if (typeof hasRead === 'undefined') {
+      if (typeof hasRead === "undefined") {
         return this.wechaty.puppet.conversationReadMark(this.id)
       } else {
         await this.wechaty.puppet.conversationReadMark(this.id, hasRead)
       }
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Contact', 'readMark() exception: %s', (e as Error).message)
+      log.error("Contact", "readMark() exception: %s", (e as Error).message)
     }
   }
 
   /**
    * @ignore
    */
-  isReady (): boolean {
+  isReady(): boolean {
     return !!(this.payload && this.payload.name)
   }
 
@@ -749,7 +709,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const isSelf = contact.self()
    */
-  self (): boolean {
+  self(): boolean {
     return this.id === this.wechaty.puppet.currentUserId
   }
 
@@ -765,7 +725,7 @@ class ContactMixin extends MixinBase implements SayableSayer {
    * @example
    * const handle = contact.handle()
    */
-  handle (): undefined | string {
+  handle(): undefined | string {
     return this.payload?.handle
   }
 
@@ -774,33 +734,22 @@ class ContactMixin extends MixinBase implements SayableSayer {
    *  @link https://github.com/wechaty/puppet/issues/181
    * @deprecated use `handle()` instead
    */
-  weixin (): undefined | string {
-    log.warn('Contact', 'weixin() is deprecated, use `handle()` instead.')
+  weixin(): undefined | string {
+    log.warn("Contact", "weixin() is deprecated, use `handle()` instead.")
     console.error(new Error().stack)
     return this.payload?.weixin
   }
-
 }
 
 class ContactImplBase extends validationMixin(ContactMixin)<ContactImplInterface>() {}
 interface ContactImplInterface extends ContactImplBase {}
 
-type ContactProtectedProperty =
-  | 'ready'
+type ContactProtectedProperty = "ready"
 
 type ContactInterface = Omit<ContactImplInterface, ContactProtectedProperty>
 class ContactImpl extends validationMixin(ContactImplBase)<ContactInterface>() {}
 
-type ContactConstructor = Constructor<
-  ContactImplInterface,
-  Omit<typeof ContactImpl, 'load'>
->
+type ContactConstructor = Constructor<ContactImplInterface, Omit<typeof ContactImpl, "load">>
 
-export type {
-  ContactConstructor,
-  ContactProtectedProperty,
-  ContactInterface,
-}
-export {
-  ContactImpl,
-}
+export type { ContactConstructor, ContactProtectedProperty, ContactInterface }
+export { ContactImpl }

@@ -47,7 +47,7 @@ export {
   DelayImpl,
   TagImpl,
   UrlLinkImpl,
-}                             from '../user-modules/mod.js'
+} from "../user-modules/mod.js"
 
 // export {
 //   ContactImpl         as Contact,
@@ -85,7 +85,7 @@ export type {
   RoomInvitationInterface,
   TagInterface,
   UrlLinkInterface,
-}                               from '../user-modules/mod.js'
+} from "../user-modules/mod.js"
 
 export type {
   ContactConstructor,
@@ -104,12 +104,7 @@ export type {
   RoomInvitationConstructor,
   TagConstructor,
   UrlLinkConstructor,
-}                               from '../user-modules/mod.js'
+} from "../user-modules/mod.js"
 
-export {
-  WechatyImpl,
-}                         from '../wechaty/mod.js'
-export type {
-  WechatyInterface,
-  WechatyConstructor,
-}                         from '../wechaty/mod.js'
+export { WechatyImpl } from "../wechaty/mod.js"
+export type { WechatyInterface, WechatyConstructor } from "../wechaty/mod.js"

@@ -1,4 +1,5 @@
 import { z } from "zod"
+
 import { AppMessageType } from "./message.js"
 
 export type DeserializedRefMsgPayload =
@@ -9,9 +10,7 @@ export type DeserializedRefMsgPayload =
     }
   | string
 
-export const deserializeRefMsgPayload = (
-  v: string,
-): DeserializedRefMsgPayload => {
+export const deserializeRefMsgPayload = (v: string): DeserializedRefMsgPayload => {
   const m = /^RefMsg\(id=(.*?), type=(.*?), content=(.*?)\)$/ms.exec(v)
   // logger.debug(`deserialized ref message payload: %o`, m);
   if (!m) return v

@@ -1,12 +1,10 @@
-import type { WebRoomRawPayload, WebRoomRawMember } from "../../web-schemas.js"
-
 import type * as PUPPET from "wechaty-puppet"
 import { log } from "wechaty-puppet"
+
+import type { WebRoomRawMember, WebRoomRawPayload } from "../../web-schemas.js"
 import { plainText } from "../utils/xml.js"
 
-export function wechat4uRoomToWechaty(
-  rawPayload: WebRoomRawPayload,
-): PUPPET.payloads.Room {
+export function wechat4uRoomToWechaty(rawPayload: WebRoomRawPayload): PUPPET.payloads.Room {
   log.verbose("PuppetWechat4u", "roomRawPayloadParser(%s)", rawPayload)
 
   const id = rawPayload.UserName
@@ -21,9 +19,7 @@ export function wechat4uRoomToWechaty(
   //   })
   // }
 
-  const memberIdList = rawPayload.MemberList
-    ? rawPayload.MemberList.map((m) => m.UserName)
-    : []
+  const memberIdList = rawPayload.MemberList ? rawPayload.MemberList.map((m) => m.UserName) : []
 
   const roomPayload: PUPPET.payloads.Room = {
     adminIdList: [],
@@ -36,9 +32,7 @@ export function wechat4uRoomToWechaty(
   return roomPayload
 }
 
-export function wechat4uRoomMemberToWechaty(
-  rawPayload: WebRoomRawMember,
-): PUPPET.payloads.RoomMember {
+export function wechat4uRoomMemberToWechaty(rawPayload: WebRoomRawMember): PUPPET.payloads.RoomMember {
   log.verbose("PuppetWechat4u", "roomMemberRawPayloadParser(%s)", rawPayload)
 
   const payload: PUPPET.payloads.RoomMember = {

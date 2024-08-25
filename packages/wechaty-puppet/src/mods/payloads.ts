@@ -37,11 +37,7 @@ import type {
   TapPayload,
   UrlLinkPayload,
 } from "../schemas/mod.js"
-import {
-  isPostPayloadClient,
-  isPostPayloadServer,
-  sayablePayloads,
-} from "../schemas/mod.js"
+import { isPostPayloadClient, isPostPayloadServer, sayablePayloads } from "../schemas/mod.js"
 
 export type {
   ContactPayload as Contact,

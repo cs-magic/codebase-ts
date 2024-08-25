@@ -1,4 +1,5 @@
 import Pusher from "pusher-js"
+
 import { env } from "../../env/index.js"
 import type { IPusherServerConfig } from "../schema.js"
 
@@ -22,16 +23,13 @@ export const initPusherClient = (
     // console.log({ message })
     const exists = (events: string[]) => events.some((s) => message.includes(s))
 
-    if (exists(["pusher:ping", "initialized -> connecting"]) && options?.onPing)
-      options.onPing()
+    if (exists(["pusher:ping", "initialized -> connecting"]) && options?.onPing) options.onPing()
 
-    if (exists(["pusher:pong", "connecting -> connected"]) && options?.onPong)
-      options.onPong()
+    if (exists(["pusher:pong", "connecting -> connected"]) && options?.onPong) options.onPong()
   }
 
   console.log("initializing pusher client")
-  if (!env?.NEXT_PUBLIC_PUSHER_APP_KEY)
-    throw new Error("no pusher app key in env")
+  if (!env?.NEXT_PUBLIC_PUSHER_APP_KEY) throw new Error("no pusher app key in env")
   const pusherClient = new Pusher(env?.NEXT_PUBLIC_PUSHER_APP_KEY, {
     cluster,
     wsHost,

@@ -17,65 +17,29 @@
  *   limitations under the License.
  *
  */
-import { EventEmitter }   from 'events'
-import * as PUPPET        from 'wechaty-puppet'
-import type {
-  FileBoxInterface,
-}                         from 'file-box'
+import type { Constructor } from "clone-class"
+import { EventEmitter } from "events"
+import type { FileBoxInterface } from "file-box"
+import * as PUPPET from "wechaty-puppet"
 
-import type { Constructor } from 'clone-class'
+import { AT_SEPARATOR_REGEX, log } from "../config.js"
+import { escapeRegExp } from "../pure-functions/escape-regexp.js"
+import { timestampToDate } from "../pure-functions/timestamp-to-date.js"
+import type { Sayable, SayableSayer } from "../sayable/mod.js"
+import { messageToSayable } from "../sayable/mod.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixin } from "../user-mixins/wechatify.js"
 
-import { escapeRegExp }           from '../pure-functions/escape-regexp.js'
-import { timestampToDate }        from '../pure-functions/timestamp-to-date.js'
+import type { ContactSelfImpl } from "./contact-self.js"
+import type { ContactImpl, ContactInterface } from "./contact.js"
+import type { ImageInterface } from "./image.js"
+import { LocationImpl, LocationInterface } from "./location.js"
+import type { MiniProgramInterface } from "./mini-program.js"
+import { PostImpl, PostInterface } from "./post.js"
+import type { RoomImpl, RoomInterface } from "./room.js"
+import type { UrlLinkInterface } from "./url-link.js"
 
-import {
-  log,
-  AT_SEPARATOR_REGEX,
-}                         from '../config.js'
-import type {
-  SayableSayer,
-  Sayable,
-}                             from '../sayable/mod.js'
-import {
-  messageToSayable,
-}                             from '../sayable/mod.js'
-
-import {
-  wechatifyMixin,
-}                       from '../user-mixins/wechatify.js'
-
-import type {
-  ContactInterface,
-  ContactImpl,
-}                       from './contact.js'
-import type {
-  RoomInterface,
-  RoomImpl,
-}                       from './room.js'
-import type {
-  UrlLinkInterface,
-}                       from './url-link.js'
-import type {
-  MiniProgramInterface,
-}                       from './mini-program.js'
-import type {
-  ImageInterface,
-}                       from './image.js'
-import {
-  PostInterface,
-  PostImpl,
-}                       from './post.js'
-import {
-  LocationInterface,
-  LocationImpl,
-}                       from './location.js'
-
-import { validationMixin } from '../user-mixins/validation.js'
-import type { ContactSelfImpl } from './contact-self.js'
-
-const MixinBase = wechatifyMixin(
-  EventEmitter,
-)
+const MixinBase = wechatifyMixin(EventEmitter)
 
 /**
  * All wechat messages will be encapsulated as a Message.
@@ -83,7 +47,6 @@ const MixinBase = wechatifyMixin(
  * [Examples/Ding-Dong-Bot]{@link https://github.com/wechaty/wechaty/blob/1523c5e02be46ebe2cc172a744b2fbe53351540e/examples/ding-dong-bot.ts}
  */
 class MessageMixin extends MixinBase implements SayableSayer {
-
   /**
    *
    * Static Properties
@@ -98,12 +61,10 @@ class MessageMixin extends MixinBase implements SayableSayer {
   /**
    * Find message in cache
    */
-  static async find (
-    query : string | PUPPET.filters.Message,
-  ): Promise<undefined | MessageInterface> {
-    log.verbose('Message', 'find(%s)', JSON.stringify(query))
+  static async find(query: string | PUPPET.filters.Message): Promise<undefined | MessageInterface> {
+    log.verbose("Message", "find(%s)", JSON.stringify(query))
 
-    if (typeof query === 'string') {
+    if (typeof query === "string") {
       query = { text: query }
     }
 
@@ -113,7 +74,7 @@ class MessageMixin extends MixinBase implements SayableSayer {
     }
 
     if (messageList.length > 1) {
-      log.warn('Message', 'findAll() got more than one(%d) result', messageList.length)
+      log.warn("Message", "findAll() got more than one(%d) result", messageList.length)
     }
 
     return messageList[0]!
@@ -122,10 +83,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
   /**
    * Find messages in cache
    */
-  static async findAll (
-    query? : PUPPET.filters.Message,
-  ): Promise<MessageInterface[]> {
-    log.verbose('Message', 'findAll(%s)', JSON.stringify(query) || '')
+  static async findAll(query?: PUPPET.filters.Message): Promise<MessageInterface[]> {
+    log.verbose("Message", "findAll(%s)", JSON.stringify(query) || "")
 
     // Huan(202111): { id } query has been optimized in the PuppetAbstract class
 
@@ -133,22 +92,20 @@ class MessageMixin extends MixinBase implements SayableSayer {
 
     try {
       const MessageIdList = await this.wechaty.puppet.messageSearch(query)
-      const messageList = MessageIdList.map(id => this.load(id))
+      const messageList = MessageIdList.map((id) => this.load(id))
       await Promise.all(
-        messageList.map(
-          message => message.ready()
-            .catch(e => {
-              log.warn('Room', 'findAll() message.ready() rejection: %s', e)
-              invalidDict[message.id] = true
-            }),
+        messageList.map((message) =>
+          message.ready().catch((e) => {
+            log.warn("Room", "findAll() message.ready() rejection: %s", e)
+            invalidDict[message.id] = true
+          }),
         ),
       )
 
-      return messageList.filter(message => !invalidDict[message.id])
-
+      return messageList.filter((message) => !invalidDict[message.id])
     } catch (e) {
       this.wechaty.emitError(e)
-      log.warn('Message', 'findAll() rejected: %s', (e as Error).message)
+      log.warn("Message", "findAll() rejected: %s", (e as Error).message)
       return [] // fail safe
     }
   }
@@ -159,8 +116,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * "mobile originated" or "mobile terminated"
    * https://www.tatango.com/resources/video-lessons/video-mo-mt-sms-messaging/
    */
-  static load (id: string): MessageImplInterface {
-    log.verbose('Message', 'static load(%s)', id)
+  static load(id: string): MessageImplInterface {
+    log.verbose("Message", "static load(%s)", id)
 
     /**
      * Must NOT use `Message` at here
@@ -184,20 +141,15 @@ class MessageMixin extends MixinBase implements SayableSayer {
   /**
    * @hideconstructor
    */
-  constructor (
-    public readonly id: string,
-  ) {
+  constructor(public readonly id: string) {
     super()
-    log.verbose('Message', 'constructor(%s) for class %s',
-      id || '',
-      this.constructor.name,
-    )
+    log.verbose("Message", "constructor(%s) for class %s", id || "", this.constructor.name)
   }
 
   /**
    * @ignore
    */
-  override toString () {
+  override toString() {
     if (!this.payload) {
       return this.constructor.name
     }
@@ -210,32 +162,28 @@ class MessageMixin extends MixinBase implements SayableSayer {
     }
 
     const msgStrList = [
-      'Message',
+      "Message",
       `#${PUPPET.types.Message[this.type()]}`,
-      '[',
-      '🗣',
+      "[",
+      "🗣",
       talker,
-      this.room()
-        ? '@👥' + this.room()
-        : '',
-      ']',
+      this.room() ? "@👥" + this.room() : "",
+      "]",
     ]
 
-    if (this.type() === PUPPET.types.Message.Text
-     || this.type() === PUPPET.types.Message.Unknown
-    ) {
+    if (this.type() === PUPPET.types.Message.Text || this.type() === PUPPET.types.Message.Unknown) {
       msgStrList.push(`\t${this.text().substr(0, 70)}`)
     } else {
-      log.silly('Message', 'toString() for message type: %s(%s)', PUPPET.types.Message[this.type()], this.type())
+      log.silly("Message", "toString() for message type: %s(%s)", PUPPET.types.Message[this.type()], this.type())
       // if (!this.#payload) {
       //   throw new Error('no payload')
       // }
     }
 
-    return msgStrList.join('')
+    return msgStrList.join("")
   }
 
-  conversation (): ContactInterface | RoomInterface {
+  conversation(): ContactInterface | RoomInterface {
     if (this.room()) {
       return this.room()!
     } else {
@@ -262,9 +210,9 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    * .start()
    */
-  talker (): ContactInterface {
+  talker(): ContactInterface {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     let talkerId = this.payload.talkerId
@@ -275,11 +223,11 @@ class MessageMixin extends MixinBase implements SayableSayer {
       if (this.payload.fromId) {
         talkerId = this.payload.fromId
       } else {
-        throw new Error('no talkerId found for talker')
+        throw new Error("no talkerId found for talker")
       }
 
-      log.warn('Message', 'talker() payload.talkerId not exist! See: https://github.com/wechaty/puppet/issues/187')
-      console.error('Puppet: %s@%s', this.wechaty.puppet.name(), this.wechaty.puppet.version())
+      log.warn("Message", "talker() payload.talkerId not exist! See: https://github.com/wechaty/puppet/issues/187")
+      console.error("Puppet: %s@%s", this.wechaty.puppet.name(), this.wechaty.puppet.version())
       console.error(new Error().stack)
     }
 
@@ -296,10 +244,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * @depreacated Use `message.talker()` to replace `message.from()`
    *  https://github.com/wechaty/wechaty/issues/2094
    */
-  from (): undefined | ContactInterface {
-    log.warn('Message', 'from() is deprecated, use talker() instead. Call stack: %s',
-      new Error().stack,
-    )
+  from(): undefined | ContactInterface {
+    log.warn("Message", "from() is deprecated, use talker() instead. Call stack: %s", new Error().stack)
     try {
       return this.talker()
     } catch (e) {
@@ -314,7 +260,7 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * @returns {(ContactInterface|null)}
    * @deprecated use `listener()` instead
    */
-  to (): undefined | ContactInterface {
+  to(): undefined | ContactInterface {
     // Huan(202108): I want to deprecate this method name in the future,
     //  and use `message.listener()` to replace it.
     return this.listener()
@@ -326,9 +272,9 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * use Message.room() to get the room.
    * @returns {(undefined | ContactInterface)}
    */
-  listener (): undefined | ContactInterface {
+  listener(): undefined | ContactInterface {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     let listenerId = this.payload.listenerId
@@ -339,8 +285,11 @@ class MessageMixin extends MixinBase implements SayableSayer {
        */
       listenerId = this.payload.toId
 
-      log.warn('Message', 'listener() payload.listenerId should be set! See: https://github.com/wechaty/puppet/issues/187')
-      console.error('Puppet: %s@%s', this.wechaty.puppet.name(), this.wechaty.puppet.version())
+      log.warn(
+        "Message",
+        "listener() payload.listenerId should be set! See: https://github.com/wechaty/puppet/issues/187",
+      )
+      console.error("Puppet: %s@%s", this.wechaty.puppet.name(), this.wechaty.puppet.version())
       console.error(new Error().stack)
     }
 
@@ -378,9 +327,9 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    * .start()
    */
-  room (): undefined | RoomInterface {
+  room(): undefined | RoomInterface {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
     const roomId = this.payload.roomId
     if (!roomId) {
@@ -411,12 +360,12 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    * .start()
    */
-  text (): string {
+  text(): string {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
-    return this.payload.text || ''
+    return this.payload.text || ""
   }
 
   /**
@@ -433,20 +382,19 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    * .start()
    */
-  async toRecalled (): Promise<undefined | MessageInterface> {
+  async toRecalled(): Promise<undefined | MessageInterface> {
     if (this.type() !== PUPPET.types.Message.Recalled) {
-      throw new Error('Can not call toRecalled() on message which is not recalled type.')
+      throw new Error("Can not call toRecalled() on message which is not recalled type.")
     }
     const originalMessageId = this.text()
     if (!originalMessageId) {
-      throw new Error('Can not find recalled message')
+      throw new Error("Can not find recalled message")
     }
     try {
       const message = await this.wechaty.Message.find({ id: originalMessageId })
       if (message) {
         return message
       }
-
     } catch (e) {
       this.wechaty.emitError(e)
       log.verbose(`Can not retrieve the recalled message with id ${originalMessageId}.`)
@@ -543,13 +491,11 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    * .start()
    */
-  async say (
-    sayable: Sayable,
-  ): Promise<void | MessageInterface> {
-    log.verbose('Message', 'say(%s)', sayable)
+  async say(sayable: Sayable): Promise<void | MessageInterface> {
+    log.verbose("Message", "say(%s)", sayable)
 
-    const talker  = this.talker()
-    const room    = this.room()
+    const talker = this.talker()
+    const room = this.room()
 
     if (room) {
       return room.say(sayable)
@@ -574,8 +520,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    */
 
-  async recall (): Promise<boolean> {
-    log.verbose('Message', 'recall()')
+  async recall(): Promise<boolean> {
+    log.verbose("Message", "recall()")
     const isSuccess = await this.wechaty.puppet.messageRecall(this.id)
     return isSuccess
   }
@@ -600,9 +546,9 @@ class MessageMixin extends MixinBase implements SayableSayer {
    *   console.log('This is a text message')
    * }
    */
-  type (): PUPPET.types.Message {
+  type(): PUPPET.types.Message {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
     return this.payload.type || PUPPET.types.Message.Unknown
   }
@@ -616,14 +562,14 @@ class MessageMixin extends MixinBase implements SayableSayer {
    *  console.log('this message is sent by myself!')
    * }
    */
-  self (): boolean {
+  self(): boolean {
     try {
       const talker = this.talker()
 
       return talker.id === this.wechaty.puppet.currentUserId
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Message', 'self() rejection: %s', (e as Error).message)
+      log.error("Message", "self() rejection: %s", (e as Error).message)
       return false
     }
   }
@@ -647,8 +593,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * const contactList = await message.mentionList()
    * console.log(contactList)
    */
-  async mentionList (): Promise<ContactInterface[]> {
-    log.verbose('Message', 'mentionList()')
+  async mentionList(): Promise<ContactInterface[]> {
+    log.verbose("Message", "mentionList()")
 
     const room = this.room()
     if (this.type() !== PUPPET.types.Message.Text || !room) {
@@ -658,15 +604,9 @@ class MessageMixin extends MixinBase implements SayableSayer {
     /**
      * 1. Use mention list if mention list is available
      */
-    if (this.payload
-        && 'mentionIdList' in this.payload
-        && Array.isArray(this.payload.mentionIdList)
-    ) {
+    if (this.payload && "mentionIdList" in this.payload && Array.isArray(this.payload.mentionIdList)) {
       const idToContact = (id: string) => this.wechaty.Contact.find({ id })
-      const allContact = await Promise.all(
-        this.payload.mentionIdList
-          .map(idToContact),
-      )
+      const allContact = await Promise.all(this.payload.mentionIdList.map(idToContact))
       // remove `undefined` types because we use a `filter(Boolean)`
       return allContact.filter(Boolean) as ContactInterface[]
     }
@@ -684,21 +624,20 @@ class MessageMixin extends MixinBase implements SayableSayer {
     if (atList.length === 0) return []
 
     // Using `filter(e => e.indexOf('@') > -1)` to filter the string without `@`
-    const rawMentionList = atList
-      .filter(str => str.includes('@'))
-      .map(str => multipleAt(str))
+    const rawMentionList = atList.filter((str) => str.includes("@")).map((str) => multipleAt(str))
 
     // convert 'hello@a@b@c' to [ 'c', 'b@c', 'a@b@c' ]
-    function multipleAt (str: string) {
-      str = str.replace(/^.*?@/, '@')
-      let name = ''
+    function multipleAt(str: string) {
+      str = str.replace(/^.*?@/, "@")
+      let name = ""
       const nameList: string[] = []
-      str.split('@')
-        .filter(mentionName => !!mentionName)
+      str
+        .split("@")
+        .filter((mentionName) => !!mentionName)
         .reverse()
-        .forEach(mentionName => {
+        .forEach((mentionName) => {
           // console.log('mentionName: ', mentionName)
-          name = mentionName + '@' + name
+          name = mentionName + "@" + name
           nameList.push(name.slice(0, -1)) // get rid of the `@` at beginning
         })
       return nameList
@@ -709,24 +648,25 @@ class MessageMixin extends MixinBase implements SayableSayer {
     // see http://stackoverflow.com/a/10865042/1123955
     mentionNameList = mentionNameList.concat.apply([], rawMentionList)
     // filter blank string
-    mentionNameList = mentionNameList.filter(s => !!s)
+    mentionNameList = mentionNameList.filter((s) => !!s)
 
-    log.verbose('Message', 'mentionList() text = "%s", mentionNameList = "%s"',
+    log.verbose(
+      "Message",
+      'mentionList() text = "%s", mentionNameList = "%s"',
       this.text(),
       JSON.stringify(mentionNameList),
     )
 
-    const contactListNested = await Promise.all(
-      mentionNameList.map(
-        name => room.memberAll(name),
-      ),
-    )
+    const contactListNested = await Promise.all(mentionNameList.map((name) => room.memberAll(name)))
 
     let contactList: ContactInterface[] = []
     contactList = contactList.concat.apply([], contactListNested)
 
     if (contactList.length === 0) {
-      log.silly('Message', `message.mentionList() can not found member using room.member() from mentionList, mention string: ${JSON.stringify(mentionNameList)}`)
+      log.silly(
+        "Message",
+        `message.mentionList() can not found member using room.member() from mentionList, mention string: ${JSON.stringify(mentionNameList)}`,
+      )
     }
     return contactList
   }
@@ -734,14 +674,12 @@ class MessageMixin extends MixinBase implements SayableSayer {
   /**
    * @deprecated mention() DEPRECATED. use mentionList() instead.
    */
-  async mention (): Promise<ContactInterface[]> {
-    log.warn('Message', 'mention() DEPRECATED. use mentionList() instead. Call stack: %s',
-      new Error().stack,
-    )
+  async mention(): Promise<ContactInterface[]> {
+    log.warn("Message", "mention() DEPRECATED. use mentionList() instead. Call stack: %s", new Error().stack)
     return this.mentionList()
   }
 
-  async mentionText (): Promise<string> {
+  async mentionText(): Promise<string> {
     const text = this.text()
     const room = this.room()
 
@@ -762,7 +700,7 @@ class MessageMixin extends MixinBase implements SayableSayer {
     const textWithoutMention = mentionNameList.reduce((prev, cur) => {
       const escapedCur = escapeRegExp(cur)
       const regex = new RegExp(`@${escapedCur}(\u2005|\u0020|$)`)
-      return prev.replace(regex, '')
+      return prev.replace(regex, "")
     }, text)
 
     return textWithoutMention.trim()
@@ -777,24 +715,24 @@ class MessageMixin extends MixinBase implements SayableSayer {
    *  console.log('this message were mentioned me! [You were mentioned] tip ([有人@我]的提示)')
    * }
    */
-  async mentionSelf (): Promise<boolean> {
+  async mentionSelf(): Promise<boolean> {
     const currentUserId = this.wechaty.puppet.currentUserId
     const mentionList = await this.mentionList()
-    return mentionList.some(contact => contact.id === currentUserId)
+    return mentionList.some((contact) => contact.id === currentUserId)
   }
 
   /**
    * @ignore
    */
-  isReady (): boolean {
+  isReady(): boolean {
     return !!this.payload
   }
 
   /**
    * @ignore
    */
-  async ready (): Promise<void> {
-    log.verbose('Message', 'ready()')
+  async ready(): Promise<void> {
+    log.verbose("Message", "ready()")
 
     if (this.isReady()) {
       return
@@ -810,11 +748,11 @@ class MessageMixin extends MixinBase implements SayableSayer {
       if (this.payload.fromId) {
         talkerId = this.payload.fromId
       } else {
-        throw new Error('no talkerId found for talker')
+        throw new Error("no talkerId found for talker")
       }
 
-      log.warn('Message', 'ready() payload.talkerId not exist! See: https://github.com/wechaty/puppet/issues/187')
-      console.error('Puppet: %s@%s', this.wechaty.puppet.name(), this.wechaty.puppet.version())
+      log.warn("Message", "ready() payload.talkerId not exist! See: https://github.com/wechaty/puppet/issues/187")
+      console.error("Puppet: %s@%s", this.wechaty.puppet.name(), this.wechaty.puppet.version())
       console.error(new Error().stack)
     }
 
@@ -827,8 +765,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
        */
       listenerId = this.payload.toId
 
-      log.warn('Message', 'ready() payload.listenerId should be set! See: https://github.com/wechaty/puppet/issues/187')
-      console.error('Puppet: %s@%s', this.wechaty.puppet.name(), this.wechaty.puppet.version())
+      log.warn("Message", "ready() payload.listenerId should be set! See: https://github.com/wechaty/puppet/issues/187")
+      console.error("Puppet: %s@%s", this.wechaty.puppet.name(), this.wechaty.puppet.version())
       console.error(new Error().stack)
     }
 
@@ -896,23 +834,20 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * })
    * .start()
    */
-  async forward (to: RoomInterface | ContactInterface): Promise<void | MessageInterface> {
-    log.verbose('Message', 'forward(%s)', to)
+  async forward(to: RoomInterface | ContactInterface): Promise<void | MessageInterface> {
+    log.verbose("Message", "forward(%s)", to)
 
     // let roomId
     // let contactId
 
     try {
-      const msgId = await this.wechaty.puppet.messageForward(
-        to.id,
-        this.id,
-      )
+      const msgId = await this.wechaty.puppet.messageForward(to.id, this.id)
       if (msgId) {
         const msg = await this.wechaty.Message.find({ id: msgId })
         return msg
       }
     } catch (e) {
-      log.error('Message', 'forward(%s) exception: %s', to, e)
+      log.error("Message", "forward(%s) exception: %s", to, e)
       throw e
     }
   }
@@ -920,9 +855,9 @@ class MessageMixin extends MixinBase implements SayableSayer {
   /**
    * Message sent date
    */
-  date (): Date {
+  date(): Date {
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     const timestamp = this.payload.timestamp
@@ -938,7 +873,7 @@ class MessageMixin extends MixinBase implements SayableSayer {
    *
    * @returns {number} message age in seconds.
    */
-  age (): number {
+  age(): number {
     const ageMilliseconds = Date.now() - this.date().getTime()
     const ageSeconds = Math.floor(ageMilliseconds / 1000)
     return ageSeconds
@@ -956,10 +891,10 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * const fileName = fileBox.name
    * fileBox.toFile(fileName)
    */
-  async toFileBox (): Promise<FileBoxInterface> {
-    log.verbose('Message', 'toFileBox()')
+  async toFileBox(): Promise<FileBoxInterface> {
+    log.verbose("Message", "toFileBox()")
     if (this.type() === PUPPET.types.Message.Text) {
-      throw new Error('text message no file')
+      throw new Error("text message no file")
     }
     const fileBox = await this.wechaty.puppet.messageFile(this.id)
     return fileBox
@@ -978,8 +913,8 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * const fileName = fileBox.name
    * fileBox.toFile(fileName)
    */
-  toImage (): ImageInterface {
-    log.verbose('Message', 'toImage() for message id: %s', this.id)
+  toImage(): ImageInterface {
+    log.verbose("Message", "toImage() for message id: %s", this.id)
     if (this.type() !== PUPPET.types.Message.Image) {
       throw new Error(`not a image type message. type: ${this.type()}`)
     }
@@ -993,11 +928,11 @@ class MessageMixin extends MixinBase implements SayableSayer {
    * This function is depending on the Puppet Implementation, see [puppet-compatible-table](https://github.com/wechaty/wechaty/wiki/Puppet#3-puppet-compatible-table)
    * @returns {Promise<ContactInterface>}
    */
-  async toContact (): Promise<ContactInterface> {
-    log.verbose('Message', 'toContact()')
+  async toContact(): Promise<ContactInterface> {
+    log.verbose("Message", "toContact()")
 
     if (this.type() !== PUPPET.types.Message.Contact) {
-      throw new Error('message not a ShareCard')
+      throw new Error("message not a ShareCard")
     }
 
     const contactId = await this.wechaty.puppet.messageContact(this.id)
@@ -1014,15 +949,15 @@ class MessageMixin extends MixinBase implements SayableSayer {
     return contact
   }
 
-  async toUrlLink (): Promise<UrlLinkInterface> {
-    log.verbose('Message', 'toUrlLink()')
+  async toUrlLink(): Promise<UrlLinkInterface> {
+    log.verbose("Message", "toUrlLink()")
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     if (this.type() !== PUPPET.types.Message.Url) {
-      throw new Error('message not a Url Link')
+      throw new Error("message not a Url Link")
     }
 
     const urlPayload = await this.wechaty.puppet.messageUrl(this.id)
@@ -1030,15 +965,15 @@ class MessageMixin extends MixinBase implements SayableSayer {
     return new this.wechaty.UrlLink(urlPayload)
   }
 
-  async toMiniProgram (): Promise<MiniProgramInterface> {
-    log.verbose('Message', 'toMiniProgram()')
+  async toMiniProgram(): Promise<MiniProgramInterface> {
+    log.verbose("Message", "toMiniProgram()")
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     if (this.type() !== PUPPET.types.Message.MiniProgram) {
-      throw new Error('message not a MiniProgram')
+      throw new Error("message not a MiniProgram")
     }
 
     const miniProgramPayload = await this.wechaty.puppet.messageMiniProgram(this.id)
@@ -1046,15 +981,15 @@ class MessageMixin extends MixinBase implements SayableSayer {
     return new this.wechaty.MiniProgram(miniProgramPayload)
   }
 
-  async toLocation (): Promise<LocationInterface> {
-    log.verbose('Message', 'toLocation()')
+  async toLocation(): Promise<LocationInterface> {
+    log.verbose("Message", "toLocation()")
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     if (this.type() !== PUPPET.types.Message.Location) {
-      throw new Error('message not a Location')
+      throw new Error("message not a Location")
     }
 
     const locationPayload = await this.wechaty.puppet.messageLocation(this.id)
@@ -1062,15 +997,15 @@ class MessageMixin extends MixinBase implements SayableSayer {
     return new LocationImpl(locationPayload)
   }
 
-  public async toPost (): Promise<PostInterface> {
-    log.verbose('Message', 'toPost()')
+  public async toPost(): Promise<PostInterface> {
+    log.verbose("Message", "toPost()")
 
     if (!this.payload) {
-      throw new Error('no payload')
+      throw new Error("no payload")
     }
 
     if (this.type() !== PUPPET.types.Message.Post) {
-      throw new Error('message type not a Post')
+      throw new Error("message type not a Post")
     }
 
     const post = PostImpl.load(this.id)
@@ -1078,32 +1013,21 @@ class MessageMixin extends MixinBase implements SayableSayer {
     return post
   }
 
-  async toSayable (): Promise<undefined | Sayable> {
-    log.verbose('Message', 'toSayable()')
+  async toSayable(): Promise<undefined | Sayable> {
+    log.verbose("Message", "toSayable()")
     return messageToSayable(this)
   }
-
 }
 
 class MessageImplBase extends validationMixin(MessageMixin)<MessageImplInterface>() {}
 interface MessageImplInterface extends MessageImplBase {}
 
-type MessageProtectedProperty =
-  | 'ready'
+type MessageProtectedProperty = "ready"
 
 type MessageInterface = Omit<MessageImplInterface, MessageProtectedProperty>
 class MessageImpl extends validationMixin(MessageImplBase)<MessageInterface>() {}
 
-type MessageConstructor = Constructor<
-  MessageInterface,
-  Omit<typeof MessageImpl, 'load'>
->
+type MessageConstructor = Constructor<MessageInterface, Omit<typeof MessageImpl, "load">>
 
-export type {
-  MessageInterface,
-  MessageProtectedProperty,
-  MessageConstructor,
-}
-export {
-  MessageImpl,
-}
+export type { MessageInterface, MessageProtectedProperty, MessageConstructor }
+export { MessageImpl }

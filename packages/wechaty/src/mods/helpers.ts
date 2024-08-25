@@ -1,5 +1,1 @@
-export {
-  messageToSayable,
-  payloadToSayableWechaty,
-  sayableToPayload,
-}                           from '../sayable/mod.js'
+export { messageToSayable, payloadToSayableWechaty, sayableToPayload } from "../sayable/mod.js"

@@ -3,17 +3,13 @@ import Image from "next/image"
 import React, { HTMLAttributes } from "react"
 
 import { IUploadFile } from "@cs-magic/common/dist/oss/schema"
-
-import { FlexContainer } from "./flex-container"
-import { Loading } from "./loading"
 import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import { AspectRatio } from "@cs-magic/shadcn/dist/ui/aspect-ratio"
 
-export const FileComp = ({
-  file,
-  className,
-  ...props
-}: { file: IUploadFile } & HTMLAttributes<HTMLDivElement>) => {
+import { FlexContainer } from "./flex-container"
+import { Loading } from "./loading"
+
+export const FileComp = ({ file, className, ...props }: { file: IUploadFile } & HTMLAttributes<HTMLDivElement>) => {
   return (
     <div className={cn("w-full", className)} {...props}>
       <AspectRatio ratio={1} className={"relative"}>

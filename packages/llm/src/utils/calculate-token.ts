@@ -1,6 +1,8 @@
-import { ILlmMessage } from "@cs-magic/common/dist/schema/message"
 import { sum } from "lodash-es"
 import { encoding_for_model } from "tiktoken"
+
+import { ILlmMessage } from "@cs-magic/common/dist/schema/message"
+
 import type { LlmModelType } from "../schema/llm.models.js"
 
 /**
@@ -13,10 +15,7 @@ import type { LlmModelType } from "../schema/llm.models.js"
  * @param messages
  * @param model
  */
-export const calculateToken = (
-  messages: ILlmMessage[],
-  model: LlmModelType,
-) => {
+export const calculateToken = (messages: ILlmMessage[], model: LlmModelType) => {
   // the model is fixed to have an estimated value since we would support many other models (e.g. domestic)
   const encoding = encoding_for_model("gpt-3.5-turbo-0613")
   const tokens_per_message = 3

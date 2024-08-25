@@ -1,5 +1,4 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
-
 import { GError } from "gerror"
 import { sinon, test } from "tstest"
 
@@ -7,10 +6,7 @@ import type { PuppetSkeletonProtectedProperty } from "./puppet-skeleton.js"
 import { PuppetSkeleton } from "./puppet-skeleton.js"
 
 test("ProtectedPropertySkeleton", async (t) => {
-  type NotExistInMixin = Exclude<
-    PuppetSkeletonProtectedProperty,
-    keyof PuppetSkeleton
-  >
+  type NotExistInMixin = Exclude<PuppetSkeletonProtectedProperty, keyof PuppetSkeleton>
   type NotExistTest = NotExistInMixin extends never ? true : false
 
   const noOneLeft: NotExistTest = true
@@ -48,15 +44,8 @@ test("emit(error, ...) with GError", async (t) => {
   for (const data of FIXTURES) {
     puppet.emit("error", data)
     await Promise.resolve()
-    t.equal(
-      typeof payload.gerror,
-      "string",
-      `should be an error payload for ${typeof data} "${JSON.stringify(data)}"`,
-    )
-    t.doesNotThrow(
-      () => GError.fromJSON(payload.gerror),
-      "should be successfully deserialized to GError",
-    )
+    t.equal(typeof payload.gerror, "string", `should be an error payload for ${typeof data} "${JSON.stringify(data)}"`)
+    t.doesNotThrow(() => GError.fromJSON(payload.gerror), "should be successfully deserialized to GError")
   }
 })
 
@@ -71,11 +60,7 @@ test("wrapAsync() promise", async (t) => {
   const DATA = "test"
   const promise = Promise.resolve(DATA)
   const wrappedPromise = puppet.wrapAsync(promise)
-  t.equal(
-    await wrappedPromise,
-    undefined,
-    "should resolve Promise<any> to void",
-  )
+  t.equal(await wrappedPromise, undefined, "should resolve Promise<any> to void")
 
   const rejection = Promise.reject(new Error("test"))
   const wrappedRejection = puppet.wrapAsync(rejection)

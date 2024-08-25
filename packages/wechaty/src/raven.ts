@@ -1,27 +1,20 @@
-import type Raven from 'raven'
+import type { GError } from "gerror"
+import os from "os"
+import type Raven from "raven"
+import { log } from "wechaty-puppet"
 
-import os from 'os'
-
-import {
-  log,
-}           from 'wechaty-puppet'
-import type { GError } from 'gerror'
-
-import {
-  VERSION,
-  GIT_COMMIT_HASH,
-}                   from './config.js'
+import { GIT_COMMIT_HASH, VERSION } from "./config.js"
 
 let raven: typeof Raven
 let enabled = false
 
-function getRavenDsn (): undefined | string {
+function getRavenDsn(): undefined | string {
   // const RAVEN_DSN = 'https://f6770399ee65459a82af82650231b22c:d8d11b283deb441e807079b8bb2c45cd@sentry.io/179672'
-  const dsn = process.env['WECHATY_RAVEN_DSN']
+  const dsn = process.env["WECHATY_RAVEN_DSN"]
   return dsn
 }
 
-function enableRaven (dsn: string):void  {
+function enableRaven(dsn: string): void {
   /**
    * Raven.io
    */
@@ -29,40 +22,36 @@ function enableRaven (dsn: string):void  {
     release: VERSION,
     tags: {
       git_commit: GIT_COMMIT_HASH,
-      platform: process.env['WECHATY_DOCKER']
-        ? 'docker'
-        : os.platform(),
+      platform: process.env["WECHATY_DOCKER"] ? "docker" : os.platform(),
     },
   }
 
   raven.disableConsoleAlerts()
-  raven
-    .config(dsn, ravenOptions)
-    .install()
+  raven.config(dsn, ravenOptions).install()
 
   enabled = true
 }
 
-async function init () {
+async function init() {
   try {
-    raven = await import('raven')
-    log.verbose('Wechaty', 'init() Raven enabled (import("raven") succeed)')
+    raven = await import("raven")
+    log.verbose("Wechaty", 'init() Raven enabled (import("raven") succeed)')
   } catch (e) {
     // It's ok when there's no raven installed
-    log.verbose('Wechaty', 'init() Raven disabled (import("raven") failed)')
+    log.verbose("Wechaty", 'init() Raven disabled (import("raven") failed)')
     return
   }
 
   const dsn = getRavenDsn()
   if (!dsn) {
-    log.verbose('Wechaty', 'init() getRavenDsn() return undefined, skipped.')
+    log.verbose("Wechaty", "init() getRavenDsn() return undefined, skipped.")
     return
   }
 
   enableRaven(dsn)
 }
 
-function wechatyCaptureException (e: GError) {
+function wechatyCaptureException(e: GError) {
   if (enabled) {
     raven.captureException(e)
   }
@@ -70,6 +59,4 @@ function wechatyCaptureException (e: GError) {
 
 init().catch(console.error)
 
-export {
-  wechatyCaptureException,
-}
+export { wechatyCaptureException }

@@ -1,5 +1,6 @@
 import { Puppet, log } from "wechaty-puppet"
 import type * as PUPPET from "wechaty-puppet"
+
 import type { WebMessageRawPayload } from "../../web-schemas.js"
 
 export enum EventType {
@@ -26,28 +27,19 @@ export interface Event<T extends keyof EventPayloadSpec> {
 }
 
 export type EventPayload = EventPayloadSpec[keyof EventPayloadSpec] | null
-export type EventParserHandler = (
-  puppet: Puppet,
-  message: WebMessageRawPayload,
-) => Promise<EventPayload>
+export type EventParserHandler = (puppet: Puppet, message: WebMessageRawPayload) => Promise<EventPayload>
 type EventParser = { type: EventType; handler: EventParserHandler }
 
 const EventParserList: Array<EventParser> = []
 
-export function addEventParser(
-  eventType: EventType,
-  parser: EventParserHandler,
-): void {
+export function addEventParser(eventType: EventType, parser: EventParserHandler): void {
   EventParserList.push({
     handler: parser,
     type: eventType,
   })
 }
 
-export async function parseEvent(
-  puppet: Puppet,
-  message: WebMessageRawPayload,
-): Promise<Event<any>> {
+export async function parseEvent(puppet: Puppet, message: WebMessageRawPayload): Promise<Event<any>> {
   for (const parser of EventParserList) {
     try {
       const parsedPayload = await parser.handler(puppet, message)

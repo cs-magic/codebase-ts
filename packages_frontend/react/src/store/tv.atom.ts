@@ -1,6 +1,8 @@
 import { atom } from "jotai"
-import { uiScreenAtom } from "./ui.atom"
+
 import { IDimension } from "@cs-magic/common/dist/schema/ui"
+
+import { uiScreenAtom } from "./ui.atom"
 
 // import { IDimension } from "../ui/schema"
 // import { uiScreenAtom } from "../ui/store"
@@ -33,5 +35,4 @@ export const tvScaleAtom = atom((get) => {
   return get(tvTargetWidthAtom) / 420 // css中的固定尺寸
 })
 
-export const getTvScale = ({ width, height }: IDimension) =>
-  Math.min(width, height) / 420
+export const getTvScale = ({ width, height }: IDimension) => Math.min(width, height) / 420

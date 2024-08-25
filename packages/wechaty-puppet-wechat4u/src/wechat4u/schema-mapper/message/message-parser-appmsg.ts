@@ -1,9 +1,11 @@
 import * as PUPPET from "wechaty-puppet"
 import { MessageParserContext, log } from "wechaty-puppet"
 import { AppMessageType } from "wechaty-puppet"
-import { LOGPRE, MessageParser } from "./message-parser.js"
-import { parseAppmsgMessagePayload } from "../../messages/message-appmsg.js"
+
 import type { WebMessageRawPayload } from "../../../web-schemas"
+import { parseAppmsgMessagePayload } from "../../messages/message-appmsg.js"
+
+import { LOGPRE, MessageParser } from "./message-parser.js"
 
 // @ts-ignore
 export const appMsgParser: MessageParser = async (
@@ -16,9 +18,7 @@ export const appMsgParser: MessageParser = async (
   }
 
   try {
-    const appPayload = await parseAppmsgMessagePayload(
-      webMessageRawPayload.Content,
-    )
+    const appPayload = await parseAppmsgMessagePayload(webMessageRawPayload.Content)
     context.appMessagePayload = appPayload
     switch (appPayload.type) {
       case AppMessageType.Text:

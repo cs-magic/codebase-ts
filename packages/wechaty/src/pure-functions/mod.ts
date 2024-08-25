@@ -17,12 +17,5 @@
  *   limitations under the License.
  *
  */
-export { retryPolicy }      from './retry-policy.js'
-export {
-  digestEmoji,
-  plainText,
-  stripEmoji,
-  stripHtml,
-  unescapeHtml,
-  unifyEmoji,
-}                          from './xml.js'
+export { retryPolicy } from "./retry-policy.js"
+export { digestEmoji, plainText, stripEmoji, stripHtml, unescapeHtml, unifyEmoji } from "./xml.js"

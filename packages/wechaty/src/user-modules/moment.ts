@@ -17,22 +17,20 @@
  *   limitations under the License.
  *
  */
-import { log } from 'wechaty-puppet'
-import type { Constructor } from 'clone-class'
+import type { Constructor } from "clone-class"
+import { log } from "wechaty-puppet"
 
-import type { ContactInterface } from './contact.js'
-import { validationMixin } from '../user-mixins/validation.js'
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
+
+import type { ContactInterface } from "./contact.js"
 
 class MomentMixin extends wechatifyMixinBase() {
-
-  static post () {
+  static post() {
     // post new moment
   }
 
-  static timeline (contact: ContactInterface): MomentImpl[] {
+  static timeline(contact: ContactInterface): MomentImpl[] {
     // list all moment
     void contact
     return []
@@ -41,24 +39,15 @@ class MomentMixin extends wechatifyMixinBase() {
   /*
    * @hideconstructor
    */
-  constructor () {
+  constructor() {
     super()
-    log.verbose('Moment', 'constructor()')
+    log.verbose("Moment", "constructor()")
   }
-
 }
 
 class MomentImpl extends validationMixin(MomentMixin)<MomentInterface>() {}
 interface MomentInterface extends MomentImpl {}
-type MomentConstructor = Constructor<
-  MomentInterface,
-  typeof MomentImpl
->
+type MomentConstructor = Constructor<MomentInterface, typeof MomentImpl>
 
-export type {
-  MomentConstructor,
-  MomentInterface,
-}
-export {
-  MomentImpl,
-}
+export type { MomentConstructor, MomentInterface }
+export { MomentImpl }

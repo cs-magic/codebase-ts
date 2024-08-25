@@ -1,9 +1,10 @@
-import { useTranslation } from "next-i18next"
 import { IconLanguage } from "@tabler/icons-react"
+import { useTranslation } from "next-i18next"
 
 import { ICON_SIZE_MD } from "../config"
-import { LocaleNameSpace, LocaleType } from "@/locales"
+
 import { useSwitchLocale } from "@/hooks/use-locale"
+import { LocaleNameSpace, LocaleType } from "@/locales"
 
 export const LocaleSwitcher = () => {
   const { t, i18n } = useTranslation(LocaleNameSpace.manufacture)
@@ -11,9 +12,7 @@ export const LocaleSwitcher = () => {
 
   return (
     <IconLanguage
-      className={
-        "cursor-pointer shrink-0 text-muted-foreground hocus:text-accent-foreground"
-      }
+      className={"cursor-pointer shrink-0 text-muted-foreground hocus:text-accent-foreground"}
       size={ICON_SIZE_MD}
       onClick={() => {
         const curLang = i18n.language

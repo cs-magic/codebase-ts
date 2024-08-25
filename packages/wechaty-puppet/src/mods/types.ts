@@ -9,13 +9,13 @@ import {
   FriendshipType,
   ImageType,
   MessageType,
-  PostType,
   PUPPET_EVENT_DICT,
+  PostType,
   type PuppetEventName,
-  sayableTypes,
   ScanStatus,
   TapType,
   YOU,
+  sayableTypes,
 } from "../schemas/mod.js"
 
 export {
@@ -38,10 +38,4 @@ export {
   DirtyType as Dirty,
 }
 
-export {
-  ScanStatus,
-  type FriendshipAddOptions,
-  YOU,
-  CHAT_EVENT_DICT,
-  PUPPET_EVENT_DICT,
-}
+export { ScanStatus, type FriendshipAddOptions, YOU, CHAT_EVENT_DICT, PUPPET_EVENT_DICT }

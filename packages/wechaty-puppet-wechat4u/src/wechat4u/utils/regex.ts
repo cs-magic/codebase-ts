@@ -1,7 +1,4 @@
-export type RegexHandler<T> = (
-  matchedRegexIndex: number,
-  match: RegExpMatchArray,
-) => Promise<T>
+export type RegexHandler<T> = (matchedRegexIndex: number, match: RegExpMatchArray) => Promise<T>
 
 export async function parseTextWithRegexList<T>(
   text: string,

@@ -1,12 +1,9 @@
 import { BooleanIndicator } from "state-switch"
 
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 
-const readyMixin = <MixinBase extends typeof PuppetSkeleton>(
-  mixinBase: MixinBase,
-) => {
+const readyMixin = <MixinBase extends typeof PuppetSkeleton>(mixinBase: MixinBase) => {
   abstract class ReadyMixin extends mixinBase {
     readyIndicator: BooleanIndicator
 

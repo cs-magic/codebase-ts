@@ -1,5 +1,6 @@
 import { api } from "../api/api.js"
 import { parseJs } from "../utils/parse-js.js"
+
 import type { IXiaoHongShuNotePageData } from "./schema.js"
 
 /**
@@ -27,9 +28,7 @@ import type { IXiaoHongShuNotePageData } from "./schema.js"
  *
  * @param url
  */
-export const fetchXiaoHongShuDetail = async (
-  url: string,
-): Promise<IXiaoHongShuNotePageData | null> => {
+export const fetchXiaoHongShuDetail = async (url: string): Promise<IXiaoHongShuNotePageData | null> => {
   console.log({ url })
 
   const { data: html } = await api.get<string>(url, {
@@ -38,9 +37,7 @@ export const fetchXiaoHongShuDetail = async (
     },
   })
 
-  const jsonData = /window.__INITIAL_STATE__\s*=\s*(.*?)\s*<\/script>/.exec(
-    html,
-  )
+  const jsonData = /window.__INITIAL_STATE__\s*=\s*(.*?)\s*<\/script>/.exec(html)
 
   if (!jsonData?.[1]) return null
 

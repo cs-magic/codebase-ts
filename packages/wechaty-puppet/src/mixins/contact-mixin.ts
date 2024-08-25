@@ -1,19 +1,13 @@
 import type { FileBoxInterface } from "file-box"
+
 import { log } from "../config.js"
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
-
-import type {
-  ContactPayload,
-  ContactPayloadFilterFunction,
-  ContactQueryFilter,
-} from "../schemas/contact.js"
+import type { ContactPayload, ContactPayloadFilterFunction, ContactQueryFilter } from "../schemas/contact.js"
 import { DirtyType } from "../schemas/dirty.js"
 
 import type { CacheMixin } from "./cache-mixin.js"
 
-const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
-  mixinBase: MixinBase,
-) => {
+const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(mixinBase: MixinBase) => {
   abstract class ContactMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
@@ -37,28 +31,16 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
      *
      */
     abstract contactAlias(contactId: string): Promise<string>
-    abstract contactAlias(
-      contactId: string,
-      alias: string | null,
-    ): Promise<void>
+    abstract contactAlias(contactId: string, alias: string | null): Promise<void>
 
     abstract contactAvatar(contactId: string): Promise<FileBoxInterface>
-    abstract contactAvatar(
-      contactId: string,
-      file: FileBoxInterface,
-    ): Promise<void>
+    abstract contactAvatar(contactId: string, file: FileBoxInterface): Promise<void>
 
     abstract contactPhone(contactId: string, phoneList: string[]): Promise<void>
 
-    abstract contactCorporationRemark(
-      contactId: string,
-      corporationRemark: string | null,
-    ): Promise<void>
+    abstract contactCorporationRemark(contactId: string, corporationRemark: string | null): Promise<void>
 
-    abstract contactDescription(
-      contactId: string,
-      description: string | null,
-    ): Promise<void>
+    abstract contactDescription(contactId: string, description: string | null): Promise<void>
 
     abstract contactList(): Promise<string[]>
 
@@ -93,10 +75,7 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
     /**
      * @param query {string | Object} if string, then search `name` & `alias`
      */
-    async contactSearch(
-      query?: string | ContactQueryFilter,
-      searchIdList?: string[],
-    ): Promise<string[]> {
+    async contactSearch(query?: string | ContactQueryFilter, searchIdList?: string[]): Promise<string[]> {
       log.verbose(
         "PuppetContactMixin",
         "contactSearch(query=%s, %s)",
@@ -113,11 +92,7 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
           await this.contactPayload(query.id)
           return [query.id]
         } catch (e) {
-          log.verbose(
-            "PuppetContactMixin",
-            'contactSearch() payload not found for id "%s"',
-            query.id,
-          )
+          log.verbose("PuppetContactMixin", 'contactSearch() payload not found for id "%s"', query.id)
           await this.contactPayloadDirty(query.id)
           return []
         }
@@ -130,31 +105,20 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
         searchIdList = await this.contactList()
       }
 
-      log.silly(
-        "PuppetContactMixin",
-        "contactSearch() searchIdList.length = %d",
-        searchIdList.length,
-      )
+      log.silly("PuppetContactMixin", "contactSearch() searchIdList.length = %d", searchIdList.length)
 
       if (!query) {
         return searchIdList
       }
 
       if (typeof query === "string") {
-        const nameIdList = await this.contactSearch(
-          { name: query },
-          searchIdList,
-        )
-        const aliasIdList = await this.contactSearch(
-          { alias: query },
-          searchIdList,
-        )
+        const nameIdList = await this.contactSearch({ name: query }, searchIdList)
+        const aliasIdList = await this.contactSearch({ alias: query }, searchIdList)
 
         return Array.from(new Set([...nameIdList, ...aliasIdList]))
       }
 
-      const filterFunction: ContactPayloadFilterFunction =
-        this.contactQueryFilterFactory(query)
+      const filterFunction: ContactPayloadFilterFunction = this.contactQueryFilterFactory(query)
 
       const BATCH_SIZE = 16
       let batchIndex = 0
@@ -181,10 +145,7 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
       }
 
       while (BATCH_SIZE * batchIndex < searchIdList.length) {
-        const batchSearchIdList = searchIdList.slice(
-          BATCH_SIZE * batchIndex,
-          BATCH_SIZE * (batchIndex + 1),
-        )
+        const batchSearchIdList = searchIdList.slice(BATCH_SIZE * batchIndex, BATCH_SIZE * (batchIndex + 1))
 
         /**
          * Huan(202110): TODO: use an iterator with works to control the concurrency of Promise.all.
@@ -194,20 +155,14 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
         const matchBatchIdFutureList = batchSearchIdList.map(matchId)
         const matchBatchIdList = await Promise.all(matchBatchIdFutureList)
 
-        const batchSearchIdResultList: string[] = matchBatchIdList.filter(
-          (id) => !!id,
-        ) as string[]
+        const batchSearchIdResultList: string[] = matchBatchIdList.filter((id) => !!id) as string[]
 
         resultIdList.push(...batchSearchIdResultList)
 
         batchIndex++
       }
 
-      log.silly(
-        "PuppetContactMixin",
-        "contactSearch() searchContactPayloadList.length = %d",
-        resultIdList.length,
-      )
+      log.silly("PuppetContactMixin", "contactSearch() searchContactPayloadList.length = %d", resultIdList.length)
 
       return resultIdList
     }
@@ -217,14 +172,8 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
      *
      * @protected
      */
-    contactQueryFilterFactory(
-      query: ContactQueryFilter,
-    ): ContactPayloadFilterFunction {
-      log.verbose(
-        "PuppetContactMixin",
-        "contactQueryFilterFactory(%s)",
-        JSON.stringify(query),
-      )
+    contactQueryFilterFactory(query: ContactQueryFilter): ContactPayloadFilterFunction {
+      log.verbose("PuppetContactMixin", "contactQueryFilterFactory(%s)", JSON.stringify(query))
 
       /**
        * Clean the query for keys with empty value
@@ -236,18 +185,12 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
       })
 
       if (Object.keys(query).length < 1) {
-        throw new Error(
-          "query must provide at least one key. current query is empty.",
-        )
+        throw new Error("query must provide at least one key. current query is empty.")
       } else if (Object.keys(query).length > 1) {
-        throw new Error(
-          "query only support one key. multi key support is not available now.",
-        )
+        throw new Error("query only support one key. multi key support is not available now.")
       }
       // Huan(202105): we use `!` at here because the above `if` checks
-      const filterKey = Object.keys(
-        query,
-      )[0]!.toLowerCase() as keyof ContactQueryFilter
+      const filterKey = Object.keys(query)[0]!.toLowerCase() as keyof ContactQueryFilter
 
       const isValid = ["alias", "id", "name", "weixin"].includes(filterKey)
 
@@ -264,11 +207,9 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
       let filterFunction
 
       if (typeof filterValue === "string") {
-        filterFunction = (payload: ContactPayload) =>
-          filterValue === payload[filterKey]
+        filterFunction = (payload: ContactPayload) => filterValue === payload[filterKey]
       } else if (filterValue instanceof RegExp) {
-        filterFunction = (payload: ContactPayload) =>
-          !!payload[filterKey] && filterValue.test(payload[filterKey]!)
+        filterFunction = (payload: ContactPayload) => !!payload[filterKey] && filterValue.test(payload[filterKey]!)
       } else {
         throw new Error("unsupported filterValue type: " + typeof filterValue)
       }
@@ -281,11 +222,7 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
      *  For example: talk to the server, and see if it should be deleted in the local cache.
      */
     async contactValidate(contactId: string): Promise<boolean> {
-      log.silly(
-        "PuppetContactMixin",
-        "contactValidate(%s) base class just return `true`",
-        contactId,
-      )
+      log.silly("PuppetContactMixin", "contactValidate(%s) base class just return `true`", contactId)
       return true
     }
 
@@ -304,11 +241,7 @@ const contactMixin = <MixinBase extends CacheMixin & typeof PuppetSkeleton>(
       if (cachedPayload) {
         // log.silly('PuppetContactMixin', 'contactPayload(%s) cache HIT', contactId)
       } else {
-        log.silly(
-          "PuppetContactMixin",
-          "contactPayload(%s) cache MISS",
-          contactId,
-        )
+        log.silly("PuppetContactMixin", "contactPayload(%s) cache MISS", contactId)
       }
 
       return cachedPayload

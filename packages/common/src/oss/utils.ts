@@ -6,10 +6,7 @@ import { OSS_DOMAIN } from "./const.js"
  * @param width
  * @param height
  */
-export const getOssUrl = (
-  ossKeyWithSuffix: string,
-  params?: { width?: number; height?: number },
-) => {
+export const getOssUrl = (ossKeyWithSuffix: string, params?: { width?: number; height?: number }) => {
   if (!/^(?:\/|http)/.test(ossKeyWithSuffix)) {
     ossKeyWithSuffix = OSS_DOMAIN + ossKeyWithSuffix
   }

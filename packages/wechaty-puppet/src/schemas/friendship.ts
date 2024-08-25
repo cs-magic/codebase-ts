@@ -50,10 +50,7 @@ export type FriendshipPayloadVerify = FriendshipPayloadBase & {
   type: FriendshipType.Verify
 }
 
-export type FriendshipPayload =
-  | FriendshipPayloadConfirm
-  | FriendshipPayloadReceive
-  | FriendshipPayloadVerify
+export type FriendshipPayload = FriendshipPayloadConfirm | FriendshipPayloadReceive | FriendshipPayloadVerify
 
 export interface FriendshipSearchCondition {
   phone: string

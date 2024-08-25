@@ -17,20 +17,15 @@
  *   limitations under the License.
  *
  */
-import { MemoryCard }     from 'memory-card'
-import { log }            from 'wechaty-puppet'
-import * as UUID          from 'uuid'
-import type { Loggable }  from 'brolog'
+import type { Loggable } from "brolog"
+import { MemoryCard } from "memory-card"
+import * as UUID from "uuid"
+import { log } from "wechaty-puppet"
 
-import {
-  WechatyEventEmitter,
-  WechatyEventName,
-}                               from '../schemas/mod.js'
-
-import type { WechatyOptions }  from '../schemas/wechaty-options.js'
+import { WechatyEventEmitter, WechatyEventName } from "../schemas/mod.js"
+import type { WechatyOptions } from "../schemas/wechaty-options.js"
 
 abstract class WechatySkeleton extends WechatyEventEmitter {
-
   static readonly log: Loggable = log
   readonly log: Loggable = log
 
@@ -41,21 +36,21 @@ abstract class WechatySkeleton extends WechatyEventEmitter {
   readonly id: string
 
   __memory?: MemoryCard
-  get memory (): MemoryCard {
+  get memory(): MemoryCard {
     if (!this.__memory) {
-      throw new Error('NOMEMORY')
+      throw new Error("NOMEMORY")
     }
     return this.__memory
   }
 
   __options: WechatyOptions
 
-  constructor (...args: any[]) {
-    log.verbose('WechatySkeleton', 'constructor()')
+  constructor(...args: any[]) {
+    log.verbose("WechatySkeleton", "constructor()")
     super()
 
     this.id = UUID.v4()
-    this.__options = args[0] || {} as WechatyOptions
+    this.__options = args[0] || ({} as WechatyOptions)
 
     /**
      * Huan(202008):
@@ -76,21 +71,21 @@ abstract class WechatySkeleton extends WechatyEventEmitter {
    *  2. It should be allowed for being called multiple times in the same instance,
    *    by skipping the second time initialization.
    */
-  async init (): Promise<void> {
-    log.verbose('WechatySkeleton', 'init()')
+  async init(): Promise<void> {
+    log.verbose("WechatySkeleton", "init()")
 
     if (!this.__memory) {
       this.__memory = new MemoryCard(this.__options.name)
       try {
         await this.__memory.load()
       } catch (_) {
-        log.silly('WechatySkeleton', 'onStart() memory.load() had already loaded')
+        log.silly("WechatySkeleton", "onStart() memory.load() had already loaded")
       }
     }
   }
 
-  async start (): Promise<void> {
-    log.verbose('WechatySkeleton', 'start()')
+  async start(): Promise<void> {
+    log.verbose("WechatySkeleton", "start()")
     // no super.start()
 
     /**
@@ -99,31 +94,24 @@ abstract class WechatySkeleton extends WechatyEventEmitter {
     await this.init()
   }
 
-  async stop  (): Promise<void> {
-    log.verbose('WechatySkeleton', 'stop()')
+  async stop(): Promise<void> {
+    log.verbose("WechatySkeleton", "stop()")
     // no super.stop()
   }
 
-  override on (event: WechatyEventName, listener: (...args: any[]) => any): this {
-    log.verbose('WechatySkeleton', 'on(%s, listener) registering... listenerCount: %s',
+  override on(event: WechatyEventName, listener: (...args: any[]) => any): this {
+    log.verbose(
+      "WechatySkeleton",
+      "on(%s, listener) registering... listenerCount: %s",
       event,
       this.listenerCount(event),
     )
 
     return super.on(event, listener)
   }
-
 }
 
-type WechatySkeletonProtectedProperty =
-  | '__events'
-  | '__memory'
-  | '__options'
-  | 'memory'
+type WechatySkeletonProtectedProperty = "__events" | "__memory" | "__options" | "memory"
 
-export type {
-  WechatySkeletonProtectedProperty,
-}
-export {
-  WechatySkeleton,
-}
+export type { WechatySkeletonProtectedProperty }
+export { WechatySkeleton }

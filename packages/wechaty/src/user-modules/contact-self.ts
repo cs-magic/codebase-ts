@@ -17,29 +17,18 @@
  *   limitations under the License.
  *
  */
-import type * as PUPPET from 'wechaty-puppet'
-import {
-  log,
-}                             from 'wechaty-puppet'
-import type {
-  FileBoxInterface,
-}                             from 'file-box'
+import type { Constructor } from "clone-class"
+import type { FileBoxInterface } from "file-box"
+import type * as PUPPET from "wechaty-puppet"
+import { log } from "wechaty-puppet"
 
-import type { Constructor }   from 'clone-class'
+import { guardQrCodeValue } from "../pure-functions/guard-qr-code-value.js"
+import { poolifyMixin } from "../user-mixins/poolify.js"
+import { validationMixin } from "../user-mixins/validation.js"
 
-import {
-  guardQrCodeValue,
-}                       from '../pure-functions/guard-qr-code-value.js'
+import { ContactImpl } from "./contact.js"
 
-import {
-  ContactImpl,
-}                       from './contact.js'
-import { validationMixin } from '../user-mixins/validation.js'
-import { poolifyMixin } from '../user-mixins/poolify.js'
-
-const MixinBase = poolifyMixin(
-  ContactImpl,
-)<ContactSelfInterface>()
+const MixinBase = poolifyMixin(ContactImpl)<ContactSelfInterface>()
 
 /**
  * Bot itself will be encapsulated as a ContactSelf.
@@ -53,10 +42,7 @@ const MixinBase = poolifyMixin(
  * })
  */
 class ContactSelfMixin extends MixinBase {
-
-  static override async find (
-    query : string | PUPPET.filters.Contact,
-  ): Promise<undefined | ContactSelfInterface> {
+  static override async find(query: string | PUPPET.filters.Contact): Promise<undefined | ContactSelfInterface> {
     if (!this.wechaty.isLoggedIn) {
       return undefined
     }
@@ -67,13 +53,13 @@ class ContactSelfMixin extends MixinBase {
         return contact as ContactSelfInterface
       }
     } catch (e) {
-      log.silly('ContactSelf', 'find() exception: %s', (e as Error).message)
+      log.silly("ContactSelf", "find() exception: %s", (e as Error).message)
     }
     return undefined
   }
 
-  public override async avatar ()                       : Promise<FileBoxInterface>
-  public override async avatar (file: FileBoxInterface) : Promise<void>
+  public override async avatar(): Promise<FileBoxInterface>
+  public override async avatar(file: FileBoxInterface): Promise<void>
 
   /**
    * GET / SET bot avatar
@@ -102,8 +88,8 @@ class ContactSelfMixin extends MixinBase {
    * })
    *
    */
-  public override async avatar (file?: FileBoxInterface): Promise<void | FileBoxInterface> {
-    log.verbose('Contact', 'avatar(%s)', file ? file.name : '')
+  public override async avatar(file?: FileBoxInterface): Promise<void | FileBoxInterface> {
+    log.verbose("Contact", "avatar(%s)", file ? file.name : "")
 
     if (!file) {
       const filebox = await super.avatar()
@@ -111,7 +97,7 @@ class ContactSelfMixin extends MixinBase {
     }
 
     if (this.id !== this.wechaty.puppet.currentUserId) {
-      throw new Error('set avatar only available for user self')
+      throw new Error("set avatar only available for user self")
     }
 
     await this.wechaty.puppet.contactAvatar(this.id, file)
@@ -131,10 +117,10 @@ class ContactSelfMixin extends MixinBase {
    *   generate(qrcode, { small: true })
    * })
    */
-  public async qrcode (): Promise<string> {
-    log.verbose('Contact', 'qrcode()')
+  public async qrcode(): Promise<string> {
+    log.verbose("Contact", "qrcode()")
     if (this.id !== this.wechaty.puppet.currentUserId) {
-      throw new Error('only can get qrcode for the currentUser')
+      throw new Error("only can get qrcode for the currentUser")
     }
 
     const qrcodeValue = await this.wechaty.puppet.contactSelfQRCode()
@@ -157,18 +143,18 @@ class ContactSelfMixin extends MixinBase {
    *   }
    * })
    */
-  public override name (): string
-  public override name (name: string): Promise<void>
+  public override name(): string
+  public override name(name: string): Promise<void>
 
-  public override name (name?: string): string | Promise<void> {
-    log.verbose('ContactSelf', 'name(%s)', name || '')
+  public override name(name?: string): string | Promise<void> {
+    log.verbose("ContactSelf", "name(%s)", name || "")
 
-    if (typeof name === 'undefined') {
+    if (typeof name === "undefined") {
       return super.name()
     }
 
     if (this.id !== this.wechaty.puppet.currentUserId) {
-      throw new Error('only can set name for user self')
+      throw new Error("only can set name for user self")
     }
 
     return this.wechaty.puppet.contactSelfName(name).then(this.sync.bind(this))
@@ -189,29 +175,20 @@ class ContactSelfMixin extends MixinBase {
    *   }
    * })
    */
-  public async signature (signature: string): Promise<void> {
-    log.verbose('ContactSelf', 'signature()')
+  public async signature(signature: string): Promise<void> {
+    log.verbose("ContactSelf", "signature()")
 
     if (this.id !== this.wechaty.puppet.currentUserId) {
-      throw new Error('only can change signature for user self')
+      throw new Error("only can change signature for user self")
     }
 
     return this.wechaty.puppet.contactSelfSignature(signature).then(this.sync.bind(this))
   }
-
 }
 
 class ContactSelfImpl extends validationMixin(ContactSelfMixin)<ContactSelfInterface>() {}
 interface ContactSelfInterface extends ContactSelfImpl {}
-type ContactSelfConstructor = Constructor<
-  ContactSelfInterface,
-  Omit<typeof ContactSelfImpl, 'load'>
->
+type ContactSelfConstructor = Constructor<ContactSelfInterface, Omit<typeof ContactSelfImpl, "load">>
 
-export type {
-  ContactSelfConstructor,
-  ContactSelfInterface,
-}
-export {
-  ContactSelfImpl,
-}
+export type { ContactSelfConstructor, ContactSelfInterface }
+export { ContactSelfImpl }

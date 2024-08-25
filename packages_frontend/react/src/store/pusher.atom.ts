@@ -1,13 +1,11 @@
-import { LogLevel } from "@cs-magic/common/dist/log/schema"
-import {
-  PusherConnectionState,
-  PusherServerId,
-} from "@cs-magic/common/dist/pusher/schema"
-import { FixedArray } from "@cs-magic/common/dist/schema/fixed-array"
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import Pusher from "pusher"
 import PusherJS from "pusher-js"
+
+import { LogLevel } from "@cs-magic/common/dist/log/schema"
+import { PusherConnectionState, PusherServerId } from "@cs-magic/common/dist/pusher/schema"
+import { FixedArray } from "@cs-magic/common/dist/schema/fixed-array"
 
 //////////////////////////////
 // base
@@ -15,21 +13,13 @@ import PusherJS from "pusher-js"
 
 export const pusherServerAtom = atom<Pusher | null>(null)
 export const pusherClientAtom = atom<PusherJS | null>(null)
-export const pusherServerIdAtom = atomWithStorage<PusherServerId>(
-  "pusher.server.id",
-  "tencent_wss",
-)
+export const pusherServerIdAtom = atomWithStorage<PusherServerId>("pusher.server.id", "tencent_wss")
 export const pusherStateAtom = atom<PusherConnectionState>("initialized")
 export const pusherLastPingTimeAtom = atom<number | null>(null)
 export const pusherLastPongTimeAtom = atom<number | null>(null)
 export const pusherLatencyAtom = atom<number>(0)
-export const pusherLatenciesAtom = atom<FixedArray<number>>(
-  new FixedArray<number>(10),
-)
-export const pusherLogLevelAtom = atomWithStorage<LogLevel>(
-  "pusher.log.level",
-  LogLevel.debug,
-)
+export const pusherLatenciesAtom = atom<FixedArray<number>>(new FixedArray<number>(10))
+export const pusherLogLevelAtom = atomWithStorage<LogLevel>("pusher.log.level", LogLevel.debug)
 
 //////////////////////////////
 // derived

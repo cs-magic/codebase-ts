@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-
 import type {
   AppAttachPayload,
   AppMessagePayload,
@@ -7,14 +6,12 @@ import type {
   ChannelsMsgPayload,
   MiniAppMsgPayload,
 } from "wechaty-puppet"
+
 import { xmlToJson } from "../utils/xml-to-json.js"
 
-export async function parseAppmsgMessagePayload(
-  messageContent: string,
-): Promise<AppMessagePayload> {
+export async function parseAppmsgMessagePayload(messageContent: string): Promise<AppMessagePayload> {
   const appMsgXml: AppMsgXmlSchema = await xmlToJson(messageContent)
-  const { title, des, url, thumburl, type, md5, recorditem } =
-    appMsgXml.msg.appmsg
+  const { title, des, url, thumburl, type, md5, recorditem } = appMsgXml.msg.appmsg
 
   let appattach: AppAttachPayload | undefined
   let channel: ChannelsMsgPayload | undefined
@@ -31,8 +28,7 @@ export async function parseAppmsgMessagePayload(
       emoticonmd5: tmp.emoticonmd5,
       encryver: (tmp.encryver && parseInt(tmp.encryver, 10)) || 0,
       fileext: tmp.fileext,
-      islargefilemsg:
-        (tmp.islargefilemsg && parseInt(tmp.islargefilemsg, 10)) || 0,
+      islargefilemsg: (tmp.islargefilemsg && parseInt(tmp.islargefilemsg, 10)) || 0,
       totallen: (tmp.totallen && parseInt(tmp.totallen, 10)) || 0,
     }
   }

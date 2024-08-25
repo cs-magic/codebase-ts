@@ -1,5 +1,5 @@
-import "ulog"
 import anylogger from "anylogger"
+import "ulog"
 
 /**
  * ref: https://github.com/Download/ulog

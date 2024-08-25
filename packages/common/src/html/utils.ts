@@ -5,8 +5,5 @@ export const parseMetaFromHtml = (
   property: string,
   key: "property" | "name" = "property",
 ): string | null => {
-  return (
-    html.querySelector(`meta[${key}="${property}"]`)?.getAttribute("content") ??
-    null
-  )
+  return html.querySelector(`meta[${key}="${property}"]`)?.getAttribute("content") ?? null
 }

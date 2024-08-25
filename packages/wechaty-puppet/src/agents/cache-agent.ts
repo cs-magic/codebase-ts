@@ -26,11 +26,7 @@ class CacheAgent {
   readonly roomMember: QuickLru<string, LruRoomMemberPayload>
 
   constructor(protected options?: PayloadCacheOptions) {
-    log.verbose(
-      "PuppetCacheAgent",
-      "constructor(%s)",
-      options ? JSON.stringify(options) : "",
-    )
+    log.verbose("PuppetCacheAgent", "constructor(%s)", options ? JSON.stringify(options) : "")
 
     /**
      * Setup LRU Caches
@@ -41,38 +37,22 @@ class CacheAgent {
     })
 
     this.contact = new QuickLru<string, ContactPayload>(
-      lruOptions(
-        envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_CONTACT(options?.contact),
-      ),
+      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_CONTACT(options?.contact)),
     )
     this.friendship = new QuickLru<string, FriendshipPayload>(
-      lruOptions(
-        envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_FRIENDSHIP(options?.friendship),
-      ),
+      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_FRIENDSHIP(options?.friendship)),
     )
     this.message = new QuickLru<string, MessagePayload>(
-      lruOptions(
-        envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_MESSAGE(options?.message),
-      ),
+      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_MESSAGE(options?.message)),
     )
     this.roomInvitation = new QuickLru<string, RoomInvitationPayload>(
-      lruOptions(
-        envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_ROOM_INVITATION(
-          options?.roomInvitation,
-        ),
-      ),
+      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_ROOM_INVITATION(options?.roomInvitation)),
     )
     this.roomMember = new QuickLru<string, LruRoomMemberPayload>(
-      lruOptions(
-        envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_ROOM_MEMBER(options?.roomMember),
-      ),
+      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_ROOM_MEMBER(options?.roomMember)),
     )
-    this.room = new QuickLru<string, RoomPayload>(
-      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_ROOM(options?.room)),
-    )
-    this.post = new QuickLru<string, PostPayload>(
-      lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_POST(options?.post)),
-    )
+    this.room = new QuickLru<string, RoomPayload>(lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_ROOM(options?.room)))
+    this.post = new QuickLru<string, PostPayload>(lruOptions(envVars.WECHATY_PUPPET_LRU_CACHE_SIZE_POST(options?.post)))
   }
 
   start(): void {

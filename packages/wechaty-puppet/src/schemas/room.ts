@@ -40,6 +40,4 @@ export interface RoomMemberPayload {
 export type RoomPayloadFilterFunction = (payload: RoomPayload) => boolean
 
 /** @hidden */
-export type RoomPayloadFilterFactory = (
-  query: RoomQueryFilter,
-) => RoomPayloadFilterFunction
+export type RoomPayloadFilterFactory = (query: RoomQueryFilter) => RoomPayloadFilterFunction

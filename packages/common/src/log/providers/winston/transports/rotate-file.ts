@@ -1,6 +1,7 @@
 import winston, { format } from "winston"
+import "winston-daily-rotate-file"
 
-import "winston-daily-rotate-file" // for new winston.transports.DailyRotateFile
+// for new winston.transports.DailyRotateFile
 
 /**
  * ref:

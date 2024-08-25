@@ -17,42 +17,35 @@
  *   limitations under the License.
  *
  */
-import Url from 'url'
+import type { Constructor } from "clone-class"
+import Url from "url"
+import type * as PUPPET from "wechaty-puppet"
 
-import type * as PUPPET     from 'wechaty-puppet'
-import type { Constructor } from 'clone-class'
-
-import { openGraph }          from '../helper-functions/open-graph.js'
-import { validationMixin }    from '../user-mixins/validation.js'
-import { wechatifyMixinBase } from '../user-mixins/wechatify.js'
-import { log } from '../config.js'
+import { log } from "../config.js"
+import { openGraph } from "../helper-functions/open-graph.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
 class UrlLinkMixin extends wechatifyMixinBase() {
-
   /**
    *
    * Create from URL
    *
    */
-  static async create (
+  static async create(
     url: string,
-    fallback?: Partial<
-      Omit<
-        PUPPET.payloads.UrlLink,
-        'url'
-      >
-    >,
+    fallback?: Partial<Omit<PUPPET.payloads.UrlLink, "url">>,
   ): Promise<UrlLinkInterface> {
-    log.verbose('UrlLink', 'create(%s)', url)
+    log.verbose("UrlLink", "create(%s)", url)
 
     const meta = await openGraph(url)
 
-    let description  : undefined | string
-    let thumbnailUrl : undefined | string
-    let title        : string
+    let description: undefined | string
+    let thumbnailUrl: undefined | string
+    let title: string
 
     if (meta.image) {
-      if (typeof meta.image === 'string') {
+      if (typeof meta.image === "string") {
         thumbnailUrl = meta.image
       } else if (Array.isArray(meta.image)) {
         thumbnailUrl = meta.image[0]
@@ -79,15 +72,15 @@ class UrlLinkMixin extends wechatifyMixinBase() {
       description = title
     }
 
-    if (thumbnailUrl && !thumbnailUrl.startsWith('http')) {
+    if (thumbnailUrl && !thumbnailUrl.startsWith("http")) {
       const resolvedUrl = new Url.URL(thumbnailUrl, url)
       thumbnailUrl = resolvedUrl.toString()
     }
 
     const payload: PUPPET.payloads.UrlLink = {
-      description  : description  || fallback?.description  || '',
-      thumbnailUrl : thumbnailUrl || fallback?.thumbnailUrl || '',
-      title        : title        || fallback?.title        || '',
+      description: description || fallback?.description || "",
+      thumbnailUrl: thumbnailUrl || fallback?.thumbnailUrl || "",
+      title: title || fallback?.title || "",
       url,
     }
 
@@ -97,49 +90,38 @@ class UrlLinkMixin extends wechatifyMixinBase() {
   /*
    * @hideconstructor
    */
-  constructor (
-    public readonly payload: PUPPET.payloads.UrlLink,
-  ) {
+  constructor(public readonly payload: PUPPET.payloads.UrlLink) {
     super()
-    log.verbose('UrlLink', 'constructor()')
+    log.verbose("UrlLink", "constructor()")
     // Huan(202110): it is ok to create a raw one without wechaty instance
     // guardWechatifyClass.call(this, UrlLink)
   }
 
-  override toString (): string {
+  override toString(): string {
     return `UrlLink<${this.payload.url}>`
   }
 
-  url (): string {
+  url(): string {
     return this.payload.url
   }
 
-  title (): string {
+  title(): string {
     return this.payload.title
   }
 
-  thumbnailUrl (): undefined | string {
+  thumbnailUrl(): undefined | string {
     return this.payload.thumbnailUrl
   }
 
-  description (): undefined | string {
+  description(): undefined | string {
     return this.payload.description
   }
-
 }
 
 class UrlLinkImpl extends validationMixin(UrlLinkMixin)<UrlLinkInterface>() {}
 interface UrlLinkInterface extends UrlLinkImpl {}
 
-type UrlLinkConstructor = Constructor<
-  UrlLinkInterface,
-  typeof UrlLinkImpl
->
+type UrlLinkConstructor = Constructor<UrlLinkInterface, typeof UrlLinkImpl>
 
-export type {
-  UrlLinkConstructor,
-  UrlLinkInterface,
-}
-export {
-  UrlLinkImpl,
-}
+export type { UrlLinkConstructor, UrlLinkInterface }
+export { UrlLinkImpl }

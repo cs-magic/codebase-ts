@@ -4,6 +4,7 @@
  * `yarn add net tls`
  */
 import { v20210111 } from "tencentcloud-sdk-nodejs-sms/tencentcloud/services/sms/v20210111/index.js"
+
 import { env } from "../../../../env/index.js"
 import logger from "../../../../log/index.js"
 
@@ -36,11 +37,7 @@ const smsTencentClient = new v20210111.Client({
   },
 })
 
-export const $sendSmsViaTencent = async (
-  phone: string,
-  code: string,
-  expire: number,
-) => {
+export const $sendSmsViaTencent = async (phone: string, code: string, expire: number) => {
   const params = {
     PhoneNumberSet: [phone],
     SmsSdkAppId: tencentSmsConfig.appId,

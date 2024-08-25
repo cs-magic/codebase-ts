@@ -14,6 +14,5 @@ export const useSwitchLocale = () => {
   const router = useRouter()
 
   const { pathname, asPath, query } = router
-  return (newLocale: LocaleType) =>
-    router.push({ pathname, query }, asPath, { locale: newLocale })
+  return (newLocale: LocaleType) => router.push({ pathname, query }, asPath, { locale: newLocale })
 }

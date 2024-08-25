@@ -1,10 +1,7 @@
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 
-const tagMixin = <MixinBase extends typeof PuppetSkeleton>(
-  mixinBase: MixinBase,
-) => {
+const tagMixin = <MixinBase extends typeof PuppetSkeleton>(mixinBase: MixinBase) => {
   abstract class TagMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)

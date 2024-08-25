@@ -1,13 +1,10 @@
 import { serviceCtlMixin } from "state-switch"
+
 import { WatchdogAgent } from "../agents/watchdog-agent.js"
-
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 
-const serviceMixin = <MixinBase extends typeof PuppetSkeleton>(
-  mixinBase: MixinBase,
-) => {
+const serviceMixin = <MixinBase extends typeof PuppetSkeleton>(mixinBase: MixinBase) => {
   const serviceBase = serviceCtlMixin("PuppetServiceMixin", { log })(mixinBase)
 
   let PUPPET_COUNTER = 0

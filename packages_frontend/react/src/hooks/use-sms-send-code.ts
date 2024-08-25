@@ -5,7 +5,10 @@ import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import { toast } from "sonner"
 
-import { uiLoadingAlertDialogAtom } from "@/store/ui.atom"
+import { $sendSms } from "@cs-magic/common/dist/auth/providers/sms/actions"
+import { $sendSmsViaAli } from "@cs-magic/common/dist/auth/providers/sms/providers/ali"
+import { $sendSmsViaTencent } from "@cs-magic/common/dist/auth/providers/sms/providers/tencent"
+
 import {
   smsCodeCurCountdownSecondsAtom,
   smsCodeExpireSecondsAtom,
@@ -15,9 +18,7 @@ import {
   smsSendCodePayloadAtom,
   smsStageAtom,
 } from "@/store/sms.atom"
-import { $sendSmsViaAli } from "@cs-magic/common/dist/auth/providers/sms/providers/ali"
-import { $sendSmsViaTencent } from "@cs-magic/common/dist/auth/providers/sms/providers/tencent"
-import { $sendSms } from "@cs-magic/common/dist/auth/providers/sms/actions"
+import { uiLoadingAlertDialogAtom } from "@/store/ui.atom"
 
 export const useSmsSendCode = () => {
   const [smsProviderType] = useAtom(smsProviderTypeAtom)
@@ -32,8 +33,7 @@ export const useSmsSendCode = () => {
 
   const userId = useSession()?.data?.user?.id // for link account
 
-  const sendApproach =
-    smsProviderType === "ali" ? $sendSmsViaAli : $sendSmsViaTencent
+  const sendApproach = smsProviderType === "ali" ? $sendSmsViaAli : $sendSmsViaTencent
   const { phone } = smsSendPayload
 
   useEffect(() => {

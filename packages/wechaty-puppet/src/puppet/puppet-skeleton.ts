@@ -17,6 +17,7 @@
  *
  */
 import type { WrapAsync } from "gerror"
+
 /**
  * Issue #165 - ReferenceError: Cannot access 'PuppetSkeleton' before initialization
  *  @see https://github.com/wechaty/puppet/issues/165
@@ -25,9 +26,7 @@ import { GError, wrapAsyncError } from "gerror"
 import * as UUID from "uuid"
 
 import { log } from "../config.js"
-
 import type { EventErrorPayload } from "../schemas/event.js"
-
 import type { PuppetOptions } from "../schemas/puppet.js"
 
 import { PuppetEventEmitter } from "./events.js"
@@ -62,11 +61,7 @@ abstract class PuppetSkeleton extends PuppetEventEmitter {
    */
   constructor(...args: any[]) {
     super()
-    log.verbose(
-      "PuppetSkeleton",
-      "constructor(%s)",
-      args.length ? JSON.stringify(args[0]) : "",
-    )
+    log.verbose("PuppetSkeleton", "constructor(%s)", args.length ? JSON.stringify(args[0]) : "")
 
     this.id = UUID.v4()
     this.options = args[0] || {}

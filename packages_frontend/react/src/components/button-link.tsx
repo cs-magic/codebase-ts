@@ -1,8 +1,8 @@
 import Link from "next/link"
 import React, { ComponentProps } from "react"
 
-import { Button, buttonVariants } from "@cs-magic/shadcn/dist/ui/button"
 import { cn } from "@cs-magic/shadcn/dist/lib/utils"
+import { Button, buttonVariants } from "@cs-magic/shadcn/dist/ui/button"
 
 export const ButtonLink = ({
   href,
@@ -10,9 +10,7 @@ export const ButtonLink = ({
   disabled,
   ...props
 }: ComponentProps<typeof Button> & { href: string }) => {
-  const InnerButton = () => (
-    <Button className={cn(buttonVariants(), "w-full", className)} {...props} />
-  )
+  const InnerButton = () => <Button className={cn(buttonVariants(), "w-full", className)} {...props} />
   if (disabled) return <InnerButton />
 
   return (

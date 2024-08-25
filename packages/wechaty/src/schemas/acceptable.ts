@@ -17,14 +17,12 @@
  *   limitations under the License.
  *
  */
-import type { WechatyInterface } from '../wechaty/mod.js'
+import type { WechatyInterface } from "../wechaty/mod.js"
 
 interface Accepter {
-  accept  : () => Promise<void>
-  id      : string,
-  wechaty : WechatyInterface
+  accept: () => Promise<void>
+  id: string
+  wechaty: WechatyInterface
 }
 
-export type  {
-  Accepter,
-}
+export type { Accepter }

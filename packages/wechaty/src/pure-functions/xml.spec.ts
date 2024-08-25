@@ -1,4 +1,5 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
+
 /**
  *   Wechaty Chatbot SDK - https://github.com/wechaty/wechaty
  *
@@ -18,64 +19,52 @@
  *   limitations under the License.
  *
  */
-import { test } from 'tstest'
+import { test } from "tstest"
 
-import {
-  digestEmoji,
-  plainText,
-  stripEmoji,
-  stripHtml,
-  unescapeHtml,
-  unifyEmoji,
-}                   from './xml.js'
+import { digestEmoji, plainText, stripEmoji, stripHtml, unescapeHtml, unifyEmoji } from "./xml.js"
 
-test('stripHtml()', async t => {
-  const HTML_BEFORE_STRIP = 'Outer<html>Inner</html>'
-  const HTML_AFTER_STRIP  = 'OuterInner'
+test("stripHtml()", async (t) => {
+  const HTML_BEFORE_STRIP = "Outer<html>Inner</html>"
+  const HTML_AFTER_STRIP = "OuterInner"
 
   const strippedHtml = stripHtml(HTML_BEFORE_STRIP)
-  t.equal(strippedHtml, HTML_AFTER_STRIP, 'should strip html as expected')
+  t.equal(strippedHtml, HTML_AFTER_STRIP, "should strip html as expected")
 })
 
-test('unescapeHtml()', async t => {
-  const HTML_BEFORE_UNESCAPE  = '&apos;|&quot;|&gt;|&lt;|&amp;'
+test("unescapeHtml()", async (t) => {
+  const HTML_BEFORE_UNESCAPE = "&apos;|&quot;|&gt;|&lt;|&amp;"
   // eslint-disable-next-line
-  const HTML_AFTER_UNESCAPE   = `'|"|>|<|&`
+  const HTML_AFTER_UNESCAPE = `'|"|>|<|&`
 
   const unescapedHtml = unescapeHtml(HTML_BEFORE_UNESCAPE)
-  t.equal(unescapedHtml, HTML_AFTER_UNESCAPE, 'should unescape html as expected')
+  t.equal(unescapedHtml, HTML_AFTER_UNESCAPE, "should unescape html as expected")
 })
 
-test('plainText()', async t => {
-  const PLAIN_BEFORE  = '&amp;<html>&amp;</html>&amp;<img class="emoji emoji1f4a4" text="[流汗]_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />'
-  const PLAIN_AFTER   = '&&&[流汗]'
+test("plainText()", async (t) => {
+  const PLAIN_BEFORE =
+    '&amp;<html>&amp;</html>&amp;<img class="emoji emoji1f4a4" text="[流汗]_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />'
+  const PLAIN_AFTER = "&&&[流汗]"
 
   const text = plainText(PLAIN_BEFORE)
-  t.equal(text, PLAIN_AFTER, 'should convert plain text as expected')
-
+  t.equal(text, PLAIN_AFTER, "should convert plain text as expected")
 })
 
-test('digestEmoji()', async t => {
+test("digestEmoji()", async (t) => {
   const EMOJI_XML = [
     '<img class="emoji emoji1f4a4" text="[流汗]_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />',
     '<img class="qqemoji qqemoji13" text="[呲牙]_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />',
     '<img class="emoji emoji1f44d" text="_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />',
     '<span class="emoji emoji1f334"></span>',
   ]
-  const EMOJI_AFTER_DIGEST  = [
-    '[流汗]',
-    '[呲牙]',
-    '',
-    '[emoji1f334]',
-  ]
+  const EMOJI_AFTER_DIGEST = ["[流汗]", "[呲牙]", "", "[emoji1f334]"]
 
   for (let i = 0; i < EMOJI_XML.length; i++) {
     const emojiDigest = digestEmoji(EMOJI_XML[i])
-    t.equal(emojiDigest, EMOJI_AFTER_DIGEST[i], 'should digest emoji string ' + i + ' as expected')
+    t.equal(emojiDigest, EMOJI_AFTER_DIGEST[i], "should digest emoji string " + i + " as expected")
   }
 })
 
-test('unifyEmoji()', async t => {
+test("unifyEmoji()", async (t) => {
   const ORIGNAL_XML_LIST: Array<[string[], string]> = [
     [
       [
@@ -86,31 +75,28 @@ test('unifyEmoji()', async t => {
     ],
   ]
 
-  ORIGNAL_XML_LIST.forEach(([ xmlList, expectedEmojiXml ]) => {
-    xmlList.forEach(xml => {
+  ORIGNAL_XML_LIST.forEach(([xmlList, expectedEmojiXml]) => {
+    xmlList.forEach((xml) => {
       const unifiedXml = unifyEmoji(xml)
-      t.equal(unifiedXml, expectedEmojiXml, 'should convert the emoji xml to the expected unified xml')
+      t.equal(unifiedXml, expectedEmojiXml, "should convert the emoji xml to the expected unified xml")
     })
   })
 })
 
-test('stripEmoji()', async t => {
+test("stripEmoji()", async (t) => {
   const EMOJI_STR = [
     [
       'ABC<img class="emoji emoji1f4a4" text="[流汗]_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />DEF',
-      'ABCDEF',
+      "ABCDEF",
     ],
-    [
-      'UVW<span class="emoji emoji1f334"></span>XYZ',
-      'UVWXYZ',
-    ],
+    ['UVW<span class="emoji emoji1f334"></span>XYZ', "UVWXYZ"],
   ]
 
-  EMOJI_STR.forEach(([ emojiStr, expectResult ]) => {
+  EMOJI_STR.forEach(([emojiStr, expectResult]) => {
     const result = stripEmoji(emojiStr)
-    t.equal(result, expectResult, 'should strip to the expected str')
+    t.equal(result, expectResult, "should strip to the expected str")
   })
 
   const empty = stripEmoji(undefined)
-  t.equal(empty, '', 'should return empty string for `undefined`')
+  t.equal(empty, "", "should return empty string for `undefined`")
 })

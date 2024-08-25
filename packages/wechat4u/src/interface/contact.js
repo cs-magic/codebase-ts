@@ -1,7 +1,5 @@
-import {
-  convertEmoji,
-  getCONF
-} from '../util'
+import { convertEmoji, getCONF } from "../util"
+
 const CONF = getCONF()
 
 /* Contact Object Example
@@ -38,35 +36,42 @@ const CONF = getCONF()
   "EncryChatRoomId": ""
 }
 */
-export function getUserByUserName (memberList, UserName) {
+export function getUserByUserName(memberList, UserName) {
   if (!memberList.length) return null
 
-  return memberList.find(contact => contact.UserName === UserName)
+  return memberList.find((contact) => contact.UserName === UserName)
 }
 
-export function getDisplayName (contact) {
+export function getDisplayName(contact) {
   if (isRoomContact(contact)) {
     if (contact.MemberCount >= 2) {
-      return '[群] ' + (contact.RemarkName || contact.DisplayName || contact.NickName ||
-      `${getDisplayName(contact.MemberList[0])}、${getDisplayName(contact.MemberList[1])}`)
+      return (
+        "[群] " +
+        (contact.RemarkName ||
+          contact.DisplayName ||
+          contact.NickName ||
+          `${getDisplayName(contact.MemberList[0])}、${getDisplayName(contact.MemberList[1])}`)
+      )
     } else {
-      return '[群] ' + (contact.RemarkName || contact.DisplayName || contact.NickName ||
-        `${getDisplayName(contact.MemberList[0])}`)
+      return (
+        "[群] " +
+        (contact.RemarkName || contact.DisplayName || contact.NickName || `${getDisplayName(contact.MemberList[0])}`)
+      )
     }
   } else {
     return contact.DisplayName || contact.RemarkName || contact.NickName || contact.UserName
   }
 }
 
-export function isRoomContact (contact) {
+export function isRoomContact(contact) {
   return contact.UserName ? /^@@|@chatroom$/.test(contact.UserName) : false
 }
 
-export function isSpContact (contact) {
+export function isSpContact(contact) {
   return CONF.SPECIALUSERS.indexOf(contact.UserName) >= 0
 }
 
-export function isPublicContact (contact) {
+export function isPublicContact(contact) {
   return contact.VerifyFlag & CONF.MM_USERATTRVERIFYFALG_BIZ_BRAND
 }
 
@@ -90,7 +95,7 @@ const contactProto = {
     if (!keyword) return false
     keyword = keyword.toUpperCase()
 
-    let isSatisfy = key => (key || '').toUpperCase().indexOf(keyword) >= 0
+    let isSatisfy = (key) => (key || "").toUpperCase().indexOf(keyword) >= 0
     return (
       isSatisfy(this.RemarkName) ||
       isSatisfy(this.RemarkPYQuanPin) ||
@@ -99,10 +104,10 @@ const contactProto = {
       isSatisfy(this.Alias) ||
       isSatisfy(this.KeyWord)
     )
-  }
+  },
 }
 
-export default function ContactFactory (instance) {
+export default function ContactFactory(instance) {
   return {
     extend: function (contactObj) {
       contactObj = Object.setPrototypeOf(contactObj, contactProto)
@@ -126,6 +131,6 @@ export default function ContactFactory (instance) {
     getDisplayName,
     isRoomContact,
     isPublicContact,
-    isSpContact
+    isSpContact,
   }
 }

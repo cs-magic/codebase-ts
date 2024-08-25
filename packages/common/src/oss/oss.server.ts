@@ -1,8 +1,10 @@
 "use server"
 
 import OSS from "ali-oss"
-import { api, IApiResult } from "../api"
+
+import { IApiResult, api } from "../api"
 import { env } from "../env"
+
 import { OSS_BUCKET_NAME, OSS_REGION } from "./const"
 
 // ref: https://help.aliyun.com/zh/oss/developer-reference/initialization-10#783f1f604f969
@@ -59,10 +61,7 @@ export const uploadFile = async (file: File): Promise<IApiResult<string>> => {
   } catch (error: any) {
     // 检查 error 对象是否包含 message 属性
     // 如果有 axios 响应信息（error.response），可以进一步提取信息
-    const message =
-      error.response?.data?.message ||
-      error.message ||
-      "An unknown error occurred"
+    const message = error.response?.data?.message || error.message || "An unknown error occurred"
     return { success: false, message }
   }
 }

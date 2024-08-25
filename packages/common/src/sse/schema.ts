@@ -1,13 +1,7 @@
 /**
  * 不能用 error 这是 sse 默认的 event-type
  */
-export type TransEventType =
-  | "init"
-  | "data"
-  | "error"
-  | "close"
-  | "onClientConnected"
-  | "onClientDisconnected"
+export type TransEventType = "init" | "data" | "error" | "close" | "onClientConnected" | "onClientDisconnected"
 
 export type GenericTransEvent<T extends TransEventType, V = any> = {
   event: T
@@ -15,11 +9,7 @@ export type GenericTransEvent<T extends TransEventType, V = any> = {
 }
 
 export type ResponseFinalStatus = "interrupted" | "responded" | "not-found"
-export type ResponseStatus =
-  | "unknown"
-  | "to-response"
-  | "responding"
-  | ResponseFinalStatus
+export type ResponseStatus = "unknown" | "to-response" | "responding" | ResponseFinalStatus
 export type ITransEvent<T extends TransEventType = any> = T extends "init"
   ? GenericTransEvent<"init", object>
   : T extends "data"

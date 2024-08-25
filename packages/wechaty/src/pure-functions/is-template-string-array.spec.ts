@@ -1,4 +1,5 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
+
 /**
  *   Wechaty Chatbot SDK - https://github.com/wechaty/wechaty
  *
@@ -18,14 +19,12 @@
  *   limitations under the License.
  *
  */
-import { test } from 'tstest'
-import { isTemplateStringArray } from './is-template-string-array.js'
+import { test } from "tstest"
 
-test('isTemplateStringArray', async t => {
-  function test (
-    s: string | TemplateStringsArray,
-    ...varList : unknown[]
-  ) {
+import { isTemplateStringArray } from "./is-template-string-array.js"
+
+test("isTemplateStringArray", async (t) => {
+  function test(s: string | TemplateStringsArray, ...varList: unknown[]) {
     void varList
     if (isTemplateStringArray(s)) {
       return true
@@ -36,9 +35,9 @@ test('isTemplateStringArray', async t => {
   const n = 42
   const obj = {}
 
-  t.ok(test`foo`, 'should return true for template string')
-  t.ok(test`bar${n}`, 'should return true for template string with one var')
-  t.ok(test`obj${obj}`, 'should return true for template string with one obj')
+  t.ok(test`foo`, "should return true for template string")
+  t.ok(test`bar${n}`, "should return true for template string with one var")
+  t.ok(test`obj${obj}`, "should return true for template string with one obj")
 
-  t.notOk(test('xixi'), 'should return false for (string) call')
+  t.notOk(test("xixi"), "should return false for (string) call")
 })

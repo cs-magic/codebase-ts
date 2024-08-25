@@ -1,12 +1,13 @@
 "use client"
 
-import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import React, { HTMLAttributes, LegacyRef } from "react"
 import Markdown, { ExtraProps } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
+
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 
 // import styles from "./markdown-comp.module.css"
 // import "katex/dist/katex.min.css";

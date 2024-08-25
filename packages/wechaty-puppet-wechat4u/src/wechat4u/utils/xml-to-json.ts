@@ -1,5 +1,5 @@
-import { parseString } from "xml2js"
 import { log } from "wechaty-puppet"
+import { parseString } from "xml2js"
 
 export async function xmlToJson(xml: string): Promise<any> {
   const firstIndex = xml.indexOf("<")

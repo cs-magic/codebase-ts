@@ -12,9 +12,7 @@ export interface PatMessagePayload {
   template: string
 }
 
-export async function parsePatMessagePayload(
-  patXml: PatXmlSchema,
-): Promise<PatMessagePayload> {
+export async function parsePatMessagePayload(patXml: PatXmlSchema): Promise<PatMessagePayload> {
   return {
     chatUserName: patXml.chatusername,
     fromUserName: patXml.fromusername,

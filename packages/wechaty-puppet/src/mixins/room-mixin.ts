@@ -1,22 +1,14 @@
 import type { FileBoxInterface } from "file-box"
 
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 import { DirtyType } from "../schemas/dirty.js"
-import type {
-  RoomPayload,
-  RoomPayloadFilterFunction,
-  RoomQueryFilter,
-} from "../schemas/room.js"
+import type { RoomPayload, RoomPayloadFilterFunction, RoomQueryFilter } from "../schemas/room.js"
+
 import type { ContactMixin } from "./contact-mixin.js"
 import type { RoomMemberMixin } from "./room-member-mixin.js"
 
-const roomMixin = <
-  MixinBase extends typeof PuppetSkeleton & ContactMixin & RoomMemberMixin,
->(
-  mixinBase: MixinBase,
-) => {
+const roomMixin = <MixinBase extends typeof PuppetSkeleton & ContactMixin & RoomMemberMixin>(mixinBase: MixinBase) => {
   abstract class RoomMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
@@ -28,23 +20,13 @@ const roomMixin = <
      * Room
      *
      */
-    abstract roomAdd(
-      roomId: string,
-      contactId: string | string[],
-      inviteOnly?: boolean,
-    ): Promise<void>
+    abstract roomAdd(roomId: string, contactId: string | string[], inviteOnly?: boolean): Promise<void>
 
     abstract roomAvatar(roomId: string): Promise<FileBoxInterface>
 
-    abstract roomCreate(
-      contactIdList: string[],
-      topic?: string,
-    ): Promise<string>
+    abstract roomCreate(contactIdList: string[], topic?: string): Promise<string>
 
-    abstract roomDel(
-      roomId: string,
-      contactId: string | string[],
-    ): Promise<void>
+    abstract roomDel(roomId: string, contactId: string | string[]): Promise<void>
 
     abstract roomList(): Promise<string[]>
 
@@ -77,14 +59,8 @@ const roomMixin = <
     abstract roomAnnounce(roomId: string): Promise<string>
     abstract roomAnnounce(roomId: string, text: string): Promise<void>
 
-    async roomSearch(
-      query?: RoomQueryFilter,
-    ): Promise<string[] /* Room Id List */> {
-      log.verbose(
-        "PuppetRoomMixin",
-        "roomSearch(%s)",
-        query ? JSON.stringify(query) : "",
-      )
+    async roomSearch(query?: RoomQueryFilter): Promise<string[] /* Room Id List */> {
+      log.verbose("PuppetRoomMixin", "roomSearch(%s)", query ? JSON.stringify(query) : "")
 
       /**
        * Huan(202110): optimize for search id
@@ -95,11 +71,7 @@ const roomMixin = <
           await this.roomPayload(query.id)
           return [query.id]
         } catch (e) {
-          log.verbose(
-            "PuppetRoomMixin",
-            'roomSearch() payload not found for id "%s"',
-            query.id,
-          )
+          log.verbose("PuppetRoomMixin", 'roomSearch() payload not found for id "%s"', query.id)
           await this.roomPayloadDirty(query.id)
           return []
         }
@@ -109,11 +81,7 @@ const roomMixin = <
        * Deal with non-id queries
        */
       const allRoomIdList: string[] = await this.roomList()
-      log.silly(
-        "PuppetRoomMixin",
-        "roomSearch() allRoomIdList.length=%d",
-        allRoomIdList.length,
-      )
+      log.silly("PuppetRoomMixin", "roomSearch() allRoomIdList.length=%d", allRoomIdList.length)
 
       if (!query || Object.keys(query).length <= 0) {
         return allRoomIdList
@@ -125,10 +93,7 @@ const roomMixin = <
       let batchIndex = 0
 
       while (batchIndex * BATCH_SIZE < allRoomIdList.length) {
-        const batchRoomIds = allRoomIdList.slice(
-          BATCH_SIZE * batchIndex,
-          BATCH_SIZE * (batchIndex + 1),
-        )
+        const batchRoomIds = allRoomIdList.slice(BATCH_SIZE * batchIndex, BATCH_SIZE * (batchIndex + 1))
 
         /**
          * Huan(202110): TODO: use an iterator with works to control the concurrency of Promise.all.
@@ -161,15 +126,9 @@ const roomMixin = <
 
       const filterFunction = this.roomQueryFilterFactory(query)
 
-      const roomIdList = roomPayloadList
-        .filter(filterFunction)
-        .map((payload) => payload.id)
+      const roomIdList = roomPayloadList.filter(filterFunction).map((payload) => payload.id)
 
-      log.silly(
-        "PuppetRoomMixin",
-        "roomSearch() roomIdList filtered. result length=%d",
-        roomIdList.length,
-      )
+      log.silly("PuppetRoomMixin", "roomSearch() roomIdList filtered. result length=%d", roomIdList.length)
 
       return roomIdList
     }
@@ -180,26 +139,16 @@ const roomMixin = <
      * @protected
      */
     roomQueryFilterFactory(query: RoomQueryFilter): RoomPayloadFilterFunction {
-      log.verbose(
-        "PuppetRoomMixin",
-        "roomQueryFilterFactory(%s)",
-        JSON.stringify(query),
-      )
+      log.verbose("PuppetRoomMixin", "roomQueryFilterFactory(%s)", JSON.stringify(query))
 
       if (Object.keys(query).length < 1) {
-        throw new Error(
-          "query must provide at least one key. current query is empty.",
-        )
+        throw new Error("query must provide at least one key. current query is empty.")
       } else if (Object.keys(query).length > 1) {
-        throw new Error(
-          "query only support one key. multi key support is not available now.",
-        )
+        throw new Error("query only support one key. multi key support is not available now.")
       }
       // Huan(202105): we use `Object.keys(query)[0]!` with `!` at here because we have the above `if` checks
       // TypeScript bug: have to set `undefined | string | RegExp` at here, or the later code type check will get error
-      const filterKey = Object.keys(
-        query,
-      )[0]!.toLowerCase() as keyof RoomQueryFilter
+      const filterKey = Object.keys(query)[0]!.toLowerCase() as keyof RoomQueryFilter
 
       const isValid = ["topic", "id"].includes(filterKey)
 
@@ -215,12 +164,10 @@ const roomMixin = <
       let filterFunction: RoomPayloadFilterFunction
 
       if (filterValue instanceof RegExp) {
-        filterFunction = (payload: RoomPayload) =>
-          filterValue.test(payload[filterKey])
+        filterFunction = (payload: RoomPayload) => filterValue.test(payload[filterKey])
       } else {
         // if (typeof filterValue === 'string') {
-        filterFunction = (payload: RoomPayload) =>
-          filterValue === payload[filterKey]
+        filterFunction = (payload: RoomPayload) => filterValue === payload[filterKey]
       }
 
       return filterFunction
@@ -231,11 +178,7 @@ const roomMixin = <
      *  For example: talk to the server, and see if it should be deleted in the local cache.
      */
     async roomValidate(roomId: string): Promise<boolean> {
-      log.silly(
-        "PuppetRoomMixin",
-        "roomValidate(%s) base class just return `true`",
-        roomId,
-      )
+      log.silly("PuppetRoomMixin", "roomValidate(%s) base class just return `true`", roomId)
       return true
     }
 

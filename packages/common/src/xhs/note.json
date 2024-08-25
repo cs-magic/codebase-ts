@@ -26,9 +26,7 @@
         "md5": "6820bd7dd034cd804d88a7f5748ae79f",
         "hdrType": 0,
         "drmType": 0,
-        "streamTypes": [
-          258
-        ]
+        "streamTypes": [258]
       },
       "stream": {
         "h264": [

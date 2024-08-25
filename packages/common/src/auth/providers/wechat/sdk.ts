@@ -1,9 +1,5 @@
 import { IWechatProfile, IWechatRefreshedToken } from "./schema.js"
-import {
-  getWechatAuthToken,
-  getWechatUserProfile,
-  refreshWechatAuthToken,
-} from "./utils.js"
+import { getWechatAuthToken, getWechatUserProfile, refreshWechatAuthToken } from "./utils.js"
 
 /**
  * 用于稳定地获取用户信息

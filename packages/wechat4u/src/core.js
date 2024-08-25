@@ -1,16 +1,11 @@
-import path from "path"
 import bl from "bl"
 import _debug from "debug"
 import FormData from "form-data"
 import mime from "mime"
-import {
-  getCONF,
-  Request,
-  isStandardBrowserEnv,
-  assert,
-  getClientMsgId,
-  getDeviceID,
-} from "./util"
+import path from "path"
+
+import { Request, assert, getCONF, getClientMsgId, getDeviceID, isStandardBrowserEnv } from "./util"
+
 // import { logger } from "@cs-magic/common"
 
 const debug = _debug("core")
@@ -152,9 +147,7 @@ export default class WechatCore {
                 this.PROP.skey = data.match(/<skey>(.*)<\/skey>/)[1]
                 this.PROP.sid = data.match(/<wxsid>(.*)<\/wxsid>/)[1]
                 this.PROP.uin = data.match(/<wxuin>(.*)<\/wxuin>/)[1]
-                this.PROP.passTicket = data.match(
-                  /<pass_ticket>(.*)<\/pass_ticket>/,
-                )[1]
+                this.PROP.passTicket = data.match(/<pass_ticket>(.*)<\/pass_ticket>/)[1]
               }
               if (error.response.headers["set-cookie"]) {
                 error.response.headers["set-cookie"].forEach((item) => {
@@ -381,11 +374,7 @@ export default class WechatCore {
           if (window.synccheck.retcode === this.CONF.SYNCCHECK_RET_LOGOUT) {
             throw new AlreadyLogoutError()
           }
-          assert.equal(
-            window.synccheck.retcode,
-            this.CONF.SYNCCHECK_RET_SUCCESS,
-            res,
-          )
+          assert.equal(window.synccheck.retcode, this.CONF.SYNCCHECK_RET_SUCCESS, res)
           return window.synccheck.selector
         })
       })
@@ -975,10 +964,7 @@ export default class WechatCore {
             url = this.CONF.API_webwxsendmsg
             if (msg.SubMsgType === this.CONF.MSGTYPE_LOCATION) {
               data.Msg.Type = this.CONF.MSGTYPE_LOCATION
-              data.Msg.Content = msg.OriContent.replace(/&lt;/g, "<").replace(
-                /&gt;/g,
-                ">",
-              )
+              data.Msg.Content = msg.OriContent.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
             }
             break
           case this.CONF.MSGTYPE_IMAGE:
@@ -987,10 +973,7 @@ export default class WechatCore {
           case this.CONF.MSGTYPE_EMOTICON:
             url = this.CONF.API_webwxsendemoticon
             params.fun = "sys"
-            data.Msg.EMoticonMd5 = msg.Content.replace(
-              /^[\s\S]*?md5\s?=\s?"(.*?)"[\s\S]*?$/,
-              "$1",
-            )
+            data.Msg.EMoticonMd5 = msg.Content.replace(/^[\s\S]*?md5\s?=\s?"(.*?)"[\s\S]*?$/, "$1")
             if (!data.Msg.EMoticonMd5) {
               throw new Error("商店表情不能转发")
             }

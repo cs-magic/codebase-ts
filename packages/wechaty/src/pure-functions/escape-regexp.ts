@@ -17,6 +17,6 @@
  *   limitations under the License.
  *
  */
-export function escapeRegExp (text: string) {
-  return text.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
+export function escapeRegExp(text: string) {
+  return text.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")
 }

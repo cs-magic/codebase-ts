@@ -1,10 +1,8 @@
 import { FileBox, type FileBoxInterface } from "file-box"
 
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 import { DirtyType } from "../schemas/dirty.js"
-
 import type { ImageType } from "../schemas/image.js"
 import type { LocationPayload } from "../schemas/location.js"
 import type {
@@ -23,9 +21,7 @@ import type { CacheMixin } from "./cache-mixin.js"
 const filebox = (filebox: string | FileBoxInterface) =>
   typeof filebox === "string" ? FileBox.fromJSON(filebox) : filebox
 
-const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
-  baseMixin: MinxinBase,
-) => {
+const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(baseMixin: MinxinBase) => {
   abstract class MessageMixin extends baseMixin {
     constructor(...args: any[]) {
       super(...args)
@@ -37,10 +33,7 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
      * Conversation
      *
      */
-    abstract conversationReadMark(
-      conversationId: string,
-      hasRead?: boolean,
-    ): Promise<void | boolean>
+    abstract conversationReadMark(conversationId: string, hasRead?: boolean): Promise<void | boolean>
 
     /**
      *
@@ -51,10 +44,7 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
 
     abstract messageFile(messageId: string): Promise<FileBoxInterface>
 
-    abstract messageImage(
-      messageId: string,
-      imageType: ImageType,
-    ): Promise<FileBoxInterface>
+    abstract messageImage(messageId: string, imageType: ImageType): Promise<FileBoxInterface>
 
     abstract messageMiniProgram(messageId: string): Promise<MiniProgramPayload>
 
@@ -62,46 +52,24 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
 
     abstract messageLocation(messageId: string): Promise<LocationPayload>
 
-    abstract messageForward(
-      conversationId: string,
-      messageId: string,
-    ): Promise<void | string>
+    abstract messageForward(conversationId: string, messageId: string): Promise<void | string>
 
-    abstract messageSendContact(
-      conversationId: string,
-      contactId: string,
-    ): Promise<void | string>
+    abstract messageSendContact(conversationId: string, contactId: string): Promise<void | string>
 
-    abstract messageSendFile(
-      conversationId: string,
-      file: FileBoxInterface,
-    ): Promise<void | string>
+    abstract messageSendFile(conversationId: string, file: FileBoxInterface): Promise<void | string>
 
-    abstract messageSendLocation(
-      conversationId: string,
-      locationPayload: LocationPayload,
-    ): Promise<void | string>
+    abstract messageSendLocation(conversationId: string, locationPayload: LocationPayload): Promise<void | string>
 
     abstract messageSendMiniProgram(
       conversationId: string,
       miniProgramPayload: MiniProgramPayload,
     ): Promise<void | string>
 
-    abstract messageSendPost(
-      conversationId: string,
-      postPayload: PostPayload,
-    ): Promise<void | string>
+    abstract messageSendPost(conversationId: string, postPayload: PostPayload): Promise<void | string>
 
-    abstract messageSendText(
-      conversationId: string,
-      text: string,
-      mentionIdList?: string[],
-    ): Promise<void | string>
+    abstract messageSendText(conversationId: string, text: string, mentionIdList?: string[]): Promise<void | string>
 
-    abstract messageSendUrl(
-      conversationId: string,
-      urlLinkPayload: UrlLinkPayload,
-    ): Promise<void | string>
+    abstract messageSendUrl(conversationId: string, urlLinkPayload: UrlLinkPayload): Promise<void | string>
 
     abstract messageRecall(messageId: string): Promise<boolean>
 
@@ -133,11 +101,7 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
       if (cachedPayload) {
         // log.silly('PuppetMessageMixin', 'messagePayloadCache(%s) cache HIT', messageId)
       } else {
-        log.silly(
-          "PuppetMessageMixin",
-          "messagePayloadCache(%s) cache MISS",
-          messageId,
-        )
+        log.silly("PuppetMessageMixin", "messagePayloadCache(%s) cache MISS", messageId)
       }
 
       return cachedPayload
@@ -175,14 +139,8 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
       return [...this.cache.message.keys()]
     }
 
-    async messageSearch(
-      query?: MessageQueryFilter,
-    ): Promise<string[] /* Message Id List */> {
-      log.verbose(
-        "PuppetMessageMixin",
-        "messageSearch(%s)",
-        JSON.stringify(query),
-      )
+    async messageSearch(query?: MessageQueryFilter): Promise<string[] /* Message Id List */> {
+      log.verbose("PuppetMessageMixin", "messageSearch(%s)", JSON.stringify(query))
 
       /**
        * Huan(202110): optimize for search id
@@ -193,11 +151,7 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
           await this.messagePayload(query.id)
           return [query.id]
         } catch (e) {
-          log.verbose(
-            "PuppetMessageMixin",
-            'messageSearch() payload not found for id "%s"',
-            query.id,
-          )
+          log.verbose("PuppetMessageMixin", 'messageSearch() payload not found for id "%s"', query.id)
           return []
         }
       }
@@ -206,11 +160,7 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
        * Deal with non-id queries
        */
       const allMessageIdList: string[] = this.messageList()
-      log.silly(
-        "PuppetMessageMixin",
-        "messageSearch() allMessageIdList.length=%d",
-        allMessageIdList.length,
-      )
+      log.silly("PuppetMessageMixin", "messageSearch() allMessageIdList.length=%d", allMessageIdList.length)
 
       if (!query || Object.keys(query).length <= 0) {
         return allMessageIdList
@@ -222,15 +172,9 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
 
       const filterFunction = this.messageQueryFilterFactory(query)
 
-      const messageIdList = messagePayloadList
-        .filter(filterFunction)
-        .map((payload) => payload.id)
+      const messageIdList = messagePayloadList.filter(filterFunction).map((payload) => payload.id)
 
-      log.silly(
-        "PuppetMessageMixin",
-        "messageSearch() messageIdList filtered. result length=%d",
-        messageIdList.length,
-      )
+      log.silly("PuppetMessageMixin", "messageSearch() messageIdList filtered. result length=%d", messageIdList.length)
 
       return messageIdList
     }
@@ -241,14 +185,8 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
      *
      * @protected
      */
-    messageQueryFilterFactory(
-      query: MessageQueryFilter,
-    ): MessagePayloadFilterFunction {
-      log.verbose(
-        "PuppetMessageMixin",
-        "messageQueryFilterFactory(%s)",
-        JSON.stringify(query),
-      )
+    messageQueryFilterFactory(query: MessageQueryFilter): MessagePayloadFilterFunction {
+      log.verbose("PuppetMessageMixin", "messageQueryFilterFactory(%s)", JSON.stringify(query))
 
       if (Object.keys(query).length <= 0) {
         throw new Error("query empty")
@@ -256,14 +194,11 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
 
       const filterFunctionList: MessagePayloadFilterFunction[] = []
 
-      const filterKeyList = Object.keys(query) as Array<
-        keyof MessageQueryFilter
-      >
+      const filterKeyList = Object.keys(query) as Array<keyof MessageQueryFilter>
 
       for (const filterKey of filterKeyList) {
         // TypeScript bug: have to set `undefined | string | RegExp` at here, or the later code type check will get error
-        const filterValue: undefined | string | MessageType | RegExp =
-          query[filterKey]
+        const filterValue: undefined | string | MessageType | RegExp = query[filterKey]
         if (!filterValue) {
           throw new Error("filterValue not found for filterKey: " + filterKey)
         }
@@ -271,12 +206,10 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
         let filterFunction: MessagePayloadFilterFunction
 
         if (filterValue instanceof RegExp) {
-          filterFunction = (payload: MessagePayload) =>
-            filterValue.test(payload[filterKey] as string)
+          filterFunction = (payload: MessagePayload) => filterValue.test(payload[filterKey] as string)
         } else {
           // if (typeof filterValue === 'string') {
-          filterFunction = (payload: MessagePayload) =>
-            filterValue === payload[filterKey]
+          filterFunction = (payload: MessagePayload) => filterValue === payload[filterKey]
         }
 
         filterFunctionList.push(filterFunction)
@@ -301,16 +234,8 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
      * @param sayable
      * @returns
      */
-    messageSend(
-      conversationId: string,
-      sayable: SayablePayload,
-    ): Promise<void | string> {
-      log.verbose(
-        "PuppetMessageMixin",
-        "messageSend(%s, {type:%s})",
-        conversationId,
-        sayable.type,
-      )
+    messageSend(conversationId: string, sayable: SayablePayload): Promise<void | string> {
+      log.verbose("PuppetMessageMixin", "messageSend(%s, {type:%s})", conversationId, sayable.type)
 
       switch (sayable.type) {
         case sayableTypes.Attachment:
@@ -318,15 +243,9 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
         case sayableTypes.Emoticon:
         case sayableTypes.Image:
         case sayableTypes.Video:
-          return this.messageSendFile(
-            conversationId,
-            filebox(sayable.payload.filebox),
-          )
+          return this.messageSendFile(conversationId, filebox(sayable.payload.filebox))
         case sayableTypes.Contact:
-          return this.messageSendContact(
-            conversationId,
-            sayable.payload.contactId,
-          )
+          return this.messageSendContact(conversationId, sayable.payload.contactId)
         case sayableTypes.Location:
           return this.messageSendLocation(conversationId, sayable.payload)
         case sayableTypes.MiniProgram:
@@ -334,17 +253,11 @@ const messageMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
         case sayableTypes.Url:
           return this.messageSendUrl(conversationId, sayable.payload)
         case sayableTypes.Text:
-          return this.messageSendText(
-            conversationId,
-            sayable.payload.text,
-            sayable.payload.mentions,
-          )
+          return this.messageSendText(conversationId, sayable.payload.text, sayable.payload.mentions)
         case sayableTypes.Post:
           return this.messageSendPost(conversationId, sayable.payload)
         default:
-          throw new Error(
-            "unsupported sayable payload: " + JSON.stringify(sayable),
-          )
+          throw new Error("unsupported sayable payload: " + JSON.stringify(sayable))
       }
     }
   }

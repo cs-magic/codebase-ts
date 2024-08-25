@@ -7,8 +7,7 @@ export const parseJsonSafe = <T>(s?: any): T | null => {
   if (typeof s === "object") return s as T
 
   try {
-    if (typeof s === "string" && s.startsWith('"'))
-      return parseJsonSafe(JSON.parse(s))
+    if (typeof s === "string" && s.startsWith('"')) return parseJsonSafe(JSON.parse(s))
     return parseJsonSafe(parseJs<T>(s as string))
   } catch (e) {
     return null

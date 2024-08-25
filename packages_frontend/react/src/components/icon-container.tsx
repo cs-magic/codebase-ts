@@ -1,12 +1,11 @@
 "use client"
 
+import clsx from "clsx"
 import React, { ComponentProps, forwardRef } from "react"
-
-import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/shadcn/dist/ui/tooltip"
 
 // todo: why cn not okay
 import { cn } from "@cs-magic/shadcn/dist/lib/utils"
-import clsx from "clsx"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/shadcn/dist/ui/tooltip"
 
 export const IconContainer = forwardRef<
   HTMLButtonElement,

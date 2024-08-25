@@ -1,7 +1,8 @@
+import type * as PUPPET from "wechaty-puppet"
+
+import { isRoomId } from "../../utils/is-type.js"
 import { parseTextWithRegexList } from "../../utils/regex.js"
 import { executeRunners } from "../../utils/runner.js"
-import type * as PUPPET from "wechaty-puppet"
-import { isRoomId } from "../../utils/is-type.js"
 
 export interface RevokeMsgXmlSchema {
   session: string
@@ -21,10 +22,7 @@ export interface RevokeMsgMessagePayload {
 }
 
 const YOU_REVOKE_REGEX_LIST = [/你撤回了一条消息/, /You recalled a message/]
-const OTHER_REVOKE_REGEX_LIST = [
-  /"(.+)" 撤回了一条消息/,
-  /"(.+)" has recalled a message./,
-]
+const OTHER_REVOKE_REGEX_LIST = [/"(.+)" 撤回了一条消息/, /"(.+)" has recalled a message./]
 
 export async function parseRevokeMsgMessagePayload(
   revokeMsgXmlSchema: RevokeMsgXmlSchema,
@@ -32,20 +30,12 @@ export async function parseRevokeMsgMessagePayload(
   let nickName: string | undefined
 
   const youRevoke = async () =>
-    parseTextWithRegexList<RevokeMsgType>(
-      revokeMsgXmlSchema.replacemsg,
-      YOU_REVOKE_REGEX_LIST,
-      async () => "You",
-    )
+    parseTextWithRegexList<RevokeMsgType>(revokeMsgXmlSchema.replacemsg, YOU_REVOKE_REGEX_LIST, async () => "You")
   const otherRevoke = async () =>
-    parseTextWithRegexList<RevokeMsgType>(
-      revokeMsgXmlSchema.replacemsg,
-      OTHER_REVOKE_REGEX_LIST,
-      async (_, match) => {
-        nickName = match[1]
-        return "Other"
-      },
-    )
+    parseTextWithRegexList<RevokeMsgType>(revokeMsgXmlSchema.replacemsg, OTHER_REVOKE_REGEX_LIST, async (_, match) => {
+      nickName = match[1]
+      return "Other"
+    })
 
   const type = (await executeRunners<RevokeMsgType>([youRevoke, otherRevoke]))!
 
@@ -77,10 +67,7 @@ export async function getRevokeOperatorIdForRoomMessage(
   revokemsgPayload: RevokeMsgMessagePayload,
 ): Promise<string | null> {
   if (isRoomId(revokemsgPayload.session)) {
-    const contactIdList = await puppet.roomMemberSearch(
-      revokemsgPayload.session,
-      revokemsgPayload.operatorNickName!,
-    )
+    const contactIdList = await puppet.roomMemberSearch(revokemsgPayload.session, revokemsgPayload.operatorNickName!)
     if (contactIdList.length) {
       return contactIdList[0]!
     }

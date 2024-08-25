@@ -50,9 +50,7 @@ export interface SysmsgTemplateLinkRevoke {
 
 export type SysmsgTemplateLinkType = "link_profile" | "link_revoke"
 
-export type SysmsgTemplateLinkPayload =
-  | SysmsgTemplateLinkProfile
-  | SysmsgTemplateLinkRevoke
+export type SysmsgTemplateLinkPayload = SysmsgTemplateLinkProfile | SysmsgTemplateLinkRevoke
 
 export interface SysmsgTemplateLink {
   name: string
@@ -88,17 +86,12 @@ export async function parseSysmsgTemplateMessagePayload(
 
     if (type === "link_profile") {
       const memberList = toList(link.memberlist!.member)
-      payload = memberList.map(
-        (member: {
-          nickname: string
-          username?: string
-        }): SysmsgTemplateLinkMember => {
-          return {
-            nickName: member.nickname,
-            userName: member.username,
-          }
-        },
-      )
+      payload = memberList.map((member: { nickname: string; username?: string }): SysmsgTemplateLinkMember => {
+        return {
+          nickName: member.nickname,
+          userName: member.username,
+        }
+      })
     } else if (link.$.type === "link_revoke") {
       payload = {
         title: link.title!,
@@ -129,23 +122,16 @@ export async function parseSysmsgTemplateMessagePayload(
   }
 }
 
-export type SysmsgTemplateHandler<T> = (
-  templateLinkList: SysmsgTemplateLink[],
-  matchedRegexIndex: number,
-) => Promise<T>
+export type SysmsgTemplateHandler<T> = (templateLinkList: SysmsgTemplateLink[], matchedRegexIndex: number) => Promise<T>
 
 export async function parseSysmsgTemplate<T>(
   sysmsgTemplatePayload: SysmsgTemplateMessagePayload,
   regexList: RegExp[],
   handler: SysmsgTemplateHandler<T>,
 ): Promise<T | null> {
-  return parseTextWithRegexList(
-    sysmsgTemplatePayload.template,
-    regexList,
-    async (matchedRegexIndex) => {
-      return handler(sysmsgTemplatePayload.templateLinkList, matchedRegexIndex)
-    },
-  )
+  return parseTextWithRegexList(sysmsgTemplatePayload.template, regexList, async (matchedRegexIndex) => {
+    return handler(sysmsgTemplatePayload.templateLinkList, matchedRegexIndex)
+  })
 }
 
 export function createSysmsgTemplateRunner<T>(
@@ -153,6 +139,5 @@ export function createSysmsgTemplateRunner<T>(
   regexList: RegExp[],
   handler: SysmsgTemplateHandler<T>,
 ): Runner<T> {
-  return async () =>
-    parseSysmsgTemplate<T>(sysmsgTemplatePayload, regexList, handler)
+  return async () => parseSysmsgTemplate<T>(sysmsgTemplatePayload, regexList, handler)
 }

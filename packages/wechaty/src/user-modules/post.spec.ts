@@ -1,4 +1,5 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
+
 /**
  *   Wechaty Chatbot SDK - https://github.com/wechaty/wechaty
  *
@@ -18,60 +19,56 @@
  *   limitations under the License.
  *
  */
-import {
-  test,
-  sinon,
-}             from 'tstest'
+import { FileBox } from "file-box"
+import { sinon, test } from "tstest"
+import * as PUPPET from "wechaty-puppet"
+import PuppetMock from "wechaty-puppet-mock"
 
-import * as PUPPET from 'wechaty-puppet'
-import PuppetMock from 'wechaty-puppet-mock'
-import { FileBox } from 'file-box'
+import { WechatyBuilder } from "../wechaty-builder.js"
 
-import { WechatyBuilder } from '../wechaty-builder.js'
-
-test.skip('Post smoke testing', async t => {
+test.skip("Post smoke testing", async (t) => {
   void sinon
 
   const puppet = new PuppetMock()
   const wechaty = WechatyBuilder.build({ puppet })
   await wechaty.start()
-  const bot = puppet.mocker.createContact({ name: 'Bot' })
+  const bot = puppet.mocker.createContact({ name: "Bot" })
   puppet.mocker.login(bot)
 
   const post = await wechaty.Post.builder()
-    .add('Hello, world!')
-    .add(FileBox.fromQRCode('qr'))
-    .add(await wechaty.UrlLink.create('https://yahoo.com'))
+    .add("Hello, world!")
+    .add(FileBox.fromQRCode("qr"))
+    .add(await wechaty.UrlLink.create("https://yahoo.com"))
     .build()
 
   await wechaty.say(post)
 
-  await post.reply('Thanks for sharing!')
+  await post.reply("Thanks for sharing!")
   await post.like(true)
   await post.tap(PUPPET.types.Tap.Like, false)
 
   const pagination = {
     pageSize: 10,
-    pageToken: '',
+    pageToken: "",
   }
 
   for await (const sayable of post) {
-    t.ok(sayable, 'tbw')
+    t.ok(sayable, "tbw")
   }
 
   for await (const descendantPost of post.descendants()) {
-    t.ok(descendantPost, 'tbw')
+    t.ok(descendantPost, "tbw")
   }
 
-  const [ descendantList, _nextPageToken2 ] = await wechaty.Post.findAll({}, pagination)
-  t.ok(descendantList, 'tbw')
+  const [descendantList, _nextPageToken2] = await wechaty.Post.findAll({}, pagination)
+  t.ok(descendantList, "tbw")
 
   for await (const liker of post.taps({ type: PUPPET.types.Tap.Like })) {
-    t.ok(liker, 'tbw')
+    t.ok(liker, "tbw")
   }
 
-  const [ tapList, _nextPageToken3 ] = await post.tapFind({ type: PUPPET.types.Tap.Like }, pagination)
-  t.ok(tapList, 'tbw')
+  const [tapList, _nextPageToken3] = await post.tapFind({ type: PUPPET.types.Tap.Like }, pagination)
+  t.ok(tapList, "tbw")
 
   await wechaty.stop()
 })

@@ -1,9 +1,6 @@
 import { IWechatSDKToken } from "../auth/index.js"
-import {
-  getWechatSignature,
-  getWechatTicket,
-  getWechatToken,
-} from "./notify/functions.js"
+
+import { getWechatSignature, getWechatTicket, getWechatToken } from "./notify/functions.js"
 
 export class WechatSDK {
   private token?: IWechatSDKToken
@@ -26,10 +23,7 @@ export class WechatSDK {
   private async _getTicket() {
     const access_token = await this.getToken()
 
-    if (
-      !this.ticket ||
-      Date.now() / 1000 - this.ticket.time >= this.ticket.expires_in
-    ) {
+    if (!this.ticket || Date.now() / 1000 - this.ticket.time >= this.ticket.expires_in) {
       const { ticket, expires_in } = await getWechatTicket(access_token)
       this.ticket = {
         value: ticket,

@@ -1,4 +1,5 @@
-import type { payloads, Puppet } from "../mods/mod.js"
+import type { Puppet, payloads } from "../mods/mod.js"
+
 import type { AppMessagePayload } from "./message.js"
 
 /**

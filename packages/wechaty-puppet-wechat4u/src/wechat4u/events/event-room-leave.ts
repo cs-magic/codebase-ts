@@ -1,23 +1,18 @@
-import { WebMessageRawPayload, WebMessageType } from "../../web-schemas.js"
-
 import type * as PUPPET from "wechaty-puppet"
+
+import { WebMessageRawPayload, WebMessageType } from "../../web-schemas.js"
 import { isRoomId } from "../utils/is-type.js"
-import type { EventPayload } from "./event.js"
 import { executeRunners } from "../utils/runner.js"
 
-const YOU_REMOVE_OTHER_REGEX_LIST = [
-  /^(你)将"(.+)"移出了群聊/,
-  /^(You) removed "(.+)" from the group chat/,
-]
+import type { EventPayload } from "./event.js"
+
+const YOU_REMOVE_OTHER_REGEX_LIST = [/^(你)将"(.+)"移出了群聊/, /^(You) removed "(.+)" from the group chat/]
 const OTHER_REMOVE_YOU_REGEX_LIST = [
   /^(你)被"([^"]+?)"移出群聊/,
   /^(You) were removed from the group chat by "([^"]+)"/,
 ]
 
-const roomLeaveDebounceMap: Map<
-  string,
-  ReturnType<typeof setTimeout>
-> = new Map()
+const roomLeaveDebounceMap: Map<string, ReturnType<typeof setTimeout>> = new Map()
 const DEBOUNCE_TIMEOUT = 3600 * 1000 // 1 hour
 
 function roomLeaveDebounceKey(roomId: string, removeeId: string) {
@@ -43,18 +38,12 @@ export function removeRoomLeaveDebounce(roomId: string, removeeId: string) {
   roomLeaveDebounceMap.delete(key)
 }
 
-export function isRoomLeaveDebouncing(
-  roomId: string,
-  removeeId: string,
-): boolean {
+export function isRoomLeaveDebouncing(roomId: string, removeeId: string): boolean {
   const key = roomLeaveDebounceKey(roomId, removeeId)
   return roomLeaveDebounceMap.get(key) !== undefined
 }
 
-export default async (
-  puppet: PUPPET.Puppet,
-  message: WebMessageRawPayload,
-): Promise<EventPayload> => {
+export default async (puppet: PUPPET.Puppet, message: WebMessageRawPayload): Promise<EventPayload> => {
   const roomId = message.FromUserName
   if (!isRoomId(roomId) || ![WebMessageType.SYS].includes(message.MsgType)) {
     return null
@@ -67,9 +56,7 @@ export default async (
    */
   const youRemoveOther = async () => {
     let matches: null | string[] = null
-    YOU_REMOVE_OTHER_REGEX_LIST.some(
-      (re) => !!(matches = message.Content.match(re)),
-    )
+    YOU_REMOVE_OTHER_REGEX_LIST.some((re) => !!(matches = message.Content.match(re)))
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (matches) {
       const removerName = matches[2]!
@@ -92,9 +79,7 @@ export default async (
    */
   const otherRemoveYou = async () => {
     let matches: null | string[] = null
-    OTHER_REMOVE_YOU_REGEX_LIST.some(
-      (re) => !!(matches = message.Content.match(re)),
-    )
+    OTHER_REMOVE_YOU_REGEX_LIST.some((re) => !!(matches = message.Content.match(re)))
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (matches) {
       const removerName = matches[2]!
@@ -111,10 +96,7 @@ export default async (
     return null
   }
 
-  const ret = await executeRunners<PUPPET.payloads.EventRoomLeave>([
-    youRemoveOther,
-    otherRemoveYou,
-  ])
+  const ret = await executeRunners<PUPPET.payloads.EventRoomLeave>([youRemoveOther, otherRemoveYou])
   if (ret) {
     ret.removeeIdList.forEach((leaverId) => {
       roomLeaveAddDebounce(roomId, leaverId)

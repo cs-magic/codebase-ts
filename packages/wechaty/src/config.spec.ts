@@ -1,4 +1,5 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
+
 /**
  *   Wechaty Chatbot SDK - https://github.com/wechaty/wechaty
  *
@@ -18,43 +19,36 @@
  *   limitations under the License.
  *
  */
+import { test } from "tstest"
 
-import { test }  from 'tstest'
+import { config } from "./config.js"
 
-import { config } from './config.js'
 // import { Puppet } from './puppet'
 
-test('important variables', async t => {
+test("important variables", async (t) => {
   // t.ok('puppet'   in config, 'should exist `puppet` in Config')
-  t.ok('apihost'  in config, 'should exist `apihost` in Config')
-  t.ok('token'    in config, 'should exist `token` in Config')
+  t.ok("apihost" in config, "should exist `apihost` in Config")
+  t.ok("token" in config, "should exist `token` in Config")
 
   // t.ok(config.default.DEFAULT_PUPPET      , 'should export DEFAULT_PUPPET')
   // t.ok(config.default.DEFAULT_PROFILE     , 'should export DEFAULT_PROFILE')
-  t.ok(config.default.DEFAULT_PROTOCOL, 'should export DEFAULT_PROTOCOL')
-  t.ok(config.default.DEFAULT_APIHOST,  'should export DEFAULT_APIHOST')
+  t.ok(config.default.DEFAULT_PROTOCOL, "should export DEFAULT_PROTOCOL")
+  t.ok(config.default.DEFAULT_APIHOST, "should export DEFAULT_APIHOST")
 })
 
-test('validApiHost()', async t => {
-  const OK_APIHOSTS = [
-    'api.chatie.io',
-    'chatie.io:8080',
-  ]
-  const ERR_APIHOSTS = [
-    'https://api.chatie.io',
-    'chatie.io/',
-  ]
-  OK_APIHOSTS.forEach(apihost => {
+test("validApiHost()", async (t) => {
+  const OK_APIHOSTS = ["api.chatie.io", "chatie.io:8080"]
+  const ERR_APIHOSTS = ["https://api.chatie.io", "chatie.io/"]
+  OK_APIHOSTS.forEach((apihost) => {
     t.doesNotThrow(() => {
       config.validApiHost(apihost)
     })
-  }, 'should not row for right apihost')
-  ERR_APIHOSTS.forEach(apihost => {
+  }, "should not row for right apihost")
+  ERR_APIHOSTS.forEach((apihost) => {
     t.throws(() => {
       config.validApiHost(apihost)
     })
-  }, 'should throw for error apihost')
-
+  }, "should throw for error apihost")
 })
 
 // test('puppetInstance()', async t => {
@@ -83,15 +77,19 @@ test('validApiHost()', async t => {
 //   config.puppetInstance(bak)
 // })
 
-test('systemPuppetName ()', async t => {
-  const WECHATY_PUPPET_ORIG = process.env['WECHATY_PUPPET']
+test("systemPuppetName ()", async (t) => {
+  const WECHATY_PUPPET_ORIG = process.env["WECHATY_PUPPET"]
 
-  delete process.env['WECHATY_PUPPET']
-  t.equal(config.systemPuppetName(), 'wechaty-puppet-wechat4u', 'should get wechaty-puppet-wechat4u as default puppet name')
+  delete process.env["WECHATY_PUPPET"]
+  t.equal(
+    config.systemPuppetName(),
+    "wechaty-puppet-wechat4u",
+    "should get wechaty-puppet-wechat4u as default puppet name",
+  )
 
-  process.env['WECHATY_PUPPET'] = 'wechaty-puppet-mock'
-  t.equal(config.systemPuppetName(), 'wechaty-puppet-mock', 'should get puppet name from process.env')
+  process.env["WECHATY_PUPPET"] = "wechaty-puppet-mock"
+  t.equal(config.systemPuppetName(), "wechaty-puppet-mock", "should get puppet name from process.env")
 
   // restore the original value
-  process.env['WECHATY_PUPPET'] = WECHATY_PUPPET_ORIG
+  process.env["WECHATY_PUPPET"] = WECHATY_PUPPET_ORIG
 })

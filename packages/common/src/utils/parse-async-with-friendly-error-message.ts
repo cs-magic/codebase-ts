@@ -2,10 +2,7 @@ import { ZodError } from "zod"
 
 import type { InputValidatorSchema } from "../schema/utils.js"
 
-export const parseAsyncWithFriendlyErrorMessage = async <T>(
-  schema: InputValidatorSchema,
-  input?: string,
-) => {
+export const parseAsyncWithFriendlyErrorMessage = async <T>(schema: InputValidatorSchema, input?: string) => {
   try {
     const result = await schema.parseAsync(input ?? "")
     return result as T

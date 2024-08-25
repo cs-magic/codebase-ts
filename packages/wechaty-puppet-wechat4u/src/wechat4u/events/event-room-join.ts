@@ -1,16 +1,14 @@
-import type { WebMessageRawPayload } from "../../web-schemas.js"
-
 import type * as PUPPET from "wechaty-puppet"
-import { isRoomId } from "../utils/is-type.js"
-import type { EventPayload } from "./event.js"
-import { removeRoomLeaveDebounce } from "./event-room-leave.js"
-import { executeRunners } from "../utils/runner.js"
-import { WebMessageType } from "../../web-schemas.js"
 
-const YOU_INVITE_OTHER_REGEX_LIST = [
-  /^你邀请"(.+)"加入了群聊 {2}/,
-  /^You invited (.+) to the group chat/,
-]
+import type { WebMessageRawPayload } from "../../web-schemas.js"
+import { WebMessageType } from "../../web-schemas.js"
+import { isRoomId } from "../utils/is-type.js"
+import { executeRunners } from "../utils/runner.js"
+
+import { removeRoomLeaveDebounce } from "./event-room-leave.js"
+import type { EventPayload } from "./event.js"
+
+const YOU_INVITE_OTHER_REGEX_LIST = [/^你邀请"(.+)"加入了群聊 {2}/, /^You invited (.+) to the group chat/]
 const OTHER_INVITE_YOU_REGEX_LIST = [
   /^"([^"]+?)"邀请你加入了群聊，群聊参与人还有：(.+)/,
   /^(.+) invited you to a group chat with (.+)/,
@@ -19,10 +17,7 @@ const OTHER_INVITE_YOU_AND_OTHER_REGEX_LIST = [
   /^"([^"]+?)"邀请你和"(.+?)"加入了群聊/,
   /^(.+?) invited you and (.+?) to (the|a) group chat/,
 ]
-const OTHER_INVITE_OTHER_REGEX_LIST = [
-  /^"(.+)"邀请"(.+)"加入了群聊/,
-  /^(.+?) invited (.+?) to (the|a) group chat/,
-]
+const OTHER_INVITE_OTHER_REGEX_LIST = [/^"(.+)"邀请"(.+)"加入了群聊/, /^(.+?) invited (.+?) to (the|a) group chat/]
 const OTHER_JOIN_VIA_YOUR_QRCODE_REGEX_LIST = [
   /^" ?(.+)"通过扫描你分享的二维码加入群聊/,
   /^" ?(.+)" joined group chat via the QR code you shared/,
@@ -32,10 +27,7 @@ const OTHER_JOIN_VIA_OTHER_QRCODE_REGEX_LIST = [
   /^"(.+)" joined the group chat via the QR Code shared by "(.+)"/,
 ]
 
-export default async (
-  puppet: PUPPET.Puppet,
-  message: WebMessageRawPayload,
-): Promise<EventPayload> => {
+export default async (puppet: PUPPET.Puppet, message: WebMessageRawPayload): Promise<EventPayload> => {
   const roomId = message.FromUserName
   if (!isRoomId(roomId)) {
     return null
@@ -55,10 +47,9 @@ export default async (
    */
   const youInviteOther = async () => {
     let matches: null | string[] = null
-    ;[
-      ...YOU_INVITE_OTHER_REGEX_LIST,
-      ...OTHER_JOIN_VIA_YOUR_QRCODE_REGEX_LIST,
-    ].some((re) => !!(matches = message.Content.match(re)))
+    ;[...YOU_INVITE_OTHER_REGEX_LIST, ...OTHER_JOIN_VIA_YOUR_QRCODE_REGEX_LIST].some(
+      (re) => !!(matches = message.Content.match(re)),
+    )
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (matches) {
       const inviteName = matches[1]!
@@ -80,9 +71,7 @@ export default async (
    */
   const otherInviteYou = async () => {
     let matches: null | string[] = null
-    OTHER_INVITE_YOU_REGEX_LIST.some(
-      (re) => !!(matches = message.Content.match(re)),
-    )
+    OTHER_INVITE_YOU_REGEX_LIST.some((re) => !!(matches = message.Content.match(re)))
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (matches) {
       const inviteName = matches[1]!
@@ -105,10 +94,9 @@ export default async (
    */
   const otherInviteOther = async () => {
     let matches: null | string[] = null
-    ;[
-      ...OTHER_INVITE_YOU_AND_OTHER_REGEX_LIST,
-      ...OTHER_INVITE_OTHER_REGEX_LIST,
-    ].some((re) => !!(matches = message.Content.match(re)))
+    ;[...OTHER_INVITE_YOU_AND_OTHER_REGEX_LIST, ...OTHER_INVITE_OTHER_REGEX_LIST].some(
+      (re) => !!(matches = message.Content.match(re)),
+    )
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (matches) {
       const inviteeIdList = []
@@ -137,9 +125,7 @@ export default async (
    */
   const otherJoinViaQrCode = async () => {
     let matches: null | string[] = null
-    OTHER_JOIN_VIA_OTHER_QRCODE_REGEX_LIST.some(
-      (re) => !!(matches = message.Content.match(re)),
-    )
+    OTHER_JOIN_VIA_OTHER_QRCODE_REGEX_LIST.some((re) => !!(matches = message.Content.match(re)))
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (matches) {
       const inviteeIdList = []
@@ -160,12 +146,7 @@ export default async (
     return null
   }
 
-  const ret = await executeRunners([
-    youInviteOther,
-    otherInviteYou,
-    otherInviteOther,
-    otherJoinViaQrCode,
-  ])
+  const ret = await executeRunners([youInviteOther, otherInviteYou, otherInviteOther, otherJoinViaQrCode])
   if (ret) {
     ret.inviteeIdList.forEach((inviteeId) => {
       removeRoomLeaveDebounce(ret!.roomId, inviteeId)

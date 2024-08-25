@@ -2,6 +2,7 @@
 
 import fs from "fs"
 import path from "path"
+
 import { formatAction } from "./utils/format-action.js"
 
 export const dumpFile = async (
@@ -28,9 +29,6 @@ export const dumpFile = async (
   }
 
   await formatAction(async () => {
-    await fs.promises.writeFile(
-      fp,
-      typeof content === "string" ? content : JSON.stringify(content, null, 2),
-    )
+    await fs.promises.writeFile(fp, typeof content === "string" ? content : JSON.stringify(content, null, 2))
   }, `dumping JSON file into file://${fp}`)
 }

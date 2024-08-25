@@ -1,12 +1,9 @@
 import { log } from "../config.js"
-
 import type { PuppetScanListener } from "../puppet/events.js"
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 import { ScanStatus } from "../schemas/event.js"
 
-const loginMixin = <MixinBase extends typeof PuppetSkeleton>(
-  mixinBase: MixinBase,
-) => {
+const loginMixin = <MixinBase extends typeof PuppetSkeleton>(mixinBase: MixinBase) => {
   abstract class LoginMixin extends mixinBase {
     /**
      * @internal used by public API `currentUserId`
@@ -124,10 +121,7 @@ const loginMixin = <MixinBase extends typeof PuppetSkeleton>(
       log.verbose("PuppetLoginMixin", "logout(%s)", reason)
 
       if (!this.isLoggedIn) {
-        log.verbose(
-          "PuppetLoginMixin",
-          "logout() isLoggedIn === false, do nothing",
-        )
+        log.verbose("PuppetLoginMixin", "logout() isLoggedIn === false, do nothing")
         return
       }
 
@@ -152,11 +146,7 @@ const loginMixin = <MixinBase extends typeof PuppetSkeleton>(
      * @deprecated use `currentUserId` instead. (will be removed in v2.0)
      */
     selfId(): string {
-      log.warn(
-        "PuppetLoginMixin",
-        "selfId() is deprecated, use `currentUserId` instead:\n%s",
-        new Error().stack,
-      )
+      log.warn("PuppetLoginMixin", "selfId() is deprecated, use `currentUserId` instead:\n%s", new Error().stack)
       return this.currentUserId
     }
 
@@ -164,11 +154,7 @@ const loginMixin = <MixinBase extends typeof PuppetSkeleton>(
      * @deprecated use isLoggedIn instead. will be removed in v2.0
      */
     logonoff(): boolean {
-      log.warn(
-        "PuppetLoginMixin",
-        "logonoff() is deprecated, use `isLoggedIn` instead:\n%s",
-        new Error().stack,
-      )
+      log.warn("PuppetLoginMixin", "logonoff() is deprecated, use `isLoggedIn` instead:\n%s", new Error().stack)
       return this.isLoggedIn
     }
   }
@@ -178,11 +164,7 @@ const loginMixin = <MixinBase extends typeof PuppetSkeleton>(
 
 type LoginMixin = ReturnType<typeof loginMixin>
 
-type ProtectedPropertyLoginMixin =
-  | "__authQrCode"
-  | "__currentUserId"
-  | "login"
-  | "logonoff"
+type ProtectedPropertyLoginMixin = "__authQrCode" | "__currentUserId" | "login" | "logonoff"
 
 export type { LoginMixin, ProtectedPropertyLoginMixin }
 export { loginMixin }

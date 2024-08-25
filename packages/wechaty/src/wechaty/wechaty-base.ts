@@ -17,22 +17,14 @@
  *   limitations under the License.
  *
  */
-import {
-  serviceCtlMixin,
-}                       from 'state-switch'
-import { function as FP } from 'fp-ts'
-import type * as PUPPET from 'wechaty-puppet'
+import { function as FP } from "fp-ts"
+import { serviceCtlMixin } from "state-switch"
+import type * as PUPPET from "wechaty-puppet"
 
-import {
-  config,
-  log,
-  VERSION,
-}                       from '../config.js'
-
-import type {
-  SayableSayer,
-  Sayable,
-}                             from '../sayable/mod.js'
+import { VERSION, config, log } from "../config.js"
+import type { Sayable, SayableSayer } from "../sayable/mod.js"
+import type { WechatyOptions } from "../schemas/wechaty-options.js"
+import type { PostInterface } from "../user-modules/post.js"
 import {
   gErrorMixin,
   ioMixin,
@@ -41,18 +33,10 @@ import {
   pluginMixin,
   puppetMixin,
   wechatifyUserModuleMixin,
-}                             from '../wechaty-mixins/mod.js'
+} from "../wechaty-mixins/mod.js"
 
-import {
-  WechatySkeleton,
-}                             from './wechaty-skeleton.js'
-import type {
-  WechatyInterface,
-}                             from './wechaty-impl.js'
-import type {
-  WechatyOptions,
-}                             from '../schemas/wechaty-options.js'
-import type { PostInterface } from '../user-modules/post.js'
+import type { WechatyInterface } from "./wechaty-impl.js"
+import { WechatySkeleton } from "./wechaty-skeleton.js"
 
 const mixinBase = FP.pipe(
   WechatySkeleton,
@@ -70,7 +54,7 @@ const mixinBase = FP.pipe(
    *  because the `wechaty.start/stop()` should first entry `serviceCtlMixin.start/stop()`
    *  which can be managed correctly by the `serviceCtlMixin`
    */
-  serviceCtlMixin('Wechaty', { log }),
+  serviceCtlMixin("Wechaty", { log }),
 )
 
 /**
@@ -114,9 +98,8 @@ const mixinBase = FP.pipe(
  * bot.start()
  */
 class WechatyBase extends mixinBase implements SayableSayer {
-
-  static   override readonly VERSION = VERSION
-  readonly wechaty : WechatyInterface
+  static override readonly VERSION = VERSION
+  readonly wechaty: WechatyInterface
 
   readonly _stopCallbackList: (() => void)[] = []
 
@@ -163,45 +146,50 @@ class WechatyBase extends mixinBase implements SayableSayer {
    * @param {WechatyOptions} [options={}]
    *
    */
-  constructor (
-    override __options: WechatyOptions = {},
-  ) {
+  constructor(override __options: WechatyOptions = {}) {
     super(__options)
-    log.verbose('Wechaty', 'constructor()')
+    log.verbose("Wechaty", "constructor()")
 
     this.__memory = this.__options.memory
-    this.wechaty  = this
+    this.wechaty = this
   }
 
-  override async start (): Promise<void> {
-    log.verbose('Wechaty', 'start()')
+  override async start(): Promise<void> {
+    log.verbose("Wechaty", "start()")
     await this.init()
     return super.start()
   }
 
-  override async onStart (): Promise<void> {
-    log.verbose('Wechaty', 'onStart()')
+  override async onStart(): Promise<void> {
+    log.verbose("Wechaty", "onStart()")
 
-    log.verbose('Wechaty', '<%s>(%s) onStart() v%s is starting...',
+    log.verbose(
+      "Wechaty",
+      "<%s>(%s) onStart() v%s is starting...",
       this.__options.puppet || config.systemPuppetName(),
-      this.__options.name   || '',
+      this.__options.name || "",
       this.version(),
     )
-    log.verbose('Wechaty', 'id: %s', this.id)
+    log.verbose("Wechaty", "id: %s", this.id)
 
-    const lifeTimer = setInterval(() => {
-      log.silly('Wechaty', 'onStart() setInterval() this timer is to keep Wechaty running...')
-    }, 1000 * 60 * 60)
+    const lifeTimer = setInterval(
+      () => {
+        log.silly("Wechaty", "onStart() setInterval() this timer is to keep Wechaty running...")
+      },
+      1000 * 60 * 60,
+    )
     this._stopCallbackList.push(() => clearInterval(lifeTimer))
 
-    this.emit('start')
-    log.verbose('Wechaty', 'onStart() ... done')
+    this.emit("start")
+    log.verbose("Wechaty", "onStart() ... done")
   }
 
-  override async onStop (): Promise<void> {
-    log.verbose('Wechaty', 'onStop()')
+  override async onStop(): Promise<void> {
+    log.verbose("Wechaty", "onStop()")
 
-    log.verbose('Wechaty', '<%s> onStop() v%s is stopping ...',
+    log.verbose(
+      "Wechaty",
+      "<%s> onStop() v%s is stopping ...",
       this.__options.puppet || config.systemPuppetName(),
       this.version(),
     )
@@ -210,8 +198,8 @@ class WechatyBase extends mixinBase implements SayableSayer {
     this._stopCallbackList.map(setImmediate)
     this._stopCallbackList.length = 0
 
-    this.emit('stop')
-    log.verbose('Wechaty', 'onStop() ... done')
+    this.emit("stop")
+    log.verbose("Wechaty", "onStop() ... done")
   }
 
   /**
@@ -268,19 +256,16 @@ class WechatyBase extends mixinBase implements SayableSayer {
    * await bot.say(miniPayload)
    */
 
-  async say (
-    sayable: Sayable,
-  ): Promise<void> {
-    log.verbose('Wechaty', 'say(%s)', sayable)
+  async say(sayable: Sayable): Promise<void> {
+    log.verbose("Wechaty", "say(%s)", sayable)
     await this.currentUser.say(sayable)
   }
 
-  async publish (
-    post: PostInterface,
-  ): Promise<void | PostInterface> {
-    log.verbose('Wechaty', 'publish(%s)',
-      (post.payload.sayableList as PUPPET.payloads.Sayable[])
-        .map(s => s.type).join(','),
+  async publish(post: PostInterface): Promise<void | PostInterface> {
+    log.verbose(
+      "Wechaty",
+      "publish(%s)",
+      (post.payload.sayableList as PUPPET.payloads.Sayable[]).map((s) => s.type).join(","),
     )
     const postId = await this.puppet.postPublish(post.payload)
 
@@ -288,20 +273,15 @@ class WechatyBase extends mixinBase implements SayableSayer {
       return this.Post.find({ id: postId })
     }
   }
-
 }
 
 type WechatyBaseProtectedProperty =
   // | '_serviceCtlFsmInterpreter'  // from ServiceCtlFsm
-  | '__serviceCtlLogger'             // from ServiceCtl(&Fsm)
-  | '__serviceCtlResettingIndicator' // from ServiceCtl
-  | 'wechaty'
-  | 'onStart'
-  | 'onStop'
+  | "__serviceCtlLogger" // from ServiceCtl(&Fsm)
+  | "__serviceCtlResettingIndicator" // from ServiceCtl
+  | "wechaty"
+  | "onStart"
+  | "onStop"
 
-export type {
-  WechatyBaseProtectedProperty,
-}
-export {
-  WechatyBase,
-}
+export type { WechatyBaseProtectedProperty }
+export { WechatyBase }

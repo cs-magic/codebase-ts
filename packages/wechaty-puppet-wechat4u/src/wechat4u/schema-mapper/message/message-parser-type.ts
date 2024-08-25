@@ -1,8 +1,10 @@
 import * as PUPPET from "wechaty-puppet"
 import { MessageParserContext, log } from "wechaty-puppet"
+
+import { WebMessageRawPayload, WebMessageType } from "../../../web-schemas.js"
+
 import type { MessageParser } from "./message-parser.js"
 import { LOGPRE } from "./message-parser.js"
-import { WebMessageRawPayload, WebMessageType } from "../../../web-schemas.js"
 
 const TypeMappings: { [key: number]: PUPPET.types.Message } = {
   [WebMessageType.TEXT]: PUPPET.types.Message.Text,
@@ -30,10 +32,7 @@ export const typeParser: MessageParser = async (
   let type: PUPPET.types.Message | undefined = TypeMappings[wechatMessageType]
 
   if (!type) {
-    log.verbose(
-      LOGPRE,
-      `unsupported type: ${JSON.stringify(webMessageRawPayload)}`,
-    )
+    log.verbose(LOGPRE, `unsupported type: ${JSON.stringify(webMessageRawPayload)}`)
 
     type = PUPPET.types.Message.Unknown
   }

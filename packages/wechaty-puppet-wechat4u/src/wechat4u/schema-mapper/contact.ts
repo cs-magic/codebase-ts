@@ -1,26 +1,18 @@
 import * as PUPPET from "wechaty-puppet"
-import type { WebContactRawPayload } from "../../web-schemas.js"
-import { plainText } from "../utils/xml.js"
 import { log } from "wechaty-puppet"
 
-export function wechat4uContactToWechaty(
-  rawPayload: WebContactRawPayload,
-): PUPPET.payloads.Contact {
-  log.silly(
-    "PuppetWechat4u",
-    "contactParseRawPayload(Object.keys(payload).length=%d)",
-    Object.keys(rawPayload).length,
-  )
+import type { WebContactRawPayload } from "../../web-schemas.js"
+import { plainText } from "../utils/xml.js"
+
+export function wechat4uContactToWechaty(rawPayload: WebContactRawPayload): PUPPET.payloads.Contact {
+  log.silly("PuppetWechat4u", "contactParseRawPayload(Object.keys(payload).length=%d)", Object.keys(rawPayload).length)
   if (!Object.keys(rawPayload).length) {
     log.error(
       "PuppetWechat4u",
       "contactParseRawPayload(Object.keys(payload).length=%d)",
       Object.keys(rawPayload).length,
     )
-    log.error(
-      "PuppetWechat4u",
-      "contactParseRawPayload() got empty rawPayload!",
-    )
+    log.error("PuppetWechat4u", "contactParseRawPayload() got empty rawPayload!")
     throw new Error("empty raw payload")
     // return {
     //   gender: Gender.Unknown,
@@ -55,9 +47,7 @@ export function wechat4uContactToWechaty(
      */
     // eslint-disable-next-line sort-keys
     type:
-      !!rawPayload.UserName &&
-      !rawPayload.UserName.startsWith("@@") &&
-      !!(rawPayload.VerifyFlag & 8)
+      !!rawPayload.UserName && !rawPayload.UserName.startsWith("@@") && !!(rawPayload.VerifyFlag & 8)
         ? PUPPET.types.Contact.Official
         : PUPPET.types.Contact.Individual,
     /**

@@ -1,15 +1,15 @@
+import { Profile } from "next-auth"
+// noinspection ES6PreferShortImport: 因为next-auth的packages.json的exports里规定了从 ./providers/* 里导出, see: https://github.com/nextauthjs/next-auth/issues/8263#issuecomment-1671918326
+import { OAuthConfig, OAuthUserConfig } from "next-auth/providers/index"
+
 import { WECHAT_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/wechat/config"
 import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema"
 import {
   adaptWechatAuthToken,
-  getWechatAuthorizationUrl,
   getWechatAuthToken,
+  getWechatAuthorizationUrl,
   getWechatUserProfile,
 } from "@cs-magic/common/dist/auth/providers/wechat/utils"
-import { Profile } from "next-auth"
-
-// noinspection ES6PreferShortImport: 因为next-auth的packages.json的exports里规定了从 ./providers/* 里导出, see: https://github.com/nextauthjs/next-auth/issues/8263#issuecomment-1671918326
-import { OAuthConfig, OAuthUserConfig } from "next-auth/providers/index"
 
 export interface IWechatAdaptedProfile extends IWechatProfile, Profile {}
 
@@ -19,9 +19,7 @@ export interface IWechatAdaptedProfile extends IWechatProfile, Profile {}
  * 1. https://github.com/nextauthjs/next-auth/issues/5937
  * 2. node_modules/next-auth/providers/facebook.ts
  */
-export function WechatProvider<P extends IWechatAdaptedProfile>(
-  options: OAuthUserConfig<P>,
-): OAuthConfig<P> {
+export function WechatProvider<P extends IWechatAdaptedProfile>(options: OAuthUserConfig<P>): OAuthConfig<P> {
   // @ts-ignore
   return {
     id: WECHAT_PROVIDER_ID,

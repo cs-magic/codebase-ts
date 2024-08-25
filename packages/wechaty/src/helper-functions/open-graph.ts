@@ -17,15 +17,15 @@
  *   limitations under the License.
  *
  */
-import og from 'open-graph'
+import og from "open-graph"
 
-export async function openGraph (url: string): Promise<og.Data> {
+export async function openGraph(url: string): Promise<og.Data> {
   return new Promise((resolve, reject) => {
     og(url, (err, meta) => {
       if (err) {
         reject(err)
       } else if (!meta) {
-        reject(new Error('meta is undefined'))
+        reject(new Error("meta is undefined"))
       } else {
         resolve(meta)
       }

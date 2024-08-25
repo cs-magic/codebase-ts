@@ -1,5 +1,6 @@
 import { pino } from "pino"
 import { logflarePinoVercel } from "pino-logflare"
+
 import { env } from "../../../env/index.js"
 
 // create pino-logflare console stream for serverless functions and send function for browser logs
@@ -42,8 +43,6 @@ const pinoLogflareLogger = pino(
 )
 
 const logUrl = "https://logflare.app/sources/31484"
-pinoLogflareLogger.info(
-  `===\n-- visit ${logUrl} to view the logs powered by pino and logflare\n===\n`,
-)
+pinoLogflareLogger.info(`===\n-- visit ${logUrl} to view the logs powered by pino and logflare\n===\n`)
 
 export default pinoLogflareLogger

@@ -1,11 +1,13 @@
 import type { MessageParserContext } from "wechaty-puppet"
-import type { MessageParser } from "./message-parser.js"
 import type * as PUPPET from "wechaty-puppet"
+
+import type { WebMessageRawPayload } from "../../../web-schemas"
 import { parseSysmsgMessagePayload } from "../../messages/message-sysmsg.js"
 import type { PatMessagePayload } from "../../messages/sysmsg/message-pat.js"
-import type { TodoMessagePayload } from "../../messages/sysmsg/message-todo.js"
 import type { RevokeMsgMessagePayload } from "../../messages/sysmsg/message-revokemsg.js"
-import type { WebMessageRawPayload } from "../../../web-schemas"
+import type { TodoMessagePayload } from "../../messages/sysmsg/message-todo.js"
+
+import type { MessageParser } from "./message-parser.js"
 
 /**
  * try to parse talker and listenerId from sysmsg for room messages
@@ -24,8 +26,7 @@ export const sysmsgParser: MessageParser = async (
   }
   switch (sysmsgPayload.type) {
     case "pat": {
-      const patMessagePayload: PatMessagePayload =
-        sysmsgPayload.payload as PatMessagePayload
+      const patMessagePayload: PatMessagePayload = sysmsgPayload.payload as PatMessagePayload
 
       if (context.isRoomMessage) {
         ret.talkerId = patMessagePayload.pattedUserName
@@ -36,8 +37,7 @@ export const sysmsgParser: MessageParser = async (
     }
 
     case "roomtoolstips": {
-      const todoMessagePayload: TodoMessagePayload =
-        sysmsgPayload.payload as TodoMessagePayload
+      const todoMessagePayload: TodoMessagePayload = sysmsgPayload.payload as TodoMessagePayload
 
       if (context.isRoomMessage) {
         ret.talkerId = todoMessagePayload.operatorUserName
@@ -47,8 +47,7 @@ export const sysmsgParser: MessageParser = async (
     }
 
     case "revokemsg": {
-      const revokeMsgPayload: RevokeMsgMessagePayload =
-        sysmsgPayload.payload as RevokeMsgMessagePayload
+      const revokeMsgPayload: RevokeMsgMessagePayload = sysmsgPayload.payload as RevokeMsgMessagePayload
 
       if (context.isRoomMessage) {
         // Generic room message logic can get the right talkerId for revoke message

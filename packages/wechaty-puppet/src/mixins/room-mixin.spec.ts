@@ -1,14 +1,10 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
-
 import { test } from "tstest"
 
 import type { ProtectedPropertyRoomMixin, RoomMixin } from "./room-mixin.js"
 
 test("ProtectedPropertyRoomMixin", async (t) => {
-  type NotExistInMixin = Exclude<
-    ProtectedPropertyRoomMixin,
-    keyof InstanceType<RoomMixin>
-  >
+  type NotExistInMixin = Exclude<ProtectedPropertyRoomMixin, keyof InstanceType<RoomMixin>>
   type NotExistTest = NotExistInMixin extends never ? true : false
 
   const noOneLeft: NotExistTest = true

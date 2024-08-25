@@ -17,9 +17,7 @@ export type IUserSummaryFilled = {
   image?: string
 }
 
-export const convertUserSummary = (
-  user: IUserSummary,
-): IUserSummaryFilled | null => {
+export const convertUserSummary = (user: IUserSummary): IUserSummaryFilled | null => {
   const avatar = user.avatar ?? user.image
   if (user.name && avatar)
     return {
@@ -29,14 +27,11 @@ export const convertUserSummary = (
   return null
 }
 
-export const wechatMessageDetailSchema =
-  Prisma.validator<Prisma.WechatMessageDefaultArgs>()({
-    include: {
-      talker: true,
-      listener: true,
-      room: true,
-    },
-  })
-export type IWechatMessageDetail = Prisma.WechatMessageGetPayload<
-  typeof wechatMessageDetailSchema
->
+export const wechatMessageDetailSchema = Prisma.validator<Prisma.WechatMessageDefaultArgs>()({
+  include: {
+    talker: true,
+    listener: true,
+    room: true,
+  },
+})
+export type IWechatMessageDetail = Prisma.WechatMessageGetPayload<typeof wechatMessageDetailSchema>

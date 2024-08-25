@@ -1,18 +1,11 @@
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 import { DirtyType } from "../schemas/dirty.js"
-import type {
-  FriendshipAddOptions,
-  FriendshipPayload,
-  FriendshipSearchQueryFilter,
-} from "../schemas/friendship.js"
+import type { FriendshipAddOptions, FriendshipPayload, FriendshipSearchQueryFilter } from "../schemas/friendship.js"
 
 import type { CacheMixin } from "./cache-mixin.js"
 
-const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
-  mixinBase: MixinBase,
-) => {
+const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(mixinBase: MixinBase) => {
   abstract class FriendshipMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
@@ -26,10 +19,7 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
      */
     abstract friendshipAccept(friendshipId: string): Promise<void>
 
-    abstract friendshipAdd(
-      contactId: string,
-      option?: FriendshipAddOptions,
-    ): Promise<void>
+    abstract friendshipAdd(contactId: string, option?: FriendshipAddOptions): Promise<void>
 
     abstract friendshipSearchPhone(phone: string): Promise<null | string>
 
@@ -40,10 +30,7 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
      * @deprecated use `friendshipSearchHandle()` instead.
      */
     friendshipSearchWeixin(weixin: string): Promise<null | string> {
-      log.warn(
-        "Puppet",
-        "friendshipSearchWeixin() is deprecated. use `friendshipSearchHandle()` instead.",
-      )
+      log.warn("Puppet", "friendshipSearchWeixin() is deprecated. use `friendshipSearchHandle()` instead.")
       console.error(new Error().stack)
       return this.friendshipSearchHandle(weixin)
     }
@@ -60,23 +47,13 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
      *
      * @protected
      */
-    abstract friendshipRawPayloadParser(
-      rawPayload: any,
-    ): Promise<FriendshipPayload>
+    abstract friendshipRawPayloadParser(rawPayload: any): Promise<FriendshipPayload>
 
-    async friendshipSearch(
-      searchQueryFilter: FriendshipSearchQueryFilter,
-    ): Promise<string | null> {
-      log.verbose(
-        "PuppetFriendshipMixin",
-        'friendshipSearch("%s")',
-        JSON.stringify(searchQueryFilter),
-      )
+    async friendshipSearch(searchQueryFilter: FriendshipSearchQueryFilter): Promise<string | null> {
+      log.verbose("PuppetFriendshipMixin", 'friendshipSearch("%s")', JSON.stringify(searchQueryFilter))
 
       if (Object.keys(searchQueryFilter).length !== 1) {
-        throw new Error(
-          "searchQueryFilter should only include one key for query!",
-        )
+        throw new Error("searchQueryFilter should only include one key for query!")
       }
 
       if (searchQueryFilter.phone) {
@@ -86,19 +63,14 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
          * Huan(202203): `weixin` will be removed in Puppet v2.0
          * @deprecate use `handle` instead
          */
-        log.warn(
-          "Puppet",
-          "friendshipSearch() `{ weixin: ... }` is deprecated. use `{ handle: ... }` instead.",
-        )
+        log.warn("Puppet", "friendshipSearch() `{ weixin: ... }` is deprecated. use `{ handle: ... }` instead.")
         console.error(new Error().stack)
         return this.friendshipSearchHandle(searchQueryFilter.weixin)
       } else if (searchQueryFilter.handle) {
         return this.friendshipSearchHandle(searchQueryFilter.handle)
       }
 
-      throw new Error(
-        `unknown key from searchQueryFilter: ${Object.keys(searchQueryFilter).join("")}`,
-      )
+      throw new Error(`unknown key from searchQueryFilter: ${Object.keys(searchQueryFilter).join("")}`)
     }
 
     /**
@@ -106,15 +78,8 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
      *
      * @protected
      */
-    friendshipPayloadCache(
-      friendshipId: string,
-    ): undefined | FriendshipPayload {
-      log.silly(
-        "PuppetFriendshipMixin",
-        "friendshipPayloadCache(id=%s) @ %s",
-        friendshipId,
-        this,
-      )
+    friendshipPayloadCache(friendshipId: string): undefined | FriendshipPayload {
+      log.silly("PuppetFriendshipMixin", "friendshipPayloadCache(id=%s) @ %s", friendshipId, this)
 
       if (!friendshipId) {
         throw new Error("no id")
@@ -124,11 +89,7 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
       if (cachedPayload) {
         // log.silly('PuppetFriendshipMixin', 'friendshipPayloadCache(%s) cache HIT', friendshipId)
       } else {
-        log.silly(
-          "PuppetFriendshipMixin",
-          "friendshipPayloadCache(%s) cache MISS",
-          friendshipId,
-        )
+        log.silly("PuppetFriendshipMixin", "friendshipPayloadCache(%s) cache MISS", friendshipId)
       }
 
       return cachedPayload
@@ -138,15 +99,9 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
      * Get & Set
      */
     async friendshipPayload(friendshipId: string): Promise<FriendshipPayload>
-    async friendshipPayload(
-      friendshipId: string,
-      newPayload: FriendshipPayload,
-    ): Promise<void>
+    async friendshipPayload(friendshipId: string, newPayload: FriendshipPayload): Promise<void>
 
-    async friendshipPayload(
-      friendshipId: string,
-      newPayload?: FriendshipPayload,
-    ): Promise<void | FriendshipPayload> {
+    async friendshipPayload(friendshipId: string, newPayload?: FriendshipPayload): Promise<void | FriendshipPayload> {
       log.verbose(
         "PuppetFriendshipMixin",
         "friendshipPayload(%s)",
@@ -190,10 +145,7 @@ const friendshipMixin = <MixinBase extends typeof PuppetSkeleton & CacheMixin>(
 
 type FriendshipMixin = ReturnType<typeof friendshipMixin>
 
-type ProtectedPropertyFriendshipMixin =
-  | "friendshipRawPayload"
-  | "friendshipRawPayloadParser"
-  | "friendshipPayloadCache"
+type ProtectedPropertyFriendshipMixin = "friendshipRawPayload" | "friendshipRawPayloadParser" | "friendshipPayloadCache"
 
 export type { FriendshipMixin, ProtectedPropertyFriendshipMixin }
 export { friendshipMixin }

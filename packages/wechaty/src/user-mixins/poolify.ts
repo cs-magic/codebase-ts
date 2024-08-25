@@ -2,8 +2,8 @@
  * Class mixins are a pattern for sharing code between classes using standard JavaScript.
  * https://lit.dev/docs/composition/mixins/
  */
-import type { Constructor } from 'clone-class'
-import { log } from 'wechaty-puppet'
+import type { Constructor } from "clone-class"
+import { log } from "wechaty-puppet"
 
 interface PoolifyMixin<T> {
   new (...args: any[]): T
@@ -22,56 +22,49 @@ interface PoolifyMixin<T> {
  * generic type parameter defaults do not scratch this itch;
  * a default turns off inference.
  */
-const poolifyMixin = <MixinBase extends Constructor>(mixinBase: MixinBase) => <T>() => {
-  log.verbose('PoolifyMixin', 'poolifyMixin(%s)', mixinBase.name)
+const poolifyMixin =
+  <MixinBase extends Constructor>(mixinBase: MixinBase) =>
+  <T>() => {
+    log.verbose("PoolifyMixin", "poolifyMixin(%s)", mixinBase.name)
 
-  abstract class AbstractPoolifyMixin extends mixinBase {
+    abstract class AbstractPoolifyMixin extends mixinBase {
+      static _pool?: Map<string, T>
+      static get pool(): Map<string, T> {
+        /**
+         * hasOwnProperty() is important because we are calling this from the child classes
+         */
+        if (!Object.prototype.hasOwnProperty.call(this, "_pool")) {
+          log.verbose("PoolifyMixin", "get pool() init pool")
+          this._pool = new Map<string, T>()
+        }
 
-    static _pool?     : Map<string, T>
-    static get pool (): Map<string, T> {
+        return this._pool! // FIXME: why we need "!" at here?
+      }
+
       /**
-       * hasOwnProperty() is important because we are calling this from the child classes
+       * Nan(202111): We use it as a workaround to meet the requirement of Constructor parameters
+       *
+       * See: https://github.com/wechaty/wechaty/issues/2553
        */
-      if (!Object.prototype.hasOwnProperty.call(this, '_pool')) {
-        log.verbose('PoolifyMixin', 'get pool() init pool')
-        this._pool = new Map<string, T>()
+      public static load<L extends Constructor<T & {}> & PoolifyMixin<T>>(this: L, id: string): T {
+        const existingItem = this.pool.get(id)
+        if (existingItem) {
+          return existingItem
+        }
+
+        const newItem = new this(id)
+        this.pool.set(id, newItem)
+
+        return newItem
       }
 
-      return this._pool!  // FIXME: why we need "!" at here?
-    }
-
-    /**
-     * Nan(202111): We use it as a workaround to meet the requirement of Constructor parameters
-     *
-     * See: https://github.com/wechaty/wechaty/issues/2553
-     */
-    public static load<L extends Constructor<T & {}> & PoolifyMixin<T>> (
-      this : L,
-      id   : string,
-    ): T {
-      const existingItem = this.pool.get(id)
-      if (existingItem) {
-        return existingItem
+      constructor(...args: any[]) {
+        super(...args)
       }
-
-      const newItem = new this(id)
-      this.pool.set(id, newItem)
-
-      return newItem
     }
 
-    constructor (...args: any[]) {
-      super(...args)
-    }
-
+    return AbstractPoolifyMixin
   }
 
-  return AbstractPoolifyMixin
-}
-
-export type {
-  PoolifyMixin,
-}
-export {
-  poolifyMixin,
-}
+export type { PoolifyMixin }
+export { poolifyMixin }

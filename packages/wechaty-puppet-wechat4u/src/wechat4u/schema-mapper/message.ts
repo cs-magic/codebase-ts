@@ -1,7 +1,9 @@
-import type { WebMessageRawPayload } from "../../web-schemas.js"
 import * as PUPPET from "wechaty-puppet"
-import { executeMessageParsers } from "./message/mod.js"
+
+import type { WebMessageRawPayload } from "../../web-schemas.js"
 import { isContactId, isRoomId } from "../utils/is-type.js"
+
+import { executeMessageParsers } from "./message/mod.js"
 
 export async function webMessageToWechaty(
   puppet: PUPPET.Puppet,
@@ -17,10 +19,7 @@ export async function webMessageToWechaty(
   if (isContactId(webMessageRawPayload.FromUserName)) {
     talkerId = webMessageRawPayload.FromUserName
   } else {
-    const array: string[] =
-      webMessageRawPayload.OriginalContent.match(
-        /^(@[a-zA-Z0-9]+|[a-zA-Z0-9_-]+):<br\/>/,
-      ) || []
+    const array: string[] = webMessageRawPayload.OriginalContent.match(/^(@[a-zA-Z0-9]+|[a-zA-Z0-9_-]+):<br\/>/) || []
 
     talkerId = array[1]
     if (!talkerId) {

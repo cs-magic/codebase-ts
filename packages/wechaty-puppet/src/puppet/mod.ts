@@ -17,7 +17,6 @@ import "./interface-of.js"
 import { Puppet } from "./puppet-abstract.js"
 import type { PuppetConstructor, PuppetInterface } from "./puppet-interface.js"
 import { resolvePuppet } from "./puppet-resolver.js"
-
 import { PuppetSkeleton } from "./puppet-skeleton.js"
 
 export type { PuppetConstructor, PuppetInterface }

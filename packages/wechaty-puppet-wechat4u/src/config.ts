@@ -1,12 +1,9 @@
 // tslint:disable:no-reference
-
 /// <reference path="./types.d.ts" />
-
-import { log } from "wechaty-puppet"
 import { FileBox } from "file-box"
-
-import type { OperationOptions } from "retry"
 import promiseRetry from "promise-retry"
+import type { OperationOptions } from "retry"
+import { log } from "wechaty-puppet"
 
 import { packageJson } from "./package-json.js"
 
@@ -14,8 +11,7 @@ const VERSION = packageJson.version || "0.0.0"
 const NAME = packageJson.name || "NONAME"
 
 export function qrCodeForChatie(): FileBox {
-  const CHATIE_OFFICIAL_ACCOUNT_QRCODE =
-    "http://weixin.qq.com/r/qymXj7DEO_1ErfTs93y5"
+  const CHATIE_OFFICIAL_ACCOUNT_QRCODE = "http://weixin.qq.com/r/qymXj7DEO_1ErfTs93y5"
   return FileBox.fromQRCode(CHATIE_OFFICIAL_ACCOUNT_QRCODE)
 }
 

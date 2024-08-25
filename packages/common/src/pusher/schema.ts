@@ -25,17 +25,16 @@ export type PusherEventType =
   | "onUserMessage"
   | "state_change"
 
-export type PusherEventData<T extends PusherEventType> =
-  T extends "onNotification"
-    ? {
-        userId: string
-        content: string
-      }
-    : {
-        fromUserId: string
-        channelId: string
-        content: string
-      }
+export type PusherEventData<T extends PusherEventType> = T extends "onNotification"
+  ? {
+      userId: string
+      content: string
+    }
+  : {
+      fromUserId: string
+      channelId: string
+      content: string
+    }
 
 export const pusherServerIdSchema = z
   .union([z.literal("aws"), z.literal("tencent_ws"), z.literal("tencent_wss")])

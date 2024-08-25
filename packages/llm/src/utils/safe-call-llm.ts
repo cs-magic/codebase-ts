@@ -2,20 +2,22 @@ import { HttpsProxyAgent } from "https-proxy-agent"
 import OpenAI from "openai"
 import { v4 } from "uuid"
 
+import { SEPARATOR_BOX } from "@cs-magic/common/dist/const"
+import { env } from "@cs-magic/common/dist/env/get-env"
+import logger from "@cs-magic/common/dist/log/index"
+import { formatError } from "@cs-magic/common/dist/utils/format-error"
+import { formatString } from "@cs-magic/common/dist/utils/format-string"
+
 import {
-  defaultLlmQueryConfigExtra,
   type ILlmQueryConfig,
   type ILlmQueryConfigExtra,
   type ILlmRes,
+  defaultLlmQueryConfigExtra,
 } from "../schema/llm.api.js"
+
 import { callLlm } from "./call-llm.js"
 import { formatLlmMessage } from "./format-llm-message.js"
 import { model2provider } from "./model2provider.js"
-import { env } from "@cs-magic/common/dist/env/get-env"
-import logger from "@cs-magic/common/dist/log/index"
-import { SEPARATOR_BOX } from "@cs-magic/common/dist/const"
-import { formatError } from "@cs-magic/common/dist/utils/format-error"
-import { formatString } from "@cs-magic/common/dist/utils/format-string"
 
 // logEnv("api_key")
 
@@ -40,8 +42,7 @@ export const safeCallLLM = async (
         ? "https://api.deepseek.com/v1"
         : undefined
 
-  const API_KEY_NAME =
-    `${llmProviderType}_api_key`.toUpperCase() as keyof typeof env
+  const API_KEY_NAME = `${llmProviderType}_api_key`.toUpperCase() as keyof typeof env
   const apiKey = env?.[API_KEY_NAME]
 
   if (!apiKey) throw new Error(`missing env variable of ${API_KEY_NAME}`)
@@ -63,9 +64,7 @@ export const safeCallLLM = async (
       ? [
           {
             role: "user" as const,
-            content: queryConfig.messages
-              .map((r) => r.content)
-              .join("\n\n## 输入\n\n"),
+            content: queryConfig.messages.map((r) => r.content).join("\n\n## 输入\n\n"),
           },
         ]
       : queryConfig.messages

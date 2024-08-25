@@ -1,6 +1,7 @@
+import { useState } from "react"
+
 import { uploadFile } from "@cs-magic/common/dist/oss/oss.server"
 import { IUploadFile } from "@cs-magic/common/dist/oss/schema"
-import { useState } from "react"
 
 export const useUploadFile = () => {
   const [status, setStatus] = useState<IUploadFile>({ status: "idle" })
@@ -14,11 +15,7 @@ export const useUploadFile = () => {
   return { status, upload }
 }
 
-export const useUploadFiles = ({
-  onUploadChange,
-}: {
-  onUploadChange?: (index: number, file: IUploadFile) => void
-}) => {
+export const useUploadFiles = ({ onUploadChange }: { onUploadChange?: (index: number, file: IUploadFile) => void }) => {
   const [isUploading, setUploading] = useState(false)
 
   const upload = async (files: FileList | File[]) => {
@@ -27,11 +24,9 @@ export const useUploadFiles = ({
 
     void Promise.all(
       items.map(async (file, index) => {
-        if (onUploadChange)
-          onUploadChange(index, { status: "running", input: file })
+        if (onUploadChange) onUploadChange(index, { status: "running", input: file })
         const result = await uploadFile(file)
-        if (onUploadChange)
-          onUploadChange(index, { status: "finished", input: file, ...result })
+        if (onUploadChange) onUploadChange(index, { status: "finished", input: file, ...result })
       }),
     ).finally(() => {
       setUploading(false)

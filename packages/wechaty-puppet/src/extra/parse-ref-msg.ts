@@ -1,10 +1,7 @@
 import { type payloads, types } from "../mods/mod.js"
-import { AppMessageType } from "./message.js"
-import type {
-  GenericMessageParser,
-  MessageParserContext,
-} from "./message.parser.js"
 
+import { AppMessageType } from "./message.js"
+import type { GenericMessageParser, MessageParserContext } from "./message.parser.js"
 import { serializeRefMsgPayload } from "./serialize-ref-msg.js"
 
 export const referMsgParser: GenericMessageParser = async <T>(
@@ -16,10 +13,7 @@ export const referMsgParser: GenericMessageParser = async <T>(
   // logger.info(`[refer] <-- ret`)
   // logger.info({ ret, localMessage, appMessagePayload })
 
-  if (
-    !appMessagePayload ||
-    appMessagePayload.type !== AppMessageType.ReferMsg
-  ) {
+  if (!appMessagePayload || appMessagePayload.type !== AppMessageType.ReferMsg) {
     return ret
   }
 

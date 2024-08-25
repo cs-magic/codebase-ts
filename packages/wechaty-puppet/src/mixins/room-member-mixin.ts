@@ -1,21 +1,13 @@
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
-
 import type { ContactQueryFilter } from "../schemas/contact.js"
 import { DirtyType } from "../schemas/dirty.js"
 import { YOU } from "../schemas/puppet.js"
-import type {
-  RoomMemberPayload,
-  RoomMemberQueryFilter,
-} from "../schemas/room.js"
+import type { RoomMemberPayload, RoomMemberQueryFilter } from "../schemas/room.js"
+
 import type { ContactMixin } from "./contact-mixin.js"
 
-const roomMemberMixin = <
-  MixinBase extends typeof PuppetSkeleton & ContactMixin,
->(
-  mixinBase: MixinBase,
-) => {
+const roomMemberMixin = <MixinBase extends typeof PuppetSkeleton & ContactMixin>(mixinBase: MixinBase) => {
   abstract class RoomMemberMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
@@ -25,27 +17,17 @@ const roomMemberMixin = <
     abstract roomMemberList(roomId: string): Promise<string[]>
 
     /** @protected */
-    abstract roomMemberRawPayload(
-      roomId: string,
-      contactId: string,
-    ): Promise<any>
+    abstract roomMemberRawPayload(roomId: string, contactId: string): Promise<any>
 
     /** @protected */
-    abstract roomMemberRawPayloadParser(
-      rawPayload: any,
-    ): Promise<RoomMemberPayload>
+    abstract roomMemberRawPayloadParser(rawPayload: any): Promise<RoomMemberPayload>
 
     async roomMemberSearch(
       roomId: string,
       query: (symbol | string) | RoomMemberQueryFilter,
       memberIdList?: string[],
     ): Promise<string[]> {
-      log.verbose(
-        "PuppetRoomMemberMixin",
-        "roomMemberSearch(%s, %s)",
-        roomId,
-        JSON.stringify(query),
-      )
+      log.verbose("PuppetRoomMemberMixin", "roomMemberSearch(%s, %s)", roomId, JSON.stringify(query))
 
       if (!this.isLoggedIn) {
         throw new Error("no puppet.id. need puppet to be login-ed for a search")
@@ -113,37 +95,23 @@ const roomMemberMixin = <
           name: query.name,
         }
 
-        idList = idList.concat(
-          await this.contactSearch(contactQueryFilter, memberIdList),
-        )
+        idList = idList.concat(await this.contactSearch(contactQueryFilter, memberIdList))
       }
 
       if (query.roomAlias) {
         const memberPayloadList = await Promise.all(
-          memberIdList.map((contactId) =>
-            this.roomMemberPayload(roomId, contactId),
-          ),
+          memberIdList.map((contactId) => this.roomMemberPayload(roomId, contactId)),
         )
         idList = idList.concat(
-          memberPayloadList
-            .filter((payload) => payload.roomAlias === query.roomAlias)
-            .map((payload) => payload.id),
+          memberPayloadList.filter((payload) => payload.roomAlias === query.roomAlias).map((payload) => payload.id),
         )
       }
 
       return idList
     }
 
-    async roomMemberPayload(
-      roomId: string,
-      memberId: string,
-    ): Promise<RoomMemberPayload> {
-      log.verbose(
-        "PuppetRoomMemberMixin",
-        "roomMemberPayload(roomId=%s, memberId=%s)",
-        roomId,
-        memberId,
-      )
+    async roomMemberPayload(roomId: string, memberId: string): Promise<RoomMemberPayload> {
+      log.verbose("PuppetRoomMemberMixin", "roomMemberPayload(roomId=%s, memberId=%s)", roomId, memberId)
 
       if (!roomId || !memberId) {
         throw new Error("no id")
@@ -164,9 +132,7 @@ const roomMemberMixin = <
        */
       const rawPayload = await this.roomMemberRawPayload(roomId, memberId)
       if (!rawPayload) {
-        throw new Error(
-          "contact(" + memberId + ") is not in the Room(" + roomId + ")",
-        )
+        throw new Error("contact(" + memberId + ") is not in the Room(" + roomId + ")")
       }
       const payload = await this.roomMemberRawPayloadParser(rawPayload)
 
@@ -174,11 +140,7 @@ const roomMemberMixin = <
         ...cachedPayload,
         memberId: payload,
       })
-      log.silly(
-        "PuppetRoomMemberMixin",
-        "roomMemberPayload(%s) cache SET",
-        roomId,
-      )
+      log.silly("PuppetRoomMemberMixin", "roomMemberPayload(%s) cache SET", roomId)
 
       return payload
     }
@@ -195,9 +157,7 @@ const roomMemberMixin = <
 
 type RoomMemberMixin = ReturnType<typeof roomMemberMixin>
 
-type ProtectedPropertyRoomMemberMixin =
-  | "roomMemberRawPayload"
-  | "roomMemberRawPayloadParser"
+type ProtectedPropertyRoomMemberMixin = "roomMemberRawPayload" | "roomMemberRawPayloadParser"
 
 export type { ProtectedPropertyRoomMemberMixin, RoomMemberMixin }
 export { roomMemberMixin }

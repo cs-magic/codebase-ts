@@ -146,8 +146,7 @@ export interface MessagePayloadTo {
   listenerId: string // if to is not set, then room must be set
 }
 
-export type MessagePayload = MessagePayloadBase &
-  (MessagePayloadRoom | MessagePayloadTo)
+export type MessagePayload = MessagePayloadBase & (MessagePayloadRoom | MessagePayloadTo)
 
 export interface MessageQueryFilter {
   fromId?: string
@@ -162,6 +161,4 @@ export interface MessageQueryFilter {
 export type MessagePayloadFilterFunction = (payload: MessagePayload) => boolean
 
 /** @hidden */
-export type MessagePayloadFilterFactory = (
-  query: MessageQueryFilter,
-) => MessagePayloadFilterFunction
+export type MessagePayloadFilterFactory = (query: MessageQueryFilter) => MessagePayloadFilterFunction

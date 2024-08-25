@@ -1,5 +1,6 @@
 import { logger } from "../log/index.js"
 import { formatError } from "../utils/format-error.js"
+
 import type { TransEventType } from "./schema.js"
 
 export const fetchSSE = (
@@ -35,21 +36,13 @@ export const fetchSSE = (
   /**
    * todo: error 占用了系统的 error 通道?
    */
-  sse.addEventListener(
-    "error" as TransEventType,
-    (ev: MessageEvent<string>) => {
-      formatError(ev)
+  sse.addEventListener("error" as TransEventType, (ev: MessageEvent<string>) => {
+    formatError(ev)
 
-      if (options?.onError)
-        options.onError(
-          typeof ev.data === "string"
-            ? (JSON.parse(ev.data) as string)
-            : ev.data,
-        )
+    if (options?.onError) options.onError(typeof ev.data === "string" ? (JSON.parse(ev.data) as string) : ev.data)
 
-      doEnd()
-    },
-  )
+    doEnd()
+  })
 
   sse.onerror = (err) => {
     // 2 是结束

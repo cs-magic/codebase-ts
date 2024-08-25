@@ -1,12 +1,9 @@
 import { MemoryCard } from "memory-card"
 
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 
-const memoryMixin = <MixinBase extends typeof PuppetSkeleton>(
-  mixinBase: MixinBase,
-) => {
+const memoryMixin = <MixinBase extends typeof PuppetSkeleton>(mixinBase: MixinBase) => {
   abstract class MemoryMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
@@ -29,10 +26,7 @@ const memoryMixin = <MixinBase extends typeof PuppetSkeleton>(
       try {
         await this.memory.load()
       } catch (_) {
-        log.silly(
-          "PuppetMemoryMixin",
-          "start() memory has already been loaded before",
-        )
+        log.silly("PuppetMemoryMixin", "start() memory has already been loaded before")
       }
       await super.start()
     }

@@ -1,16 +1,12 @@
-import * as PUPPET from 'wechaty-puppet'
-import { log } from 'wechaty-puppet'
+import * as PUPPET from "wechaty-puppet"
+import { log } from "wechaty-puppet"
 
-import type {
-  MessageInterface,
-}                   from '../user-modules/mod.js'
+import type { MessageInterface } from "../user-modules/mod.js"
 
-import type { Sayable } from './types.js'
+import type { Sayable } from "./types.js"
 
-async function messageToSayable (
-  message: MessageInterface,
-): Promise<undefined | Sayable> {
-  log.verbose('Wechaty', 'toSayable(%s)', message)
+async function messageToSayable(message: MessageInterface): Promise<undefined | Sayable> {
+  log.verbose("Wechaty", "toSayable(%s)", message)
 
   const type = message.type()
 
@@ -41,8 +37,9 @@ async function messageToSayable (
       return message.toPost()
 
     default:
-      log.warn('Wechaty',
-        'toSayable() can not convert not re-sayable type: %s(%s) for %s\n%s',
+      log.warn(
+        "Wechaty",
+        "toSayable() can not convert not re-sayable type: %s(%s) for %s\n%s",
         PUPPET.types.Message[type],
         type,
         message,
@@ -52,6 +49,4 @@ async function messageToSayable (
   }
 }
 
-export {
-  messageToSayable,
-}
+export { messageToSayable }

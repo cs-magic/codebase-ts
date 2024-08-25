@@ -11,10 +11,7 @@ import { BaseSimulator } from "./base-simulator.js"
 export class CardSimulator extends BaseSimulator {
   static runningTasksCount = 0
 
-  async genCard(
-    content: string,
-    user: IUserSummaryFilled,
-  ): Promise<{ cardUrl: string }> {
+  async genCard(content: string, user: IUserSummaryFilled): Promise<{ cardUrl: string }> {
     let result
     while (CardSimulator.runningTasksCount !== 0) {
       await sleep(3e3) // wait 3s
@@ -35,10 +32,7 @@ export class CardSimulator extends BaseSimulator {
    * @param content LLM 解析的结果
    * @param user 微信的用户的昵称/头像
    */
-  async genCardInner(
-    content: string,
-    user: IUserSummaryFilled,
-  ): Promise<{ cardUrl: string }> {
+  async genCardInner(content: string, user: IUserSummaryFilled): Promise<{ cardUrl: string }> {
     if (!this.page) await this.initPageSafe()
     if (!this.page) throw new UnexpectedError()
 

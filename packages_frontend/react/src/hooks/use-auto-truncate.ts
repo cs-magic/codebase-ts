@@ -35,13 +35,8 @@ export const useAutoTruncate = ({
 
     setContent(
       (content) =>
-        content?.slice(
-          0,
-          Math.min(
-            content?.length - (options?.step ?? 5),
-            options?.maxLen ?? 100,
-          ),
-        ) + (options?.ellipse ?? "…"),
+        content?.slice(0, Math.min(content?.length - (options?.step ?? 5), options?.maxLen ?? 100)) +
+        (options?.ellipse ?? "…"),
     )
   }, [content])
 

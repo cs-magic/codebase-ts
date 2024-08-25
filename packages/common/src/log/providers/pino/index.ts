@@ -1,7 +1,6 @@
 /**
  * ref" Better Logging in Next.js Apps with Pino | by Tat Leung | Level Up Coding, https://levelup.gitconnected.com/better-logging-in-next-js-apps-with-pino-f973de4dd8dd
  */
-
 import { type Logger, pino } from "pino"
 
 import { logLevelData } from "./config.js"

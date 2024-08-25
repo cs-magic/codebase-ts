@@ -1,22 +1,14 @@
-import { xmlToJson } from "../utils/xml-to-json.js"
-import type { PatMessagePayload, PatXmlSchema } from "./sysmsg/message-pat"
-import type {
-  SysmsgTemplateMessagePayload,
-  SysmsgTemplateXmlSchema,
-} from "./sysmsg/message-sysmsgtemplate"
-import { parsePatMessagePayload } from "./sysmsg/message-pat.js"
-import { parseSysmsgTemplateMessagePayload } from "./sysmsg/message-sysmsgtemplate.js"
-import type {
-  TodoMessagePayload,
-  TodoXmlSchema,
-} from "./sysmsg/message-todo.js"
-import { parseTodoMessagePayload } from "./sysmsg/message-todo.js"
-import type {
-  RevokeMsgMessagePayload,
-  RevokeMsgXmlSchema,
-} from "./sysmsg/message-revokemsg"
-import { parseRevokeMsgMessagePayload } from "./sysmsg/message-revokemsg.js"
 import { WebMessageRawPayload, WebMessageType } from "../../web-schemas.js"
+import { xmlToJson } from "../utils/xml-to-json.js"
+
+import type { PatMessagePayload, PatXmlSchema } from "./sysmsg/message-pat"
+import { parsePatMessagePayload } from "./sysmsg/message-pat.js"
+import type { RevokeMsgMessagePayload, RevokeMsgXmlSchema } from "./sysmsg/message-revokemsg"
+import { parseRevokeMsgMessagePayload } from "./sysmsg/message-revokemsg.js"
+import type { SysmsgTemplateMessagePayload, SysmsgTemplateXmlSchema } from "./sysmsg/message-sysmsgtemplate"
+import { parseSysmsgTemplateMessagePayload } from "./sysmsg/message-sysmsgtemplate.js"
+import type { TodoMessagePayload, TodoXmlSchema } from "./sysmsg/message-todo.js"
+import { parseTodoMessagePayload } from "./sysmsg/message-todo.js"
 
 interface SysmsgXmlSchema {
   sysmsg: {
@@ -34,12 +26,7 @@ export interface RoomTipsPayload {
   content: string
 }
 
-type SysMsgType =
-  | "pat"
-  | "sysmsgtemplate"
-  | "roomtoolstips"
-  | "revokemsg"
-  | "roomtips"
+type SysMsgType = "pat" | "sysmsgtemplate" | "roomtoolstips" | "revokemsg" | "roomtips"
 type SysMsgPayload =
   | PatMessagePayload
   | SysmsgTemplateMessagePayload
@@ -52,12 +39,8 @@ export interface SysmsgMessagePayload {
   payload: SysMsgPayload
 }
 
-export async function parseSysmsgMessagePayload(
-  message: WebMessageRawPayload,
-): Promise<SysmsgMessagePayload | null> {
-  if (
-    ![WebMessageType.SYS, WebMessageType.RECALLED].includes(message.MsgType)
-  ) {
+export async function parseSysmsgMessagePayload(message: WebMessageRawPayload): Promise<SysmsgMessagePayload | null> {
+  if (![WebMessageType.SYS, WebMessageType.RECALLED].includes(message.MsgType)) {
     return null
   }
 
@@ -70,9 +53,7 @@ export async function parseSysmsgMessagePayload(
     }
   }
 
-  const sysmsgXml: SysmsgXmlSchema = await xmlToJson(
-    content.substring(sysmsgIndex),
-  )
+  const sysmsgXml: SysmsgXmlSchema = await xmlToJson(content.substring(sysmsgIndex))
 
   let payload: SysMsgPayload | undefined
   switch (sysmsgXml.sysmsg.$.type) {
@@ -80,9 +61,7 @@ export async function parseSysmsgMessagePayload(
       payload = await parsePatMessagePayload(sysmsgXml.sysmsg.pat!)
       break
     case "sysmsgtemplate":
-      payload = await parseSysmsgTemplateMessagePayload(
-        sysmsgXml.sysmsg.sysmsgtemplate!,
-      )
+      payload = await parseSysmsgTemplateMessagePayload(sysmsgXml.sysmsg.sysmsgtemplate!)
       break
     case "roomtoolstips":
       payload = await parseTodoMessagePayload(sysmsgXml.sysmsg.todo!)
@@ -102,9 +81,7 @@ export async function parseSysmsgMessagePayload(
   }
 }
 
-export async function parseSysmsgPatMessagePayload(
-  message: WebMessageRawPayload,
-): Promise<PatMessagePayload | null> {
+export async function parseSysmsgPatMessagePayload(message: WebMessageRawPayload): Promise<PatMessagePayload | null> {
   const sysmsgPayload = await parseSysmsgMessagePayload(message)
   if (!sysmsgPayload || sysmsgPayload.type !== "pat") {
     return null
@@ -124,9 +101,7 @@ export async function parseSysmsgSysmsgTemplateMessagePayload(
   return sysmsgPayload.payload as SysmsgTemplateMessagePayload
 }
 
-export async function parseSysmsgTodoMessagePayload(
-  message: WebMessageRawPayload,
-): Promise<TodoMessagePayload | null> {
+export async function parseSysmsgTodoMessagePayload(message: WebMessageRawPayload): Promise<TodoMessagePayload | null> {
   const sysmsgPayload = await parseSysmsgMessagePayload(message)
   if (!sysmsgPayload || sysmsgPayload.type !== "roomtoolstips") {
     return null

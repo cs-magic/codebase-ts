@@ -17,88 +17,24 @@
  *   limitations under the License.
  *
  */
-import {
-  ContactImpl,
-  ContactInterface,
-  ContactConstructor,
-}                           from './contact.js'
-import {
-  ContactSelfImpl,
-  ContactSelfInterface,
-  ContactSelfConstructor,
-}                           from './contact-self.js'
-import {
-  FavoriteImpl,
-  FavoriteInterface,
-  FavoriteConstructor,
-}                           from './favorite.js'
-import {
-  FriendshipImpl,
-  FriendshipInterface,
-  FriendshipConstructor,
-}                           from './friendship.js'
-import {
-  ImageImpl,
-  ImageInterface,
-  ImageConstructor,
-}                           from './image.js'
-import {
-  LocationImpl,
-  LocationInterface,
-  LocationConstructor,
-}                           from './location.js'
-import {
-  MessageImpl,
-  MessageInterface,
-  MessageConstructor,
-}                           from './message.js'
-import {
-  MiniProgramImpl,
-  MiniProgramInterface,
-  MiniProgramConstructor,
-}                           from './mini-program.js'
-import {
-  MomentImpl,
-  MomentInterface,
-  MomentConstructor,
-}                           from './moment.js'
-import {
-  MoneyImpl,
-  MoneyInterface,
-  MoneyConstructor,
-}                           from './money.js'
-import {
-  PostImpl,
-  PostInterface,
-  PostConstructor,
-}                           from './post.js'
-import {
-  RoomImpl,
-  RoomInterface,
-  RoomConstructor,
-}                           from './room.js'
-import {
-  RoomInvitationImpl,
-  RoomInvitationInterface,
-  RoomInvitationConstructor,
-}                           from './room-invitation.js'
-import {
-  TagImpl,
-  TagInterface,
-  TagConstructor,
-}                           from './tag.js'
-import {
-  UrlLinkImpl,
-  UrlLinkInterface,
-  UrlLinkConstructor,
-}                           from './url-link.js'
-import {
-  DelayImpl,
-  DelayInterface,
-  DelayConstructor,
-}                           from './delay.js'
+import { wechatifyUserModule } from "../user-mixins/wechatify.js"
 
-import { wechatifyUserModule } from '../user-mixins/wechatify.js'
+import { ContactSelfConstructor, ContactSelfImpl, ContactSelfInterface } from "./contact-self.js"
+import { ContactConstructor, ContactImpl, ContactInterface } from "./contact.js"
+import { DelayConstructor, DelayImpl, DelayInterface } from "./delay.js"
+import { FavoriteConstructor, FavoriteImpl, FavoriteInterface } from "./favorite.js"
+import { FriendshipConstructor, FriendshipImpl, FriendshipInterface } from "./friendship.js"
+import { ImageConstructor, ImageImpl, ImageInterface } from "./image.js"
+import { LocationConstructor, LocationImpl, LocationInterface } from "./location.js"
+import { MessageConstructor, MessageImpl, MessageInterface } from "./message.js"
+import { MiniProgramConstructor, MiniProgramImpl, MiniProgramInterface } from "./mini-program.js"
+import { MomentConstructor, MomentImpl, MomentInterface } from "./moment.js"
+import { MoneyConstructor, MoneyImpl, MoneyInterface } from "./money.js"
+import { PostConstructor, PostImpl, PostInterface } from "./post.js"
+import { RoomInvitationConstructor, RoomInvitationImpl, RoomInvitationInterface } from "./room-invitation.js"
+import { RoomConstructor, RoomImpl, RoomInterface } from "./room.js"
+import { TagConstructor, TagImpl, TagInterface } from "./tag.js"
+import { UrlLinkConstructor, UrlLinkImpl, UrlLinkInterface } from "./url-link.js"
 
 export type {
   ContactInterface,
@@ -140,7 +76,6 @@ export type {
 
 export {
   wechatifyUserModule,
-
   ContactImpl,
   ContactSelfImpl,
   FavoriteImpl,

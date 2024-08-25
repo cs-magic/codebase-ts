@@ -1,7 +1,7 @@
 import { sha1 } from "js-sha1"
 
 import { api } from "../../api/index.js"
-import { fetchWechatApi, IWechatSDKToken } from "../../auth/index.js"
+import { IWechatSDKToken, fetchWechatApi } from "../../auth/index.js"
 import { env } from "../../env/index.js"
 
 import { WECHAT_NONCE_STR, WECHAT_TIMESTAMP } from "./config.js"
@@ -10,18 +10,13 @@ import { WECHAT_NONCE_STR, WECHAT_TIMESTAMP } from "./config.js"
  * ref: https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html
  */
 export const getWechatToken = async () => {
-  if (!env?.NEXT_PUBLIC_WECHAT_APP_ID || !env?.WECHAT_APP_SECRET)
-    throw new Error("invalid wechat app id/secret in env")
+  if (!env?.NEXT_PUBLIC_WECHAT_APP_ID || !env?.WECHAT_APP_SECRET) throw new Error("invalid wechat app id/secret in env")
 
-  return fetchWechatApi<IWechatSDKToken>(
-    "get-wechat-sdk-token",
-    "/cgi-bin/token",
-    {
-      grant_type: "client_credential",
-      appid: env?.NEXT_PUBLIC_WECHAT_APP_ID,
-      secret: env?.WECHAT_APP_SECRET,
-    },
-  )
+  return fetchWechatApi<IWechatSDKToken>("get-wechat-sdk-token", "/cgi-bin/token", {
+    grant_type: "client_credential",
+    appid: env?.NEXT_PUBLIC_WECHAT_APP_ID,
+    secret: env?.WECHAT_APP_SECRET,
+  })
 }
 
 export const getWechatTicket = async (access_token: string) => {
@@ -57,12 +52,7 @@ export interface ITemplate {
   data: Record<string, { value: string | number }>
 }
 
-export async function sendWechatNotification(
-  access_token: string,
-  openid: string,
-  template: ITemplate,
-  url: string,
-) {
+export async function sendWechatNotification(access_token: string, openid: string, template: ITemplate, url: string) {
   const targetUrl = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${access_token}`
 
   const payload = {

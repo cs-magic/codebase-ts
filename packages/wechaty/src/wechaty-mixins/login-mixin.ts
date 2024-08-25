@@ -1,20 +1,16 @@
-import { log }      from 'wechaty-puppet'
+import { log } from "wechaty-puppet"
 
-import type {
-  ContactSelfImpl,
-  ContactSelfInterface,
-}                               from '../user-modules/mod.js'
-import type { WechatySkeleton } from '../wechaty/mod.js'
+import type { ContactSelfImpl, ContactSelfInterface } from "../user-modules/mod.js"
+import type { WechatySkeleton } from "../wechaty/mod.js"
 
-import type { GErrorMixin }     from './gerror-mixin.js'
-import type { PuppetMixin }     from './puppet-mixin.js'
+import type { GErrorMixin } from "./gerror-mixin.js"
+import type { PuppetMixin } from "./puppet-mixin.js"
 
-const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GErrorMixin> (mixinBase: MixinBase) => {
-  log.verbose('WechatyLoginMixin', 'loginMixin(%s)', mixinBase.name)
+const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GErrorMixin>(mixinBase: MixinBase) => {
+  log.verbose("WechatyLoginMixin", "loginMixin(%s)", mixinBase.name)
 
   abstract class LoginMixin extends mixinBase {
-
-    get authQrCode (): undefined | string {
+    get authQrCode(): undefined | string {
       return this.puppet.authQrCode
     }
 
@@ -26,9 +22,8 @@ const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GEr
      * const contact = bot.currentUser
      * console.log(`Bot is ${contact.name()}`)
      */
-    get currentUser (): ContactSelfInterface {
-      return (this.ContactSelf as typeof ContactSelfImpl)
-        .load(this.puppet.currentUserId)
+    get currentUser(): ContactSelfInterface {
+      return (this.ContactSelf as typeof ContactSelfImpl).load(this.puppet.currentUserId)
     }
 
     /**
@@ -42,14 +37,14 @@ const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GEr
      *   console.log('Bot not logged in')
      * }
      */
-    get isLoggedIn (): boolean {
+    get isLoggedIn(): boolean {
       try {
         // the `this.puppet` might not be initialized yet
         return this.puppet.isLoggedIn
       } catch (e) {
-        this.emit('error', e)
+        this.emit("error", e)
 
-        log.warn('WechatyLoginMixin', 'get isLoggedIn puppet instance is not ready yet')
+        log.warn("WechatyLoginMixin", "get isLoggedIn puppet instance is not ready yet")
         // https://github.com/wechaty/wechaty/issues/1878
         return false
       }
@@ -57,13 +52,13 @@ const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GEr
 
     __loginMixinInited = false
 
-    constructor (...args: any[]) {
-      log.verbose('WechatyLoginMixin', 'constructor()')
+    constructor(...args: any[]) {
+      log.verbose("WechatyLoginMixin", "constructor()")
       super(...args)
     }
 
-    override async init (): Promise<void> {
-      log.verbose('WechatyLoginMixin', 'init()')
+    override async init(): Promise<void> {
+      log.verbose("WechatyLoginMixin", "init()")
       await super.init()
 
       if (this.__loginMixinInited) {
@@ -79,16 +74,20 @@ const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GEr
      * @example
      * await bot.logout()
      */
-    async logout (): Promise<void>  {
-      log.verbose('WechatyLoginMixin', 'logout()')
+    async logout(): Promise<void> {
+      log.verbose("WechatyLoginMixin", "logout()")
       await this.puppet.logout()
     }
 
     /**
      * @deprecated: use `isLoggedIn` property instead. will be removed after Dec 31, 2022
      */
-    logonoff (): boolean {
-      log.warn('WechatyLoginMixin', 'logonoff() is deprecated: use `isLoggedIn` property instead.\n%s', new Error().stack)
+    logonoff(): boolean {
+      log.warn(
+        "WechatyLoginMixin",
+        "logonoff() is deprecated: use `isLoggedIn` property instead.\n%s",
+        new Error().stack,
+      )
       return this.isLoggedIn
     }
 
@@ -96,13 +95,10 @@ const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GEr
      * Will be removed after Dec 31, 2022
      * @deprecated use {@link Wechaty#currentUser} instead
      */
-    userSelf () {
-      log.warn('WechatyLoginMixin', 'userSelf() deprecated: use currentUser instead.\n%s',
-        new Error().stack,
-      )
+    userSelf() {
+      log.warn("WechatyLoginMixin", "userSelf() deprecated: use currentUser instead.\n%s", new Error().stack)
       return this.currentUser
     }
-
   }
 
   return LoginMixin
@@ -111,14 +107,9 @@ const loginMixin = <MixinBase extends typeof WechatySkeleton & PuppetMixin & GEr
 type LoginMixin = ReturnType<typeof loginMixin>
 
 type ProtectedPropertyLoginMixin =
-  | 'userSelf'  // deprecated: use `currentUser` instead. (will be removed after Dec 31, 2022)
-  | 'logonoff'  // deprecated: use `isLoggedIn` instead. ((will be removed after Dec 31, 2022)
-  | '__loginMixinInited'
+  | "userSelf" // deprecated: use `currentUser` instead. (will be removed after Dec 31, 2022)
+  | "logonoff" // deprecated: use `isLoggedIn` instead. ((will be removed after Dec 31, 2022)
+  | "__loginMixinInited"
 
-export type {
-  LoginMixin,
-  ProtectedPropertyLoginMixin,
-}
-export {
-  loginMixin,
-}
+export type { LoginMixin, ProtectedPropertyLoginMixin }
+export { loginMixin }

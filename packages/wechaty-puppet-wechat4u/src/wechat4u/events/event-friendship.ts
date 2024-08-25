@@ -1,7 +1,9 @@
-import { WebMessageRawPayload, WebMessageType } from "../../web-schemas.js"
 import * as PUPPET from "wechaty-puppet"
+
+import { WebMessageRawPayload, WebMessageType } from "../../web-schemas.js"
 import { isContactId } from "../utils/is-type.js"
 import { xmlToJson } from "../utils/xml-to-json.js"
+
 import type { EventPayload } from "./event.js"
 
 const FRIENDSHIP_CONFIRM_REGEX_LIST = [
@@ -46,9 +48,7 @@ const isNeedVerify = (message: WebMessageRawPayload): boolean => {
   })
 }
 
-const isReceive = async (
-  message: WebMessageRawPayload,
-): Promise<ReceiveXmlSchema | null> => {
+const isReceive = async (message: WebMessageRawPayload): Promise<ReceiveXmlSchema | null> => {
   if (message.MsgType !== WebMessageType.VERIFYMSG) {
     return null
   }
@@ -66,10 +66,7 @@ const isReceive = async (
   return null
 }
 
-export default async (
-  _puppet: PUPPET.Puppet,
-  message: WebMessageRawPayload,
-): Promise<EventPayload> => {
+export default async (_puppet: PUPPET.Puppet, message: WebMessageRawPayload): Promise<EventPayload> => {
   if (isConfirm(message)) {
     return {
       contactId: message.FromUserName,

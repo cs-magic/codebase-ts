@@ -1,19 +1,11 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
-
 import { test } from "tstest"
 
 import type { MessageType } from "./message.js"
-
-import type {
-  SayablePayload,
-  SayablePayloadUnsupportedType,
-} from "./sayable.js"
+import type { SayablePayload, SayablePayloadUnsupportedType } from "./sayable.js"
 
 test("SayablePayloadUnsupportedType must be subset of MessageType", async (t) => {
-  type NotExistInMessageType = Exclude<
-    SayablePayloadUnsupportedType,
-    keyof typeof MessageType
-  >
+  type NotExistInMessageType = Exclude<SayablePayloadUnsupportedType, keyof typeof MessageType>
   type NotExistTest = NotExistInMessageType extends never ? true : false
 
   const noOneLeft: NotExistTest = true

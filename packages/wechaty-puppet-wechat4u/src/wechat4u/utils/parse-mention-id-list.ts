@@ -2,7 +2,7 @@
  * Huan(202109): from Add mention - wechaty/wechaty#362
  *  https://github.com/wechaty/wechaty/pull/362/files
  */
-import { log, Puppet } from "wechaty-puppet"
+import { Puppet, log } from "wechaty-puppet"
 
 /**
  * mobile: \u2005
@@ -30,11 +30,7 @@ const AT_SEPRATOR_REGEX = /[\u2005\u0020\s]+/
  * const contactList = await message.mention()
  * console.log(contactList)
  */
-async function parseMentionIdList(
-  puppet: Puppet,
-  roomId: string,
-  text: string,
-): Promise<string[]> {
+async function parseMentionIdList(puppet: Puppet, roomId: string, text: string): Promise<string[]> {
   log.verbose("Message", "mention()")
 
   const atList = text.split(AT_SEPRATOR_REGEX)
@@ -65,16 +61,9 @@ async function parseMentionIdList(
     return nameList
   }
 
-  log.silly(
-    "wechaty-puppet-wechat",
-    'mentionIdList(%s), mentionNameList = "%s"',
-    text,
-    JSON.stringify(mentionNameList),
-  )
+  log.silly("wechaty-puppet-wechat", 'mentionIdList(%s), mentionNameList = "%s"', text, JSON.stringify(mentionNameList))
 
-  const contactIdListNested = await Promise.all(
-    mentionNameList.map((name) => puppet.roomMemberSearch(roomId, name)),
-  )
+  const contactIdListNested = await Promise.all(mentionNameList.map((name) => puppet.roomMemberSearch(roomId, name)))
 
   const contactIdList = contactIdListNested.flat()
 

@@ -1,8 +1,9 @@
+import AsyncLock from "async-lock"
 import { chromium } from "playwright"
 import type { Browser, BrowserType, LaunchOptions, Page } from "playwright-core"
-import AsyncLock from "async-lock"
 
 import logger from "../log/index.js"
+
 import { type DriverType } from "./schema.js"
 
 const lock = new AsyncLock()
@@ -13,10 +14,7 @@ export class BaseSimulator {
   protected browser: Browser | null = null
   protected page?: Page
 
-  constructor(
-    driverType: DriverType = "playwright",
-    launchOptions?: LaunchOptions,
-  ) {
+  constructor(driverType: DriverType = "playwright", launchOptions?: LaunchOptions) {
     logger.info("-- init UniParserBot: ", { driverType })
     // Or 'firefox' or 'webkit'.
     this.driver = chromium

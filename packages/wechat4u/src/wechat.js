@@ -40,9 +40,7 @@ class Wechat extends WechatCore {
       members.push({
         username: member["UserName"],
         nickname: this.Contact.getDisplayName(member),
-        py: member["RemarkPYQuanPin"]
-          ? member["RemarkPYQuanPin"]
-          : member["PYQuanPin"],
+        py: member["RemarkPYQuanPin"] ? member["RemarkPYQuanPin"] : member["PYQuanPin"],
         avatar: member.AvatarUrl,
       })
     }
@@ -56,29 +54,21 @@ class Wechat extends WechatCore {
     } else if (msg.emoticonMd5) {
       return this.sendEmoticon(msg.emoticonMd5, toUserName)
     } else {
-      return this.uploadMedia(msg.file, msg.filename, toUserName).then(
-        (res) => {
-          switch (res.ext) {
-            case "bmp":
-            case "jpeg":
-            case "jpg":
-            case "png":
-              return this.sendPic(res.mediaId, toUserName)
-            case "gif":
-              return this.sendEmoticon(res.mediaId, toUserName)
-            case "mp4":
-              return this.sendVideo(res.mediaId, toUserName)
-            default:
-              return this.sendDoc(
-                res.mediaId,
-                res.name,
-                res.size,
-                res.ext,
-                toUserName,
-              )
-          }
-        },
-      )
+      return this.uploadMedia(msg.file, msg.filename, toUserName).then((res) => {
+        switch (res.ext) {
+          case "bmp":
+          case "jpeg":
+          case "jpg":
+          case "png":
+            return this.sendPic(res.mediaId, toUserName)
+          case "gif":
+            return this.sendEmoticon(res.mediaId, toUserName)
+          case "mp4":
+            return this.sendVideo(res.mediaId, toUserName)
+          default:
+            return this.sendDoc(res.mediaId, res.name, res.size, res.ext, toUserName)
+        }
+      })
     }
   }
 
@@ -111,9 +101,7 @@ class Wechat extends WechatCore {
         }
         this.emit("error", err)
         if (++this.syncErrorCount > 2) {
-          let err = new Error(
-            `连续${this.syncErrorCount}次同步失败，5s后尝试重启`,
-          )
+          let err = new Error(`连续${this.syncErrorCount}次同步失败，5s后尝试重启`)
           debug(err)
           debug("todo: 如何不重启也能确保程序运行（mark@2024-05-16 09:52:34）")
           this.emit("error", err)
@@ -121,10 +109,7 @@ class Wechat extends WechatCore {
           // setTimeout(() => this.restart(), 5 * 1000)
         } else {
           clearTimeout(this.retryPollingId)
-          this.retryPollingId = setTimeout(
-            () => this.syncPolling(id),
-            2000 * this.syncErrorCount,
-          )
+          this.retryPollingId = setTimeout(() => this.syncPolling(id), 2000 * this.syncErrorCount)
         }
       })
   }
@@ -135,21 +120,14 @@ class Wechat extends WechatCore {
       .then((res) => {
         contacts = res.MemberList || []
         if (res.Seq) {
-          return this._getContact(res.Seq).then(
-            (_contacts) => (contacts = contacts.concat(_contacts || [])),
-          )
+          return this._getContact(res.Seq).then((_contacts) => (contacts = contacts.concat(_contacts || [])))
         }
       })
       .then(() => {
         if (Seq === 0) {
-          let emptyGroup = contacts.filter(
-            (contact) =>
-              contact.UserName.startsWith("@@") && contact.MemberCount === 0,
-          )
+          let emptyGroup = contacts.filter((contact) => contact.UserName.startsWith("@@") && contact.MemberCount === 0)
           if (emptyGroup.length !== 0) {
-            return this.batchGetContact(emptyGroup).then(
-              (_contacts) => (contacts = contacts.concat(_contacts || [])),
-            )
+            return this.batchGetContact(emptyGroup).then((_contacts) => (contacts = contacts.concat(_contacts || [])))
           } else {
             return contacts
           }
@@ -280,18 +258,13 @@ class Wechat extends WechatCore {
         this.emit("error", err)
       })
       if (this._getPollingTarget()) {
-        this.sendMsg(this._getPollingMessage(), this._getPollingTarget()).catch(
-          (err) => {
-            debug(err)
-            this.emit("error", err)
-          },
-        )
+        this.sendMsg(this._getPollingMessage(), this._getPollingTarget()).catch((err) => {
+          debug(err)
+          this.emit("error", err)
+        })
       }
       clearTimeout(this.checkPollingId)
-      this.checkPollingId = setTimeout(
-        () => this.checkPolling(),
-        this._getPollingInterval(),
-      )
+      this.checkPollingId = setTimeout(() => this.checkPolling(), this._getPollingInterval())
     }
   }
 
@@ -316,8 +289,7 @@ class Wechat extends WechatCore {
         .then(() => {
           if (
             !this.contacts[msg.FromUserName] ||
-            (msg.FromUserName.startsWith("@@") &&
-              this.contacts[msg.FromUserName].MemberCount === 0)
+            (msg.FromUserName.startsWith("@@") && this.contacts[msg.FromUserName].MemberCount === 0)
           ) {
             return this.batchGetContact([
               {
@@ -359,8 +331,7 @@ class Wechat extends WechatCore {
             })
           }
           if (
-            (msg.ToUserName === "filehelper" &&
-              msg.Content === "退出wechat4u") ||
+            (msg.ToUserName === "filehelper" && msg.Content === "退出wechat4u") ||
             /^(.\udf1a\u0020\ud83c.){3}$/.test(msg.Content)
           ) {
             this.stop()

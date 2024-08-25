@@ -17,9 +17,7 @@
  *   limitations under the License.
  *
  */
-import type {
-  FileBoxInterface,
-}                       from 'file-box'
+import type { FileBoxInterface } from "file-box"
 
 import type {
   ContactInterface,
@@ -29,11 +27,8 @@ import type {
   MiniProgramInterface,
   PostInterface,
   UrlLinkInterface,
-}                           from '../user-modules/mod.js'
-
-import type {
-  WechatyInterface,
-}                           from '../wechaty/mod.js'
+} from "../user-modules/mod.js"
+import type { WechatyInterface } from "../wechaty/mod.js"
 
 type Sayable =
   | ContactInterface
@@ -48,15 +43,9 @@ type Sayable =
   | UrlLinkInterface
 
 interface SayableSayer {
-  id      : string,
-  wechaty : WechatyInterface,
-  say (
-    sayable  : Sayable,
-    replyTo? : ContactInterface | ContactInterface[]
-  ): Promise<void | MessageInterface>
+  id: string
+  wechaty: WechatyInterface
+  say(sayable: Sayable, replyTo?: ContactInterface | ContactInterface[]): Promise<void | MessageInterface>
 }
 
-export type {
-  SayableSayer,
-  Sayable,
-}
+export type { SayableSayer, Sayable }

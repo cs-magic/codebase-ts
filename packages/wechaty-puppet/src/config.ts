@@ -4,7 +4,6 @@ import { MemoryCard } from "memory-card"
 import { StateSwitch } from "state-switch"
 
 import * as envVars from "./env-vars.js"
-
 import { packageJson } from "./package-json.js"
 
 const log = new Brolog()

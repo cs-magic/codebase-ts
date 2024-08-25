@@ -30,9 +30,7 @@ export interface TodoMessagePayload {
   template?: string
 }
 
-export async function parseTodoMessagePayload(
-  todoXml: TodoXmlSchema,
-): Promise<TodoMessagePayload> {
+export async function parseTodoMessagePayload(todoXml: TodoXmlSchema): Promise<TodoMessagePayload> {
   return {
     appId: todoXml.username,
     creatorUserName: todoXml.creator,

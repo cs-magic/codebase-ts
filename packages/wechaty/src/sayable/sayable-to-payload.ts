@@ -1,27 +1,25 @@
-import * as PUPPET from 'wechaty-puppet'
-import { log }  from 'wechaty-puppet'
-import { FileBox } from 'file-box'
+import { FileBox } from "file-box"
+import * as PUPPET from "wechaty-puppet"
+import { log } from "wechaty-puppet"
 
 import {
+  ContactImpl,
   DelayImpl,
   LocationImpl,
   MessageImpl,
   MiniProgramImpl,
-  UrlLinkImpl,
-  ContactImpl,
   PostImpl,
-}                       from '../user-modules/mod.js'
+  UrlLinkImpl,
+} from "../user-modules/mod.js"
 
-import type {
-  Sayable,
-}                   from './types.js'
+import type { Sayable } from "./types.js"
 
-async function sayableToPayload (sayable: Sayable): Promise<undefined | PUPPET.payloads.Sayable> {
-  log.verbose('Wechaty', 'sayableToPayload(%s)', sayable)
+async function sayableToPayload(sayable: Sayable): Promise<undefined | PUPPET.payloads.Sayable> {
+  log.verbose("Wechaty", "sayableToPayload(%s)", sayable)
 
-  if (typeof sayable === 'string') {
+  if (typeof sayable === "string") {
     return PUPPET.payloads.sayable.text(sayable)
-  } else if (typeof sayable === 'number') {
+  } else if (typeof sayable === "number") {
     return PUPPET.payloads.sayable.text(String(sayable))
   } else if (ContactImpl.valid(sayable)) {
     return PUPPET.payloads.sayable.contact(sayable.id)
@@ -44,11 +42,9 @@ async function sayableToPayload (sayable: Sayable): Promise<undefined | PUPPET.p
   } else if (UrlLinkImpl.validInstance(sayable)) {
     return PUPPET.payloads.sayable.url(sayable.payload)
   } else {
-    log.error('Wechaty', 'sayableToPayload() unsupported sayable: %s', sayable)
+    log.error("Wechaty", "sayableToPayload() unsupported sayable: %s", sayable)
     return undefined
   }
 }
 
-export {
-  sayableToPayload,
-}
+export { sayableToPayload }

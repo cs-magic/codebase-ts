@@ -7,8 +7,5 @@ import { ID_LEN } from "../const.js"
 export const genNanoId = async (n = ID_LEN) => {
   const { customAlphabet } = await import("nanoid")
 
-  return customAlphabet(
-    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
-    ID_LEN,
-  )(n)
+  return customAlphabet("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM", ID_LEN)(n)
 }

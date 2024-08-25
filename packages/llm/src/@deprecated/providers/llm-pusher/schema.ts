@@ -1,8 +1,4 @@
-import {
-  ITransChannel,
-  ITransEvent,
-  ResponseFinalStatus,
-} from "@cs-magic/common/dist/sse/schema"
+import { ITransChannel, ITransEvent, ResponseFinalStatus } from "@cs-magic/common/dist/sse/schema"
 
 export interface ILLMManagerPusher {
   //////////////////////////////

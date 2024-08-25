@@ -1,6 +1,7 @@
+import Credentials from "next-auth/providers/credentials"
+
 import { prisma } from "@cs-magic/common/dist/db/prisma"
 import { SMS_PROVIDER_ID } from "@cs-magic/common/dist/sms.base"
-import Credentials from "next-auth/providers/credentials"
 
 export const SmsProvider = Credentials({
   id: SMS_PROVIDER_ID,
@@ -29,8 +30,7 @@ export const SmsProvider = Credentials({
 
     const userInDB = await prisma.user.findUnique({ where: { phone } })
 
-    if (userInDB && userInDB.id !== accountInDB.userId)
-      throw new Error("账号已存在")
+    if (userInDB && userInDB.id !== accountInDB.userId) throw new Error("账号已存在")
 
     return prisma.user.update({
       where: { id: accountInDB.userId },

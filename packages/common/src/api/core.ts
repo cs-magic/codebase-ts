@@ -1,11 +1,7 @@
 /**
  * error handler: Axios & Error handling like a boss 😎 - DEV Community, https://dev.to/mperon/axios-error-handling-like-a-boss-333d
  */
-import axios, {
-  AxiosError,
-  type AxiosResponse,
-  type CreateAxiosDefaults,
-} from "axios"
+import axios, { AxiosError, type AxiosResponse, type CreateAxiosDefaults } from "axios"
 
 import { logger } from "../log/index.js"
 
@@ -45,9 +41,7 @@ interface ErrorHandlerObject {
 }
 
 //signature of error function that can be passed to ours registry
-type ErrorHandlerFunction = (
-  error?: THttpError,
-) => ErrorHandlerObject | boolean | undefined
+type ErrorHandlerFunction = (error?: THttpError) => ErrorHandlerObject | boolean | undefined
 
 //type that our registry accepts
 type ErrorHandler = ErrorHandlerFunction | ErrorHandlerObject | string
@@ -68,10 +62,7 @@ class ErrorHandlerRegistry {
 
   private parent: ErrorHandlerRegistry | null = null
 
-  constructor(
-    parent: ErrorHandlerRegistry | undefined = undefined,
-    input?: ErrorHandlerMany,
-  ) {
+  constructor(parent: ErrorHandlerRegistry | undefined = undefined, input?: ErrorHandlerMany) {
     if (typeof parent !== "undefined") this.parent = parent
     if (typeof input !== "undefined") this.registerMany(input)
   }
@@ -104,11 +95,7 @@ class ErrorHandlerRegistry {
   }
 
   // handle error seeking for key
-  handleError(
-    this: ErrorHandlerRegistry,
-    seek: (string | undefined)[] | string,
-    error: THttpError,
-  ): boolean {
+  handleError(this: ErrorHandlerRegistry, seek: (string | undefined)[] | string, error: THttpError): boolean {
     if (Array.isArray(seek)) {
       return seek.some((key) => {
         if (key !== undefined) return this.handleError(String(key), error)
@@ -121,8 +108,7 @@ class ErrorHandlerRegistry {
       return this.handleErrorObject(error, { message: handler })
     } else if (typeof handler === "function") {
       const result = handler(error)
-      if (isErrorHandlerObject(result))
-        return this.handleErrorObject(error, result)
+      if (isErrorHandlerObject(result)) return this.handleErrorObject(error, result)
       return !!result
     } else if (isErrorHandlerObject(handler)) {
       return this.handleErrorObject(error, handler)
@@ -139,24 +125,14 @@ class ErrorHandlerRegistry {
   }
 
   // this is the function that will be registered in interceptor.
-  responseErrorHandler(
-    this: ErrorHandlerRegistry,
-    error: THttpError,
-    direct?: boolean,
-  ) {
+  responseErrorHandler(this: ErrorHandlerRegistry, error: THttpError, direct?: boolean) {
     if (error === null) throw new Error("Unrecoverrable error!! Error is null!")
     if (axios.isAxiosError(error)) {
       const response = error?.response
       const config = error?.config
       const data = response?.data as HttpData
       if (!direct && config?.raw) throw error
-      const seekers = [
-        data?.code,
-        error.code,
-        error?.name,
-        String(data?.status),
-        String(response?.status),
-      ]
+      const seekers = [data?.code, error.code, error?.name, String(data?.status), String(response?.status)]
       const result = this.handleError(seekers, error)
       if (!result) {
         if (data?.code && data?.description) {
@@ -208,12 +184,8 @@ export function dealWith(solutions: ErrorHandlerMany, ignoreGlobal?: boolean) {
   return (error: THttpError) => localHandlers.responseErrorHandler(error, true)
 }
 
-function responseHandler<T>(
-  response: AxiosResponse<T> & { config: { raw: true } },
-): AxiosResponse<T>
-function responseHandler<T>(
-  response: AxiosResponse<T> & { config?: { raw?: false } },
-): T
+function responseHandler<T>(response: AxiosResponse<T> & { config: { raw: true } }): AxiosResponse<T>
+function responseHandler<T>(response: AxiosResponse<T> & { config?: { raw?: false } }): T
 function responseHandler<T>(response: AxiosResponse<T>): AxiosResponse<T> | T {
   const config = response?.config
   if (config.raw) {
@@ -239,8 +211,7 @@ export function createHttpInstance(config?: CreateAxiosDefaults) {
     ...config,
   })
 
-  const responseError = (error: THttpError) =>
-    globalHandlers.responseErrorHandler(error)
+  const responseError = (error: THttpError) => globalHandlers.responseErrorHandler(error)
 
   // todo
   // @ts-ignore

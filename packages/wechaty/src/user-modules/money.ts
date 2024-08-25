@@ -17,33 +17,21 @@
  *   limitations under the License.
  *
  */
-import type { Constructor } from 'clone-class'
-import { validationMixin } from '../user-mixins/validation.js'
+import type { Constructor } from "clone-class"
 
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
 class MoneyMixin extends wechatifyMixinBase() {
-
-  constructor () {
+  constructor() {
     super()
   }
-
 }
 
 class MoneyImpl extends validationMixin(MoneyMixin)<MoneyInterface>() {}
 interface MoneyInterface extends MoneyImpl {}
 
-type MoneyConstructor = Constructor<
-  MoneyInterface,
-  typeof MoneyImpl
->
+type MoneyConstructor = Constructor<MoneyInterface, typeof MoneyImpl>
 
-export type {
-  MoneyConstructor,
-  MoneyInterface,
-}
-export {
-  MoneyImpl,
-}
+export type { MoneyConstructor, MoneyInterface }
+export { MoneyImpl }

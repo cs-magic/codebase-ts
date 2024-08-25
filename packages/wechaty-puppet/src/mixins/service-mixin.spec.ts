@@ -1,17 +1,10 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
-
 import { test } from "tstest"
 
-import type {
-  ProtectedPropertyServiceMixin,
-  ServiceMixin,
-} from "./service-mixin.js"
+import type { ProtectedPropertyServiceMixin, ServiceMixin } from "./service-mixin.js"
 
 test("ProtectedPropertyServiceMixin", async (t) => {
-  type NotExistInMixin = Exclude<
-    ProtectedPropertyServiceMixin,
-    keyof InstanceType<ServiceMixin>
-  >
+  type NotExistInMixin = Exclude<ProtectedPropertyServiceMixin, keyof InstanceType<ServiceMixin>>
   type NotExistTest = NotExistInMixin extends never ? true : false
 
   const noOneLeft: NotExistTest = true

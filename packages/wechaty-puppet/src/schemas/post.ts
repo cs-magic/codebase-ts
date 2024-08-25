@@ -79,9 +79,7 @@ interface PostPayloadServer extends PostPayloadBase {
 
 type PostPayload = PostPayloadClient | PostPayloadServer
 
-const isPostPayloadClient = (
-  payload: PostPayload,
-): payload is PostPayloadClient =>
+const isPostPayloadClient = (payload: PostPayload): payload is PostPayloadClient =>
   payload instanceof Object &&
   !payload.id && // <- Huan(202201): here is enough to check if it's a PostPayloadClient
   Array.isArray(payload.sayableList) &&
@@ -89,9 +87,7 @@ const isPostPayloadClient = (
   payload.sayableList[0] instanceof Object &&
   typeof payload.sayableList[0].type !== "undefined"
 
-const isPostPayloadServer = (
-  payload: PostPayload,
-): payload is PostPayloadServer =>
+const isPostPayloadServer = (payload: PostPayload): payload is PostPayloadServer =>
   payload instanceof Object &&
   !!payload.id && // <- Huan(202201): here is enough to check if it's a PostPayloadServer
   Array.isArray(payload.sayableList) &&

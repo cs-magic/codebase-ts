@@ -1,4 +1,5 @@
 #!/usr/bin/env -S node --no-warnings --loader ts-node/esm
+
 /**
  *   Wechaty Chatbot SDK - https://github.com/wechaty/wechaty
  *
@@ -18,15 +19,12 @@
  *   limitations under the License.
  *
  */
-import { test }  from 'tstest'
+import jsonRpcPeer from "json-rpc-peer"
+import { test } from "tstest"
 
-import jsonRpcPeer from 'json-rpc-peer'
+import { getPeer } from "./io-peer.js"
 
-import {
-  getPeer,
-}                   from './io-peer.js'
-
-test('getPeer()', async t => {
+test("getPeer()", async (t) => {
   const EXPECTED_PORT = 8788
   const server = getPeer({
     serviceGrpcPort: EXPECTED_PORT,
@@ -41,11 +39,11 @@ test('getPeer()', async t => {
    * Huan(202101) Need to be fixed by new IO Bus system.
    *  See: https://github.com/wechaty/wechaty-puppet-service/issues/118
    */
-  const port = await client.request('getHostieGrpcPort')
-  t.equal(port, EXPECTED_PORT, 'should get the right port')
+  const port = await client.request("getHostieGrpcPort")
+  t.equal(port, EXPECTED_PORT, "should get the right port")
 })
 
-test('exec()', async t => {
+test("exec()", async (t) => {
   const EXPECTED_PORT = 8788
   const server = getPeer({
     serviceGrpcPort: EXPECTED_PORT,
@@ -55,10 +53,10 @@ test('exec()', async t => {
    * Huan(202101) Need to be fixed by new IO Bus system.
    *  See: https://github.com/wechaty/wechaty-puppet-service/issues/118
    */
-  const request = jsonRpcPeer.format.request(42, 'getHostieGrpcPort')
-  const response = await server.exec(request) as string
+  const request = jsonRpcPeer.format.request(42, "getHostieGrpcPort")
+  const response = (await server.exec(request)) as string
   // console.info('response: ', response)
 
   const obj = jsonRpcPeer.parse(response) as jsonRpcPeer.JsonRpcPayloadResponse
-  t.equal(obj.result, EXPECTED_PORT, 'should get the right port from payload')
+  t.equal(obj.result, EXPECTED_PORT, "should get the right port from payload")
 })

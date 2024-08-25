@@ -1,11 +1,8 @@
 import { ELLIPSE } from "../const.js"
+
 import { isAscii } from "./is-ascii.js"
 
-export const truncateString = (
-  s: string,
-  asciiMaxLen = 20,
-  ellipse = ELLIPSE,
-) => {
+export const truncateString = (s: string, asciiMaxLen = 20, ellipse = ELLIPSE) => {
   let index = 0
   let sum = 0
   for (const c of s) {

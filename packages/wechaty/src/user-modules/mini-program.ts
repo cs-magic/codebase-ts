@@ -17,36 +17,31 @@
  *   limitations under the License.
  *
  */
-import type * as PUPPET  from 'wechaty-puppet'
+import type { Constructor } from "clone-class"
+import type * as PUPPET from "wechaty-puppet"
 
-import type { Constructor } from 'clone-class'
-import { log } from '../config.js'
-
-import { validationMixin } from '../user-mixins/validation.js'
-
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
+import { log } from "../config.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
 class MiniProgramMixin extends wechatifyMixinBase() {
-
   /**
    *
    * Create
    *
    */
-  static async create (): Promise<MiniProgramInterface> {
-    log.verbose('MiniProgram', 'create()')
+  static async create(): Promise<MiniProgramInterface> {
+    log.verbose("MiniProgram", "create()")
 
     // TODO: get appid and username from wechat
     const payload: PUPPET.payloads.MiniProgram = {
-      appid              : 'todo',
-      description        : 'todo',
-      pagePath           : 'todo',
-      thumbKey           : 'todo',
-      thumbUrl           : 'todo',
-      title              : 'todo',
-      username           : 'todo',
+      appid: "todo",
+      description: "todo",
+      pagePath: "todo",
+      thumbKey: "todo",
+      thumbUrl: "todo",
+      title: "todo",
+      username: "todo",
     }
 
     return new this(payload)
@@ -55,57 +50,46 @@ class MiniProgramMixin extends wechatifyMixinBase() {
   /*
    * @hideconstructor
    */
-  constructor (
-    public readonly payload: PUPPET.payloads.MiniProgram,
-  ) {
+  constructor(public readonly payload: PUPPET.payloads.MiniProgram) {
     super()
-    log.verbose('MiniProgram', 'constructor()')
+    log.verbose("MiniProgram", "constructor()")
     // Huan(202110): it is ok to create a raw one without wechaty instance
     // guardWechatifyClass.call(this, MiniProgram)
   }
 
-  appid (): undefined | string {
+  appid(): undefined | string {
     return this.payload.appid
   }
 
-  title (): undefined | string {
+  title(): undefined | string {
     return this.payload.title
   }
 
-  pagePath (): undefined | string {
+  pagePath(): undefined | string {
     return this.payload.pagePath
   }
 
-  username (): undefined | string {
+  username(): undefined | string {
     return this.payload.username
   }
 
-  description (): undefined | string {
+  description(): undefined | string {
     return this.payload.description
   }
 
-  thumbUrl (): undefined | string {
+  thumbUrl(): undefined | string {
     return this.payload.thumbUrl
   }
 
-  thumbKey (): undefined | string {
+  thumbKey(): undefined | string {
     return this.payload.thumbKey
   }
-
 }
 
 class MiniProgramImpl extends validationMixin(MiniProgramMixin)<MiniProgramInterface>() {}
 interface MiniProgramInterface extends MiniProgramImpl {}
 
-type MiniProgramConstructor = Constructor<
-  MiniProgramInterface,
-  typeof MiniProgramImpl
->
+type MiniProgramConstructor = Constructor<MiniProgramInterface, typeof MiniProgramImpl>
 
-export type {
-  MiniProgramConstructor,
-  MiniProgramInterface,
-}
-export {
-  MiniProgramImpl,
-}
+export type { MiniProgramConstructor, MiniProgramInterface }
+export { MiniProgramImpl }

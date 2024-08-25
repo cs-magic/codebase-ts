@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { xmlToJson } from "../utils/xml-to-json.js"
 import type { WebMessageRawPayload } from "../../web-schemas.js"
+import { xmlToJson } from "../utils/xml-to-json.js"
 
 interface EmotionXmlSchema {
   msg: {
@@ -33,9 +33,7 @@ export interface EmojiMessagePayload {
   gameext?: string
 }
 
-export async function parseEmotionMessagePayload(
-  message: WebMessageRawPayload,
-): Promise<EmojiMessagePayload> {
+export async function parseEmotionMessagePayload(message: WebMessageRawPayload): Promise<EmojiMessagePayload> {
   const jsonPayload: EmotionXmlSchema = await xmlToJson(message.Content)
 
   const len = parseInt(jsonPayload.msg.emoji.$.len, 10) || 0
@@ -63,9 +61,7 @@ export async function parseEmotionMessagePayload(
   }
 }
 
-export function generateEmotionPayload(
-  emojiMessagePayload: EmojiMessagePayload,
-): string {
+export function generateEmotionPayload(emojiMessagePayload: EmojiMessagePayload): string {
   return `<msg><emoji cdnurl="${emojiMessagePayload.cdnurl}" len="${emojiMessagePayload.len}" md5="${
     emojiMessagePayload.md5
   }" type="${emojiMessagePayload.type}"/>${emojiMessagePayload.gameext || ""}</msg>`

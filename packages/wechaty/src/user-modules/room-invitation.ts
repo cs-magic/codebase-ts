@@ -17,35 +17,23 @@
  *   limitations under the License.
  *
  */
-import type * as PUPPET          from 'wechaty-puppet'
+import type { Constructor } from "clone-class"
+import type * as PUPPET from "wechaty-puppet"
 
-import { log } from '../config.js'
-import type { Constructor } from 'clone-class'
+import { log } from "../config.js"
+import { timestampToDate } from "../pure-functions/timestamp-to-date.js"
+import type { Accepter } from "../schemas/acceptable.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
-import type {
-  Accepter,
-}                     from '../schemas/acceptable.js'
-import {
-  timestampToDate,
-}                     from '../pure-functions/timestamp-to-date.js'
-
-import type {
-  ContactInterface,
-}               from './contact.js'
-import {
-  wechatifyMixinBase,
-}                     from '../user-mixins/wechatify.js'
-import { validationMixin } from '../user-mixins/validation.js'
+import type { ContactInterface } from "./contact.js"
 
 /**
  *
  * accept room invitation
  */
 class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
-
-  static load (
-    id   : string,
-  ): RoomInvitationInterface {
+  static load(id: string): RoomInvitationInterface {
     const newRoomInvitation = new this(id)
     return newRoomInvitation
   }
@@ -55,34 +43,21 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * Instance Properties
    *
    */
-  constructor (
-    public readonly id: string,
-  ) {
+  constructor(public readonly id: string) {
     super()
-    log.verbose('RoomInvitation', 'constructor(id=%s)', id)
+    log.verbose("RoomInvitation", "constructor(id=%s)", id)
   }
 
-  override toString () {
-    return [
-      'RoomInvitation#',
-      this.id || 'loading',
-    ].join('')
+  override toString() {
+    return ["RoomInvitation#", this.id || "loading"].join("")
   }
 
   /**
-    * @ignore
+   * @ignore
    */
-  async toStringAsync (): Promise<string> {
+  async toStringAsync(): Promise<string> {
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
-    return [
-      'RoomInvitation#',
-      this.id,
-      '<',
-      payload.topic,
-      ',',
-      payload.inviterId,
-      '>',
-    ].join('')
+    return ["RoomInvitation#", this.id, "<", payload.topic, ",", payload.inviterId, ">"].join("")
   }
 
   /**
@@ -102,24 +77,19 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * }
    * .start()
    */
-  async accept (): Promise<void> {
-    log.verbose('RoomInvitation', 'accept()')
+  async accept(): Promise<void> {
+    log.verbose("RoomInvitation", "accept()")
 
     try {
       await this.wechaty.puppet.roomInvitationAccept(this.id)
 
       const inviter = await this.inviter()
-      const topic   = await this.topic()
+      const topic = await this.topic()
 
-      log.verbose('RoomInvitation', 'accept() with room(%s) & inviter(%s) ready()',
-        topic,
-        inviter,
-      )
+      log.verbose("RoomInvitation", "accept() with room(%s) & inviter(%s) ready()", topic, inviter)
     } catch (e) {
       this.wechaty.emitError(e)
-      log.warn('RoomInvitation', 'accept() rejection: %s',
-        (e && (e as Error).message) || e,
-      )
+      log.warn("RoomInvitation", "accept() rejection: %s", (e && (e as Error).message) || e)
     }
   }
 
@@ -136,14 +106,14 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * }
    * .start()
    */
-  async inviter (): Promise<ContactInterface> {
-    log.verbose('RoomInvitation', 'inviter()')
+  async inviter(): Promise<ContactInterface> {
+    log.verbose("RoomInvitation", "inviter()")
 
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
     const inviter = await this.wechaty.Contact.find({ id: payload.inviterId })
 
     if (!inviter) {
-      throw new Error('can not found inviter with id: ' + payload.inviterId)
+      throw new Error("can not found inviter with id: " + payload.inviterId)
     }
     return inviter
   }
@@ -160,14 +130,14 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * }
    * .start()
    */
-  async topic (): Promise<string> {
+  async topic(): Promise<string> {
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
 
-    return payload.topic || payload.topic || ''
+    return payload.topic || payload.topic || ""
   }
 
-  async memberCount (): Promise<number> {
-    log.verbose('RoomInvitation', 'memberCount()')
+  async memberCount(): Promise<number> {
+    log.verbose("RoomInvitation", "memberCount()")
 
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
 
@@ -176,22 +146,18 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
 
   /**
    * List of Room Members that you known(is friend)
-    * @ignore
+   * @ignore
    */
-  async memberList (): Promise<ContactInterface[]> {
-    log.verbose('RoomInvitation', 'roomMemberList()')
+  async memberList(): Promise<ContactInterface[]> {
+    log.verbose("RoomInvitation", "roomMemberList()")
 
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
 
     const contactIdList = payload.memberIdList
 
-    const contactListAll = await Promise.all(
-      contactIdList.map(
-        id => this.wechaty.Contact.find({ id }),
-      ),
-    )
+    const contactListAll = await Promise.all(contactIdList.map((id) => this.wechaty.Contact.find({ id })))
 
-    const contactList = contactListAll.filter(c => !!c) as ContactInterface[]
+    const contactList = contactListAll.filter((c) => !!c) as ContactInterface[]
     return contactList
   }
 
@@ -200,8 +166,8 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    *
    * @returns {Promise<Date>}
    */
-  async date (): Promise<Date> {
-    log.verbose('RoomInvitation', 'date()')
+  async date(): Promise<Date> {
+    log.verbose("RoomInvitation", "date()")
 
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
     return timestampToDate(payload.timestamp)
@@ -215,7 +181,7 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * then the age() will return `8:43:15 - 8:43:01 = 14 (seconds)`
    * @returns {number}
    */
-  async age (): Promise<number> {
+  async age(): Promise<number> {
     const recvDate = await this.date()
 
     const ageMilliseconds = Date.now() - recvDate.getTime()
@@ -234,16 +200,10 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * const roomInvitation = await bot.RoomInvitation.fromJSON(dataFromDisk)
    * await roomInvitation.accept()
    */
-  static async fromJSON (
-    payload: string | PUPPET.payloads.RoomInvitation,
-  ): Promise<RoomInvitationInterface> {
-    log.verbose('RoomInvitation', 'fromJSON(%s)',
-      typeof payload === 'string'
-        ? payload
-        : JSON.stringify(payload),
-    )
+  static async fromJSON(payload: string | PUPPET.payloads.RoomInvitation): Promise<RoomInvitationInterface> {
+    log.verbose("RoomInvitation", "fromJSON(%s)", typeof payload === "string" ? payload : JSON.stringify(payload))
 
-    if (typeof payload === 'string') {
+    if (typeof payload === "string") {
       payload = JSON.parse(payload) as PUPPET.payloads.RoomInvitation
     }
 
@@ -265,26 +225,17 @@ class RoomInvitationMixin extends wechatifyMixinBase() implements Accepter {
    * }
    * .start()
    */
-  async toJSON (): Promise<string> {
-    log.verbose('RoomInvitation', 'toJSON()')
+  async toJSON(): Promise<string> {
+    log.verbose("RoomInvitation", "toJSON()")
     const payload = await this.wechaty.puppet.roomInvitationPayload(this.id)
     return JSON.stringify(payload)
   }
-
 }
 
 class RoomInvitationImpl extends validationMixin(RoomInvitationMixin)<RoomInvitationInterface>() {}
 interface RoomInvitationInterface extends RoomInvitationImpl {}
 
-type RoomInvitationConstructor = Constructor<
-  RoomInvitationInterface,
-  typeof RoomInvitationImpl
->
+type RoomInvitationConstructor = Constructor<RoomInvitationInterface, typeof RoomInvitationImpl>
 
-export type {
-  RoomInvitationConstructor,
-  RoomInvitationInterface,
-}
-export {
-  RoomInvitationImpl,
-}
+export type { RoomInvitationConstructor, RoomInvitationInterface }
+export { RoomInvitationImpl }

@@ -32,9 +32,8 @@
 
  * This is due to the circler dependence, the deeper reason is still not clear.
  */
+import { VERSION, log } from "../config.js"
 import "../puppet/interface-of.js"
-
-import { log, VERSION } from "../config.js"
 import { Puppet } from "../puppet/puppet-abstract.js"
 import type { PuppetOptions } from "../schemas/puppet.js"
 import { throwUnsupportedError } from "../throw-unsupported-error.js"

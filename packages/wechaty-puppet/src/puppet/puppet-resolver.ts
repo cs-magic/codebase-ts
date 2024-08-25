@@ -34,9 +34,7 @@ interface ResolveOptions {
   puppetOptions?: PuppetOptions
 }
 
-async function resolvePuppet(
-  options: ResolveOptions,
-): Promise<PuppetInterface> {
+async function resolvePuppet(options: ResolveOptions): Promise<PuppetInterface> {
   log.verbose(
     "Puppet",
     "resolvePuppet({puppet: %s, puppetOptions: %s})",
@@ -59,17 +57,9 @@ async function resolvePuppet(
     )
   }
 
-  log.verbose(
-    "Puppet",
-    'resolvePuppet() resolving name "%s" ...',
-    options.puppet,
-  )
+  log.verbose("Puppet", 'resolvePuppet() resolving name "%s" ...', options.puppet)
   const MyPuppet = await resolvePuppetName(options.puppet)
-  log.verbose(
-    "Puppet",
-    'resolvePuppet() resolving name "%s" ... done',
-    options.puppet,
-  )
+  log.verbose("Puppet", 'resolvePuppet() resolving name "%s" ... done', options.puppet)
 
   /**
    * We will meet the following error:
@@ -96,9 +86,7 @@ async function resolvePuppet(
   return puppetInstance
 }
 
-async function resolvePuppetName(
-  puppetName: PuppetNpmName,
-): Promise<PuppetConstructor> {
+async function resolvePuppetName(puppetName: PuppetNpmName): Promise<PuppetConstructor> {
   log.verbose("Puppet", "resolvePuppetName(%s)", puppetName)
 
   let puppetModule
@@ -116,13 +104,9 @@ async function resolvePuppetName(
       "resolvePuppetName %s",
       [
         "",
-        'Failed to import Wechaty Puppet Provider (WPP) NPM module: "' +
-          puppetName +
-          '"',
+        'Failed to import Wechaty Puppet Provider (WPP) NPM module: "' + puppetName + '"',
         "Please make sure:",
-        " 1. it has been installed correctly. (run `npm install " +
-          puppetName +
-          "` if it doesn't)",
+        " 1. it has been installed correctly. (run `npm install " + puppetName + "` if it doesn't)",
         ' 2. "' + puppetName + '" is a valid Wechaty Puppet Provider (WPP).',
         "",
         "learn more about Wechaty Puppet Providers (WPP) from the official website:",
@@ -144,9 +128,7 @@ async function resolvePuppetName(
   let retry = 0
   while (typeof puppetModule.default !== "function") {
     if (!puppetModule || retry++ > 3) {
-      throw new Error(
-        `Puppet(${puppetName}) has not provided the default export`,
-      )
+      throw new Error(`Puppet(${puppetName}) has not provided the default export`)
     }
     /**
      * CommonJS Module: puppetModule.default.default is the expoerted Puppet
@@ -160,12 +142,7 @@ async function resolvePuppetName(
      */
     log.verbose("Puppet", "resolvePuppetName(%s): ESM resolved", puppetName)
   } else {
-    log.verbose(
-      "Puppet",
-      "resolvePuppetName(%s): CJS resolved, retry times: %s",
-      puppetName,
-      retry,
-    )
+    log.verbose("Puppet", "resolvePuppetName(%s): CJS resolved, retry times: %s", puppetName, retry)
   }
 
   // console.info(puppetModule)

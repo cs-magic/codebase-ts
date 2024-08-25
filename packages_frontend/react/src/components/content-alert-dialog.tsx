@@ -2,7 +2,9 @@
 
 import { useAtom } from "jotai"
 import React, { PropsWithChildren } from "react"
+
 import { AlertDialog, AlertDialogContent } from "@cs-magic/shadcn/dist/ui/alert-dialog"
+
 import { uiAlertDialogOpen } from "@/store/ui.atom"
 
 export const ContentAlertDialog = ({ children }: PropsWithChildren) => {

@@ -1,6 +1,8 @@
 import type { MessageParserContext } from "wechaty-puppet"
 import type * as PUPPET from "wechaty-puppet"
+
 import type { WebMessageRawPayload } from "../../../web-schemas"
+
 import type { MessageParser } from "./message-parser"
 
 export const singleChatParser: MessageParser = async (

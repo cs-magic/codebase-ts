@@ -17,32 +17,29 @@
  *   limitations under the License.
  *
  */
-import type * as PUPPET          from 'wechaty-puppet'
-import type { Constructor } from 'clone-class'
-import { log } from '../config.js'
+import type { Constructor } from "clone-class"
+import type * as PUPPET from "wechaty-puppet"
 
-import { validationMixin }  from '../user-mixins/validation.js'
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
+import { log } from "../config.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
 class LocationMixin extends wechatifyMixinBase() {
-
   /**
    *
    * Create
    * @param poi string A point of interest (POI) is a specific point location that someone may find useful or interesting.
    *  See: https://en.wikipedia.org/wiki/Point_of_interest
    */
-  static async create (poi: string): Promise<LocationInterface> {
-    log.verbose('Location', 'create(%s)', poi)
+  static async create(poi: string): Promise<LocationInterface> {
+    log.verbose("Location", "create(%s)", poi)
 
     const payload: PUPPET.payloads.Location = {
-      accuracy  : 15, // in meters
-      address   : '北京市北京市海淀区45 Chengfu Rd',
-      latitude  : 39.995120999999997,
-      longitude : 116.334154,
-      name      : poi,  // Huan(202109): FIXME: generate payload by poi
+      accuracy: 15, // in meters
+      address: "北京市北京市海淀区45 Chengfu Rd",
+      latitude: 39.995120999999997,
+      longitude: 116.334154,
+      name: poi, // Huan(202109): FIXME: generate payload by poi
     }
 
     return new this(payload)
@@ -51,53 +48,42 @@ class LocationMixin extends wechatifyMixinBase() {
   /*
    * @hideconstructor
    */
-  constructor (
-    public readonly payload: PUPPET.payloads.Location,
-  ) {
+  constructor(public readonly payload: PUPPET.payloads.Location) {
     super()
-    log.verbose('Location', 'constructor()')
+    log.verbose("Location", "constructor()")
     // Huan(202110): it is ok to create a raw one without wechaty instance
     // guardWechatifyClass.call(this, Location)
   }
 
-  override toString (): string {
+  override toString(): string {
     return `Location<${this.payload.name}>`
   }
 
-  address (): string {
+  address(): string {
     return this.payload.address
   }
 
-  latitude (): number {
+  latitude(): number {
     return this.payload.latitude
   }
 
-  longitude (): number {
+  longitude(): number {
     return this.payload.longitude
   }
 
-  name (): string {
+  name(): string {
     return this.payload.name
   }
 
-  accuracy (): number {
+  accuracy(): number {
     return this.payload.accuracy
   }
-
 }
 
 class LocationImpl extends validationMixin(LocationMixin)<LocationInterface>() {}
 interface LocationInterface extends LocationImpl {}
 
-type LocationConstructor = Constructor<
-  LocationInterface,
-  typeof LocationImpl
->
+type LocationConstructor = Constructor<LocationInterface, typeof LocationImpl>
 
-export type {
-  LocationConstructor,
-  LocationInterface,
-}
-export {
-  LocationImpl,
-}
+export type { LocationConstructor, LocationInterface }
+export { LocationImpl }

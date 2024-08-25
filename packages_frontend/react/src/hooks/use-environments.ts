@@ -1,5 +1,6 @@
-import { isWechatBrowser } from "@cs-magic/common/dist/env/is-wechat-browser"
 import { useEffect, useState } from "react"
+
+import { isWechatBrowser } from "@cs-magic/common/dist/env/is-wechat-browser"
 
 /**
  * 充分性：检测当前的环境

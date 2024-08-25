@@ -18,8 +18,7 @@
  */
 import { function as FP } from "fp-ts"
 
-import { log, VERSION } from "../config.js"
-
+import { VERSION, log } from "../config.js"
 import {
   cacheMixin,
   contactMixin,
@@ -37,9 +36,8 @@ import {
   serviceMixin,
   tagMixin,
   tapMixin,
-  validateMixin
+  validateMixin,
 } from "../mixins/mod.js"
-
 import type { PuppetOptions } from "../schemas/mod.js"
 
 import { PuppetSkeleton } from "./puppet-skeleton.js"

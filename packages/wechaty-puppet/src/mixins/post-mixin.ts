@@ -1,20 +1,12 @@
 import { log } from "../config.js"
-
 import type { PuppetSkeleton } from "../puppet/puppet-skeleton.js"
 import { DirtyType } from "../schemas/dirty.js"
-
-import type {
-  PaginationRequest,
-  PaginationResponse,
-} from "../schemas/pagination.js"
-
+import type { PaginationRequest, PaginationResponse } from "../schemas/pagination.js"
 import type { PostPayload, PostQueryFilter } from "../schemas/post.js"
 
 import type { CacheMixin } from "./cache-mixin.js"
 
-const postMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
-  baseMixin: MinxinBase,
-) => {
+const postMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(baseMixin: MinxinBase) => {
   abstract class PostMixin extends baseMixin {
     constructor(...args: any[]) {
       super(...args)
@@ -79,10 +71,7 @@ const postMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
      * @param filter
      * @param pagination
      */
-    abstract postSearch(
-      filter: PostQueryFilter,
-      pagination?: PaginationRequest,
-    ): Promise<PaginationResponse<string[]>>
+    abstract postSearch(filter: PostQueryFilter, pagination?: PaginationRequest): Promise<PaginationResponse<string[]>>
 
     /**
      * List from the local, will return all ids from cache
@@ -104,10 +93,7 @@ const postMixin = <MinxinBase extends typeof PuppetSkeleton & CacheMixin>(
 
 type PostMixin = ReturnType<typeof postMixin>
 
-type ProtectedPropertyPostMixin =
-  | "postPayloadCache"
-  | "postRawPayload"
-  | "postRawPayloadParser"
+type ProtectedPropertyPostMixin = "postPayloadCache" | "postRawPayload" | "postRawPayloadParser"
 
 export type { PostMixin, ProtectedPropertyPostMixin }
 export { postMixin }

@@ -3,37 +3,31 @@ import { test } from "tstest"
 import PuppetMock from "wechaty-puppet-mock"
 
 import { WechatyEventEmitter } from "../schemas/wechaty-events.js"
-
 import type {
-  ContactSelfConstructor,
   ContactConstructor,
+  ContactSelfConstructor,
+  DelayConstructor,
   FriendshipConstructor,
   ImageConstructor,
   LocationConstructor,
   MessageConstructor,
+  MessageInterface,
   MiniProgramConstructor,
   PostConstructor,
-  RoomInvitationConstructor,
   RoomConstructor,
-  DelayConstructor,
+  RoomInvitationConstructor,
   TagConstructor,
   UrlLinkConstructor,
-  MessageInterface,
 } from "../user-modules/mod.js"
 
 import {
-  type WechatyConstructor,
+  type WechatyConstructor, // type AllProtectedProperty,
+  WechatyImpl, // WechatyConstructor,
   type WechatyInterface,
-  // type AllProtectedProperty,
-  WechatyImpl,
-  // WechatyConstructor,
 } from "./wechaty-impl.js"
 
 test("Wechaty interface", async (t) => {
-  abstract class WechatyImplementation
-    extends WechatyEventEmitter
-    implements WechatyInterface
-  {
+  abstract class WechatyImplementation extends WechatyEventEmitter implements WechatyInterface {
     Contact: ContactConstructor
     ContactSelf: ContactSelfConstructor
     Delay: DelayConstructor
@@ -110,18 +104,9 @@ test("Wechaty interface", async (t) => {
 test("options.puppet initialization", async (t) => {
   const puppet = new PuppetMock()
   const wechaty = new WechatyImpl({ puppet })
-  t.throws(
-    () => wechaty.puppet,
-    "should throw when access puppet getter before init()",
-  )
+  t.throws(() => wechaty.puppet, "should throw when access puppet getter before init()")
 
   await wechaty.init()
-  t.doesNotThrow(
-    () => wechaty.puppet,
-    "should not throw when access puppet getter after init()",
-  )
-  t.ok(
-    wechaty.puppet,
-    "should exist puppet instance by setting the options.puppet",
-  )
+  t.doesNotThrow(() => wechaty.puppet, "should not throw when access puppet getter after init()")
+  t.ok(wechaty.puppet, "should exist puppet instance by setting the options.puppet")
 })

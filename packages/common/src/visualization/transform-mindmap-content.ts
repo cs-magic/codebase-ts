@@ -14,8 +14,6 @@ export const transformMindmapContent = (input?: string): string => {
     })
     .join("\n")
 
-  logger.info(
-    `-- transformed mindmap content: input=${input}, output=${output}`,
-  )
+  logger.info(`-- transformed mindmap content: input=${input}, output=${output}`)
   return output
 }

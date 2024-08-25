@@ -1,13 +1,7 @@
 import { Prisma } from "@prisma/client"
 import { z } from "zod"
 
-export const taskStatusSchema = z.enum([
-  "pending",
-  "running",
-  "paused",
-  "done",
-  "discarded",
-])
+export const taskStatusSchema = z.enum(["pending", "running", "paused", "done", "discarded"])
 export type TaskStatus = z.infer<typeof taskStatusSchema>
 
 export type TaskTimer = {

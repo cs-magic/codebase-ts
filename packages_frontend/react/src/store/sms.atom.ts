@@ -1,21 +1,14 @@
-import { Nullable } from "@cs-magic/common/dist/schema/base"
-import {
-  ISendSms,
-  ISmsSignIn,
-  SmsProviderType,
-  SmsStage,
-} from "@cs-magic/common/dist/sms.schema"
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
+
+import { Nullable } from "@cs-magic/common/dist/schema/base"
+import { ISendSms, ISmsSignIn, SmsProviderType, SmsStage } from "@cs-magic/common/dist/sms.schema"
 
 //////////////////////////////
 // base
 //////////////////////////////
 
-export const smsProviderTypeAtom = atomWithStorage<SmsProviderType>(
-  "sms.provider.type",
-  "ali",
-)
+export const smsProviderTypeAtom = atomWithStorage<SmsProviderType>("sms.provider.type", "ali")
 export const smsStageAtom = atom<SmsStage>("toSendSms")
 export const userPhoneAtom = atom("")
 

@@ -15,10 +15,7 @@ export type IWechatToken = {
 }
 
 // refresh的时候少了两个
-export type IWechatRefreshedToken = Omit<
-  IWechatToken,
-  "unionid" | "is_snapshotuser"
->
+export type IWechatRefreshedToken = Omit<IWechatToken, "unionid" | "is_snapshotuser">
 
 /**
  * prisma account create 的 时候 不能有 openid 等额外的自定义字段
@@ -48,7 +45,5 @@ export type IWechatError = {
   errmsg: string
 } // e.g. {"errcode":40029,"errmsg":"invalid code"}
 export type IWechatRes<T extends object> = T | IWechatError
-export const isWechatError = <T extends object>(
-  res: IWechatRes<T>,
-): res is IWechatError => "errcode" in res
+export const isWechatError = <T extends object>(res: IWechatRes<T>): res is IWechatError => "errcode" in res
 export type IWechatSDKToken = { access_token: string; expires_in: number }

@@ -7,6 +7,7 @@
 import Dysmsapi, * as Api from "@alicloud/dysmsapi20170525"
 import { Config } from "@alicloud/openapi-client"
 import { RuntimeOptions } from "@alicloud/tea-util"
+
 import { env } from "../../../../env/index.js"
 import logger from "../../../../log/index.js"
 import { formatError } from "../../../../utils/format-error.js"
@@ -57,10 +58,7 @@ export const $sendSmsViaAli = async (phone: string, code: string) => {
      *   }
      * }
      */
-    const res = await client.sendSmsWithOptions(
-      sendSmsRequest,
-      new RuntimeOptions({}),
-    )
+    const res = await client.sendSmsWithOptions(sendSmsRequest, new RuntimeOptions({}))
     logger.info("[sms] sent result: %o", res)
     return res.statusCode === 200 && res.body?.code === "OK"
   } catch (err) {

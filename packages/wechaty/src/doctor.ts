@@ -17,26 +17,19 @@
  *   limitations under the License.
  *
  */
-import {
-  createServer,
-  Socket,
-}                   from 'net'
-import { spawnSync as spawn } from 'child_process'
-
-import {
-  log,
-}                   from 'wechaty-puppet'
+import { spawnSync as spawn } from "child_process"
+import { Socket, createServer } from "net"
+import { log } from "wechaty-puppet"
 
 export class Doctor {
-
-  constructor () {
-    log.verbose('Doctor', 'constructor()')
+  constructor() {
+    log.verbose("Doctor", "constructor()")
   }
 
-  public chromedriverVersion (): string {
+  public chromedriverVersion(): string {
     let version: string
     try {
-      const cmd = spawn('chromedriver', [ '--version' ])
+      const cmd = spawn("chromedriver", ["--version"])
       version = String(cmd.error) || cmd.stdout.toString() || cmd.stderr.toString()
     } catch (e) {
       version = (e as Error).message
@@ -47,31 +40,31 @@ export class Doctor {
   /**
    * https://gist.github.com/tedmiston/5935757
    */
-  public testTcp (): Promise<boolean> {
-    log.verbose('Doctor', 'testTcp()')
+  public testTcp(): Promise<boolean> {
+    log.verbose("Doctor", "testTcp()")
 
     return new Promise<boolean>((resolve, reject) => {
       /**
        * Server
        */
-      const server = createServer(socket => socket.pipe(socket))
+      const server = createServer((socket) => socket.pipe(socket))
       /**
        * Promise Reject
        */
-      server.on('error', reject)
-      server.on('close', () => log.silly('Doctor', 'testTcp() server closed'))
+      server.on("error", reject)
+      server.on("close", () => log.silly("Doctor", "testTcp() server closed"))
 
-      server.listen(8788, 'localhost', () => {
+      server.listen(8788, "localhost", () => {
         /**
          * Client
          */
         const client = new Socket()
-        client.connect(8788, 'localhost', () => {
-          log.silly('Doctor', 'testTcp() client connected')
-          client.write('ding')
+        client.connect(8788, "localhost", () => {
+          log.silly("Doctor", "testTcp() client connected")
+          client.write("ding")
         })
 
-        client.on('data', () => {
+        client.on("data", () => {
           /**
            * Promise Resolve
            */
@@ -82,11 +75,10 @@ export class Doctor {
         /**
          * Promise Reject
          */
-        client.on('error', reject)
+        client.on("error", reject)
 
-        client.on('close', () => server.close())
+        client.on("close", () => server.close())
       })
     })
   }
-
 }

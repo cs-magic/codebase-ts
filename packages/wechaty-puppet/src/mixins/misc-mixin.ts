@@ -1,12 +1,9 @@
-import { log, NAME, VERSION } from "../config.js"
-
+import { NAME, VERSION, log } from "../config.js"
 import type { PuppetSkeleton } from "../puppet/mod.js"
 
 import type { MemoryMixin } from "./memory-mixin.js"
 
-const miscMixin = <MixinBase extends typeof PuppetSkeleton & MemoryMixin>(
-  mixinBase: MixinBase,
-) => {
+const miscMixin = <MixinBase extends typeof PuppetSkeleton & MemoryMixin>(mixinBase: MixinBase) => {
   abstract class MiscMixin extends mixinBase {
     constructor(...args: any[]) {
       super(...args)
@@ -21,15 +18,7 @@ const miscMixin = <MixinBase extends typeof PuppetSkeleton & MemoryMixin>(
         memoryName = "NOMEMORY"
       }
 
-      return [
-        "Puppet",
-        "<",
-        this.constructor.name,
-        ">",
-        "(",
-        memoryName,
-        ")",
-      ].join("")
+      return ["Puppet", "<", this.constructor.name, ">", "(", memoryName, ")"].join("")
     }
 
     /**

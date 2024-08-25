@@ -59,9 +59,7 @@ interface ContactPayload {
 type ContactPayloadFilterFunction = (payload: ContactPayload) => boolean
 
 /** @hidden */
-type ContactPayloadFilterFactory = (
-  query: ContactQueryFilter,
-) => ContactPayloadFilterFunction
+type ContactPayloadFilterFactory = (query: ContactQueryFilter) => ContactPayloadFilterFunction
 
 export {
   ContactGender,

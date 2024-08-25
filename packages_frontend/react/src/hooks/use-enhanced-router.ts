@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
 import ansiColors from "ansicolors"
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 /**
  * 充分性：增强router，例如打印一些追踪信息
@@ -18,17 +18,13 @@ export const useEnhancedRouter = () => {
   const addLog = () => {
     const replace = router.replace.bind(router)
     router.replace = (...args) => {
-      console.info(
-        ansiColors.red(`router.replace: ${location.href} --> ${args[0]}`),
-      )
+      console.info(ansiColors.red(`router.replace: ${location.href} --> ${args[0]}`))
       return replace(...args)
     }
 
     const push = router.push.bind(router)
     router.push = (...args) => {
-      console.info(
-        ansiColors.red(`router.push: ${location.href} --> ${args[0]}`),
-      )
+      console.info(ansiColors.red(`router.push: ${location.href} --> ${args[0]}`))
       return push(...args)
     }
   }

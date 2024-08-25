@@ -1,17 +1,16 @@
 import logger from "@cs-magic/common/dist/log/index"
-import type { ILlmQueryConfig } from "../schema/llm.api.js"
-import type { LlmModelType } from "../schema/llm.models.js"
-import { loadAgent } from "./load-agent.js"
-import { safeCallLLM } from "./safe-call-llm.js"
 import { ILlmMessage } from "@cs-magic/common/dist/schema/message"
 import { compressContent } from "@cs-magic/common/dist/utils/compress-content"
 
+import type { ILlmQueryConfig } from "../schema/llm.api.js"
+import type { LlmModelType } from "../schema/llm.models.js"
+
+import { loadAgent } from "./load-agent.js"
+import { safeCallLLM } from "./safe-call-llm.js"
+
 // const __filename = fileURLToPath(import.meta.url)
 
-export type AgentType =
-  | "default"
-  | "summarize-content"
-  | "summarize-ancient-title"
+export type AgentType = "default" | "summarize-content" | "summarize-ancient-title"
 
 export const safeCallAgent = async ({
   input,

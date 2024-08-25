@@ -1,8 +1,8 @@
 /* eslint-disable sort-keys */
 import type { FileBoxInterface } from "file-box"
 import { createAction } from "typesafe-actions"
-import type { LocationPayload } from "./location.js"
 
+import type { LocationPayload } from "./location.js"
 import { MessageType } from "./message.js"
 import type { MiniProgramPayload } from "./mini-program.js"
 import type { PostPayload, SayablePayloadPost } from "./post.js"
@@ -100,9 +100,7 @@ const sayablePayloads = {
   post,
 } as const
 
-type SayablePayloadNoPost = ReturnType<
-  (typeof sayablePayloadsNoPost)[keyof typeof sayablePayloadsNoPost]
->
+type SayablePayloadNoPost = ReturnType<(typeof sayablePayloadsNoPost)[keyof typeof sayablePayloadsNoPost]>
 type SayablePayload = SayablePayloadNoPost | SayablePayloadPost
 
 // TODO: add an unit test to confirm that all unsupported type are listed here

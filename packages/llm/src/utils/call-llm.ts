@@ -2,10 +2,11 @@ import { md5 } from "js-md5"
 import OpenAI, { type ClientOptions } from "openai"
 import ZhipuAi from "zhipuai-sdk-nodejs-v4"
 
-import type { ILlmQueryConfig } from "../schema/llm.api.js"
-import { type LlmProviderType } from "../schema/llm.providers.js"
 import { api } from "@cs-magic/common/dist/api/api"
 import { backendApi } from "@cs-magic/common/dist/api/backend-api"
+
+import type { ILlmQueryConfig } from "../schema/llm.api.js"
+import { type LlmProviderType } from "../schema/llm.providers.js"
 
 export type ICompletion = OpenAI.Chat.Completions.ChatCompletion
 
@@ -33,20 +34,15 @@ export const callLlm = async ({
 
     case "baichuan":
       return (
-        await api.post<ICompletion>(
-          "https://api.baichuan-ai.com/v1/chat/completions",
-          queryConfig,
-          {
-            headers: {
-              Authorization: `Bearer ${apiKey}`,
-            },
+        await api.post<ICompletion>("https://api.baichuan-ai.com/v1/chat/completions", queryConfig, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
           },
-        )
+        })
       ).data
 
     case "dashscope":
-      return (await backendApi.post<ICompletion>("/llm/base", queryConfig, {}))
-        .data
+      return (await backendApi.post<ICompletion>("/llm/base", queryConfig, {})).data
 
     case "moonshot":
       // 2024-05-09 20:15:00: moonshot user 不能超过 32 位

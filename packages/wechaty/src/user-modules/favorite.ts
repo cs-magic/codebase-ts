@@ -17,18 +17,16 @@
  *   limitations under the License.
  *
  */
-import { log }        from 'wechaty-puppet'
-import type { Constructor } from 'clone-class'
-import { validationMixin } from '../user-mixins/validation.js'
+import type { Constructor } from "clone-class"
+import { log } from "wechaty-puppet"
 
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
-import type { TagInterface } from './tag.js'
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
+
+import type { TagInterface } from "./tag.js"
 
 class FavoriteMixin extends wechatifyMixinBase() {
-
-  static list (): FavoriteInterface[] {
+  static list(): FavoriteInterface[] {
     return []
   }
 
@@ -40,8 +38,8 @@ class FavoriteMixin extends wechatifyMixinBase() {
    * @example
    * const tags = await wechaty.Favorite.tags()
    */
-  static async tags (): Promise<TagInterface[]> {
-    log.verbose('Favorite', 'static tags() for %s', this)
+  static async tags(): Promise<TagInterface[]> {
+    log.verbose("Favorite", "static tags() for %s", this)
 
     // TODO:
     // try {
@@ -58,32 +56,23 @@ class FavoriteMixin extends wechatifyMixinBase() {
   /*
    * @hideconstructor
    */
-  constructor () {
+  constructor() {
     super()
   }
 
-  async tags (): Promise<TagInterface[]> {
+  async tags(): Promise<TagInterface[]> {
     // TODO: implmente this method
     return []
   }
 
-  async findAll () {
+  async findAll() {
     //
   }
-
 }
 
 class FavoriteImpl extends validationMixin(FavoriteMixin)<FavoriteInterface>() {}
 interface FavoriteInterface extends FavoriteImpl {}
-type FavoriteConstructor = Constructor<
-  FavoriteInterface,
-  typeof FavoriteImpl
->
+type FavoriteConstructor = Constructor<FavoriteInterface, typeof FavoriteImpl>
 
-export type {
-  FavoriteConstructor,
-  FavoriteInterface,
-}
-export {
-  FavoriteImpl,
-}
+export type { FavoriteConstructor, FavoriteInterface }
+export { FavoriteImpl }

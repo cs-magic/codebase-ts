@@ -1,4 +1,5 @@
 import type * as PUPPET from "wechaty-puppet"
+
 import type { WebMessageRawPayload } from "../../web-schemas.js"
 import { xmlToJson } from "../utils/xml-to-json.js"
 
@@ -29,9 +30,7 @@ interface MiniProgramXmlSchema {
 export async function parseMiniProgramMessagePayload(
   rawPayload: WebMessageRawPayload,
 ): Promise<PUPPET.payloads.MiniProgram> {
-  const miniProgramXml: MiniProgramXmlSchema = await xmlToJson(
-    rawPayload.Content,
-  )
+  const miniProgramXml: MiniProgramXmlSchema = await xmlToJson(rawPayload.Content)
   const appmsg = miniProgramXml.msg.appmsg
   const weappinfo = appmsg.weappinfo
   const appattach = appmsg.appattach

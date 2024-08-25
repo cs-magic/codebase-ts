@@ -1,13 +1,7 @@
 import { LucideIcon } from "lucide-react"
 import React from "react"
 
-export const StatItem = ({
-  Icon,
-  value,
-}: {
-  Icon: LucideIcon
-  value?: number
-}) => {
+export const StatItem = ({ Icon, value }: { Icon: LucideIcon; value?: number }) => {
   if (!value) return null
 
   const v =

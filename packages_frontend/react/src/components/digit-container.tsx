@@ -1,10 +1,10 @@
 "use client"
 
-import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import React, { ComponentProps, useEffect, useRef } from "react"
 
-import { Input } from "@cs-magic/shadcn/dist/ui/input"
 import { SMS_DIGIT_SIZE } from "@cs-magic/common/dist/config"
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
+import { Input } from "@cs-magic/shadcn/dist/ui/input"
 
 export const DigitContainer = ({
   className,
@@ -23,11 +23,7 @@ export const DigitContainer = ({
   return (
     <Input
       ref={ref}
-      className={cn(
-        "w-8 h-8 sm:w-12 sm:h-12 rounded-lg  text-center p-0",
-        SMS_DIGIT_SIZE,
-        className,
-      )}
+      className={cn("w-8 h-8 sm:w-12 sm:h-12 rounded-lg  text-center p-0", SMS_DIGIT_SIZE, className)}
       maxLength={1}
       {...props}
     />

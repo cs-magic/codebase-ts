@@ -1,9 +1,10 @@
 "use client"
 
-import { uiScreenAtom } from "@/store/ui.atom"
 import { useSetAtom } from "jotai"
 import React, { PropsWithChildren, useEffect } from "react"
 import { useMeasure } from "react-use"
+
+import { uiScreenAtom } from "@/store/ui.atom"
 
 export const ScreenProvider = ({ children }: PropsWithChildren) => {
   const [ref, { width, height }] = useMeasure<HTMLDivElement>()

@@ -17,45 +17,31 @@
  *   limitations under the License.
  *
  */
-import type { Constructor } from 'clone-class'
-import { validationMixin } from '../user-mixins/validation.js'
+import type { Constructor } from "clone-class"
 
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
 class DelayMixin extends wechatifyMixinBase() {
-
-  static create (milliseconds: number): DelayInterface {
+  static create(milliseconds: number): DelayInterface {
     return new DelayImpl(milliseconds)
   }
 
-  constructor (
-    public milliseconds: number,
-  ) {
+  constructor(public milliseconds: number) {
     super()
   }
 
-  wait (): Promise<void> {
-    return new Promise<void>(resolve => {
+  wait(): Promise<void> {
+    return new Promise<void>((resolve) => {
       setTimeout(resolve, this.milliseconds)
     })
   }
-
 }
 
 class DelayImpl extends validationMixin(DelayMixin)<DelayInterface>() {}
 interface DelayInterface extends DelayImpl {}
 
-type DelayConstructor = Constructor<
-  DelayInterface,
-  typeof DelayImpl
->
+type DelayConstructor = Constructor<DelayInterface, typeof DelayImpl>
 
-export type {
-  DelayConstructor,
-  DelayInterface,
-}
-export {
-  DelayImpl,
-}
+export type { DelayConstructor, DelayInterface }
+export { DelayImpl }

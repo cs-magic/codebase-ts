@@ -17,75 +17,50 @@
  *   limitations under the License.
  *
  */
-import * as PUPPET          from 'wechaty-puppet'
-import type {
-  FileBoxInterface,
-}                   from 'file-box'
-import type { Constructor } from 'clone-class'
-import { validationMixin } from '../user-mixins/validation.js'
-import { log } from '../config.js'
+import type { Constructor } from "clone-class"
+import type { FileBoxInterface } from "file-box"
+import * as PUPPET from "wechaty-puppet"
 
-import {
-  wechatifyMixinBase,
-}                       from '../user-mixins/wechatify.js'
+import { log } from "../config.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
 class ImageMixin extends wechatifyMixinBase() {
-
-  static create (id: string): ImageInterface {
-    log.verbose('Image', 'static create(%s)', id)
+  static create(id: string): ImageInterface {
+    log.verbose("Image", "static create(%s)", id)
 
     const image = new this(id)
     return image
   }
 
-  constructor (
-    public id: string,
-  ) {
+  constructor(public id: string) {
     super()
-    log.verbose('Image', 'constructor(%s)', id)
+    log.verbose("Image", "constructor(%s)", id)
   }
 
-  async thumbnail (): Promise<FileBoxInterface> {
-    log.verbose('Image', 'thumbnail() for id: "%s"', this.id)
-    const fileBox = await this.wechaty.puppet.messageImage(
-      this.id,
-      PUPPET.types.Image.Thumbnail,
-    )
+  async thumbnail(): Promise<FileBoxInterface> {
+    log.verbose("Image", 'thumbnail() for id: "%s"', this.id)
+    const fileBox = await this.wechaty.puppet.messageImage(this.id, PUPPET.types.Image.Thumbnail)
     return fileBox
   }
 
-  async hd (): Promise<FileBoxInterface> {
-    log.verbose('Image', 'hd() for id: "%s"', this.id)
-    const fileBox = await this.wechaty.puppet.messageImage(
-      this.id,
-      PUPPET.types.Image.HD,
-    )
+  async hd(): Promise<FileBoxInterface> {
+    log.verbose("Image", 'hd() for id: "%s"', this.id)
+    const fileBox = await this.wechaty.puppet.messageImage(this.id, PUPPET.types.Image.HD)
     return fileBox
   }
 
-  async artwork (): Promise<FileBoxInterface> {
-    log.verbose('Image', 'artwork() for id: "%s"', this.id)
-    const fileBox = await this.wechaty.puppet.messageImage(
-      this.id,
-      PUPPET.types.Image.Artwork,
-    )
+  async artwork(): Promise<FileBoxInterface> {
+    log.verbose("Image", 'artwork() for id: "%s"', this.id)
+    const fileBox = await this.wechaty.puppet.messageImage(this.id, PUPPET.types.Image.Artwork)
     return fileBox
   }
-
 }
 
 class ImageImpl extends validationMixin(ImageMixin)<ImageInterface>() {}
-interface ImageInterface extends ImageImpl { }
+interface ImageInterface extends ImageImpl {}
 
-type ImageConstructor = Constructor<
-  ImageInterface,
-  typeof ImageImpl
->
+type ImageConstructor = Constructor<ImageInterface, typeof ImageImpl>
 
-export type {
-  ImageConstructor,
-  ImageInterface,
-}
-export {
-  ImageImpl,
-}
+export type { ImageConstructor, ImageInterface }
+export { ImageImpl }

@@ -17,37 +17,25 @@
  *   limitations under the License.
  *
  */
-import {
-  log,
-}                     from 'wechaty-puppet'
+import type { Constructor } from "clone-class"
+import { log } from "wechaty-puppet"
 
-import type { Constructor }  from 'clone-class'
+import { poolifyMixin } from "../user-mixins/poolify.js"
+import { validationMixin } from "../user-mixins/validation.js"
+import { wechatifyMixinBase } from "../user-mixins/wechatify.js"
 
-import { ContactInterface, ContactImpl }  from './contact.js'
-import { FavoriteInterface, FavoriteImpl } from './favorite.js'
+import { ContactImpl, ContactInterface } from "./contact.js"
+import { FavoriteImpl, FavoriteInterface } from "./favorite.js"
 
-import {
-  poolifyMixin,
-}                     from '../user-mixins/poolify.js'
-import { validationMixin } from '../user-mixins/validation.js'
-import {
-  wechatifyMixinBase,
-}                     from '../user-mixins/wechatify.js'
-
-const MixinBase = poolifyMixin(
-  wechatifyMixinBase(),
-)<TagInterface>()
+const MixinBase = poolifyMixin(wechatifyMixinBase())<TagInterface>()
 
 class TagMixin extends MixinBase {
-
   /**
    * @hideconstructor
    */
-  constructor (
-    public readonly id: string,
-  ) {
+  constructor(public readonly id: string) {
     super()
-    log.silly('Tag', `constructor(${id})`)
+    log.silly("Tag", `constructor(${id})`)
   }
 
   /**
@@ -63,10 +51,8 @@ class TagMixin extends MixinBase {
    * const bot = new Wechaty()
    * await bot.Tag.get('TagName')
    */
-  static async get (
-    tag: string,
-  ): Promise<TagInterface> {
-    log.verbose('Tag', 'get(%s)', tag)
+  static async get(tag: string): Promise<TagInterface> {
+    log.verbose("Tag", "get(%s)", tag)
     return this.load(tag)
   }
 
@@ -87,11 +73,8 @@ class TagMixin extends MixinBase {
   /**
    * TODO: refactoring the target: do not use ContactIml or FavoriteImpl
    */
-  static async delete (
-    tag: TagInterface,
-    target?: typeof ContactImpl | typeof FavoriteImpl,
-  ): Promise<void> {
-    log.verbose('Tag', 'static delete(%s)', tag)
+  static async delete(tag: TagInterface, target?: typeof ContactImpl | typeof FavoriteImpl): Promise<void> {
+    log.verbose("Tag", "static delete(%s)", tag)
 
     /**
      * Huan(202110) TODO: refactory this design:
@@ -100,20 +83,19 @@ class TagMixin extends MixinBase {
      */
 
     try {
-
       /**
        * TODO(huan): add tag check code here for checking if this tag is still being used.
        */
 
       if (!target || target === ContactImpl || target === this.wechaty.Contact) {
         await this.wechaty.puppet.tagContactDelete(tag.id)
-      // TODO:
-      // } else if (!target || target === Favorite || target === this.wechaty.Favorite) {
-      //   await this.wechaty.puppet.tagFavoriteDelete(tag.id)
+        // TODO:
+        // } else if (!target || target === Favorite || target === this.wechaty.Favorite) {
+        //   await this.wechaty.puppet.tagFavoriteDelete(tag.id)
       }
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Tag', 'static delete() exception: %s', (e as Error).message)
+      log.error("Tag", "static delete() exception: %s", (e as Error).message)
     }
   }
 
@@ -128,10 +110,8 @@ class TagMixin extends MixinBase {
    * @example
    * await tag.add(contact)
    */
-  async add (
-    to: ContactInterface | FavoriteInterface,
-  ): Promise<void> {
-    log.verbose('Tag', 'add(%s) for %s', to, this.id)
+  async add(to: ContactInterface | FavoriteInterface): Promise<void> {
+    log.verbose("Tag", "add(%s) for %s", to, this.id)
 
     /**
      * Huan(202110): TODO: refactory this design:
@@ -146,8 +126,8 @@ class TagMixin extends MixinBase {
       }
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Tag', 'add() exception: %s', (e as Error).message)
-      throw new Error(`add error : ${(e as Error)}`)
+      log.error("Tag", "add() exception: %s", (e as Error).message)
+      throw new Error(`add error : ${e as Error}`)
     }
   }
 
@@ -161,8 +141,8 @@ class TagMixin extends MixinBase {
    * @example
    * await tag.remove(contact)
    */
-  async remove (from: ContactInterface | FavoriteInterface): Promise<void> {
-    log.verbose('Tag', 'remove(%s) for %s', from, this.id)
+  async remove(from: ContactInterface | FavoriteInterface): Promise<void> {
+    log.verbose("Tag", "remove(%s) for %s", from, this.id)
 
     /**
      * Huan(202110): TODO: refactory this design:
@@ -178,25 +158,16 @@ class TagMixin extends MixinBase {
       }
     } catch (e) {
       this.wechaty.emitError(e)
-      log.error('Tag', 'remove() exception: %s', (e as Error).message)
+      log.error("Tag", "remove() exception: %s", (e as Error).message)
       throw new Error(`remove error : ${e}`)
     }
   }
-
 }
 
 class TagImpl extends validationMixin(TagMixin)<TagInterface>() {}
 interface TagInterface extends TagImpl {}
 
-type TagConstructor = Constructor<
-  TagInterface,
-  typeof TagImpl
->
+type TagConstructor = Constructor<TagInterface, typeof TagImpl>
 
-export type {
-  TagConstructor,
-  TagInterface,
-}
-export {
-  TagImpl,
-}
+export type { TagConstructor, TagInterface }
+export { TagImpl }

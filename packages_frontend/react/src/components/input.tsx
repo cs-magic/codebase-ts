@@ -1,8 +1,8 @@
-import { cn } from "@cs-magic/shadcn/dist/lib/utils"
 import * as React from "react"
 
-export interface InputWithEnterProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+import { cn } from "@cs-magic/shadcn/dist/lib/utils"
+
+export interface InputWithEnterProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onEnter?: (value: string) => void
 }
 
@@ -27,11 +27,7 @@ const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
           if (onBlur) onBlur(event)
         }}
         onKeyDown={(event) => {
-          if (
-            onEnter &&
-            event.key === "Enter" &&
-            !event.nativeEvent.isComposing
-          ) {
+          if (onEnter && event.key === "Enter" && !event.nativeEvent.isComposing) {
             const value = event.currentTarget.value
             onEnter(value)
           }

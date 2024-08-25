@@ -2,7 +2,6 @@ import { Watchdog, WatchdogFood } from "watchdog"
 
 import { log } from "../config.js"
 import type { ServiceMixin } from "../mixins/service-mixin.js"
-
 import type { PuppetSkeleton } from "../puppet/mod.js"
 
 const DEFAULT_WATCHDOG_TIMEOUT_SECONDS = 60
@@ -12,9 +11,7 @@ class WatchdogAgent {
 
   private cleanCallbackList: Function[]
 
-  constructor(
-    protected readonly puppet: PuppetSkeleton & InstanceType<ServiceMixin>,
-  ) {
+  constructor(protected readonly puppet: PuppetSkeleton & InstanceType<ServiceMixin>) {
     log.verbose("PuppetWatchdogAgent", "constructor(%s)", puppet.id)
 
     this.cleanCallbackList = []
@@ -24,13 +21,8 @@ class WatchdogAgent {
      *  puppet implementation class only need to do one thing:
      *  feed the watchdog by `this.emit('heartbeat', ...)`
      */
-    const timeoutSeconds =
-      puppet.options.timeoutSeconds || DEFAULT_WATCHDOG_TIMEOUT_SECONDS
-    log.verbose(
-      "PuppetWatchdogAgent",
-      "constructor() timeout %d seconds",
-      timeoutSeconds,
-    )
+    const timeoutSeconds = puppet.options.timeoutSeconds || DEFAULT_WATCHDOG_TIMEOUT_SECONDS
+    log.verbose("PuppetWatchdogAgent", "constructor() timeout %d seconds", timeoutSeconds)
     this.watchdog = new Watchdog(1000 * timeoutSeconds, "Puppet")
 
     // /**
@@ -51,34 +43,19 @@ class WatchdogAgent {
       this.watchdog.feed(food)
     }
     this.puppet.on("heartbeat", (e) => feed({ data: e.data }))
-    log.verbose(
-      "PuppetWatchdogAgent",
-      'start() "heartbeat" event listener added',
-    )
+    log.verbose("PuppetWatchdogAgent", 'start() "heartbeat" event listener added')
 
     this.cleanCallbackList.push(() => {
       this.puppet.off("heartbeat", (e) => feed({ data: e.data }))
-      log.verbose(
-        "PuppetWatchdogAgent",
-        'start() "heartbeat" event listener removed',
-      )
+      log.verbose("PuppetWatchdogAgent", 'start() "heartbeat" event listener removed')
     })
 
     /**
      * watchdog event `reset` to reset() puppet
      */
     const reset = (lastFood: WatchdogFood) => {
-      log.warn(
-        "PuppetWatchdogAgent",
-        "start() reset() reason: %s",
-        JSON.stringify(lastFood),
-      )
-      this.puppet.emit(
-        "error",
-        new Error(
-          `WatchdogAgent reset: lastFood: "${JSON.stringify(lastFood)}"`,
-        ),
-      )
+      log.warn("PuppetWatchdogAgent", "start() reset() reason: %s", JSON.stringify(lastFood))
+      this.puppet.emit("error", new Error(`WatchdogAgent reset: lastFood: "${JSON.stringify(lastFood)}"`))
       this.puppet.wrapAsync(this.puppet.reset())
     }
     this.watchdog.on("reset", reset)
@@ -86,10 +63,7 @@ class WatchdogAgent {
 
     this.cleanCallbackList.push(() => {
       this.puppet.off("reset", (e) => reset({ data: e.data }))
-      log.verbose(
-        "PuppetWatchdogAgent",
-        'start() "reset" event listener removed',
-      )
+      log.verbose("PuppetWatchdogAgent", 'start() "reset" event listener removed')
     })
 
     // this.puppet.on('reset', this.throttleReset)

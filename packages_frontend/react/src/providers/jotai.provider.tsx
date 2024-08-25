@@ -1,8 +1,8 @@
 "use client"
+
 /**
  * ref: https://jotai.org/
  */
-
 import { Provider } from "jotai/react"
 import React, { PropsWithChildren } from "react"
 

@@ -15,8 +15,7 @@ export const sampleWxmpArticleUrl = last(sampleWxmpArticleUrls)!
 
 export const sampleWxmpArticleComment = {
   author_like_status: 0,
-  content:
-    "陶大程在优必选的时候就看出来了他不是专注于学术的学术份子，而是那种人精",
+  content: "陶大程在优必选的时候就看出来了他不是专注于学术的学术份子，而是那种人精",
   content_id: "471573716745061642",
   create_time: 1711494056,
   id: 2,
@@ -35,8 +34,7 @@ export const sampleWxmpArticleComment = {
   like_id: 0,
   like_num: 64,
   like_status: 0,
-  logo_url:
-    "http://mmsns.qpic.cn/mmsns/iaxNB5XaibCeLTYWIUGCYm7cS1kFxTx4ibUSEBZJ6VnOdXPDItJ9PaGRg/0",
+  logo_url: "http://mmsns.qpic.cn/mmsns/iaxNB5XaibCeLTYWIUGCYm7cS1kFxTx4ibUSEBZJ6VnOdXPDItJ9PaGRg/0",
   my_id: 1290,
   nick_name: "物湖",
   openid: "o7Sk462miPeT2hsTz_RvxzITiDg4",
@@ -59,8 +57,7 @@ export const sampleWxmpArticleComment = {
         is_deleted: 0,
         is_from: 3,
         is_from_friend: 0,
-        logo_url:
-          "http://mmsns.qpic.cn/mmsns/iaxNB5XaibCeLTYWIUGCYm7cS1kFxTx4ibUSEBZJ6VnOdXPDItJ9PaGRg/0",
+        logo_url: "http://mmsns.qpic.cn/mmsns/iaxNB5XaibCeLTYWIUGCYm7cS1kFxTx4ibUSEBZJ6VnOdXPDItJ9PaGRg/0",
         nick_name: "未命名用户",
         openid: "o7Sk467pijtbmpxCYGehcuDxZMvY",
         reply_del_flag: 0,
