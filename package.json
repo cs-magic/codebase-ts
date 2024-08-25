@@ -23,6 +23,7 @@
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",
     ".wechaty": "yarn workspace wechaty dist",
+    "install:ggg": "cp __scripts__/ggg.sh node_modules/.bin/ggg && chmod +x node_modules/.bin/ggg",
     "test": "jest",
     "lint": "echo 'skip eslint'"
   },
