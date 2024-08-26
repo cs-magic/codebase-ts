@@ -87,18 +87,16 @@ async function resolvePuppet(options: ResolveOptions): Promise<PuppetInterface> 
 }
 
 async function resolvePuppetName(puppetName: PuppetNpmName): Promise<PuppetConstructor> {
-  log.verbose("Puppet", "resolvePuppetName(%s)", puppetName)
-
   let puppetModule
 
   try {
-    puppetModule = await import(
-      /* webpackChunkName: "wechaty-puppet-wechat4u" */
-      puppetName
-    )
-    // puppetModule = (await import(`wechaty-puppet-wechat4u`)) as any
+    // puppetModule = await import(/* webpackChunkName: "wechaty-puppet-wechat4u" */ puppetName)
+    log.info("Puppet", "0. resolvePuppetName(%s)", puppetName)
+    // puppetModule = await import(puppetName)
+    puppetModule = (await import(`wechaty-puppet-wechat4u`)) as any
+    log.info("Puppet", "1. resolvePuppetName(%s)", puppetName)
   } catch (e) {
-    log.error(e as unknown as string)
+    log.error("Puppet", `\n+--------------------+\n${e as unknown as string}\n+--------------------+\n`)
     log.error(
       "Puppet",
       "resolvePuppetName %s",

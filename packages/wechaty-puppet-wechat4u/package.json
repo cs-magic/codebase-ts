@@ -3,6 +3,7 @@
   "version": "1.14.14",
   "description": "Wechat4u Puppet for Wechaty",
   "type": "module",
+  "main": "dist/esm/src/mod.js",
   "exports": {
     ".": {
       "import": "./dist/esm/src/mod.js",
