@@ -15,9 +15,9 @@
   ],
   "scripts": {
     "prettier": "prettier --write */*/src",
-    "postinstall": "run-s patch db:generate build:wechaty build:frontend",
+    "postinstall": "run-s db:generate install:tspc build:wechaty build:frontend",
     "db:generate": "prisma generate",
-    "patch": "ts-patch install -s && patch-package",
+    "install:tspc": "ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
     "build:wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
