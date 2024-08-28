@@ -1,5 +1,12 @@
 function update() {
-  msg=$1
+  local msg=$1
+
+    if [ -z "$msg" ]; then
+      echo "Error: Commit message is required."
+      echo "Usage: update \"Your commit message\""
+      return 1
+    fi
+
   echo ">> GIT UPDATE STARTED"
 
   echo ">> GIT UPDATE SUBMODULES STARTED"
@@ -9,9 +16,9 @@ function update() {
 #      echo "The submodule $name is clean."
       :
     else
-      git add . && git commit -m "$msg"; git push
+      git add . && git commit -m "$0"; git push
     fi
-  '
+  ' "$msg"
 #  git submodule foreach --quiet 'echo $path' | xargs -P 8 -I {} bash -c "git add . && git commit -m \"$1\"; git push"
 #  git submodule foreach --quiet 'echo $path' | parallel -j 8 "git add . && git commit -m \"$1\"; git push"
   echo "<< GIT UPDATE SUBMODULES FINISHED"
