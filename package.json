@@ -8,14 +8,14 @@
   "private": true,
   "type": "module",
   "bin": {
-    "ggg": "./__scripts__/ggg.sh"
+    "ggg": "scripts/ggg.sh"
   },
   "workspaces": [
     "packages/*",
     "packages_*/*",
     "private_app-*/*",
     "app_*/*",
-    "__tests__/*"
+    "tests/*"
   ],
   "scripts": {
     "postinstall": "run-s db:generate install:tspc install:ggg build:wechaty build:frontend",
@@ -27,7 +27,7 @@
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",
     ".wechaty": "yarn workspace wechaty dist",
-    "install:ggg": "cp __scripts__/ggg.sh node_modules/.bin/ggg && chmod +x node_modules/.bin/ggg"
+    "install:ggg": "cp scripts/ggg.sh node_modules/.bin/ggg && chmod +x node_modules/.bin/ggg"
   },
   "resolutions": {
     "markmap-view": "patch:markmap-view@npm%3A0.16.0#~/.yarn/patches/markmap-view-npm-0.16.0-f358605936.patch",
