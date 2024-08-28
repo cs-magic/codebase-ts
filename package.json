@@ -6,7 +6,6 @@
   "bugs": "https://github.com/cs-magic/codebase/issues",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "bin": {
     "ggg": "scripts/ggg.sh"
   },
@@ -18,7 +17,7 @@
     "tests/*"
   ],
   "scripts": {
-    "postinstall": "run-s db:generate install:tspc install:ggg build:wechaty build:frontend",
+    "postinstall": "run-s db:generate install:tspc build:wechaty build:frontend",
     "db:generate": "prisma generate",
     "install:tspc": "ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
@@ -31,6 +30,12 @@
   "resolutions": {
     "markmap-view": "patch:markmap-view@npm%3A0.16.0#~/.yarn/patches/markmap-view-npm-0.16.0-f358605936.patch",
     "wechaty-grpc@npm:^1.5.2": "patch:wechaty-grpc@npm%3A1.5.2#~/.yarn/patches/wechaty-grpc-npm-1.5.2-27f8d62b49.patch",
+    "eslint": "8.57.0",
+    "eslint-config-next": "^14.0.0",
+    "@types/eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint-config-prettier": "^9.0.0",
     "@hookform/resolvers": "3.9.0",
     "@radix-ui/react-icons": "1.3.0",
     "async-lock": "^1.4.1",
@@ -82,7 +87,7 @@
     "zod-prisma-types": "^3.1.8"
   },
   "devDependencies": {
-    "@cs-magic/eslint": "workspace:^",
+    "@cs-magic/eslint-config": "workspace:^",
     "@cs-magic/jest": "workspace:^",
     "@cs-magic/prettier": "workspace:^",
     "babel-loader": "^9.1.3",

@@ -1,17 +1,16 @@
-/** @type {import("eslint").Linter.Config} */
-const config = {
+module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: true,
   },
-  plugins: [
-      "@typescript-eslint"
-  ],
+  plugins: ["@typescript-eslint"],
   extends: [
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
   ],
   rules: {
+    "prefer-const": "warn",
+
     // These opinionated rules are enabled in stylistic-type-checked above.
     // Feel free to reconfigure them to your own preference.
     "@typescript-eslint/array-type": "off",
@@ -42,20 +41,17 @@ const config = {
     "@typescript-eslint/no-floating-promises": "warn",
     // no-infer 没有意义
     "@typescript-eslint/no-inferrable-types": "off",
-    "prefer-const": "warn",
     "@typescript-eslint/prefer-nullish-coalescing": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/no-namespace": "warn",
     "@typescript-eslint/no-redundant-type-constituents": "warn",
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-unnecessary-type-assertion":"warn",
+    "@typescript-eslint/no-unnecessary-type-assertion": "warn",
     "@typescript-eslint/no-unsafe-argument": "warn",
-    "@typescript-eslint/no-unsafe-enum-comparison": 'warn',
-    "@typescript-eslint/no-var-requires":"warn",
+    "@typescript-eslint/no-unsafe-enum-comparison": "warn",
+    "@typescript-eslint/no-var-requires": "warn",
     "@typescript-eslint/restrict-template-expressions": "warn",
     "@typescript-eslint/restrict-plus-operands": "warn",
   },
-}
-
-module.exports = config
+};

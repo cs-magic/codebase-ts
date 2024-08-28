@@ -1,19 +1,11 @@
 {
-  "name": "@cs-magic/eslint",
+  "name": "@cs-magic/eslint-config",
   "version": "1.0.0",
   "description": "",
+  "main": ".eslintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "echo 'skip eslint'"
-  },
-  "resolutions": {
-    "eslint": "8.57.0",
-    "eslint-config-next": "^14.0.0",
-    "typescript-eslint": "^7.16.1",
-    "@types/eslint": "^8.56.0",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "7.18.0",
-    "eslint-config-prettier": "^9.0.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.56.0",
@@ -21,7 +13,6 @@
     "@typescript-eslint/parser": "7.18.0",
     "eslint": "8.57.0",
     "eslint-config-next": "^14.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "typescript-eslint": "^7.16.1"
+    "eslint-config-prettier": "^9.0.0"
   }
 }
