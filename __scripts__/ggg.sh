@@ -9,7 +9,7 @@ function update() {
 #      echo "The submodule $name is clean."
       :
     else
-      git add . && git commit -m \"$msg\"; git push
+      git add . && git commit -m "$msg"; git push
     fi
   '
 #  git submodule foreach --quiet 'echo $path' | xargs -P 8 -I {} bash -c "git add . && git commit -m \"$1\"; git push"
@@ -17,10 +17,10 @@ function update() {
   echo "<< GIT UPDATE SUBMODULES FINISHED"
 
   echo ">> GIT UPDATE MAIN STARTED"
-  git add . && git commit -m \"$msg\"; git push
+  git add . && git commit -m "$msg"; git push
   echo "<< GIT UPDATE MAIN FINISHED"
 
   echo "<< GIT UPDATE FINISHED"
 }
 
-update
+update "$1"
