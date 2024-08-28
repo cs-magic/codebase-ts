@@ -18,7 +18,7 @@
     "__tests__/*"
   ],
   "scripts": {
-    "postinstall": "run-s db:generate install:tspc build:wechaty build:frontend",
+    "postinstall": "run-s db:generate install:tspc install:ggg build:wechaty build:frontend",
     "db:generate": "prisma generate",
     "install:tspc": "ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
