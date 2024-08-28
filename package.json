@@ -6,6 +6,9 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "bin": {
+    "ggg": "./__scripts__/ggg.sh"
+  },
   "workspaces": [
     "packages/*",
     "packages_frontend/*",
