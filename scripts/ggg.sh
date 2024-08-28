@@ -11,7 +11,6 @@ function update() {
 
   echo ">> GIT UPDATE SUBMODULES STARTED"
   git submodule foreach bash -c '
-    echo "the message is $1"
     if [ -n "$(git status --porcelain)" ]; then
       git add . && git commit -m "$1"; git push
     fi
