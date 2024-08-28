@@ -1,5 +1,5 @@
 function update() {
-  local msg=$1
+  local msg="$1"
 
     if [ -z "$msg" ]; then
       echo "Error: Commit message is required."
@@ -11,11 +11,7 @@ function update() {
 
   echo ">> GIT UPDATE SUBMODULES STARTED"
   git submodule foreach '
-#    echo "Processing $name ($path)..."
-    if [ -z "$(git status --porcelain)" ]; then
-#      echo "The submodule $name is clean."
-      :
-    else
+    if [ -n "$(git status --porcelain)" ]; then
       git add . && git commit -m "$0"; git push
     fi
   ' "$msg"
