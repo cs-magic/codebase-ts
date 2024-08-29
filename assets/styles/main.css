@@ -74,7 +74,8 @@ code {
 }
 
 .gradient-1 {
-  background: -webkit-linear-gradient(315deg, #0ea5e9 55%, #8b5cf6);
+  /*background: -webkit-linear-gradient(315deg, #0ea5e9 55%, #8b5cf6);*/
+  background: -webkit-linear-gradient(315deg, hsl(206, 75%, 49%) 55%, hsl(331, 90%, 56%));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

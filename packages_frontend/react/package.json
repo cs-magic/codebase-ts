@@ -45,7 +45,7 @@
     "cmdk": "1.0.0",
     "i18next": "*",
     "jotai": "*",
-    "lucide-react": "^0.417.0",
+    "lucide-react": "*",
     "next": "*",
     "next-auth": "*",
     "next-i18next": "*",

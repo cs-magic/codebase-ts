@@ -21,7 +21,7 @@
     "db:generate": "prisma generate",
     "install:tspc": "ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
-    "build:wechaty": "run-s .wechat4u .wechaty-puppet-wechat4u .wechaty-puppet .wechaty",
+    "build:wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",
@@ -84,7 +84,8 @@
     "webpack": "^5.93.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "wtfnode": "^0.9.1",
-    "zod-prisma-types": "^3.1.8"
+    "zod-prisma-types": "^3.1.8",
+    "lucide-react": "^0.424.0"
   },
   "devDependencies": {
     "@cs-magic/eslint-config": "workspace:^",
