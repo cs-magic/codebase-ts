@@ -25,3 +25,9 @@
 [submodule "app_eval-ai"]
 	path = app_eval-ai
 	url = git@github.com:cs-magic/eval-ai.git
+[submodule "packages_wechaty/puppet-service"]
+	path = packages_wechaty/puppet-service
+	url = ./packages_wechaty/puppet-service
+[submodule "packages_wechaty/grpc"]
+	path = packages_wechaty/grpc
+	url = ./packages_wechaty/grpc
