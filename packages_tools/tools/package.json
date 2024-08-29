@@ -1,0 +1,13 @@
+{
+  "name": "@cs-magic/tools",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "@cs-magic/commands": "workspace:^",
+    "@cs-magic/eslint": "workspace:^",
+    "@cs-magic/jest": "workspace:^",
+    "@cs-magic/prettier": "workspace:^",
+    "@cs-magic/tspc": "workspace:^",
+    "@cs-magic/webpack": "workspace:^"
+  }
+}

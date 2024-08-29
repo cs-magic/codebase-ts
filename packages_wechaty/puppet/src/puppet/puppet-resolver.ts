@@ -17,33 +17,35 @@
  *   limitations under the License.
  *
  */
-import { log } from "../config.js"
-import type { PuppetOptions } from "../schemas/puppet.js"
+import { log } from "../config.js";
+import type { PuppetOptions } from "../schemas/puppet.js";
 
-import { Puppet } from "./puppet-abstract.js"
-import type { PuppetConstructor, PuppetInterface } from "./puppet-interface.js"
+import { Puppet } from "./puppet-abstract.js";
+import type { PuppetConstructor, PuppetInterface } from "./puppet-interface.js";
 
 // i.e. @juzibot/wechaty-puppet-donut
-type PuppetNpmScope = `@${string}/` | ""
-type PuppetNpmName = `${PuppetNpmScope}wechaty-puppet-${string}`
+type PuppetNpmScope = `@${string}/` | "";
+type PuppetNpmName = `${PuppetNpmScope}wechaty-puppet-${string}`;
 
 // import "wechaty-puppet-wechat4u" // for compile
 
 interface ResolveOptions {
-  puppet: PuppetNpmName | PuppetInterface
-  puppetOptions?: PuppetOptions
+  puppet: PuppetNpmName | PuppetInterface;
+  puppetOptions?: PuppetOptions;
 }
 
-async function resolvePuppet(options: ResolveOptions): Promise<PuppetInterface> {
+async function resolvePuppet(
+  options: ResolveOptions,
+): Promise<PuppetInterface> {
   log.verbose(
     "Puppet",
     "resolvePuppet({puppet: %s, puppetOptions: %s})",
     options.puppet,
     JSON.stringify(options.puppetOptions || {}),
-  )
+  );
 
   if (Puppet.valid(options.puppet)) {
-    return options.puppet
+    return options.puppet;
   }
 
   if (typeof options.puppet !== "string") {
@@ -54,12 +56,20 @@ async function resolvePuppet(options: ResolveOptions): Promise<PuppetInterface> 
       'puppetResolver accepts string(the puppet npm name) or Puppet instance, but you provided is: "' +
         typeof options.puppet +
         '"',
-    )
+    );
   }
 
-  log.verbose("Puppet", 'resolvePuppet() resolving name "%s" ...', options.puppet)
-  const MyPuppet = await resolvePuppetName(options.puppet)
-  log.verbose("Puppet", 'resolvePuppet() resolving name "%s" ... done', options.puppet)
+  log.verbose(
+    "Puppet",
+    'resolvePuppet() resolving name "%s" ...',
+    options.puppet,
+  );
+  const MyPuppet = await resolvePuppetName(options.puppet);
+  log.verbose(
+    "Puppet",
+    'resolvePuppet() resolving name "%s" ... done',
+    options.puppet,
+  );
 
   /**
    * We will meet the following error:
@@ -79,43 +89,52 @@ async function resolvePuppet(options: ResolveOptions): Promise<PuppetInterface> 
    *
    * Huan(20210530): workaround by "as any"
    */
-  log.verbose("Puppet", "resolvePuppet() instanciating puppet ...")
-  const puppetInstance = new (MyPuppet as any)(options.puppetOptions)
-  log.verbose("Puppet", "resolvePuppet() instanciating puppet ... done")
+  log.verbose("Puppet", "resolvePuppet() instanciating puppet ...");
+  const puppetInstance = new (MyPuppet as any)(options.puppetOptions);
+  log.verbose("Puppet", "resolvePuppet() instanciating puppet ... done");
 
-  return puppetInstance
+  return puppetInstance;
 }
 
-async function resolvePuppetName(puppetName: PuppetNpmName): Promise<PuppetConstructor> {
-  let puppetModule
+async function resolvePuppetName(
+  puppetName: PuppetNpmName,
+): Promise<PuppetConstructor> {
+  let puppetModule;
 
   try {
     // puppetModule = await import(/* webpackChunkName: "wechaty-puppet-wechat4u" */ puppetName)
-    log.info("Puppet", "0. resolvePuppetName(%s)", puppetName)
-    // puppetModule = await import(puppetName)
-    puppetModule = (await import(`wechaty-puppet-wechat4u`)) as any
-    log.info("Puppet", "1. resolvePuppetName(%s)", puppetName)
+    log.info("Puppet", "0. resolvePuppetName(%s)", puppetName);
+    puppetModule = await import(puppetName);
+    // puppetModule = (await import(`wechaty-puppet-wechat4u`)) as any
+    log.info("Puppet", "1. resolvePuppetName(%s)", puppetName);
   } catch (e) {
-    log.error("Puppet", `\n+--------------------+\n${e as unknown as string}\n+--------------------+\n`)
+    log.error(
+      "Puppet",
+      `\n+--------------------+\n${e as unknown as string}\n+--------------------+\n`,
+    );
     log.error(
       "Puppet",
       "resolvePuppetName %s",
       [
         "",
-        'Failed to import Wechaty Puppet Provider (WPP) NPM module: "' + puppetName + '"',
+        'Failed to import Wechaty Puppet Provider (WPP) NPM module: "' +
+          puppetName +
+          '"',
         "Please make sure:",
-        " 1. it has been installed correctly. (run `npm install " + puppetName + "` if it doesn't)",
+        " 1. it has been installed correctly. (run `npm install " +
+          puppetName +
+          "` if it doesn't)",
         ' 2. "' + puppetName + '" is a valid Wechaty Puppet Provider (WPP).',
         "",
         "learn more about Wechaty Puppet Providers (WPP) from the official website:",
         "<https://wechaty.js.org/docs/puppet-providers>",
         "",
       ].join("\n"),
-    )
+    );
 
-    console.trace()
+    console.trace();
 
-    throw e
+    throw e;
   }
 
   /**
@@ -123,30 +142,37 @@ async function resolvePuppetName(puppetName: PuppetNpmName): Promise<PuppetConst
    *  TypeError: MyPuppet is not a constructor
    *  https://github.com/wechaty/wechaty-getting-started/issues/203
    */
-  let retry = 0
+  let retry = 0;
   while (typeof puppetModule.default !== "function") {
     if (!puppetModule || retry++ > 3) {
-      throw new Error(`Puppet(${puppetName}) has not provided the default export`)
+      throw new Error(
+        `Puppet(${puppetName}) has not provided the default export`,
+      );
     }
     /**
      * CommonJS Module: puppetModule.default.default is the expoerted Puppet
      */
-    puppetModule = puppetModule.default
+    puppetModule = puppetModule.default;
   }
 
   if (retry === 0) {
     /**
      * ES Module: default is the exported Puppet
      */
-    log.verbose("Puppet", "resolvePuppetName(%s): ESM resolved", puppetName)
+    log.verbose("Puppet", "resolvePuppetName(%s): ESM resolved", puppetName);
   } else {
-    log.verbose("Puppet", "resolvePuppetName(%s): CJS resolved, retry times: %s", puppetName, retry)
+    log.verbose(
+      "Puppet",
+      "resolvePuppetName(%s): CJS resolved, retry times: %s",
+      puppetName,
+      retry,
+    );
   }
 
   // console.info(puppetModule)
-  const MyPuppet = puppetModule.default as unknown as PuppetConstructor
+  const MyPuppet = puppetModule.default as unknown as PuppetConstructor;
 
-  return MyPuppet
+  return MyPuppet;
 }
 
-export { resolvePuppet, resolvePuppetName }
+export { resolvePuppet, resolvePuppetName };

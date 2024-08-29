@@ -50,8 +50,7 @@
     "winston": "^3.13.1",
     "winston-daily-rotate-file": "^5.0.0",
     "yargs-parser": "^21.1.1",
-    "zod": "*",
-    "zustand": "^4.5.4"
+    "zod": "*"
   },
   "devDependencies": {
     "@types/ali-oss": "^6.16.11",

@@ -1,0 +1,13 @@
+{
+  "name": "@cs-magic/tspc",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.2.1",
+    "ttypescript": "^1.5.15",
+    "typescript": "^5.5.4",
+    "typescript-transform-paths": "^3.5.0"
+  }
+}

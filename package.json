@@ -28,8 +28,10 @@
     ".wechaty": "yarn workspace wechaty dist"
   },
   "resolutions": {
+    "@chatie/tsconfig": "4.9.2",
+    "@chatie/eslint-config": "1.4.1",
     "markmap-view": "patch:markmap-view@npm%3A0.16.0#~/.yarn/patches/markmap-view-npm-0.16.0-f358605936.patch",
-    "wechaty-grpc@npm:^1.5.2": "patch:wechaty-grpc@npm%3A1.5.2#~/.yarn/patches/wechaty-grpc-npm-1.5.2-27f8d62b49.patch",
+    "wechaty-grpc": "patch:wechaty-grpc@workspace%3Apackages_wechaty/grpc#~/.yarn/patches/wechaty-grpc-workspace-24ad6e6c6c.patch",
     "eslint": "8.57.0",
     "eslint-config-next": "^14.0.0",
     "@types/eslint": "^8.56.0",
@@ -88,27 +90,8 @@
     "lucide-react": "^0.424.0"
   },
   "devDependencies": {
-    "@cs-magic/eslint-config": "workspace:^",
-    "@cs-magic/jest": "workspace:^",
-    "@cs-magic/prettier": "workspace:^",
-    "babel-loader": "^9.1.3",
-    "copy-webpack-plugin": "^12.0.2",
-    "copyfiles": "^2.4.1",
-    "cross-env": "^7.0.3",
-    "dotenv-cli": "^7.4.2",
-    "file-loader": "^6.2.0",
-    "html-loader": "^5.1.0",
-    "node-gyp": "^10.2.0",
-    "node-gyp-build": "^4.8.1",
-    "null-loader": "^4.0.1",
-    "pino-pretty": "^11.2.1",
-    "prisma": "^5",
-    "rimraf": "^3",
-    "shx": "^0.3.4",
-    "ts-patch": "^3.2.1",
-    "ttypescript": "^1.5.15",
-    "typescript-transform-paths": "^3.5.0",
-    "webpack": "^5.94.0"
+    "@cs-magic/tools": "workspace:^",
+    "prisma": "^5"
   },
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {

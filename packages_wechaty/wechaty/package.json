@@ -155,7 +155,7 @@
     "typedoc": "^1.0.0-dev.4 ",
     "typescript": "*",
     "wechaty-puppet-mock": "^1.18.2",
-    "wechaty-puppet-service": "^1.19.8",
+    "wechaty-puppet-service": "workspace:^",
     "wechaty-puppet-wechat4u": "workspace:^"
   },
   "files": [
