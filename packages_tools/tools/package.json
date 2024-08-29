@@ -4,7 +4,7 @@
   "description": "",
   "devDependencies": {
     "@cs-magic/commands": "workspace:^",
-    "@cs-magic/eslint": "workspace:^",
+    "@cs-magic/eslint-config": "workspace:^",
     "@cs-magic/jest": "workspace:^",
     "@cs-magic/prettier": "workspace:^",
     "@cs-magic/tspc": "workspace:^",

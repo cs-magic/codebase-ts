@@ -79,7 +79,7 @@
     "semver": "^7.3.5",
     "stronger-typed-streams": "^0.2.0",
     "uuid": "^8.3.2",
-    "wechaty-grpc": "patch:wechaty-grpc@workspace%3Apackages_wechaty/grpc#~/.yarn/patches/wechaty-grpc-workspace-24ad6e6c6c.patch",
+    "wechaty-grpc": "workspace:^",
     "wechaty-redux": "^1.20.2",
     "wechaty-token": "^1.0.6"
   },

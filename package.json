@@ -28,12 +28,13 @@
     ".wechaty": "yarn workspace wechaty dist"
   },
   "resolutions": {
+    "markmap-view": "patch:markmap-view@npm%3A0.16.0#~/.yarn/patches/markmap-view-npm-0.16.0-f358605936.patch",
+    "eslint": "8.57.0",
+    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-n": "^17.10.2",
+    "eslint-config-next": "^14.0.0",
     "@chatie/tsconfig": "4.9.2",
     "@chatie/eslint-config": "1.4.1",
-    "markmap-view": "patch:markmap-view@npm%3A0.16.0#~/.yarn/patches/markmap-view-npm-0.16.0-f358605936.patch",
-    "wechaty-grpc": "patch:wechaty-grpc@workspace%3Apackages_wechaty/grpc#~/.yarn/patches/wechaty-grpc-workspace-24ad6e6c6c.patch",
-    "eslint": "8.57.0",
-    "eslint-config-next": "^14.0.0",
     "@types/eslint": "^8.56.0",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "7.18.0",
