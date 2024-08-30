@@ -51,7 +51,7 @@
     "url": "https://github.com/wechaty/wechaty-puppet-wechat4u/issues"
   },
   "devDependencies": {
-    "@chatie/eslint-config": "^1.0.4",
+    "@chatie/eslint-config": "patch:@chatie/eslint-config@npm%3A1.4.1#~/.yarn/patches/@chatie-eslint-config-npm-1.4.1-4554ec8df5.patch",
     "@chatie/git-scripts": "^0.6.2",
     "@chatie/semver": "^0.4.7",
     "@chatie/tsconfig": "^4.6.2",
