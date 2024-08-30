@@ -14,7 +14,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tspc -b"
+    "build": "tspc -b && copyfiles -u1 src/**/*.css dist"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",

@@ -1,0 +1,103 @@
+.backgroundLines {
+  --right: #4c2638;
+  --left: #223b67;
+  position: absolute;
+  background-image: linear-gradient(
+    to right,
+    var(--left) 45%,
+    transparent 50%,
+    var(--right) 55%
+  );
+  mask-image: linear-gradient(90deg, #000 2px, transparent 0),
+    linear-gradient(180deg, #000 2px, transparent 0);
+  mask-size: 80px 80px;
+  mask-repeat: repeat;
+  inset: -100% 0;
+  background-position-y: 100%;
+  mask-position: 50% 0;
+  animation: animate-background 50s linear infinite;
+  transform: perspective(1000px) rotateX(75deg);
+}
+
+.leftLights:before {
+  width: 25%;
+  height: 900px;
+  left: -12.5%;
+  top: calc(50% - 900px / 2 + 151px);
+  opacity: 0.25;
+  background: linear-gradient(180deg, #77b8ff, rgba(42, 138, 246, 0.4));
+  transform: rotate(-15deg);
+  border-bottom-left-radius: 25% 25%;
+  border-bottom-right-radius: 25% 25%;
+  border-top-left-radius: 100% 100%;
+  border-top-right-radius: 100% 100%;
+  z-index: 200;
+}
+
+.leftLights:after,
+.leftLights:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  filter: blur(125px);
+  will-change: filter;
+  mix-blend-mode: normal;
+}
+
+.leftLights:after {
+  width: 40%;
+  height: 422px;
+  left: 0;
+  top: calc(50% - 422px / 2 + 298px);
+  opacity: 0.55;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 92, 162, 0.2),
+    rgba(42, 138, 246, 0.4)
+  );
+}
+
+.rightLights:before {
+  z-index: 200;
+  width: 25%;
+  height: 900px;
+  right: -12.5%;
+  top: calc(50% - 900px / 2 + 151px);
+  background-image: linear-gradient(180deg, rgba(236, 151, 207, 0.4), #e92a67);
+  transform: rotate(15deg);
+  border-bottom-left-radius: 25% 25%;
+  border-bottom-right-radius: 25% 25%;
+  border-top-left-radius: 100% 100%;
+  border-top-right-radius: 100% 100%;
+  opacity: 0.25;
+  overflow: hidden;
+}
+
+.rightLights:after,
+.rightLights:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  filter: blur(125px);
+  will-change: filter;
+  mix-blend-mode: normal;
+}
+
+.rightLights:after {
+  width: 40%;
+  height: 422px;
+  right: 0;
+  top: calc(50% - 422px / 2 + 298px);
+  opacity: 0.3;
+  background: linear-gradient(180deg, rgba(236, 151, 207, 0.4), #e92a67);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+@keyframes animate-background {
+  0% {
+    mask-position: 50% 0;
+  }
+  100% {
+    mask-position: 50% 100%;
+  }
+}
