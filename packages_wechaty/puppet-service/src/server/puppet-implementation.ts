@@ -93,7 +93,7 @@ function puppetImplementation(
   };
 
   const puppetServerImpl: grpcPuppet.IPuppetServer = {
-    conversationRead: async (call, callback) => {},
+    conversationRead: async () => {},
 
     contactAlias: async (call, callback) => {
       log.verbose("PuppetServiceImpl", "contactAlias()");
