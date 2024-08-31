@@ -18,8 +18,8 @@
   ],
   "scripts": {
     "postinstall": "run-s db:generate install:tspc build:wechaty build:frontend",
-    "db:generate": "prisma generate",
-    "install:tspc": "ts-patch install -s",
+    "db:generate": "npx prisma generate",
+    "install:tspc": "npx ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
     "build:wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty-grpc .wechaty-puppet-service .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
