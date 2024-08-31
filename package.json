@@ -26,7 +26,7 @@
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",
     ".wechaty-puppet-service": "yarn workspace wechaty-puppet-service dist",
-    ".wechaty-grpc": "PATH=$PATH:$(go env GOPATH)/bin yarn workspace wechaty-grpc dist",
+    ".wechaty-grpc": "yarn workspace wechaty-grpc install:protoc && PATH=$PATH:$(go env GOPATH)/bin yarn workspace wechaty-grpc dist",
     ".wechaty": "yarn workspace wechaty dist"
   },
   "resolutions": {
