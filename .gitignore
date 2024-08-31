@@ -12,7 +12,6 @@ prisma/generated
 **/.generated
 **/.next-tmp
 **/.idea
-**/deprecated
 **/dist
 **/node_modules
 **/.env
