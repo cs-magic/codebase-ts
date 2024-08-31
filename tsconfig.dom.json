@@ -3,6 +3,10 @@
     "./tsconfig.json"
   ],
   "compilerOptions": {
+    // ref: https://vitejs.dev/guide/features.html#client-types
+    "types": [
+      "vite/client"
+    ],
     "lib": [
       "ESNext",
       "dom",
