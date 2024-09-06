@@ -31,3 +31,6 @@
 [submodule "packages_wechaty/grpc"]
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
+[submodule "app_screensaver"]
+	path = app_screensaver
+	url = ./app_screensaver
