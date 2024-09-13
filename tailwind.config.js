@@ -1,10 +1,3 @@
-import forms from "@tailwindcss/forms";
-import typography from "@tailwindcss/typography";
-import type { Config } from "tailwindcss";
-
-import animate from "tailwindcss-animate";
-import plugin from "tailwindcss/plugin";
-
 const tailwindConfig = {
   darkMode: ["class"],
   /**
@@ -134,14 +127,15 @@ const tailwindConfig = {
     },
   },
   plugins: [
-    animate,
-
-    forms,
-
-    typography,
-
+    require("tailwindcss-animate"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    plugin(function ({ addVariant, matchUtilities, theme }) {
+    require("tailwindcss/plugin")(function ({
+      addVariant,
+      matchUtilities,
+      theme,
+    }) {
       addVariant("not-first", "&:not(first-child)"); // ref: https://www.reddit.com/r/tailwindcss/comments/s3wka1/comment/hspmjxo/?utm_source=share&utm_medium=web2x&context=3
       addVariant("not-last", "&:not(last-child)");
 
@@ -171,6 +165,5 @@ const tailwindConfig = {
       addUtilities(newUtilities, ["responsive"]);
     },
   ],
-} satisfies Config;
-
-export default tailwindConfig;
+};
+module.exports = tailwindConfig;
