@@ -34,3 +34,6 @@
 [submodule "app_screensaver"]
 	path = app_screensaver
 	url = ./app_screensaver
+[submodule "app_chrome-exts"]
+	path = app_chrome-exts
+	url = ./app_chrome-exts
