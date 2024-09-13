@@ -24,7 +24,9 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
     <>
       <nav
         ref={ref}
-        className={"fixed top-0 left-0 w-full bg-black/[.50] backdrop-blur-lg"}
+        className={
+          "fixed top-0 left-0 w-full bg-black/[.50] backdrop-blur-lg z-[9999]"
+        }
       >
         <div
           className={
@@ -88,11 +90,16 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
                     "https://apifox.com/apidoc/shared-6f09e650-ab7f-4253-a113-38df1157c8df/doc-5021508"
                   }
                   variant={"link"}
+                  className={"text-bold"}
                 >
                   Docs
                 </ButtonLink>
 
-                <ButtonLink href={"https://cs-magic.canny.io"} variant={"link"}>
+                <ButtonLink
+                  href={"https://cs-magic.canny.io"}
+                  variant={"link"}
+                  className={"text-bold"}
+                >
                   Feedback
                 </ButtonLink>
 

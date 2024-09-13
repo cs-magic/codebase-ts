@@ -1,7 +1,9 @@
 import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
 import animate from "tailwindcss-animate";
+import plugin from "tailwindcss/plugin";
 
 const tailwindConfig = {
   darkMode: ["class"],
@@ -22,7 +24,11 @@ const tailwindConfig = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
     },
     extend: {
@@ -84,6 +90,7 @@ const tailwindConfig = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        shadow: "var(--shadow)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -99,13 +106,30 @@ const tailwindConfig = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "backdrop-ring": {
+          "0%, 100%": {
+            backdropFilter: "brightness(10%)",
+          },
+          "50%": {
+            backdropFilter: "brightness(50%)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "backdrop-ring": "backdrop-ring 5s ease-in-out infinite",
       },
       borderStyle: {
         "wider-dashed": "dashed", // Name your custom style
+      },
+      textShadow: {
+        // 需要额外设置
+        douyin: "1px 1px 2px red, 0 0 1rem blue, 0 0 0.2rem blue;",
+      },
+      dropShadow: {
+        DEFAULT: "0 0 5px var(--shadow)",
+        lg: "0 0 20px var(--shadow)",
       },
     },
   },
@@ -113,6 +137,26 @@ const tailwindConfig = {
     animate,
 
     forms,
+
+    typography,
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    plugin(function ({ addVariant, matchUtilities, theme }) {
+      addVariant("not-first", "&:not(first-child)"); // ref: https://www.reddit.com/r/tailwindcss/comments/s3wka1/comment/hspmjxo/?utm_source=share&utm_medium=web2x&context=3
+      addVariant("not-last", "&:not(last-child)");
+
+      addVariant("hocus", ["&:hover", "&:focus"]);
+
+      matchUtilities(
+        // ref: https://www.hyperui.dev/blog/text-shadow-with-tailwindcss
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") },
+      );
+    }),
 
     // @ts-ignore
     function ({ addUtilities, theme }) {
