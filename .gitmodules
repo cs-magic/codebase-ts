@@ -36,4 +36,4 @@
 	url = ./app_screensaver
 [submodule "app_chrome-exts"]
 	path = app_chrome-exts
-	url = ./app_chrome-exts
+	url = https://github.com/codebase/app_chrome-exts
