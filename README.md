@@ -4,49 +4,12 @@
 
 [//]: # (![SWOT Logo]&#40;packages/swot-frontend/src/assets/branding/enterprise/swot.png&#41;)
 
-## Project Overview
-
-```mermaid
-graph LR;
-    subgraph general
-        prisma --> common & llm;
-        common --> llm;
-    end
-    
-    subgraph wechaty_eco
-        wechat4u --> wechaty-puppet-wechat4u;
-        wechaty-puppet --> wechaty-puppet-wechat4u & wechaty;
-        wechaty-puppet-wechat4u --> wechaty;
-    end
-    
-    subgraph frontend_common_eco
-        general --> react;
-        react --> frontend_common;
-        assets --> frontend_common;
-    end
-    
-    subgraph cs-magic_frontend_eco
-        frontend_common --> cs-magic_frontend;
-    end
-    
-    subgraph swot_backend_eco
-        general --> swot_backend;
-        wechaty_eco --> swot_backend;
-    end
-    
-    subgraph swot_frontend_eco
-        frontend_common_eco --> swot_frontend;
-        swot_backend_eco --> swot_frontend;
-        swot_frontend --> swot-web & swot-pc;
-    end
-```
-
 ## Preparation
 
-- you should install `jq` at the system level which is required by `wechaty-puppet`
-    - mac: `brew install jq`
-    - ubuntu: `sudo apt install jq`
 - configure env （refer to `env.sample`）
+- `brew install jq go` # for `wechaty-puppet`
+- `brew install bash` # for `shopt -s globstar` since the default base is too old on Mac
+- `brew install nvm; nvm install 18.19.0; nvm use 18.19.0; npm install -g yarn`
 - installation: `yarn` (db migration will auto exec)
 
 ## Run
