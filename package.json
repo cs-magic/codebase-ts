@@ -7,8 +7,7 @@
   "license": "MIT",
   "private": true,
   "bin": {
-    "ggg": "scripts/ggg.sh",
-    "gs": "git status"
+    "ggg": "scripts/ggg.sh"
   },
   "workspaces": [
     "packages/*",
