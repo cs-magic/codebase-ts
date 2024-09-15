@@ -19,31 +19,6 @@ brew install "${packages[@]}"
 - prepare yarn: `NV=18.19.0 && nvm install $NV && nvm use $NV && npm i -g yarn`
 - installation: `yarn` (db migration will auto exec)
 
-## Run
-
-```shell
-# start web in dev
-yarn workspace @cs-magic/swot-backend dev & yarn workspace @cs-magic/swot-web dev
-
-# start pc in dev
-yarn workspace swot-pc dev
-
-# build backend
-yarn workspace @cs-magic/swot-backend build
-
-# build web
-yarn workspace @cs-magic/swot-frontend build
-
-# build pc
-yarn workspace swot-pc build:mac
-
-# start web after build
-yarn workspace @cs-magic/swot-frontend start
-
-# start pc after build
-# double click to install: packages/swot-pc/dist/swot-pc-${version}.dmg
-```
-
 ## References 
 
 - [Tech](__docs__/tech.md)
