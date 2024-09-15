@@ -1,8 +1,6 @@
-[//]: # (# CS Magic Codebase)
+# CS Magic TypeScript Codebase
 
 ![CS Magic Banner](assets/branding/cs-magic/cs-magic_banner_white.jpg)
-
-[//]: # (![SWOT Logo]&#40;packages/swot-frontend/src/assets/branding/enterprise/swot.png&#41;)
 
 ## Preparation
 
