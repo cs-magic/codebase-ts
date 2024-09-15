@@ -24,13 +24,6 @@ brew install "${packages[@]}"
 - [Tech](__docs__/tech.md)
 - [Finished Todo](__docs__/finished-todo.md)
 
-## TODO
-
-- [ ] fix eval-ai running prisma
-- [ ] server function split for swot-pc
-- [ ] `react-hooks` split next/next-auth
-- [ ] `NextJS`  18.3.0 --> 18.2.0, o.w. there is warning when dev running `@cs-magic/homepage
-
 ## Upstreams
 
 We would also like to give thanks to open-source projects that make CS-Magic possible:
