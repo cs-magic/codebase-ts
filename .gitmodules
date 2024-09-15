@@ -33,7 +33,7 @@
 	url = ./packages_wechaty/grpc
 [submodule "app_screensaver"]
 	path = app_screensaver
-	url = ./app_screensaver
+	url = https://github.com/cs-magic/app_screensaver
 [submodule "app_chrome-exts"]
 	path = app_chrome-exts
 	url = https://github.com/cs-magic/app_chrome-exts
