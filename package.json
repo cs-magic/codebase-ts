@@ -17,11 +17,11 @@
     "tests/*"
   ],
   "scripts": {
-    "postinstall": "run-s db:generate install:tspc build:wechaty build:frontend",
+    "postinstall": "npx run-s db:generate install:tspc build:wechaty build:frontend",
     "db:generate": "npx prisma generate",
     "install:tspc": "npx ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
-    "build:wechaty": "run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty-grpc .wechaty-puppet-service .wechaty",
+    "build:wechaty": "npx run-s .wechat4u .wechaty-puppet .wechaty-puppet-wechat4u .wechaty-grpc .wechaty-puppet-service .wechaty",
     ".wechat4u": "yarn workspace wechat4u compile",
     ".wechaty-puppet": "yarn workspace wechaty-puppet dist",
     ".wechaty-puppet-wechat4u": "yarn workspace wechaty-puppet-wechat4u dist",
@@ -31,6 +31,7 @@
   },
   "resolutions": {
     "markmap-view": "patch:markmap-view@npm%3A0.16.0#~/.yarn/patches/markmap-view-npm-0.16.0-f358605936.patch",
+    "@grpc/grpc-js": "^1.11.1",
     "eslint": "8.57.0",
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-n": "^17.10.2",
