@@ -7,9 +7,16 @@
 ## Preparation
 
 - configure env （refer to `env.sample`）
-- `brew install jq go` # for `wechaty-puppet`
-- `brew install bash` # for `shopt -s globstar` since the default base is too old on Mac
-- `brew install nvm; nvm install 18.19.0; nvm use 18.19.0; npm install -g yarn`
+- configure dependencies:
+```shell
+packages=(
+ jq go # for wechaty-puppet
+ bash # for `shopt -s globstar` since the default base is too old on Mac
+ nvm # for configuring node/npm/yarn
+)
+brew install "${packages[@]}"
+```
+- prepare yarn: `NV=18.19.0 && nvm install $NV && nvm use $NV && npm i -g yarn`
 - installation: `yarn` (db migration will auto exec)
 
 ## Run
