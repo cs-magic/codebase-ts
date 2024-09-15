@@ -6,9 +6,6 @@
   "bugs": "https://github.com/cs-magic/codebase/issues",
   "license": "MIT",
   "private": true,
-  "bin": {
-    "ggg": "scripts/ggg.sh"
-  },
   "workspaces": [
     "packages/*",
     "packages_*/*",
