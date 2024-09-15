@@ -11,8 +11,8 @@
 ```shell
 packages=(
  jq go # for wechaty-puppet
- bash # for `shopt -s globstar` since the default base is too old on Mac
- nvm # for configuring node/npm/yarn
+ bash  # for `shopt -s globstar` since the default base is too old on Mac
+ nvm   # for configuring node/npm/yarn
 )
 brew install "${packages[@]}"
 ```
