@@ -1,34 +1,41 @@
-[submodule "app_home"]
+
+; apps
+[submodule "homepage"]
 	path = app_home
 	url = git@github.com:cs-magic/cs-magic.git
 
-[submodule "app_swot"]
-	path = app_swot
-	url = git@github.com:cs-magic/app_swot.git
-
-[submodule "app_poketto"]
+[submodule "poketto"]
 	path = app_poketto
 	url = git@github.com:cs-magic/poketto.git
 
-[submodule "app_eval-ai"]
+[submodule "eval-ai"]
 	path = app_eval-ai
     url = git@github.com:cs-magic/eval-ai.git
 
-[submodule "app_thinkow"]
+[submodule "thinkow"]
 	path = app_thinkow
     url = git@github.com:cs-magic/thinkow.git
+
+[submodule "screensaver"]
+	path = app_screensaver
+	url = https://github.com/cs-magic/app_screensaver
+
+; exts
+
+[submodule "chrome-exts"]
+	path = exts_chrome
+	url = https://github.com/cs-magic/app_chrome-exts
+
+; swot
+
+[submodule "swot"]
+	path = app_swot
+	url = git@github.com:cs-magic/app_swot.git
 
 [submodule "packages_wechaty/puppet-service"]
 	path = packages_wechaty/puppet-service
 	url = ./packages_wechaty/puppet-service
+
 [submodule "packages_wechaty/grpc"]
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
-[submodule "app_screensaver"]
-	path = app_screensaver
-	url = https://github.com/cs-magic/app_screensaver
-[submodule "app_chrome-exts"]
-	path = exts_chrome
-	url = https://github.com/cs-magic/app_chrome-exts
-[submodule "app_ext-chrome"]
-	url = git@github.com:cs-magic/exts-chrome.git
