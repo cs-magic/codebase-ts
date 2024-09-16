@@ -11,6 +11,7 @@
     "packages_*/*",
     "private_app-*/*",
     "app_*/*",
+    "exts_*/*",
     "tests/*"
   ],
   "scripts": {

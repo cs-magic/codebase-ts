@@ -28,7 +28,7 @@
 	path = app_screensaver
 	url = https://github.com/cs-magic/app_screensaver
 [submodule "app_chrome-exts"]
-	path = app_ext-chrome
+	path = exts_chrome
 	url = https://github.com/cs-magic/app_chrome-exts
 [submodule "app_ext-chrome"]
 	url = git@github.com:cs-magic/exts-chrome.git
