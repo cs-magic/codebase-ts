@@ -1,0 +1,12 @@
+{
+  "name": "@cs-magic/common-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "exports": {
+    "./*": "./dist/*.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tspc -b"
+  }
+}

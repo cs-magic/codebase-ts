@@ -1,7 +1,0 @@
-{
-  "name": "@cs-magic/exts_alfred_claude-search",
-  "packageManager": "yarn@4.4.0",
-  "dependencies": {
-    "puppeteer": "^23.3.1"
-  }
-}

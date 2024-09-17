@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "../../tsconfig.dom.json"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*",
+        "./public/*",
+        "../../assets/*",
+        "../../*"
+      ],
+    }
+  },
+  "include": ["src"],
+  "references": [
+    {"path": "../../packages/common"}
+  ],
+}
