@@ -1,6 +1,4 @@
-const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
@@ -12,7 +10,7 @@ module.exports = {
     // main: "./src/main.ts",
   },
   output: {
-    path: path.join(__dirname, "./dist"),
+    // path: path.join(__dirname, "./dist"),
     filename: "[name].js",
     clean: true, // 这会在每次构建前清理输出目录。
   },
@@ -64,8 +62,7 @@ module.exports = {
     //   CSS 最小化，这个插件用于最小化 CSS 文件。
     new MiniCssExtractPlugin({
       filename: "[name].css",
-    }),
-    // add copy-plugin if necessary
+    }), // add copy-plugin if necessary
     // new CopyPlugin({
     //     patterns: ["assets/*", "manifest.json"],
     // }),
