@@ -39,3 +39,6 @@
 [submodule "packages_wechaty/grpc"]
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
+[submodule "app_card-gpt"]
+	path = app_card-gpt
+	url = git@github.com:cs-magic/app_card-gpt.git
