@@ -55,6 +55,7 @@
     "react-hook-form": "*",
     "react-i18next": "*",
     "react-markdown": "^9.0.1",
+    "react-masonry-css": "^1.0.16",
     "react-responsive": "^10.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-textarea-autosize": "^8.5.3",
@@ -68,13 +69,16 @@
     "zod": "*"
   },
   "devDependencies": {
-    "@prisma/client": "^5.19.0",
+    "@prisma/client": "*",
     "@types/eslint": "*",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-responsive": "^8.0.8",
     "eslint": "*",
     "eslint-config-next": "*",
+    "masonic": "^4.0.1",
+    "npm-run-all": "^4.1.5",
+    "prisma": "*",
     "tailwindcss": "^3.4.7",
     "typescript": "*",
     "vite": "^5.4.2"

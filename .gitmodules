@@ -40,5 +40,7 @@
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
 [submodule "app_card-gpt"]
-	path = app_card-gpt
+	path = app_totem-gpt
 	url = git@github.com:cs-magic/app_card-gpt.git
+[submodule "app_totem-gpt"]
+	url = git@github.com:cs-magic/app_totem-gpt.git
