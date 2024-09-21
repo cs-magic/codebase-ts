@@ -1397,7 +1397,7 @@ function puppetImplementation(
       }
     },
 
-    stop: async (call, callback) => {
+    stopGeneration: async (call, callback) => {
       log.verbose("PuppetServiceImpl", "stop()");
       void call;
 
