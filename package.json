@@ -15,7 +15,6 @@
     "tests/*"
   ],
   "scripts": {
-    "postinstall": "npx run-s db:generate install:tspc build:wechaty build:frontend",
     "db:generate": "npx prisma generate",
     "install:tspc": "npx ts-patch install -s",
     "build:frontend": "yarn workspace @cs-magic/react build",
