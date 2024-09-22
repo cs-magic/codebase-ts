@@ -1,6 +1,4 @@
-import { action } from "@cs-magic/exts_chrome_claude-artifact-enhancer/src/utils/const";
-
-export interface Message {
-  type: action;
+export type GenericMessage<T> = {
+  type: T;
   data: any;
-}
+};
