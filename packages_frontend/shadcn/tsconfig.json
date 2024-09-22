@@ -13,11 +13,14 @@
         "./public/*",
         "../../assets/*",
         "../../*"
-      ],
+      ]
     },
 
     // suppress chart / input-otp
     "strictNullChecks": false
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {"path": "../common"}
+  ]
 }

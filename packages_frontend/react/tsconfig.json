@@ -20,6 +20,7 @@
   "references": [
     {"path": "../../packages/common"},
     {"path": "../../packages/llm"},
+    {"path": "../common"},
     {"path": "../shadcn"},
   ],
 }
