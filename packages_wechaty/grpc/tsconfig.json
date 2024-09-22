@@ -8,7 +8,6 @@
     "verbatimModuleSyntax": false,
     // See: https://github.com/wechaty/wechaty/issues/2551
     "ignoreDeprecations": "5.0",
-    "noImplicitAny": false
   },
   "exclude": [
     "node_modules/",

@@ -5,11 +5,11 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/esm/src/mod.js",
-      "require": "./dist/cjs/src/mod.js"
+      "import": "./dist/esm/mod.js",
+      "require": "./dist/cjs/mod.js"
     }
   },
-  "typings": "./dist/esm/src/mod.d.ts",
+  "typings": "./dist/esm/mod.d.ts",
   "engines": {
     "node": ">=16",
     "npm": ">=7"
@@ -64,7 +64,7 @@
     "@chatie/eslint-config": "patch:@chatie/eslint-config@npm%3A1.4.1#~/.yarn/patches/@chatie-eslint-config-npm-1.4.1-4554ec8df5.patch",
     "@chatie/git-scripts": "^0.6.2",
     "@chatie/semver": "^0.4.7",
-    "@chatie/tsconfig": "^0.20.2",
+    "@chatie/tsconfig": "^4.6.3",
     "@types/google-protobuf": "^3.15.5",
     "@types/protobufjs": "^6.0.0",
     "cross-env": "^7.0.3",

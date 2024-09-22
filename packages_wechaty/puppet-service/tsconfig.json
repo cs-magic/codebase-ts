@@ -5,6 +5,7 @@
   ],
   "compilerOptions": {
     "outDir": "dist/esm",
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules/",
