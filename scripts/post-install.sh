@@ -41,6 +41,9 @@
         echo_end "$display_name"
     }
 
+init_env() {
+  export PATH=$(pwd)/node_modules/.bin:$PATH
+}
 
 init_db() {
   echo_step "generating prisma client"
@@ -86,6 +89,8 @@ init_fullstack_packages() {
 }
 
 
+
+run_task init_env "$@"
 run_task init_db "$@"
 run_task init_commands "$@"
 run_task init_wechaty "$@"
