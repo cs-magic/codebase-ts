@@ -16,7 +16,16 @@ function install_protoc () {
 
   # https://grpc.io/docs/protoc-installation/
   if [ $(uname) = 'Linux' ]; then
-    sudo apt install -y protobuf-compiler
+    # apt's protobuf's latest version is 3.12, failed to meet the requirement
+    # sudo apt install -y protobuf-compiler
+
+    # but we can install from github release
+    # the latest version is 28+, 2024-09-23
+    # see: https://grpc.io/docs/protoc-installation/
+    PB_REL="https://github.com/protocolbuffers/protobuf/releases"
+    curl -LO $PB_REL/download/v25.1/protoc-25.1-linux-x86_64.zip
+    unzip protoc-25.1-linux-x86_64.zip -d $HOME/.local
+    # export PATH="$PATH:$HOME/.local/bin"
   elif [ $(uname) = 'Darwin' ]; then
     brew install protobuf
   else
