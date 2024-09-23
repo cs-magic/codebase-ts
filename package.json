@@ -1,6 +1,6 @@
 {
   "name": "cs-magic",
-  "version": "0.8.1237",
+  "version": "0.8.1238",
   "author": "markshawn2020 <mark@cs-magic.com>",
   "repository": "git@github.com:cs-magic/codebase.git",
   "bugs": "https://github.com/cs-magic/codebase/issues",
@@ -14,9 +14,7 @@
     "exts_*/*",
     "tests/*"
   ],
-  "scripts": {
-
-  },
+  "scripts": {},
   "resolutions": {
     "@babel/core": "^7.25.2",
     "@chatie/eslint-config": "1.4.1",
