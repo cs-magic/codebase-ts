@@ -1,3 +1,6 @@
+# 服务器不一样
+.yarn/install-state.gz
+
 .env.cs-magic.cn
 .env.cs-magic.com
 
