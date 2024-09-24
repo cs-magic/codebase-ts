@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { LoaderIcon } from "lucide-react";
+import { Ellipsis, LoaderIcon } from "lucide-react";
 import React from "react";
 
 import {
@@ -13,11 +13,12 @@ import { FlexContainer } from "./flex-container";
 import { uiLoadingAlertDialogAtom } from "@/store/ui.atom";
 
 export const Loading = ({ type = "spin" }: { type?: "spin" | "dots" }) => (
-  <FlexContainer>
+  <FlexContainer className={"overflow-hidden"}>
     {type === "spin" ? (
       <LoaderIcon className={"animate-spin"} />
     ) : (
-      <span className="loading loading-dots loading-sm"></span>
+      // <span className="loading loading-dots loading-sm"></span>
+      <Ellipsis />
     )}
   </FlexContainer>
 );

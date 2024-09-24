@@ -74,7 +74,7 @@ export const element2image = async (
 
     case "modern-screenshot":
       data = await domToDataUrl(element, {
-        scale: 1,
+        scale: 2,
         quality: 0.7,
         backgroundColor: backgroundColor,
       });
