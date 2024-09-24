@@ -105,5 +105,9 @@
     "scripts": {
       "pre-push": "npm version patch"
     }
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.202",
+    "lodash": "^4.17.21"
   }
 }
