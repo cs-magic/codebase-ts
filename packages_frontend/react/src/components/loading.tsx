@@ -18,7 +18,7 @@ export const Loading = ({ type = "spin" }: { type?: "spin" | "dots" }) => (
       <LoaderIcon className={"animate-spin"} />
     ) : (
       // <span className="loading loading-dots loading-sm"></span>
-      <Ellipsis />
+      <div className={"loader"} />
     )}
   </FlexContainer>
 );
