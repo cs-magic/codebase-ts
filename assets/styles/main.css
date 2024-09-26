@@ -130,7 +130,9 @@
 
 @tailwind components;
 
-@layer components {
+@tailwind utilities;
+
+@layer utilities {
     #root {
         display: flex;
         align-items: center;
@@ -420,7 +422,3 @@
         100%{box-shadow: 20px 0 #0002,-20px 0 #000; background: #000 }
     }
 }
-
-
-@tailwind utilities;
-
