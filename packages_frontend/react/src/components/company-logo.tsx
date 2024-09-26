@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { HTMLProps } from "react";
 
 // @transform-path
-import CsMagicBlackLogoSvg from "@assets/branding/cs-magic/cs-magic_logo_1280.svg";
+import CsMagicBlackLogoSvg from "../../../../assets/branding/cs-magic/cs-magic_logo_1280.svg";
 import { LOGO_SIZE_LG } from "@/config";
 
 export const CompanyLogo = ({
