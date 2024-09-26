@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="32 30 64 52" >
+  <defs>
+    <style>
+      :root {
+      --color: currentColor;
+      --radius: 40;
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(64,64)">
+    <path d="M0,-32 L27.7,16 L-27.7,16 Z" fill="none" stroke="var(--color)" stroke-width="2" opacity="0.6"/>
+    <path d="M0,-24 L20.8,12 L-20.8,12 Z" fill="none" stroke="var(--color)" stroke-width="2" opacity="0.7"/>
+    <path d="M0,-16 L13.9,8 L-13.9,8 Z" fill="none" stroke="var(--color)" stroke-width="2" opacity="0.8" />
+    <circle cx="0" cy="0" r="4" fill="var(--color)" opacity="1"/>
+  </g>
+</svg>
