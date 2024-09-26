@@ -1,19 +1,18 @@
 "use client";
 
-import { clsx } from "clsx";
-import Link from "next/link";
-import { ReactNode, useEffect, useRef } from "react";
-
-import {
-  NavigationMenu,
-  NavigationMenuList,
-} from "@cs-magic/shadcn/dist/ui/navigation-menu";
-
 import { ButtonLink } from "@/components/button-link";
 // todo: added localeSwitcher, after fixing: `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`
 // import { LocaleSwitcher } from "@/components/locale-switcher"
 import { CompanyLogo } from "@/components/company-logo";
 import { uri } from "@/config";
+
+import {
+  NavigationMenu,
+  NavigationMenuList,
+} from "@cs-magic/shadcn/dist/ui/navigation-menu";
+import { clsx } from "clsx";
+import Link from "next/link";
+import { ReactNode } from "react";
 import { useMeasure } from "react-use";
 
 export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
@@ -22,10 +21,10 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
 
   return (
     <>
-      <nav
+      <div
         ref={ref}
         className={
-          "fixed top-0 left-0 w-full bg-black/[.50] backdrop-blur-lg z-[9999]"
+          "fixed top-0 left-0 w-full bg-black/[.50] backdrop-blur-lg z-[9999] border-b"
         }
       >
         <div
@@ -68,7 +67,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
                   ></path>
                 </svg>
 
-                {productBanner}
+                <Link href={"/"}>{productBanner}</Link>
               </>
             )}
           </div>
@@ -110,7 +109,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
             </NavigationMenu>
           </div>
         </div>
-      </nav>
+      </div>
 
       <div style={{ height }} />
     </>
