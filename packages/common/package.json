@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tspc -b"
+    "build": "tsc -b"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "^3.0.0",

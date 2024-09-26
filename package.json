@@ -14,6 +14,9 @@
     "exts_*/*",
     "tests/*"
   ],
+  "scripts": {
+    "prepare": "ts-patch install -s"
+  },
   "resolutions": {
     "@babel/core": "^7.25.2",
     "@chatie/eslint-config": "1.4.1",
@@ -108,6 +111,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.202",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "ts-patch": "^3.2.1"
   }
 }

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tspc -b"
+    "build": "tsc -b"
   },
   "dependencies": {
     "@cs-magic/common": "workspace:^",

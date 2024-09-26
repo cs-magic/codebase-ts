@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npx tspc -b"
+    "build": "npx tsc -b"
   },
   "dependencies": {
     "@hookform/resolvers": "*",

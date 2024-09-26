@@ -7,7 +7,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tspc -b"
+    "build": "tsc -b"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
