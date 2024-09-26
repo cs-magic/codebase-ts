@@ -85,9 +85,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
                 {/* todo: variant thinner / outline */}
 
                 <ButtonLink
-                  href={
-                    "https://apifox.com/apidoc/shared-6f09e650-ab7f-4253-a113-38df1157c8df/doc-5021508"
-                  }
+                  href={"https://docs.cs-magic.cn"}
                   variant={"link"}
                   className={"text-bold"}
                 >
