@@ -6,9 +6,7 @@
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
 
-[submodule "app_assistant"]
-    path = app_assistant
-	url = git@github.com:cs-magic/app_assistant.git
+
 
 [submodule "projects"]
 	path = projects
