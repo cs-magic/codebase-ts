@@ -228,9 +228,8 @@
         opacity: 1 !important;
     }
 
-
     .center {
-        @apply justify-center items-center;
+        @apply flex flex-col justify-center items-center;
     }
 
 

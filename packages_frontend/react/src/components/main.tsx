@@ -7,16 +7,17 @@ import React, { PropsWithChildren } from "react";
 
 export const Main = ({ children }: PropsWithChildren) => {
   const [navbarHeight] = useAtom(navbarHeightAtom);
+
   console.log({ navbarHeight });
 
   return (
     <main
-      className={cn("relative flex flex-col justify-center items-center")}
+      className={cn("relative center")}
       style={{
         minHeight: `calc(100vh - ${navbarHeight}px)`,
       }}
     >
-      {children}
+      {navbarHeight ? children : null}
     </main>
   );
 };

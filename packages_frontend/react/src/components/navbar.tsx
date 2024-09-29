@@ -17,12 +17,15 @@ import { useSetAtom } from "jotai";
 import Link from "next/link";
 import { ReactNode, useEffect } from "react";
 import { useMeasure } from "react-use";
+import DiagonalSeparatorSVG from "@assets/others/diagnoal-separator.svg";
 
 export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
   const [ref, { height }] = useMeasure<HTMLDivElement>();
   const setNavbarHeight = useSetAtom(navbarHeightAtom);
 
   useEffect(() => {
+    if (!height) return;
+
     setNavbarHeight(height);
   }, [height]);
 
@@ -39,7 +42,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
           "w-full sm:max-w-[1440px] z-50 px-4 mx-auto py-3 flex justify-between items-center gap-2 font-light"
         }
       >
-        <div className={clsx("flex items-center gap-2 px-2 h-12")}>
+        <div className={clsx("flex items-center gap-0 sm:gap-2 px-2 h-12")}>
           <Link
             className={"inline-flex-center gap-2 whitespace-nowrap"}
             href={uri.company}
@@ -60,19 +63,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
 
           {productBanner && (
             <>
-              <svg
-                height="32"
-                role="separator"
-                viewBox="0 0 32 32"
-                width="32"
-                stroke="currentColor"
-              >
-                <path
-                  d="M22 5L9 28"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
+              <DiagonalSeparatorSVG className={"w-6"} />
 
               <Link href={"/"}>{productBanner}</Link>
             </>

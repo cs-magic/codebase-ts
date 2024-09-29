@@ -19,9 +19,8 @@ export default function BaseLayout({
       {/*/ body should be the direct child of html */}
       <body
         className={cn(
-          "relative w-screen",
-          // "overflow-y-auto",
-          // "overflow-x-hidden", // for arc sidebar
+          "relative w-screen h-screen overflow-y-auto",
+          "overflow-x-hidden", // for arc sidebar
           `font-sans`, // inter.variable
           "bg-background text-foreground",
         )}
