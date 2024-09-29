@@ -229,7 +229,7 @@
     }
 
     .center {
-        @apply flex flex-col justify-center items-center;
+        @apply flex justify-center items-center;
     }
 
 
@@ -304,7 +304,7 @@
     }
 
     .inline-flex-center {
-        @apply inline-flex center;
+        @apply center inline-flex;
     }
 
     .interactive {
