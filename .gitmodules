@@ -49,3 +49,6 @@
 [submodule "app_wechat/wechat-dbcracker"]
 	path = app_wechat/wechat-dbcracker
 	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
+[submodule "projects"]
+	path = projects
+	url = git@github.com:cs-magic/projects.git
