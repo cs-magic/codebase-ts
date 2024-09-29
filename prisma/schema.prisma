@@ -35,7 +35,7 @@ datasource db {
 
   extensions = [vector]
 
-  schemas = ["public", "auth", "customer", "payment", "llm", "poketto", "wechat", "assistant"]
+  schemas = ["public", "auth", "customer", "payment", "llm", "poketto", "wechat", "assistant", "swot"]
 }
 
 // -----------------------------------------------------------------------------
