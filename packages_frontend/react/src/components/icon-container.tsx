@@ -4,13 +4,13 @@ import clsx from "clsx";
 import React, { ComponentProps, forwardRef } from "react";
 
 // todo: why cn not okay
-import { cn } from "@cs-magic/shadcn/dist/lib/utils";
+import { cn } from "@cs-magic/shadcn/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@cs-magic/shadcn/dist/ui/tooltip";
+} from "@cs-magic/shadcn/ui/tooltip";
 
 export const IconContainer = forwardRef<
   HTMLButtonElement,

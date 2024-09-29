@@ -1,10 +1,10 @@
-import { useAtom } from "jotai"
-import { sum } from "lodash-es"
-import PusherJS from "pusher-js"
-import { useEffect, useRef } from "react"
+import { useAtom } from "jotai";
+import { sum } from "lodash-es";
+import PusherJS from "pusher-js";
+import { useEffect, useRef } from "react";
 
-import { initPusherClient } from "@cs-magic/common/dist/pusher/client/init"
-import { pusherServerConfigs } from "@cs-magic/common/dist/pusher/config"
+import { initPusherClient } from "@cs-magic/common/pusher/client/init";
+import { pusherServerConfigs } from "@cs-magic/common/pusher/config";
 
 import {
   pusherClientAtom,
@@ -13,37 +13,41 @@ import {
   pusherLatenciesAtom,
   pusherLatencyAtom,
   pusherServerIdAtom,
-} from "../store"
+} from "../store";
 
 export const usePusherClient = () => {
-  const [serverId] = useAtom(pusherServerIdAtom)
-  const [, setPusherClient] = useAtom(pusherClientAtom)
-  const [pusherLastPingTime, setPusherLastPingTime] = useAtom(pusherLastPingTimeAtom)
-  const [pusherLastPongTime, setPusherLastPongTime] = useAtom(pusherLastPongTimeAtom)
-  const [latencies] = useAtom(pusherLatenciesAtom)
-  const [, setPusherLatency] = useAtom(pusherLatencyAtom)
+  const [serverId] = useAtom(pusherServerIdAtom);
+  const [, setPusherClient] = useAtom(pusherClientAtom);
+  const [pusherLastPingTime, setPusherLastPingTime] = useAtom(
+    pusherLastPingTimeAtom,
+  );
+  const [pusherLastPongTime, setPusherLastPongTime] = useAtom(
+    pusherLastPongTimeAtom,
+  );
+  const [latencies] = useAtom(pusherLatenciesAtom);
+  const [, setPusherLatency] = useAtom(pusherLatencyAtom);
 
-  const refPusherClient = useRef<PusherJS>()
+  const refPusherClient = useRef<PusherJS>();
 
   useEffect(() => {
     refPusherClient.current = initPusherClient(pusherServerConfigs[serverId], {
       onInit: (pusherClient) => {
-        setPusherClient(pusherClient)
+        setPusherClient(pusherClient);
       },
       onPing: () => {
-        setPusherLastPingTime(Date.now())
+        setPusherLastPingTime(Date.now());
       },
       onPong: () => {
-        setPusherLastPongTime(Date.now())
+        setPusherLastPongTime(Date.now());
 
-        const newLatency = pusherLastPongTime! - pusherLastPingTime!
-        latencies.push(newLatency)
+        const newLatency = pusherLastPongTime! - pusherLastPingTime!;
+        latencies.push(newLatency);
 
-        const latency = sum(latencies) / latencies.length
-        setPusherLatency(latency)
+        const latency = sum(latencies) / latencies.length;
+        setPusherLatency(latency);
       },
-    })
-  }, [])
+    });
+  }, []);
 
-  return refPusherClient.current
-}
+  return refPusherClient.current;
+};

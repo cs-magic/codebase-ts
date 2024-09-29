@@ -1,12 +1,18 @@
-"use client"
+"use client";
 
-import { Atom, PrimitiveAtom, useAtom } from "jotai"
-import React from "react"
+import { Atom, PrimitiveAtom, useAtom } from "jotai";
+import React from "react";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@cs-magic/shadcn/dist/ui/select"
-import { Switch } from "@cs-magic/shadcn/dist/ui/switch"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@cs-magic/shadcn/ui/select";
+import { Switch } from "@cs-magic/shadcn/ui/switch";
 
-import { LabelLine } from "./label-line"
+import { LabelLine } from "./label-line";
 
 /**
  * @param atom
@@ -17,22 +23,30 @@ export const AtomSwitcher = ({
   atom,
   name,
 }: {
-  atom: any // todo: augment
-  name: string
+  atom: any; // todo: augment
+  name: string;
 }) => {
-  const [v, setV] = useAtom(atom as PrimitiveAtom<boolean>)
+  const [v, setV] = useAtom(atom as PrimitiveAtom<boolean>);
 
   return (
     <LabelLine title={name}>
       <Switch checked={v} onCheckedChange={setV} />
     </LabelLine>
-  )
-}
+  );
+};
 
-export const AtomSelector = <T extends string>({ atom, name, vs }: { name: string; vs: T[]; atom: Atom<T> }) => {
-  const [v, setV] = useAtom(atom)
-  return <BaseSelector v={v} setV={setV} name={name} vs={vs} />
-}
+export const AtomSelector = <T extends string>({
+  atom,
+  name,
+  vs,
+}: {
+  name: string;
+  vs: T[];
+  atom: Atom<T>;
+}) => {
+  const [v, setV] = useAtom(atom);
+  return <BaseSelector v={v} setV={setV} name={name} vs={vs} />;
+};
 
 export const BaseSelector = <T extends string>({
   name,
@@ -40,10 +54,10 @@ export const BaseSelector = <T extends string>({
   setV,
   vs,
 }: {
-  name: string
-  v: T
-  setV: (v: T) => void
-  vs: T[]
+  name: string;
+  v: T;
+  setV: (v: T) => void;
+  vs: T[];
 }) => {
   return (
     <LabelLine title={name}>
@@ -61,5 +75,5 @@ export const BaseSelector = <T extends string>({
         </SelectContent>
       </Select>
     </LabelLine>
-  )
-}
+  );
+};

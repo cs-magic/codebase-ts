@@ -1,7 +1,7 @@
-import { LoaderIcon } from "lucide-react"
-import React, { ComponentProps } from "react"
+import { LoaderIcon } from "lucide-react";
+import React, { ComponentProps } from "react";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button"
+import { Button } from "@cs-magic/shadcn/ui/button";
 
 export const ButtonWithLoading = ({
   children,
@@ -10,12 +10,21 @@ export const ButtonWithLoading = ({
   downtime,
   ...props
 }: ComponentProps<typeof Button> & {
-  loading?: boolean
-  downtime?: number
+  loading?: boolean;
+  downtime?: number;
 }) => {
   return (
-    <Button disabled={disabled ?? loading ?? (downtime ? downtime > 0 : false)} {...props}>
-      {loading ? <LoaderIcon className={"animate-spin"} /> : !downtime || downtime <= 0 ? children : `${downtime} S`}
+    <Button
+      disabled={disabled ?? loading ?? (downtime ? downtime > 0 : false)}
+      {...props}
+    >
+      {loading ? (
+        <LoaderIcon className={"animate-spin"} />
+      ) : !downtime || downtime <= 0 ? (
+        children
+      ) : (
+        `${downtime} S`
+      )}
     </Button>
-  )
-}
+  );
+};

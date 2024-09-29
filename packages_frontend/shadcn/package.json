@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "exports": {
-    "./dist/*": "./dist/*.js",
-    "./*": "./*"
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
   },
   "scripts": {
     "clean": "rimraf dist",

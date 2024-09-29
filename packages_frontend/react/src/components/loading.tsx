@@ -7,7 +7,7 @@ import React from "react";
 import {
   AlertDialog,
   AlertDialogContent,
-} from "@cs-magic/shadcn/dist/ui/alert-dialog";
+} from "@cs-magic/shadcn/ui/alert-dialog";
 
 import { FlexContainer } from "./flex-container";
 import { uiLoadingAlertDialogAtom } from "@/store/ui.atom";

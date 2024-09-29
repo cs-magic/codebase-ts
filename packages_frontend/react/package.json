@@ -5,12 +5,7 @@
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./components/*": "./dist/components/*.js",
-    "./shadcn/*": "./dist/shadcn/*.js",
-    "./providers/*": "./dist/providers/*.js",
-    "./src/*": "./src/*.js",
-    "./dist/*": "./dist/*.js",
-    "./*": "./*"
+    "./*": "./dist/*.js"
   },
   "scripts": {
     "clean": "rimraf dist",

@@ -1,9 +1,10 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@cs-magic/shadcn/dist/lib/utils"
+import { cn } from "@cs-magic/shadcn/lib/utils";
 
-export interface InputWithEnterProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  onEnter?: (value: string) => void
+export interface InputWithEnterProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  onEnter?: (value: string) => void;
 }
 
 const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
@@ -22,22 +23,26 @@ const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
         )}
         // todo: onBeforeRefresh ?
         onBlur={(event) => {
-          const value = event.currentTarget.value
-          if (onEnter) onEnter(value)
-          if (onBlur) onBlur(event)
+          const value = event.currentTarget.value;
+          if (onEnter) onEnter(value);
+          if (onBlur) onBlur(event);
         }}
         onKeyDown={(event) => {
-          if (onEnter && event.key === "Enter" && !event.nativeEvent.isComposing) {
-            const value = event.currentTarget.value
-            onEnter(value)
+          if (
+            onEnter &&
+            event.key === "Enter" &&
+            !event.nativeEvent.isComposing
+          ) {
+            const value = event.currentTarget.value;
+            onEnter(value);
           }
-          if (onKeyDown) onKeyDown(event)
+          if (onKeyDown) onKeyDown(event);
         }}
         {...props}
       />
-    )
+    );
   },
-)
-InputWithEnter.displayName = "InputWithEnter"
+);
+InputWithEnter.displayName = "InputWithEnter";
 
-export { InputWithEnter }
+export { InputWithEnter };

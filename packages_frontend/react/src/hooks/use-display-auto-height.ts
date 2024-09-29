@@ -1,11 +1,11 @@
-import { useAtom } from "jotai"
-import { useCallback, useEffect, useState } from "react"
+import { useAtom } from "jotai";
+import { useCallback, useEffect, useState } from "react";
 
-import { isServer } from "@cs-magic/common/dist/env/is-server"
+import { isServer } from "@cs-magic/common/env/is-server";
 
-import { uiInnerHeight, uiViewportHeight } from "../store"
+import { uiInnerHeight, uiViewportHeight } from "../store";
 
-import { useDisplayAutoScrollTop } from "./use-display-auto-scroll-top"
+import { useDisplayAutoScrollTop } from "./use-display-auto-scroll-top";
 
 /**
  * 充分性：自动调整屏幕高度
@@ -14,29 +14,32 @@ import { useDisplayAutoScrollTop } from "./use-display-auto-scroll-top"
  * ref: https://gist.github.com/MartijnHols/e9f4f787efa9190885a708468f63c5bb
  */
 export const useDisplayAutoHeight = () => {
-  const [vh, setVh] = useAtom(uiViewportHeight)
-  const [ih, setIh] = useAtom(uiInnerHeight)
+  const [vh, setVh] = useAtom(uiViewportHeight);
+  const [ih, setIh] = useAtom(uiInnerHeight);
 
   const getHeight = useCallback(() => {
-    const vh = isServer ? 0 : window.visualViewport?.height ?? null
-    setVh(vh)
+    const vh = isServer ? 0 : (window.visualViewport?.height ?? null);
+    setVh(vh);
 
-    const ih = isServer ? 0 : window.innerHeight
-    setIh(ih)
+    const ih = isServer ? 0 : window.innerHeight;
+    setIh(ih);
 
-    return vh ?? ih
-  }, [])
+    return vh ?? ih;
+  }, []);
 
-  const [height, setHeight] = useState<number>(getHeight())
+  const [height, setHeight] = useState<number>(getHeight());
 
-  useDisplayAutoScrollTop()
+  useDisplayAutoScrollTop();
 
   useEffect(() => {
     const handleResize = () => {
-      const h = getHeight()
-      setHeight(h)
+      const h = getHeight();
+      setHeight(h);
 
-      window.document.documentElement.style.setProperty("--app-height", `${h}px`)
+      window.document.documentElement.style.setProperty(
+        "--app-height",
+        `${h}px`,
+      );
 
       // // void serverLog({ vh, ih, h })
       // const h0 = window.innerHeight
@@ -52,25 +55,25 @@ export const useDisplayAutoHeight = () => {
       //   if (h1 > h) setTimeout(f, 100)
       // }
       // f()
-    }
+    };
 
-    handleResize()
+    handleResize();
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
     // From the top of my head this used to be required for older browsers since
     // this didn't trigger a resize event. Keeping it in to be safe.
-    window.addEventListener("orientationchange", handleResize)
+    window.addEventListener("orientationchange", handleResize);
     // This is needed on iOS to resize the viewport when the Virtual/OnScreen
     // Keyboard opens. This does not trigger any other event, or the standard
     // resize event.
-    window.visualViewport?.addEventListener("resize", handleResize)
+    window.visualViewport?.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-      window.removeEventListener("orientationchange", handleResize)
-      window.visualViewport?.removeEventListener("resize", handleResize)
-    }
-  }, [getHeight])
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+      window.visualViewport?.removeEventListener("resize", handleResize);
+    };
+  }, [getHeight]);
 
-  return height
-}
+  return height;
+};

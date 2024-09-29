@@ -4,9 +4,8 @@
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./db/*": "./dist/db/*.js",
-    "./dist/*": "./dist/*.js",
-    "./*": "./*"
+    "./dist/*": "./dist/*",
+    "./*": "./dist/*.js"
   },
   "scripts": {
     "clean": "rm -rf dist",

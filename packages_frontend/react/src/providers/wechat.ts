@@ -1,15 +1,15 @@
-import { Profile } from "next-auth"
+import { Profile } from "next-auth";
 // noinspection ES6PreferShortImport: 因为next-auth的packages.json的exports里规定了从 ./providers/* 里导出, see: https://github.com/nextauthjs/next-auth/issues/8263#issuecomment-1671918326
-import { OAuthConfig, OAuthUserConfig } from "next-auth/providers/index"
+import { OAuthConfig, OAuthUserConfig } from "next-auth/providers/index";
 
-import { WECHAT_PROVIDER_ID } from "@cs-magic/common/dist/auth/providers/wechat/config"
-import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema"
+import { WECHAT_PROVIDER_ID } from "@cs-magic/common/auth/providers/wechat/config";
+import { IWechatProfile } from "@cs-magic/common/auth/providers/wechat/schema";
 import {
   adaptWechatAuthToken,
   getWechatAuthToken,
   getWechatAuthorizationUrl,
   getWechatUserProfile,
-} from "@cs-magic/common/dist/auth/providers/wechat/utils"
+} from "@cs-magic/common/auth/providers/wechat/utils";
 
 export interface IWechatAdaptedProfile extends IWechatProfile, Profile {}
 
@@ -19,7 +19,9 @@ export interface IWechatAdaptedProfile extends IWechatProfile, Profile {}
  * 1. https://github.com/nextauthjs/next-auth/issues/5937
  * 2. node_modules/next-auth/providers/facebook.ts
  */
-export function WechatProvider<P extends IWechatAdaptedProfile>(options: OAuthUserConfig<P>): OAuthConfig<P> {
+export function WechatProvider<P extends IWechatAdaptedProfile>(
+  options: OAuthUserConfig<P>,
+): OAuthConfig<P> {
   // @ts-ignore
   return {
     id: WECHAT_PROVIDER_ID,
@@ -32,9 +34,9 @@ export function WechatProvider<P extends IWechatAdaptedProfile>(options: OAuthUs
 
     token: {
       request: async ({ params: { code } }: { params: { code?: string } }) => {
-        if (!code) throw new Error("missing code")
-        const wechatToken = await getWechatAuthToken(code)
-        return { tokens: adaptWechatAuthToken(wechatToken) }
+        if (!code) throw new Error("missing code");
+        const wechatToken = await getWechatAuthToken(code);
+        return { tokens: adaptWechatAuthToken(wechatToken) };
       },
     },
 
@@ -43,14 +45,14 @@ export function WechatProvider<P extends IWechatAdaptedProfile>(options: OAuthUs
       // todo: 调查微信与其他的OAuth平台到底有啥不同，需要这么繁琐
       // @ts-ignore
       request: async ({ tokens }: { tokens: Partial<IWechatAdaptedToken> }) => {
-        const { id, access_token } = tokens
-        if (!id || !access_token) throw new Error("missing id | access_token")
-        const userInfo = await getWechatUserProfile(access_token, id)
+        const { id, access_token } = tokens;
+        if (!id || !access_token) throw new Error("missing id | access_token");
+        const userInfo = await getWechatUserProfile(access_token, id);
         console.info("[common", {
           tokens,
           userInfo,
-        })
-        return userInfo
+        });
+        return userInfo;
       },
     },
 
@@ -71,16 +73,16 @@ export function WechatProvider<P extends IWechatAdaptedProfile>(options: OAuthUs
         // 更新额外的字段标识
         wxid: profile.openid,
         wxidVerified: new Date(),
-      }
+      };
       console.info("[common", {
         profile,
         profileOut,
-      })
-      return profileOut
+      });
+      return profileOut;
     },
 
     // @ts-ignore
     // style: { logo: "/facebook.svg", bg: "#006aff", text: "#fff" },
     options,
-  }
+  };
 }

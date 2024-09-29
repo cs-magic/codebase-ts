@@ -11,7 +11,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@cs-magic/shadcn/dist/ui/tooltip";
+} from "@cs-magic/shadcn/ui/tooltip";
 import ReactResponsiveMasonry, {
   ResponsiveMasonry,
 } from "react-responsive-masonry";
@@ -19,7 +19,7 @@ import MasonryCSS from "react-masonry-css";
 import "./containers.css";
 
 import { Loading } from "@/components/loading";
-import { type DEVICE_TYPE, DEVICES } from "@cs-magic/common/dist/device";
+import { type DEVICE_TYPE, DEVICES } from "@cs-magic/common/device";
 import { clsx } from "clsx";
 
 export function GridContainer({ children }: PropsWithChildren) {

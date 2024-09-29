@@ -1,8 +1,8 @@
-import { atom } from "jotai"
+import { atom } from "jotai";
 
-import { IDimension } from "@cs-magic/common/dist/schema/ui"
+import { IDimension } from "@cs-magic/common/schema/ui";
 
-import { uiScreenAtom } from "./ui.atom"
+import { uiScreenAtom } from "./ui.atom";
 
 // import { IDimension } from "../ui/schema"
 // import { uiScreenAtom } from "../ui/store"
@@ -11,17 +11,17 @@ import { uiScreenAtom } from "./ui.atom"
 // base
 //////////////////////////////
 
-export const tvFullScreenAtom = atom(false)
-export const tvScreenOnAtom = atom(true)
+export const tvFullScreenAtom = atom(false);
+export const tvScreenOnAtom = atom(true);
 
-export const tvViewportAtom = atom<IDimension>({ width: 0, height: 0 })
+export const tvViewportAtom = atom<IDimension>({ width: 0, height: 0 });
 
 //////////////////////////////
 // derived
 //////////////////////////////
 
 export const tvTargetWidthAtom = atom((get) => {
-  const { width: w, height: h } = get(uiScreenAtom)
+  const { width: w, height: h } = get(uiScreenAtom);
   return get(tvFullScreenAtom)
     ? // 全屏占满
       Math.min(w, h)
@@ -29,10 +29,11 @@ export const tvTargetWidthAtom = atom((get) => {
       ? // pc
         h / 2
       : // mobile
-        w / 2
-})
+        w / 2;
+});
 export const tvScaleAtom = atom((get) => {
-  return get(tvTargetWidthAtom) / 420 // css中的固定尺寸
-})
+  return get(tvTargetWidthAtom) / 420; // css中的固定尺寸
+});
 
-export const getTvScale = ({ width, height }: IDimension) => Math.min(width, height) / 420
+export const getTvScale = ({ width, height }: IDimension) =>
+  Math.min(width, height) / 420;

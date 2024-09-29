@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import { isWechatBrowser } from "@cs-magic/common/dist/env/is-wechat-browser"
+import { isWechatBrowser } from "@cs-magic/common/env/is-wechat-browser";
 
 /**
  * 充分性：检测当前的环境
  * 必要性：有很多魔法代码
  */
 export const useEnvironments = () => {
-  const [isClient, setClient] = useState(false)
-  const [isWechat, setWechat] = useState(false)
-  const [isMobile, setMobile] = useState(false)
+  const [isClient, setClient] = useState(false);
+  const [isWechat, setWechat] = useState(false);
+  const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
-    if (isClient) setClient(true)
-  }, [])
+    if (isClient) setClient(true);
+  }, []);
 
   useEffect(() => {
-    setWechat(isWechatBrowser)
-    setMobile(isMobile)
-  }, [isClient])
+    setWechat(isWechatBrowser);
+    setMobile(isMobile);
+  }, [isClient]);
 
-  return { isClient, isWechat, isMobile }
-}
+  return { isClient, isWechat, isMobile };
+};

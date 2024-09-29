@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-import { LogLevel } from "@cs-magic/common/dist/log/schema"
+import { LogLevel } from "@cs-magic/common/log/schema";
 import {
   Select,
   SelectContent,
@@ -8,11 +8,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@cs-magic/shadcn/dist/ui/select"
+} from "@cs-magic/shadcn/ui/select";
 
-export const SelectLogLevel = ({ value, setValue }: { value: LogLevel; setValue: (v: LogLevel) => void }) => {
+export const SelectLogLevel = ({
+  value,
+  setValue,
+}: {
+  value: LogLevel;
+  setValue: (v: LogLevel) => void;
+}) => {
   return (
-    <Select value={value.toString()} onValueChange={(v) => setValue(Number(v) as LogLevel)}>
+    <Select
+      value={value.toString()}
+      onValueChange={(v) => setValue(Number(v) as LogLevel)}
+    >
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>
@@ -28,5 +37,5 @@ export const SelectLogLevel = ({ value, setValue }: { value: LogLevel; setValue:
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
-}
+  );
+};

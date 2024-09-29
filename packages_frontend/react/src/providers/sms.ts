@@ -1,7 +1,7 @@
-import Credentials from "next-auth/providers/credentials"
+import Credentials from "next-auth/providers/credentials";
 
-import { prisma } from "@cs-magic/common/dist/db/prisma"
-import { SMS_PROVIDER_ID } from "@cs-magic/common/dist/sms.base"
+import { prisma } from "@cs-magic/common/db/prisma";
+import { SMS_PROVIDER_ID } from "@cs-magic/common/sms.base";
 
 export const SmsProvider = Credentials({
   id: SMS_PROVIDER_ID,
@@ -10,10 +10,10 @@ export const SmsProvider = Credentials({
     code: { type: "string", required: true },
   },
   authorize: async (credentials, req) => {
-    console.log("sms authorizing with credentials: ", credentials)
-    if (!credentials) throw new Error("no credentials")
-    const { code, phone } = credentials
-    if (!code || !phone) throw new Error("no phone or code")
+    console.log("sms authorizing with credentials: ", credentials);
+    if (!credentials) throw new Error("no credentials");
+    const { code, phone } = credentials;
+    if (!code || !phone) throw new Error("no phone or code");
 
     const accountInDB = await prisma.account.findUnique({
       where: {
@@ -22,15 +22,16 @@ export const SmsProvider = Credentials({
           provider: SMS_PROVIDER_ID,
         },
       },
-    })
+    });
 
-    if (!accountInDB) throw new Error("账号尚未注册")
+    if (!accountInDB) throw new Error("账号尚未注册");
 
-    if (accountInDB.access_token !== code) throw new Error("验证码不对")
+    if (accountInDB.access_token !== code) throw new Error("验证码不对");
 
-    const userInDB = await prisma.user.findUnique({ where: { phone } })
+    const userInDB = await prisma.user.findUnique({ where: { phone } });
 
-    if (userInDB && userInDB.id !== accountInDB.userId) throw new Error("账号已存在")
+    if (userInDB && userInDB.id !== accountInDB.userId)
+      throw new Error("账号已存在");
 
     return prisma.user.update({
       where: { id: accountInDB.userId },
@@ -38,6 +39,6 @@ export const SmsProvider = Credentials({
         phone,
         phoneVerified: new Date(),
       },
-    })
+    });
   },
-})
+});

@@ -9,22 +9,19 @@ import { uri } from "@/config";
 import {
   NavigationMenu,
   NavigationMenuList,
-} from "@cs-magic/shadcn/dist/ui/navigation-menu";
+} from "@cs-magic/shadcn/ui/navigation-menu";
 import { clsx } from "clsx";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { useMeasure } from "react-use";
 
 export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
-  const [ref, { height }] = useMeasure<HTMLDivElement>();
   // console.log({ height });
 
   return (
     <>
       <div
-        ref={ref}
         className={
-          "fixed top-0 left-0 w-full bg-black/[.50] backdrop-blur-lg z-[9999] border-b"
+          "sticky top-0 left-0 w-full bg-black/[.50] backdrop-blur-lg z-[9999] border-b"
         }
       >
         <div
@@ -108,8 +105,6 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
           </div>
         </div>
       </div>
-
-      <div style={{ height }} />
     </>
   );
 };
