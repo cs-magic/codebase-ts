@@ -1,4 +1,3 @@
-<br/>
 
 ![CS Magic Banner](assets/branding/cs-magic/cs-magic_banner_white.jpg)
 
