@@ -10,6 +10,9 @@
     "packages/*",
     "packages_*/*",
     "private_app-*/*",
+    "private_apps/*",
+    "projects/*",
+    "project_*/*",
     "app_*/*",
     "exts_*/*",
     "tests/*"
