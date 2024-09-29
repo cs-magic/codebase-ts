@@ -21,6 +21,6 @@
   },
   "include": ["src"],
   "references": [
-    {"path": "../common"}
+    {"path": "../frontend-common"}
   ]
 }

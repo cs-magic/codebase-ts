@@ -11,17 +11,13 @@
       "@/*": [
         "./src/*",
         "./public/*",
-      ],
-      "@assets/*": [
         "../../assets/*",
+        "../../*"
       ],
     }
   },
   "include": ["src"],
   "references": [
-    {"path": "../../packages/common"},
-    {"path": "../../packages/llm"},
-    {"path": "../common"},
-    {"path": "../shadcn"},
+    {"path": "../common"}
   ],
 }

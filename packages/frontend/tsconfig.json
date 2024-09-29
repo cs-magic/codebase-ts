@@ -11,13 +11,17 @@
       "@/*": [
         "./src/*",
         "./public/*",
+      ],
+      "@assets/*": [
         "../../assets/*",
-        "../../*"
       ],
     }
   },
   "include": ["src"],
   "references": [
-    {"path": "../../packages/common"}
+    {"path": "../common"},
+    {"path": "../llm"},
+    {"path": "../frontend-common"},
+    {"path": "../frontend-shadcn"},
   ],
 }

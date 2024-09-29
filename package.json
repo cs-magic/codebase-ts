@@ -1,20 +1,15 @@
 {
-  "name": "cs-magic",
+  "name": "@cs-magic/codebase-ts",
   "version": "0.8.1301",
   "author": "markshawn2020 <mark@cs-magic.com>",
-  "repository": "git@github.com:cs-magic/codebase.git",
-  "bugs": "https://github.com/cs-magic/codebase/issues",
+  "repository": "git@github.com:cs-magic/codebase-ts.git",
+  "bugs": "https://github.com/cs-magic/codebase-ts/issues",
   "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/*",
-    "packages_*/*",
-    "private_app-*/*",
-    "private_apps/*",
+    "apps/*",
     "projects/*",
-    "project_*/*",
-    "app_*/*",
-    "exts_*/*",
     "tests/*"
   ],
   "scripts": {
@@ -85,7 +80,6 @@
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
     "tsc-alias": "^1.8.10",
-    "ttypescript": "^1.5.15",
     "typescript": "^5.4.5",
     "typescript-transform-paths": "^3.4.7",
     "webpack": "^5.93.0",
@@ -108,7 +102,10 @@
     "npm-run-all": "^4.1.5",
     "postcss-import": "^16.1.0",
     "prisma": "^5",
-    "shx": "^0.3.4"
+    "shx": "^0.3.4",
+    "ttypescript": "^1.5.15",
+    "typescript": "^5.4.5",
+    "typescript-transform-paths": "^3.4.7"
   },
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {
