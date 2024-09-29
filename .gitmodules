@@ -46,3 +46,6 @@
 	url = git@github.com:cs-magic/app_totem-gpt.git
 [submodule "app_assistant"]
 	url = git@github.com:cs-magic/app_assistant.git
+[submodule "app_wechat/wechat-dbcracker"]
+	path = app_wechat/wechat-dbcracker
+	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
