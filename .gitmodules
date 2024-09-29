@@ -1,25 +1,3 @@
-
-; apps
-[submodule "poketto"]
-	path = app_poketto
-	url = git@github.com:cs-magic/poketto.git
-
-[submodule "eval-ai"]
-	path = app_eval-ai
-    url = git@github.com:cs-magic/eval-ai.git
-
-; exts
-
-[submodule "chrome-exts"]
-	path = exts_chrome
-	url = https://github.com/cs-magic/app_chrome-exts
-
-; assistant
-
-[submodule "assistant"]
-	path = app_assistant
-	url = git@github.com:cs-magic/app_assistant.git
-
 [submodule "packages_wechaty/puppet-service"]
 	path = packages_wechaty/puppet-service
 	url = ./packages_wechaty/puppet-service
@@ -29,6 +7,7 @@
 	url = ./packages_wechaty/grpc
 
 [submodule "app_assistant"]
+    path = app_assistant
 	url = git@github.com:cs-magic/app_assistant.git
 
 [submodule "projects"]
