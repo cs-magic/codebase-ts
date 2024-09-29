@@ -6,7 +6,7 @@
  *  or we will get the following error message:
  *
  * ReferenceError: Cannot access 'Puppet' before initialization
- at file:///home/huan/git/wechaty/puppet/src/puppet/interface-of.ts:23:48
+ at file:///home2/huan/git/wechaty/puppet/src/puppet/interface-of.ts:23:48
  at ModuleJob.run (node:internal/modules/esm/module_job:175:25)
  at async Loader.import (node:internal/modules/esm/loader:178:24)
  at async Object.loadESM (node:internal/process/esm_loader:68:5)

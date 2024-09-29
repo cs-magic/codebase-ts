@@ -35,7 +35,7 @@ import { WechatyBase } from "./wechaty-base.js"
  * Or will throw error:
  *
  *    ReferenceError: Cannot access 'WechatyBase' before initialization
- *    at file:///home/huan/git/wechaty/wechaty/src/wechaty/wechaty-impl.ts:25:47
+ *    at file:///home2/huan/git/wechaty/wechaty/src/wechaty/wechaty-impl.ts:25:47
  *
  * TODO: find out why
  */

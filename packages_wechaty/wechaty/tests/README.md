@@ -21,41 +21,41 @@ $ WECHATY_LOG=silly npm test
 ```bash
 
 
-> wechaty@0.17.11 test /home/zixia/chatie/wechaty
+> wechaty@0.17.11 test /home2/zixia/chatie/wechaty
 > npm run clean && npm run lint && npm run test:unit:retry && npm run test:shell && npm run sloc
 
 
-> wechaty@0.17.11 clean /home/zixia/chatie/wechaty
+> wechaty@0.17.11 clean /home2/zixia/chatie/wechaty
 > shx rm -fr dist/*
 
 
-> wechaty@0.17.11 lint /home/zixia/chatie/wechaty
+> wechaty@0.17.11 lint /home2/zixia/chatie/wechaty
 > npm run check-node-version && npm run lint:ts && npm run lint:es && npm run lint:sh
 
 
-> wechaty@0.17.11 check-node-version /home/zixia/chatie/wechaty
+> wechaty@0.17.11 check-node-version /home2/zixia/chatie/wechaty
 > check-node-version --node ">= 8.5"
 
 
-> wechaty@0.17.11 lint:ts /home/zixia/chatie/wechaty
+> wechaty@0.17.11 lint:ts /home2/zixia/chatie/wechaty
 > tslint --project tsconfig.json && tsc --noEmit
 
 
-> wechaty@0.17.11 lint:es /home/zixia/chatie/wechaty
+> wechaty@0.17.11 lint:es /home2/zixia/chatie/wechaty
 > eslint "{bin,examples,scripts,src,tests}/**/*.js" --ignore-pattern="tests/fixtures/**"
 
 
-> wechaty@0.17.11 lint:sh /home/zixia/chatie/wechaty
+> wechaty@0.17.11 lint:sh /home2/zixia/chatie/wechaty
 > bash -n bin/*.sh
 
 
-> wechaty@0.17.11 test:unit:retry /home/zixia/chatie/wechaty
+> wechaty@0.17.11 test:unit:retry /home2/zixia/chatie/wechaty
 > ts-node scripts/retry-unit-tests
 
 Safe Test: starting...
 Safe Test: running for round #0
 
-> wechaty@0.17.11 test:unit /home/zixia/chatie/wechaty
+> wechaty@0.17.11 test:unit /home2/zixia/chatie/wechaty
 > TS_NODE_FILES=1 tap --node-arg=--require=ts-node/register "src/**/*.spec.ts" "src/*.spec.ts" "tests/*.spec.ts" "tests/**/*.spec.ts"
 
 TAP version 13
@@ -615,11 +615,11 @@ ok 377 should get en blocked message
 
 Safe Test: successed at round #0!
 
-> wechaty@0.17.11 test:shell /home/zixia/chatie/wechaty
+> wechaty@0.17.11 test:shell /home2/zixia/chatie/wechaty
 > shellcheck bin/*.sh
 
 
-> wechaty@0.17.11 sloc /home/zixia/chatie/wechaty
+> wechaty@0.17.11 sloc /home2/zixia/chatie/wechaty
 > sloc bin examples scripts src tests --details --format cli-table --keys total,source,comment && sloc bin examples scripts src tests
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────┬──────────┬────────┬─────────┐

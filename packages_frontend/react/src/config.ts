@@ -1,6 +1,6 @@
 export const uri = {
   images: {
-    explore: "/images/mj-xl/home-2024-09-one-pager.jpg",
+    explore: "/images/mj-xl/home2-2024-09-one-pager.jpg",
     carousal: {
       explore: "/images/mj-xl/carousel-explore.jpg",
       competition: "/images/mj-xl/carousel-peace.jpg",

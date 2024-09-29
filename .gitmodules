@@ -1,9 +1,5 @@
 
 ; apps
-[submodule "homepage"]
-	path = app_home
-	url = git@github.com:cs-magic/cs-magic.git
-
 [submodule "poketto"]
 	path = app_poketto
 	url = git@github.com:cs-magic/poketto.git
@@ -11,14 +7,6 @@
 [submodule "eval-ai"]
 	path = app_eval-ai
     url = git@github.com:cs-magic/eval-ai.git
-
-[submodule "thinkow"]
-	path = app_thinkow
-    url = git@github.com:cs-magic/thinkow.git
-
-[submodule "screensaver"]
-	path = app_screensaver
-	url = https://github.com/cs-magic/app_screensaver
 
 ; exts
 
@@ -39,16 +27,14 @@
 [submodule "packages_wechaty/grpc"]
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
-[submodule "app_card-gpt"]
-	path = app_totem-gpt
-	url = git@github.com:cs-magic/app_card-gpt.git
-[submodule "app_totem-gpt"]
-	url = git@github.com:cs-magic/app_totem-gpt.git
+
 [submodule "app_assistant"]
 	url = git@github.com:cs-magic/app_assistant.git
-[submodule "app_wechat/wechat-dbcracker"]
-	path = app_wechat/wechat-dbcracker
-	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
+
 [submodule "projects"]
 	path = projects
 	url = git@github.com:cs-magic/projects.git
+
+[submodule "apps"]
+	path = apps
+	url = git@github.com:cs-magic/apps.git

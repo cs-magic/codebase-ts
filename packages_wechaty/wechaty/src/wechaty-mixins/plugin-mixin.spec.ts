@@ -10,7 +10,7 @@ import { gErrorMixin } from "../wechaty-mixins/mod.js"
  * Or will throw error:
  *
  * ReferenceError: Cannot access 'wechatifyUserModuleMixin' before initialization
- *   at file:///home/huan/git/wechaty/wechaty/src/wechaty/wechaty-base.ts:58:3 *
+ *   at file:///home2/huan/git/wechaty/wechaty/src/wechaty/wechaty-base.ts:58:3 *
  *
  * TODO: find out why
  */
