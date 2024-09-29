@@ -7,6 +7,6 @@
     - 这是因为 tsbuild 缓存，指定 `"tsBuildInfoFile": "dist/.tsbuildinfo"` 即可
 - [x] `package/llm` 中 config 文件夹如何在编译后保留
     - A：在 tsconfig.json 中配置好 include 的 pattern 即可
-- [x] run `swot-bot`
+- [x] run `assistant-bot`
 - [x] 跑通在 `wechat4u`（cjs） 中调用 `@cs-magic/common`（esm）
 - [x] 清除 `.js | .d.ts`。见 `scripts/rm-tsc.sh`。

@@ -35,7 +35,7 @@ datasource db {
 
   extensions = [vector]
 
-  schemas = ["public", "auth", "customer", "payment", "llm", "poketto", "wechat", "swot"]
+  schemas = ["public", "auth", "customer", "payment", "llm", "poketto", "wechat", "assistant"]
 }
 
 // -----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ enum PlatformType {
   discord
   google
 
-  // for swot
+  // for assistant
   wxmpArticle
   bilibiliVideo
   xhsNote
@@ -905,7 +905,7 @@ model WechatConv {
 // }
 
 // -----------------------------------------------------------------------------
-// swot
+// assistant
 // -----------------------------------------------------------------------------
 
 model Card {
@@ -953,7 +953,7 @@ model Card {
 
   // todo: card comments
   @@unique([platformType, platformId])
-  @@schema("swot")
+  @@schema("assistant")
 }
 
 model Task {
@@ -974,5 +974,5 @@ model Task {
   /// [TaskTimer]
   timer Json?
 
-  @@schema("swot")
+  @@schema("assistant")
 }

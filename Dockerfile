@@ -18,7 +18,7 @@ COPY . /app
 EXPOSE 40326
 
 RUN git submodule init &&  \
-    git submodule update app_swot &&  \
+    git submodule update app_assistant &&  \
     yarn &&  \
-    yarn workspace @cs-magic/swot-web build &&  \
-    yarn workspace @cs-magic/swot-web start
+    yarn workspace @cs-magic/assistant-web build &&  \
+    yarn workspace @cs-magic/assistant-web start

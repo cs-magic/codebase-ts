@@ -1,5 +1,5 @@
 -- CreateSchema
-CREATE SCHEMA IF NOT EXISTS "swot";
+CREATE SCHEMA IF NOT EXISTS "assistant";
 
 -- CreateTable
 CREATE TABLE "public"."Company" (
@@ -103,7 +103,7 @@ CREATE TABLE "llm"."EvalApp" (
 );
 
 -- CreateTable
-CREATE TABLE "swot"."Card" (
+CREATE TABLE "assistant"."Card" (
     "id" TEXT NOT NULL DEFAULT nanoid(7),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE "swot"."Card" (
 );
 
 -- CreateTable
-CREATE TABLE "swot"."Task" (
+CREATE TABLE "assistant"."Task" (
     "id" TEXT NOT NULL DEFAULT nanoid(7),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE "llm"."_EvalAppToRequest" (
 CREATE UNIQUE INDEX "Response_convId_key" ON "llm"."Response"("convId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Card_platformType_platformId_key" ON "swot"."Card"("platformType", "platformId");
+CREATE UNIQUE INDEX "Card_platformType_platformId_key" ON "assistant"."Card"("platformType", "platformId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_EvalAppToRequest_AB_unique" ON "llm"."_EvalAppToRequest"("A", "B");
@@ -166,7 +166,7 @@ CREATE INDEX "_EvalAppToRequest_B_index" ON "llm"."_EvalAppToRequest"("B");
 ALTER TABLE "llm"."Conv" ADD CONSTRAINT "Conv_fromUserId_fkey" FOREIGN KEY ("fromUserId") REFERENCES "customer"."User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "llm"."LlmResponse" ADD CONSTRAINT "LlmResponse_cardId_fkey" FOREIGN KEY ("cardId") REFERENCES "swot"."Card"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "llm"."LlmResponse" ADD CONSTRAINT "LlmResponse_cardId_fkey" FOREIGN KEY ("cardId") REFERENCES "assistant"."Card"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "llm"."Model" ADD CONSTRAINT "Model_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "public"."Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -190,7 +190,7 @@ ALTER TABLE "llm"."EvalApp" ADD CONSTRAINT "EvalApp_user_fkey" FOREIGN KEY ("use
 ALTER TABLE "llm"."EvalApp" ADD CONSTRAINT "EvalApp_modelName_fkey" FOREIGN KEY ("modelName") REFERENCES "llm"."Model"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "swot"."Task" ADD CONSTRAINT "Task_convId_fkey" FOREIGN KEY ("convId") REFERENCES "wechat"."WechatConv"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "assistant"."Task" ADD CONSTRAINT "Task_convId_fkey" FOREIGN KEY ("convId") REFERENCES "wechat"."WechatConv"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "llm"."_EvalAppToRequest" ADD CONSTRAINT "_EvalAppToRequest_A_fkey" FOREIGN KEY ("A") REFERENCES "llm"."EvalApp"("id") ON DELETE CASCADE ON UPDATE CASCADE;

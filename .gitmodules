@@ -26,11 +26,11 @@
 	path = exts_chrome
 	url = https://github.com/cs-magic/app_chrome-exts
 
-; swot
+; assistant
 
-[submodule "swot"]
-	path = app_swot
-	url = git@github.com:cs-magic/app_swot.git
+[submodule "assistant"]
+	path = app_assistant
+	url = git@github.com:cs-magic/app_assistant.git
 
 [submodule "packages_wechaty/puppet-service"]
 	path = packages_wechaty/puppet-service
