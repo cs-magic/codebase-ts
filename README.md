@@ -1,6 +1,10 @@
-# CS Magic TypeScript Codebase
+<br/>
 
 ![CS Magic Banner](assets/branding/cs-magic/cs-magic_banner_white.jpg)
+
+<div align="center">
+<h1>CS Magic TypeScript Codebase</h1>
+</div>
 
 ## Preparation
 
