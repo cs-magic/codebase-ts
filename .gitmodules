@@ -44,3 +44,5 @@
 	url = git@github.com:cs-magic/app_card-gpt.git
 [submodule "app_totem-gpt"]
 	url = git@github.com:cs-magic/app_totem-gpt.git
+[submodule "app_assistant"]
+	url = git@github.com:cs-magic/app_assistant.git
