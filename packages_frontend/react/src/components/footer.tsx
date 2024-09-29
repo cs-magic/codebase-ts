@@ -10,7 +10,7 @@ export const Footer = () => {
     <>
       <div
         className={
-          "w-full flex flex-wrap justify-center items-center bg-black lg:gap-32 px-16 lg:px-32 py-8 gap-12 mt-8 "
+          "w-full flex flex-wrap justify-center items-center lg:gap-32 px-16 lg:px-32 py-8 gap-12 mt-8 bg-black text-white"
         }
       >
         <div
@@ -20,7 +20,7 @@ export const Footer = () => {
         >
           <CompanySlogan />
 
-          <p className={"-ml-1 text-white animate-pulse"}>{mossSlogan}</p>
+          <p className={"-ml-1 animate-pulse"}>{mossSlogan}</p>
 
           {isCurUrlDomestic() && (
             <Link

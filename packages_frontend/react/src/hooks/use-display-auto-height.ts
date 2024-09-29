@@ -33,12 +33,14 @@ export const useDisplayAutoHeight = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const h = getHeight();
-      setHeight(h);
+      const appHeight = getHeight();
+      console.log({ appHeight });
+
+      setHeight(appHeight);
 
       window.document.documentElement.style.setProperty(
         "--app-height",
-        `${h}px`,
+        `${appHeight}px`,
       );
 
       // // void serverLog({ vh, ih, h })

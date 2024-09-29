@@ -8,7 +8,7 @@ import { SessionProvider as NextSessionProvider } from "next-auth/react";
 import { PropsWithChildren } from "react";
 
 export const GlobalProvider = ({ children }: PropsWithChildren) => {
-  useDisplayAutoHeight();
+  // useDisplayAutoHeight(); // todo: 为什么这个会导致界面无法滚动
 
   useEnhancedRouter();
 
@@ -18,7 +18,7 @@ export const GlobalProvider = ({ children }: PropsWithChildren) => {
       <JotaiProvider>
         {/*<TRPCReactProvider>*/}
         {/* 2. ui layer */}
-        <ThemeProvider defaultTheme={"dark"} attribute={"class"}>
+        <ThemeProvider attribute={"class"}>
           {/*<ScreenProvider>*/}
           {children}
           {/*</ScreenProvider>*/}

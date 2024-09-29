@@ -25,3 +25,9 @@ export const uiViewportHeight = atom<number | null>(null);
 export const isSoftKeyboardOn = atom(
   (get) => (get(uiInnerHeight) ?? 0) < get(uiScreenAtom).height,
 );
+
+/**
+ * navbar 高度，用于 main 占满
+ */
+
+export const navbarHeightAtom = atom(0);

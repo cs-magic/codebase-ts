@@ -19,8 +19,11 @@ export default function BaseLayout({
       {/*/ body should be the direct child of html */}
       <body
         className={cn(
-          `font-sans`,
-          "w-screen h-screen flex flex-col", // inter.variable
+          "relative w-screen",
+          // "overflow-y-auto",
+          // "overflow-x-hidden", // for arc sidebar
+          `font-sans`, // inter.variable
+          "bg-background text-foreground",
         )}
       >
         <GlobalProvider>
