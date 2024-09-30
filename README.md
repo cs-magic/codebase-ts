@@ -1,5 +1,5 @@
 
-![CS Magic Banner](assets/branding/cs-magic/cs-magic_banner_white.jpg)
+![CS Magic Banner](assets/branding/neurora/neurora_banner_white.jpg)
 
 <div align="center">
 <h1>CS Magic TypeScript Codebase</h1>

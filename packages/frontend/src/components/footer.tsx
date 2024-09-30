@@ -10,7 +10,7 @@ export const Footer = () => {
     <>
       <div
         className={
-          "w-full flex flex-wrap justify-center items-center lg:gap-32 px-8 sm:px-16 lg:px-32 py-8 gap-12 mt-8 bg-black text-white"
+          "w-full flex flex-wrap justify-center items-center lg:gap-32 px-8 sm:px-16 lg:px-32 py-8 gap-12 bg-black text-white"
         }
       >
         <div
