@@ -1,6 +1,6 @@
 {
   "name": "@cs-magic/codebase-ts",
-  "version": "0.8.1315",
+  "version": "0.8.1319",
   "author": "markshawn2020 <mark@cs-magic.com>",
   "repository": "git@github.com:cs-magic/codebase-ts.git",
   "bugs": "https://github.com/cs-magic/codebase-ts/issues",
@@ -110,10 +110,5 @@
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {
     "initVersion": "7.27.0"
-  },
-  "git": {
-    "scripts": {
-      "pre-push": "npm version patch"
-    }
   }
 }
