@@ -9,9 +9,9 @@
 	url = ./packages_wechaty/grpc
 
 ; apps
-[submodule "docs"]
+[submodule "home"]
 	path = apps/home
-	url = git@github.com:cs-magic/docs.git
+	url = git@github.com:cs-magic/home.git
 	branch = main
 
 [submodule "thinkow-ui"]
