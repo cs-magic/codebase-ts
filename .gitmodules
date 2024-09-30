@@ -1,3 +1,5 @@
+; packages
+
 [submodule "packages_wechaty/puppet-service"]
 	path = packages_wechaty/puppet-service
 	url = ./packages_wechaty/puppet-service
@@ -6,12 +8,61 @@
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
 
+; apps
+[submodule "docs"]
+	path = apps/home
+	url = git@github.com:cs-magic/docs.git
+	branch = main
 
+[submodule "thinkow-ui"]
+	path = apps/thinkow-ui
+	url = git@github.com:cs-magic/open-agent-ui.git
+	branch = main
 
-[submodule "projects"]
-	path = projects
-	url = git@github.com:cs-magic/projects.git
+[submodule "thinkow-api"]
+	path = apps/thinkow-api
+	url = git@github.com:cs-magic/open-agi.git
+	branch = main
 
-[submodule "apps"]
-	path = apps
-	url = git@github.com:cs-magic/apps.git
+[submodule "screensaver"]
+	path = apps/screensaver
+	url = git@github.com:cs-magic/app_screensaver.git
+	branch = main
+
+[submodule "totem-gpt"]
+	path = apps/totem-gpt
+	url = git@github.com:cs-magic/totem-gpt-web.git
+	branch = main
+
+[submodule "wechat-dbcracker"]
+	path = apps/wechat-dbcracker
+	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
+	branch = main
+
+[submodule "exts_chrome_chatbot-exporter"]
+	path = apps/exts_chrome_chatbot-exporter
+	url = git@github.com:cs-magic/exts_chrome_chatbot-exporter.git
+	branch = main
+
+[submodule "exts_chrome_claude-artifact-enhancer"]
+    path = apps/exts_chrome_claude-artifact-enhancer
+	url = git@github.com:cs-magic/exts_chrome_claude-artifact-enhancer.git
+	branch = main
+
+[submodule "eval-ai-web"]
+	path = apps/eval-ai-web
+	url = git@github.com:cs-magic/eval-ai-web.git
+	branch = main
+
+[submodule "assistant-web"]
+	path = apps/assistant-web
+	url = git@github.com:cs-magic/assistant-web.git
+	branch = main
+
+; projects
+
+[submodule "苏颖-智机科技"]
+	path = projects/苏颖-智机科技
+	url = git@github.com:cs-magic/SuYing-ZhijiKeji.git
+	branch = main
+
