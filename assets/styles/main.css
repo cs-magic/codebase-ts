@@ -130,8 +130,9 @@
 @tailwind components;
 
 @layer components {
-    html, body {
-        overflow-y: auto;
+
+    body {
+        position: relative;
     }
 }
 

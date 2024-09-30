@@ -1,9 +1,9 @@
 "use client";
 
+import { JotaiProvider } from "@/components/jotai.provider";
 import { useEnhancedRouter } from "@/hooks/use-enhanced-router";
-import { JotaiProvider } from "@/providers/jotai.provider";
-import { ThemeProvider } from "@/providers/theme.provider";
 import { SessionProvider as NextSessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import { PropsWithChildren } from "react";
 
 export const GlobalProvider = ({ children }: PropsWithChildren) => {

@@ -7,10 +7,8 @@ import { tokenExpireSeconds } from "@cs-magic/common/auth/config";
 import { IWechatProfile } from "@cs-magic/common/auth/providers/wechat/schema";
 import { prisma } from "@cs-magic/common/db/prisma";
 import { env } from "@cs-magic/common/env/get-env";
-
-import { ProfileUpdateProvider } from "@/providers/profile-update";
-// import { SmsProvider } from "./providers/sms.js"
-import { WechatProvider } from "@/providers/wechat";
+import { WechatProvider } from "./next-auth-providers/wechat";
+import { ProfileUpdateProvider } from "./next-auth-providers/profile-update";
 
 const providers: Provider[] = [
   ProfileUpdateProvider,

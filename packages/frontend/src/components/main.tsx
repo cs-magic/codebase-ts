@@ -12,7 +12,7 @@ export const Main = ({ children }: PropsWithChildren) => {
 
   return (
     <main
-      className={cn("relative center")}
+      className={cn("relative center ")}
       style={{
         minHeight: `calc(100vh - ${navbarHeight}px)`,
       }}
