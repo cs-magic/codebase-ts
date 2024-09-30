@@ -14,6 +14,8 @@ packages=(
  jq go # for wechaty-puppet
  bash  # for `shopt -s globstar` since the default base is too old on Mac
  nvm   # for configuring node/npm/yarn
+ postgresql # brew services start postgresql, and install nanoid, pgvectors, see in scripts/post-install.sh
+ redis # brew services start redis
 )
 brew install "${packages[@]}"
 ```
