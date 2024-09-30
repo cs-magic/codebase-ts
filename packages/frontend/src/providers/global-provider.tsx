@@ -1,6 +1,5 @@
 "use client";
 
-import { useDisplayAutoHeight } from "@/hooks/use-display-auto-height";
 import { useEnhancedRouter } from "@/hooks/use-enhanced-router";
 import { JotaiProvider } from "@/providers/jotai.provider";
 import { ThemeProvider } from "@/providers/theme.provider";
