@@ -29,11 +29,6 @@
 	url = git@github.com:cs-magic/app_screensaver.git
 	branch = main
 
-[submodule "totem-gpt"]
-	path = apps/totem-gpt
-	url = git@github.com:cs-magic/totem-gpt-web.git
-	branch = main
-
 [submodule "wechat-dbcracker"]
 	path = apps/wechat-dbcracker
 	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
@@ -66,3 +61,6 @@
 	url = git@github.com:cs-magic/SuYing-ZhijiKeji.git
 	branch = main
 
+[submodule "apps/totem-gpt"]
+	path = apps/totem-gpt
+	url = git@github.com:cs-magic/totem-gpt-web.git
