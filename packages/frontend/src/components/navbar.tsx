@@ -50,8 +50,8 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
             <CompanyLogo width={32} height={32} />
 
             {!productBanner && (
-              <h1 className={clsx("text-2xl font-medium", "tracking-[0.1rem]")}>
-                CS Magic
+              <h1 className={clsx("text-2xl font-medium", "uppercase")}>
+                Neurora
               </h1>
             )}
           </Link>
