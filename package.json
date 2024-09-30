@@ -80,8 +80,8 @@
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
     "tsc-alias": "^1.8.10",
-    "typescript": "^5.4.5",
-    "typescript-transform-paths": "^3.4.7",
+    "typescript": "5.5.4",
+    "typescript-transform-paths": "^3.5.1",
     "webpack": "^5.93.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "wtfnode": "^0.9.1",
@@ -104,8 +104,8 @@
     "prisma": "^5",
     "shx": "^0.3.4",
     "ttypescript": "^1.5.15",
-    "typescript": "^5.4.5",
-    "typescript-transform-paths": "^3.4.7"
+    "typescript": "5.5.4",
+    "typescript-transform-paths": "^3.5.1"
   },
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {

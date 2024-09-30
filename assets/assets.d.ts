@@ -1,6 +1,7 @@
 declare module "*.html"
 declare module "*.yml"
 declare module "*.ttf"
+declare module "*.otf"
 declare module "*.woff2"
 declare module "*.jpg"
 declare module "*.png" {
