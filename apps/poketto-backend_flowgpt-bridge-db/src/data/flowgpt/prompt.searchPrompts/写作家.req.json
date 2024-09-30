@@ -1,0 +1,48 @@
+{
+  "0": {
+    "json": {
+      "tag": null,
+      "categoryId": null,
+      "subCategoryId": null,
+      "sort": null,
+      "q": "写作家",
+      "nsfw": false,
+      "language": "zh"
+    },
+    "meta": {
+      "values": {
+        "tag": ["undefined"],
+        "categoryId": ["undefined"],
+        "subCategoryId": ["undefined"],
+        "sort": ["undefined"]
+      }
+    }
+  },
+  "1": {
+    "json": {
+      "skip": 14,
+      "tag": null,
+      "categoryId": null,
+      "subCategoryId": null,
+      "sort": null,
+      "nsfw": false,
+      "q": "写作家",
+      "language": "zh"
+    },
+    "meta": {
+      "values": {
+        "tag": ["undefined"],
+        "categoryId": ["undefined"],
+        "subCategoryId": ["undefined"],
+        "sort": ["undefined"]
+      }
+    }
+  },
+  "2": {
+    "json": {
+      "query": "写作家",
+      "language": "zh",
+      "threshold": 0.8
+    }
+  }
+}

@@ -1,0 +1,173 @@
+@import "devices.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+colors:
+    shadcn:
+        222.2 84% 4.9%; shadcn bg AND shadcn card bg
+        222.2 47.4% 11.2%; primary, see: https://ui.shadcn.com/docs/theming
+
+    tailwindcss:
+        210, 40%, 98%; light card bg in tailwindcss
+        #0F172A, 222, 47%, 11%; tailwindcss page bg, at: https://tailwindcss.com/docs/text-overflow#ellipsis
+
+    flowbite:
+        #243876; flowbite CTA card bg, at: https://flowbite.com/docs/components/sidebar/
+
+    postman:
+        0, 0%, 13%; postman bg, at: https://www.postman.com/
+        0, 0%, 15%; postman sidebar bg, at: https://www.postman.com/
+        0, 0%, 42%; placeholder / small title
+
+    tsinghua:
+        #82318E; 292 49% 37%; 维基百科清华校色
+
+    github:
+        132 59% 33%; github create repo
+
+    apple:
+        blue: #0076F5; 211.102 100% 48%; apple store get
+
+    general:
+        yellow: 60, 100%, 50%;
+ */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    /*--card: 0 0% 100%;*/
+    --card: 210 40% 98%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /*--primary: 222.2 47.4% 11.2%;*/
+    --primary: 211.542 100% 50%;
+    --primary-foreground: 210 40% 0%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --link: 213 68% 55%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 1% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    /*--primary: 0 0% 18%;*/
+    /*--primary: 0 0% 28%;*/
+    --primary: 211.102 100% 48%;
+
+    --primary-foreground: 0 100% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    /*--muted: 217.2 32.6% 17.5%;*/
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 42%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 20% 80%;
+
+    --destructive: 0 62.8% 30.6%; /* 褐红色 */
+    /*--destructive: 211.542 100% 40%; !*app store  *!*/
+    /*--destructive: 201.913 100% 55%; !*哆啦A梦*!*/
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 20%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9;
+    --link: 213, 68%, 55%;
+
+    --sidebar: 0 0% 13%;
+  }
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+main {
+  height: 100vh;
+  /*height: -webkit-fill-available;*/
+  height: var(--app-height);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    /* 不要对所有的都是用 transition，尤其是有动画的场景，会有闪屏的意外 */
+    /*@apply transition-all;*/
+  }
+
+  a {
+    /*@apply underline underline-offset-2 text-secondary-foreground;*/
+  }
+
+  h2 {
+    @apply text-lg font-semibold;
+  }
+
+  .show-more {
+    background-image: linear-gradient(to right, transparent 0%, hsl(var(--background)) 20%);
+  }
+
+  .p-interactive {
+    @apply bg-transparent text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-colors;
+  }
+
+  .p-btn-horizontal {
+    @apply p-interactive inline-flex w-full  items-center justify-start gap-2 rounded-md pl-4 text-sm font-medium ring-offset-background focus-visible:outline-none h-10 px-4 py-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .p-btn-vertical {
+    @apply p-interactive p-2 flex flex-col gap-1 w-full  items-center justify-between rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  /* 全局 typography */
+  .p-prose {
+    @apply prose prose-sm dark:prose-invert;
+  }
+
+  /* 让子元素居中 */
+  .p-center {
+    @apply flex justify-center items-center;
+  }
+
+  /* 让子元素的外框尺寸都一样 */
+  .p-flex-equal {
+    @apply child:grow child:basis-0 child:whitespace-nowrap;
+  }
+}

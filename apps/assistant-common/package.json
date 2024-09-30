@@ -1,0 +1,44 @@
+{
+  "name": "@cs-magic/assistant-frontend-common",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@cs-magic/assistant-backend": "workspace:^",
+    "@cs-magic/common": "workspace:^",
+    "@cs-magic/react": "workspace:^",
+    "@radix-ui/react-select": "^2.1.1",
+    "@tanstack/react-table": "^8.20.1",
+    "@uiw/react-md-editor": "^4.0.4",
+    "ansicolors": "^0.3.2",
+    "jotai": "*",
+    "lodash-es": "^4.17.21",
+    "lucide-react": "*",
+    "next": "*",
+    "next-auth": "^4.24.7",
+    "pusher-js": "^8.4.0-rc2",
+    "qrcode.react": "^3.1.0",
+    "react": "*",
+    "react-dom": "*",
+    "react-responsive": "^10.0.0",
+    "react-use": "^17.5.1",
+    "sonner": "^1.5.0",
+    "wechaty-puppet": "workspace:^"
+  },
+  "devDependencies": {
+    "@cs-magic/tools": "workspace:^",
+    "@types/ansicolors": "^0",
+    "@types/lodash-es": "^4",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "npm-run-all": "^4.1.5",
+    "vite": "^5.4.2"
+  }
+}

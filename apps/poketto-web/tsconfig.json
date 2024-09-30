@@ -1,0 +1,63 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    //    "declaration": false,
+    "allowJs": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    // ref: https://github.com/vercel/next.js/issues/5307#issuecomment-567166918
+    "sourceMap": true,
+    "strict": true,
+    // 太烦了
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noUncheckedIndexedAccess": true,
+    //    for lodash partial import
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*",
+        "./public/*",
+        "../../*"
+      ],
+      "@assets/*": [
+        "../../assets/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    ".eslintrc.json",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".build/types/**/*.ts",
+    ".serve/types/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    ".next-tmp"
+  ]
+}

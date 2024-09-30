@@ -1,0 +1,26 @@
+{
+  "Debunk": {
+    "title": "吐槽",
+    "desc": "您想随便说点什么？比如：Poketto 会梦到电子羊吗？：）"
+  },
+  "PuzzleInUse": {
+    "title": "使用困惑",
+    "desc": "您不知道如何使用 Poketto ？这一定是我们的问题，欢迎第一时间反馈给我们！"
+  },
+  "FeatureRequest":{
+    "title": "需求提议",
+    "desc": "您觉得我们目前的设计不合理，或者您需要桌面端、App端、小程序端？欢迎提议，并加入贡献墙！"
+  },
+  "BugReport": {
+    "title": "BUG报告",
+    "desc": "您在正常使用过程中发现的问题，我们确认后将赠送 Dora，并加入贡献墙！"
+  },
+  "LeakReport": {
+    "title": "漏洞报告",
+    "desc": "您发现了我们产品的潜在漏洞，欢迎第一时间向我们反馈，将赠送大量 Dora，并加入贡献墙！"
+  },
+  "BusinessCollaboration": {
+    "title": "企业协同",
+    "desc": "您来自于企业，相信 AIGC 赋能的力量，希望和 Poketto 一起推动整个行业的发展！那就来吧！Come On！"
+  }
+}

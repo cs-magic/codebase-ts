@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "@electron-toolkit/tsconfig/tsconfig.node.json",
+    "../../tsconfig.node.json",
+  ],
+  "include": [
+    "electron.vite.config.ts",
+    "src/main/**/*",
+    "src/preload/**/*",
+    "src/assets.d.ts"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+
+    "types": [
+      "electron-vite/node"
+    ],
+
+    "noUnusedLocals": false,
+//    "module": "CommonJS",
+//    "target": "ES5"
+
+    // 要用 esm
+//    "module": "NodeNext",
+//    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*",
+        "resources/*",
+        "../../assets/*",
+        "../../*"
+      ]
+    }
+  }
+}

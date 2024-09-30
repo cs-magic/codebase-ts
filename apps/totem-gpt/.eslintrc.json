@@ -1,0 +1,7 @@
+{
+  "extends": "next",
+  "rules": {
+    "no-unused-vars": "warn",
+    "react/no-children-prop": "warn"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "extends": [
+    "../../tsconfig.dom.json",
+    "@electron-toolkit/tsconfig/tsconfig.web.json",
+  ],
+
+  "include": [
+    "src/renderer/src/env.d.ts",
+    "src/renderer/src/**/*",
+    "src/renderer/src/**/*.tsx",
+    "src/preload/*.d.ts",
+    "tailwind.config.ts",
+    "../../assets/**/*.ts"
+  ],
+  "compilerOptions": {
+
+    "esModuleInterop": true,
+
+    "noUnusedLocals": false,
+    "composite": true,
+    "noEmit": true,
+
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    "jsx": "react-jsx",
+
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*",
+      ],
+      "@renderer/*": [
+        "src/renderer/src/*"
+      ],
+      "@assets/*": [
+        "../../assets/*"
+      ]
+    }
+  },
+}

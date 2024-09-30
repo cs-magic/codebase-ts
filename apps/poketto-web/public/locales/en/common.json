@@ -1,0 +1,89 @@
+{
+  "Login": "Login",
+  "LoadingMoreData": "Loading More Data …",
+  "CurrentlyNoResult": "Currently no result …",
+  "CurrentlyNoComments":"Currently no comments …",
+  "Following": "Following",
+  "Followers": "Followers",
+  "Impact": "Impact",
+  "Dora": "Dora",
+  "EditProfile": "Edit Profile",
+  "Charge": "Charge",
+  "LogOut": "Log Out",
+  "StartLogIn": "Start Log In",
+  "OrContinueWith": "Or continue with",
+  "OrYouCanAlso": "Or you can also：",
+  "product": {
+    "name": "Poketto AI"
+  },
+  "menus": {
+    "homepage": "Home",
+    "explore": "Explore",
+    "account": "Account",
+    "myGallery": "Gallery",
+    "charge": "Charge",
+    "feedback": "Feedback",
+    "whatsPoketto": "What's Poketto AI？",
+    "whatsDora": "What's Dora？",
+    "learningCenter": "Docs / Tutorial",
+    "settings": "Settings"
+  },
+  "general": {
+    "seeAll": "See All",
+    "appList": "App List",
+    "fullscreenMode": "Full Screen",
+    "windowMode": "Window Mode",
+    "detail": "See Detail",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "share": "Share",
+    "open": "Open",
+    "category": "Category",
+    "model": "Model",
+    "language": "Language",
+    "platform": "Platform",
+    "reviews": "Reviews",
+    "information": "Information",
+    "owner": "Owner",
+    "openSource": "Open Source",
+    "config": "Config"
+  },
+  "sorts": {
+    "mostViewed": "Most Viewed",
+    "mostUsed": "Most Used",
+    "newest": "Newest"
+  },
+  "states": {
+    "calls": {
+      "title": "Cals",
+      "desc": "该 App 被用户使用的总次数"
+    },
+    "forks": {
+      "title": "Forks",
+      "desc": "该 App 被用户引用并修改的总次数（待上线）"
+    },
+    "shares": {
+      "title": "Shares",
+      "desc": "该 App 被用户分享的总次数"
+    },
+    "stars": {
+      "title": "Stars",
+      "desc": "该 App 被用户收藏的总次数"
+    },
+    "tips": {
+      "title": "Tips",
+      "desc": "该 App 被用户打赏的总额"
+    },
+    "views": {
+      "title": "Views",
+      "desc": "该 App 在广场内被用户看到的总次数"
+    }
+  },
+  "command": {
+    "inputPlaceholder": "Type a command or search..."
+  },
+  "model": {
+    "gpt-3.5-turbo": "一般问题足够，较便宜",
+    "gpt-4": "专业问题效果更好，较贵，且限量哦"
+  }
+}

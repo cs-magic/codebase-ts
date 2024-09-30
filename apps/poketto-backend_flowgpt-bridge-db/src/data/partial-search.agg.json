@@ -1,0 +1,25 @@
+[
+  {
+    "$search": {
+      "index": "partial-match-tutorial",
+      "phrase": {
+        "path": ["title", "description", "initPrompt"],
+        "query": "{{query}}",
+        "slop": 20
+      },
+      "highlight": {
+        "path": ["title", "description", "initPrompt"]
+      }
+    }
+  },
+  {
+    "$limit": 5
+  },
+  {
+    "$addFields": {
+      "highlights": {
+        "$meta": "searchHighlights"
+      }
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "Usage": "使用记录",
+  "Payments": "支付记录",
+  "CreatedAt": "创建时间",
+  "Content": "内容",
+  "Cost": "消费",
+  "ProductID": "产品ID",
+  "RedeemCode": "优惠码",
+  "Quantity": "数量"
+}
