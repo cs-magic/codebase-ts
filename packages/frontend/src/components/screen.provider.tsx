@@ -19,7 +19,7 @@ export const ScreenProvider = ({ children }: PropsWithChildren) => {
   // return children;
 
   return (
-    <div id={"screen-measure"} ref={ref}>
+    <div id={"screen-measure"} className={"w-full h-full"} ref={ref}>
       {children}
     </div>
   );

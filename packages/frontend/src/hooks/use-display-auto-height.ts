@@ -13,7 +13,11 @@ import { useDisplayAutoScrollTop } from "./use-display-auto-scroll-top";
  *
  * ref: https://gist.github.com/MartijnHols/e9f4f787efa9190885a708468f63c5bb
  */
-export const useDisplayAutoHeight = () => {
+export const useDisplayAutoHeight = ({
+  strategy = "onLoad",
+}: {
+  strategy: "onLoad" | "onHeight";
+}) => {
   const [vh, setVh] = useAtom(uiViewportHeight);
   const [ih, setIh] = useAtom(uiInnerHeight);
 
@@ -29,53 +33,54 @@ export const useDisplayAutoHeight = () => {
 
   const [height, setHeight] = useState<number>(getHeight());
 
-  useDisplayAutoScrollTop();
+  useEffect(
+    () => {
+      const handleResize = () => {
+        const appHeight = getHeight();
+        console.log({ appHeight });
 
-  useEffect(() => {
-    const handleResize = () => {
-      const appHeight = getHeight();
-      console.log({ appHeight });
+        setHeight(appHeight);
 
-      setHeight(appHeight);
+        window.document.documentElement.style.setProperty(
+          "--app-height",
+          `${appHeight}px`,
+        );
 
-      window.document.documentElement.style.setProperty(
-        "--app-height",
-        `${appHeight}px`,
-      );
+        // // void serverLog({ vh, ih, h })
+        // const h0 = window.innerHeight
+        // const unit = (window.innerHeight - h) / 10
+        // let i = 0
+        // const f = () => {
+        //   const h1 = h0 - ++i * unit
+        //   void serverLog({ i, h0, h, unit, h1 })
+        //   window.document.documentElement.style.setProperty(
+        //     "--app-height",
+        //     `${h1}px`,
+        //   )
+        //   if (h1 > h) setTimeout(f, 100)
+        // }
+        // f()
+      };
 
-      // // void serverLog({ vh, ih, h })
-      // const h0 = window.innerHeight
-      // const unit = (window.innerHeight - h) / 10
-      // let i = 0
-      // const f = () => {
-      //   const h1 = h0 - ++i * unit
-      //   void serverLog({ i, h0, h, unit, h1 })
-      //   window.document.documentElement.style.setProperty(
-      //     "--app-height",
-      //     `${h1}px`,
-      //   )
-      //   if (h1 > h) setTimeout(f, 100)
-      // }
-      // f()
-    };
+      handleResize();
 
-    handleResize();
+      window.addEventListener("resize", handleResize);
+      // From the top of my head this used to be required for older browsers since
+      // this didn't trigger a resize event. Keeping it in to be safe.
+      window.addEventListener("orientationchange", handleResize);
+      // This is needed on iOS to resize the viewport when the Virtual/OnScreen
+      // Keyboard opens. This does not trigger any other event, or the standard
+      // resize event.
+      window.visualViewport?.addEventListener("resize", handleResize);
 
-    window.addEventListener("resize", handleResize);
-    // From the top of my head this used to be required for older browsers since
-    // this didn't trigger a resize event. Keeping it in to be safe.
-    window.addEventListener("orientationchange", handleResize);
-    // This is needed on iOS to resize the viewport when the Virtual/OnScreen
-    // Keyboard opens. This does not trigger any other event, or the standard
-    // resize event.
-    window.visualViewport?.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-      window.visualViewport?.removeEventListener("resize", handleResize);
-    };
-  }, [getHeight]);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("orientationchange", handleResize);
+        window.visualViewport?.removeEventListener("resize", handleResize);
+      };
+    },
+    strategy === "onHeight" ? [getHeight] : [],
+  );
 
   return height;
 };

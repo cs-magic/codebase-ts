@@ -1,13 +1,17 @@
 "use client";
 
 import { JotaiProvider } from "@/components/jotai.provider";
+import { ScreenProvider } from "@/components/screen.provider";
+import { useDisplayAutoHeight, useDisplayAutoScrollTop } from "@/hooks";
 import { useEnhancedRouter } from "@/hooks/use-enhanced-router";
 import { SessionProvider as NextSessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { PropsWithChildren } from "react";
 
 export const GlobalProvider = ({ children }: PropsWithChildren) => {
-  // useDisplayAutoHeight(); // todo: 为什么这个会导致界面无法滚动
+  // useDisplayAutoHeight();
+
+  // useDisplayAutoScrollTop() // todo: fix scroll error
 
   useEnhancedRouter();
 
