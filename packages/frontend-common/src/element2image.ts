@@ -23,7 +23,7 @@ export const element2image = async (
     filename = "screenshot",
     backgroundColor = "white",
     format = "jpeg",
-  }: {
+  }?: {
     filename?: string;
     approach?: "html2canvas" | "modern-screenshot";
     backgroundColor?: string;
@@ -75,7 +75,7 @@ export const element2image = async (
     case "modern-screenshot":
       data = await domToDataUrl(element, {
         scale: 2,
-        quality: 0.7,
+        quality: 0.9,
         backgroundColor: backgroundColor,
       });
 
