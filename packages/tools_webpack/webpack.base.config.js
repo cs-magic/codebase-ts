@@ -56,6 +56,11 @@ module.exports = {
           outputPath: "images/",
         },
       },
+
+      {
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      },
     ],
   },
   plugins: [
