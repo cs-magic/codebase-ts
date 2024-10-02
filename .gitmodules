@@ -64,3 +64,6 @@
 [submodule "apps/totem-gpt"]
 	path = apps/totem-gpt
 	url = git@github.com:cs-magic/totem-gpt-web.git
+[submodule "apps/playground"]
+	path = apps/playground
+	url = git@github.com:cs-magic/playgrounds.git
