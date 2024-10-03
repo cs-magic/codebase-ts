@@ -20,8 +20,8 @@ import { RootLayout } from "@/components/layouts/root.layout";
 import { StatusItem } from "@/components/status";
 import privacyEn from "@assets/docs/privacy/privacy_en.html";
 import { CardsLayoutType } from "@/ds";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { useUserInDb as useUser } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
 import { getConversationLink, getConversationsLink } from "@/lib/string";
 
 export default function HomePage() {

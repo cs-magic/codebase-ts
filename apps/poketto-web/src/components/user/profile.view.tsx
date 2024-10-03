@@ -1,3 +1,5 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
+import { ChargeContainer } from "@cs-magic/common/stripe/components/charge-container";
 import { AvatarIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
@@ -14,13 +16,11 @@ import { Separator } from "@cs-magic/shadcn/ui/separator";
 
 import { DEFAULT_USER_NAME } from "@/config";
 import { type UserForProfile } from "@/ds";
-import { useUser } from "packages/common/src/hooks/use-user";
 import { getFlowgptUserLink, getImageUri } from "@/lib/string";
-import { ChargeContainer } from "@/frontend/payment/src/charge-container";
 
 export function UserProfile({ user }: { user: UserForProfile }) {
   const { t } = useTranslation();
-  const { userId } = useUser();
+  const { userId } = useUserInDb();
   const isSelf = userId === user.id;
 
   return (

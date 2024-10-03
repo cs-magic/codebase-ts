@@ -1,3 +1,6 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
+import { getOrigin } from "@cs-magic/common/router";
 import { useDebouncedValue } from "@mantine/hooks";
 import {
   HandIcon,
@@ -51,10 +54,7 @@ import {
 } from "@/config";
 import { useMount } from "@/hooks/use-mount";
 import { usePokettoConversationUrl } from "@/hooks/use-url";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
-import { getOrigin } from "@/packages/common/src/router";
 import { getImageUri } from "@/lib/string";
 import { useAppStore } from "@/store";
 
@@ -138,7 +138,7 @@ export function LogoWithName({ withCompany }: { withCompany?: false }) {
 export default function Navbar() {
   const { t } = useTranslation();
 
-  const { userId } = useUser();
+  const { userId } = useUserInDb();
 
   return (
     <div className="flex items-center border-b px-4 py-2 gap-0">
@@ -196,7 +196,7 @@ export default function Navbar() {
           </Link>
         ) : (
           <Button
-            size={"xs"}
+            // size={"xs"}
             variant={"outline"}
             onClick={() => void signIn()}
             className={"whitespace-nowrap"}

@@ -29,6 +29,12 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
+      "@/prisma/*": [
+        "../../prisma/*"
+      ],
+      "@/packages/*": [
+        "../../packages/*"
+      ],
       "@/*": [
         "./src/*",
         "./public/*",

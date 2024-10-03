@@ -1,10 +1,18 @@
-import { ChatMessageFormatType, Prisma } from "@prisma/client"
-import { z } from "zod"
+import { ChatMessageFormatType, Prisma } from "@prisma/client";
+import { z } from "zod";
 
-import { includeConvForDetailView, selectAppForDetailView, selectConvForListView } from "@/ds"
-import { getWelcomeSystemNotification } from "@/lib/string"
-import { ConversationWhereUniqueInputSchema } from "@/prisma/generated/zod"
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/trpc-helpers"
+import {
+  includeConvForDetailView,
+  selectAppForDetailView,
+  selectConvForListView,
+} from "@/ds";
+import { getWelcomeSystemNotification } from "@/lib/string";
+import { ConversationWhereUniqueInputSchema } from "@/prisma/generated/zod";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "@/server/trpc-helpers";
 
 export const convRouter = createTRPCRouter({
   /**
@@ -35,7 +43,10 @@ export const convRouter = createTRPCRouter({
         input: { appId },
       }) => {
         // console.log("adding app: ", { userId, appId })
-        const app = await prisma.pokettoApp.findUniqueOrThrow({ where: { id: appId }, select: selectAppForDetailView })
+        const app = await prisma.pokettoApp.findUniqueOrThrow({
+          where: { id: appId },
+          select: selectAppForDetailView,
+        });
         const addedConv = await prisma.conversation.create({
           include: {
             messages: true,
@@ -62,9 +73,9 @@ export const convRouter = createTRPCRouter({
               ],
             },
           },
-        })
-        console.log(`added conv(id=${addedConv.id})`)
-        return addedConv
+        });
+        console.log(`added conv(id=${addedConv.id})`);
+        return addedConv;
       },
     ),
 
@@ -82,25 +93,27 @@ export const convRouter = createTRPCRouter({
       }),
   ),
 
-  getForChat: publicProcedure.input(ConversationWhereUniqueInputSchema).query(async ({ ctx: { prisma }, input }) =>
-    prisma.conversation.findUniqueOrThrow({
-      where: input,
-      select: {
-        user: true,
-        app: {
-          select: {
-            prompts: {
-              take: 1,
-              select: {
-                content: true,
-                role: true,
+  getForChat: publicProcedure
+    .input(ConversationWhereUniqueInputSchema)
+    .query(async ({ ctx: { prisma }, input }) =>
+      prisma.conversation.findUniqueOrThrow({
+        where: input,
+        select: {
+          user: true,
+          app: {
+            select: {
+              prompts: {
+                take: 1,
+                select: {
+                  content: true,
+                  role: true,
+                },
               },
             },
           },
         },
-      },
-    }),
-  ),
+      }),
+    ),
 
   get: protectedProcedure.input(ConversationWhereUniqueInputSchema).query(
     async ({
@@ -134,7 +147,7 @@ export const convRouter = createTRPCRouter({
         await prisma.conversation.update({
           where: { id: conversationId },
           data: { pinned: toStatus },
-        })
+        });
       },
     ),
 
@@ -149,4 +162,4 @@ export const convRouter = createTRPCRouter({
       //   todo: validate in zod
       prisma.conversation.delete({ where: input }),
   ),
-})
+});

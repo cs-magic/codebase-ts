@@ -1,43 +1,44 @@
-import { Prisma } from "@prisma/client"
-import { MongoClient } from "mongodb"
+import { Prisma } from "@prisma/client";
+import { MongoClient } from "mongodb";
 
-import { prisma } from "@cs-magic/common/dist/db/prisma"
+import { prisma } from "@cs-magic/common/db/prisma";
 
-import type sampleBasicPrompt from "./data/flowgpt/prompt-basic_2.json"
+import type sampleBasicPrompt from "./data/flowgpt/prompt-basic_2.json";
 
-import AppPromptsCreateManyAppInput = Prisma.AppPromptsCreateManyAppInput
-
-export type IFlowgptPromptBasic = typeof sampleBasicPrompt
+export type IFlowgptPromptBasic = typeof sampleBasicPrompt;
 
 const init = async () => {
-  const mongoClient = new MongoClient("mongodb://localhost")
+  const mongoClient = new MongoClient("mongodb://localhost");
 
-  let p
+  let p;
   try {
-    console.log("initializing flowgpt apps")
-    let k = 0
-    for await (p of mongoClient.db("flowgpt").collection("basic").find() as unknown as IFlowgptPromptBasic[]) {
-      const appPrompts: AppPromptsCreateManyAppInput[] = []
+    console.log("initializing flowgpt apps");
+    let k = 0;
+    for await (p of mongoClient
+      .db("flowgpt")
+      .collection("basic")
+      .find() as unknown as IFlowgptPromptBasic[]) {
+      const appPrompts: Prisma.PokettoAppPromptsCreateManyAppInput[] = [];
       if (p.systemMessage)
         appPrompts.push({
           role: "system",
           content: p.systemMessage,
-        })
+        });
       if (p.initPrompt)
         appPrompts.push({
           role: "user",
           content: p.initPrompt,
-        })
+        });
       if (p.welcomeMessage)
         appPrompts.push({
           role: "assistant",
           content: p.welcomeMessage,
-        })
+        });
       // console.log({ p })
 
       // 不能直接用 new PrismaClient 应该
 
-      await prisma.app.upsert({
+      await prisma.pokettoApp.upsert({
         where: { platform: { platformId: p.id, platformType: "FlowGPT" } },
         update: {},
         create: {
@@ -92,18 +93,18 @@ const init = async () => {
             })),
           },
         },
-      })
+      });
       if (++k % 100 === 0) {
-        console.log(`dumping ${k}`)
+        console.log(`dumping ${k}`);
       }
     }
 
-    console.log("successfully initialized")
+    console.log("successfully initialized");
   } catch (e) {
-    console.error({ e, p })
+    console.error({ e, p });
   } finally {
-    await mongoClient.close()
+    await mongoClient.close();
   }
-}
+};
 
-void init()
+void init();

@@ -1,11 +1,11 @@
-import dayjs from "dayjs"
-import calendar from "dayjs/plugin/calendar"
-import relativeTime from "dayjs/plugin/relativeTime"
-import updateLocale from "dayjs/plugin/updateLocale"
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar";
+import relativeTime from "dayjs/plugin/relativeTime";
+import updateLocale from "dayjs/plugin/updateLocale";
 
-dayjs.extend(relativeTime)
-dayjs.extend(calendar)
-dayjs.extend(updateLocale)
+dayjs.extend(relativeTime);
+dayjs.extend(calendar);
+dayjs.extend(updateLocale);
 
 //  ref: https://day.js.org/docs/en/display/calendar-time
 dayjs.updateLocale("en", {
@@ -15,7 +15,7 @@ dayjs.updateLocale("en", {
     lastWeek: "[Last] ddd", // Last week ( Last Monday at 2:30 AM )
     sameElse: "YYYY/MM/DD", // Everything else ( 7/10/2011 )
   },
-})
+});
 
 //  ref: https://day.js.org/docs/en/display/calendar-time
 dayjs.updateLocale("zh-CN", {
@@ -25,12 +25,12 @@ dayjs.updateLocale("zh-CN", {
     lastWeek: "[上] ddd", // Last week ( Last Monday at 2:30 AM )
     sameElse: "YYYY/MM/DD", // Everything else ( 7/10/2011 )
   },
-})
-const d = dayjs
-export default d
+});
+const d = dayjs;
+export default d;
 
 export function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const getTimestampMS = () => Date.now()
+export const getTimestampMS = () => Date.now();

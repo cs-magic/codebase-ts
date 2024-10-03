@@ -1,8 +1,8 @@
+import StripePricingTable from "@cs-magic/common/stripe/components/pricing-table";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 import { RootLayout } from "@/components/layouts/root.layout";
-import StripePricingTable from "packages/common/src/stripe/components/pricing-table";
 
 export default function GalleryPage() {
   return (

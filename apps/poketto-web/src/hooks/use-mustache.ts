@@ -1,9 +1,8 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
 import Mustache from "mustache";
 
-import { useUser } from "packages/common/src/hooks/use-user";
-
 export const useMustache = () => {
-  const { user } = useUser();
+  const { user } = useUserInDb();
   return (s: string, dict?: Record<string, string | number | boolean>) => {
     const d = { ...{ userName: user?.name }, ...(dict ?? {}) };
     try {

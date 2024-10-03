@@ -16,7 +16,7 @@ import { Skeleton } from "@cs-magic/shadcn/ui/skeleton";
 import { AppHorizontalCardView } from "@/components/app/card-horizontal.view";
 import { AppDetailContainer } from "@/components/app/container";
 import { URI } from "@/config";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { trpcApi } from "@/trpc-api";
 
 const k = 3;
 const n = 5;

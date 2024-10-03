@@ -1,9 +1,9 @@
+import d from "@cs-magic/common/datetime";
 import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
 import { Skeleton } from "@cs-magic/shadcn/ui/skeleton";
 
 import { UsesField, ViewsField } from "@/components/field";
 import { type AppForListView } from "@/ds";
-import d from "@/packages/common/src/datetime";
 import { getImageUri } from "@/lib/string";
 
 export function AppHorizontalCardView({

@@ -31,7 +31,7 @@ import { RootLayout } from "@/components/layouts/root.layout";
 import { CAROUSELS } from "@/config";
 import type { SortOrder } from "@/ds";
 import { CardsLayoutType, Order2icon, sortOrders } from "@/ds";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { trpcApi } from "@/trpc-api";
 import clsx from "@/lib/clsx";
 import { useAppStore } from "@/store";
 

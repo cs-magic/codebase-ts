@@ -1,3 +1,4 @@
+import { prisma } from "@cs-magic/common/db/prisma";
 import { PlatformType } from "@prisma/client";
 import { type GetServerSidePropsContext } from "next";
 import {
@@ -5,7 +6,7 @@ import {
   type User as NextAuthUser,
   getServerSession,
 } from "next-auth";
-import { Provider, SendVerificationRequestParams } from "next-auth/providers";
+import { SendVerificationRequestParams } from "next-auth/providers/email";
 import CredentialProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
 import EmailProvider from "next-auth/providers/email";
@@ -21,8 +22,8 @@ import {
 import { authEnv } from "@/env.mjs";
 import { pokettoPrismaAdapter } from "@/lib/db";
 import { sendVerificationRequest } from "@/lib/email";
-import { getOrigin } from "@/packages/common/src/router";
-import { prisma } from "@/packages/common/src/db/prisma";
+import { getOrigin } from "@cs-magic/common/router";
+import { Provider } from "next-auth/providers/index";
 
 export const emailFrom = siteConfig.welcomeEmailAddress;
 

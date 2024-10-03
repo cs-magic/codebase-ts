@@ -1,3 +1,4 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
 import orderBy from "lodash/orderBy";
 import { XIcon } from "lucide-react";
 import { useTranslation } from "next-i18next";
@@ -11,11 +12,10 @@ import { Input } from "@cs-magic/shadcn/ui/input";
 
 import { type ConvForListView } from "@/ds";
 import { useMustache } from "@/hooks/use-mustache";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
-import d from "@/packages/common/src/datetime";
 import { getConversationLink, getImageUri } from "@/lib/string";
+import { trpcApi } from "@/trpc-api";
+import d from "@cs-magic/common/datetime";
 
 export function ConversationList() {
   const { data: convs } = trpcApi.conv.list.useQuery();
@@ -85,7 +85,7 @@ export function SectionTitle({ children }: PropsWithChildren) {
 
 export function ConversationListView({ c }: { c: ConvForListView }) {
   const m = useMustache();
-  const { userId, isLoadingUser } = useUser();
+  const { userId, isLoadingUser } = useUserInDb();
   const latestMessage = c.messages[0]!;
   const {
     i18n: { language },
@@ -113,7 +113,10 @@ export function ConversationListView({ c }: { c: ConvForListView }) {
             <span className="truncate ">{c.app.name}</span>
             {/* todo: dayjs locale calendar */}
             <span>
-              {d(latestMessage.updatedAt).locale(language).calendar()}
+              {
+                d(latestMessage.updatedAt).locale(language).toString()
+                // todo: .calendar()
+              }
             </span>
           </div>
           <div className="flex gap-2">

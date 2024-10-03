@@ -1,8 +1,7 @@
 "use client";
 
+import { trpcApi } from "@/trpc-api";
 import { useState } from "react";
-
-import { trpcApi } from "packages/common/src/api/trpc-api";
 import { ISendSms } from "@/schema/sms";
 
 export const useSendSms = () => {

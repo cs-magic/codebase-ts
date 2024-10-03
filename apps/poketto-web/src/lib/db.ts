@@ -1,3 +1,4 @@
+import { prisma } from "@cs-magic/common/db/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type PrismaClient } from "@prisma/client";
 import {
@@ -5,7 +6,6 @@ import {
   type Adapter as NextAuthAdapter,
 } from "next-auth/adapters";
 
-import { prisma } from "@/packages/common/src/db/prisma";
 import { initUser } from "@/server/init";
 
 const { createUser: prismaCreateUser, ...adapterExtra } = PrismaAdapter(

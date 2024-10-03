@@ -2,7 +2,7 @@ import { ChatMessageFormatType, PromptRoleType } from "@prisma/client";
 import { Message } from "ai";
 
 import { AllMessage, AppForListView, UserForListView } from "@/ds";
-import d from "@/packages/common/src/datetime";
+import d from "@cs-magic/common/datetime";
 
 export const packMessageWithDate = (
   messages: Message[],

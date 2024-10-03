@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-
 import { POKETTO_APP_ID } from "@/config";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
-import { getOrigin } from "@/packages/common/src/router";
+
+import { useUserInDb as useUser } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
+import { getOrigin } from "@cs-magic/common/router";
 import { getConversationLink } from "@/lib/string";
 
 export const useUrl = () => {

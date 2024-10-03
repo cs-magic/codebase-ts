@@ -1,5 +1,6 @@
 "use client";
 
+import { useUserInDb } from "@/hooks/use-user-in-db";
 import React, { type PropsWithChildren, useEffect } from "react";
 
 import Navbar from "./navbar";
@@ -8,7 +9,6 @@ import { Sidebar } from "@/components/layouts/sidebar";
 import { FooterNavItem } from "@/components/link";
 import { menuGroups } from "@/config";
 import { useMount } from "@/hooks/use-mount";
-import { useUser } from "packages/common/src/hooks/use-user";
 import { useAppStore } from "@/store";
 
 export const Footer = () => (
@@ -99,7 +99,7 @@ export function RootLayout({ children }: PropsWithChildren) {
     };
   }, []);
 
-  const { user } = useUser();
+  const { user } = useUserInDb();
   // console.log({ user })
 
   if (!mounted) {

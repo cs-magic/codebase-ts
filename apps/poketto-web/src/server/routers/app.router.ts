@@ -1,13 +1,15 @@
-import { Prisma } from "@prisma/client"
-import { z } from "zod"
+import { Prisma } from "@prisma/client";
+import { PokettoAppWhereUniqueInputSchema } from "@/../../prisma/generated/zod";
+import { z } from "zod";
 
-import { DEFAULT_BATCH_CARDS, TAG_SEPARATOR } from "@/config"
-import type { SortOrder } from "@/ds"
-import { selectAppForDetailView, selectAppForListView, sortOrders } from "@/ds"
-import { PokettoAppWhereUniqueInputSchema } from "@/prisma/generated/zod"
-import { createTRPCRouter, publicProcedure } from "@/server/trpc-helpers"
+import { DEFAULT_BATCH_CARDS, TAG_SEPARATOR } from "@/config";
+import type { SortOrder } from "@/ds";
+import { selectAppForDetailView, selectAppForListView, sortOrders } from "@/ds";
+import { createTRPCRouter, publicProcedure } from "@/server/trpc-helpers";
 
-const orderByMap: { [key in SortOrder]: Prisma.PokettoAppOrderByWithRelationInput } = {
+const orderByMap: {
+  [key in SortOrder]: Prisma.PokettoAppOrderByWithRelationInput;
+} = {
   mostViewed: { state: { views: "desc" } },
   mostUsed: { state: { calls: "desc" } },
   // mostSaved: { state: { stars: "desc" } },
@@ -16,7 +18,7 @@ const orderByMap: { [key in SortOrder]: Prisma.PokettoAppOrderByWithRelationInpu
   // top: { state: { calls: "desc" } },
   // trending: { state: { shares: "desc" } },
   // recommend
-}
+};
 
 export const pokettoAppRouter = createTRPCRouter({
   /**
@@ -41,7 +43,16 @@ export const pokettoAppRouter = createTRPCRouter({
     .query(
       async ({
         ctx: { prisma },
-        input: { cursor, language, searchKey, limit, sortOrder, categoryMain, categorySub, tags },
+        input: {
+          cursor,
+          language,
+          searchKey,
+          limit,
+          sortOrder,
+          categoryMain,
+          categorySub,
+          tags,
+        },
       }) => {
         const items = await prisma.pokettoApp.findMany({
           cursor: cursor ? { id: cursor } : undefined,
@@ -66,23 +77,25 @@ export const pokettoAppRouter = createTRPCRouter({
             ],
           },
           orderBy: orderByMap[sortOrder],
-        })
-        let nextCursor: typeof cursor | undefined
+        });
+        let nextCursor: typeof cursor | undefined;
         if (items.length > limit) {
-          const nextItem = items.pop()
-          nextCursor = nextItem!.id
+          const nextItem = items.pop();
+          nextCursor = nextItem!.id;
         }
         return {
           items,
           nextCursor,
-        }
+        };
       },
     ),
 
-  get: publicProcedure.input(PokettoAppWhereUniqueInputSchema).query(async ({ ctx: { prisma }, input }) => {
-    return prisma.pokettoApp.findUniqueOrThrow({
-      select: selectAppForDetailView,
-      where: input,
-    })
-  }),
-})
+  get: publicProcedure
+    .input(PokettoAppWhereUniqueInputSchema)
+    .query(async ({ ctx: { prisma }, input }) => {
+      return prisma.pokettoApp.findUniqueOrThrow({
+        select: selectAppForDetailView,
+        where: input,
+      });
+    }),
+});

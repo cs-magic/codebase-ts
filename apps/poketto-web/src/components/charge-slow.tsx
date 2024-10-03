@@ -16,7 +16,7 @@ const SlowChargeForm = () => {
   const { t } = useTranslation();
   const user = useUserInDb();
 
-  const quota = user?.quota ?? defaultModelQuota;
+  const quota = "quota" in user ? user.quota : defaultModelQuota;
 
   return (
     <div className={"columns-2"}>
@@ -28,7 +28,7 @@ const SlowChargeForm = () => {
           <div className={"flex justify-between gap-4"}>
             Dora
             <span className={"text-xs text-muted-foreground ml-2"}>
-              {user ? user.balance : 0}
+              {"balance" in user ? (user.balance as number) : 0}
             </span>
           </div>
           <ChargeContainer className={"w-full"} asChild>
@@ -50,7 +50,7 @@ const SlowChargeForm = () => {
             <div key={k} className={"flex justify-between gap-4"}>
               {k}
               <span className={"text-xs text-muted-foreground ml-2"}>
-                {quota[k]}
+                {quota![k]}
               </span>
             </div>
           ))}

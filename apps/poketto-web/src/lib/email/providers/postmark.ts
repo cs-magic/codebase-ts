@@ -1,8 +1,8 @@
+import { prisma } from "@cs-magic/common/db/prisma";
 import { Client } from "postmark";
 
 import { siteConfig } from "@/config";
 import { authEnv } from "@/env.mjs";
-import { prisma } from "@/packages/common/src/db/prisma";
 
 export const sendViaPostmark = async ({
   identifier,

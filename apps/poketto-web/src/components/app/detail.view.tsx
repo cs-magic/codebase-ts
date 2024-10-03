@@ -1,3 +1,5 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -38,8 +40,6 @@ import {
 } from "@/config";
 import { useMustache } from "@/hooks/use-mustache";
 import { useUrl } from "@/hooks/use-url";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import { vIsNumber } from "@/lib/number";
 import {
@@ -58,7 +58,7 @@ export function AppDetailView({
   appId: string;
   setOpen?: (v: boolean) => void;
 } & HTMLProps<HTMLDivElement>) {
-  const { userId } = useUser();
+  const { userId } = useUserInDb();
   const { data: app, error: appError } = trpcApi.app.get.useQuery({
     id: appId,
   });

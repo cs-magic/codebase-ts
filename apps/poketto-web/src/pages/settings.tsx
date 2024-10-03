@@ -27,8 +27,8 @@ import { LocaleSwitcher, ThemeSwitcher } from "@/components/layouts/navbar";
 import { RootLayout } from "@/components/layouts/root.layout";
 import { URI } from "@/config";
 import { CardsLayoutType } from "@/ds";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { useUserInDb as useUser } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
 import { useAppStore } from "@/store";
 
 export default function SettingsPage() {

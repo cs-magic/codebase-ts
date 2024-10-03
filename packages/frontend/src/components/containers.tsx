@@ -12,9 +12,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@cs-magic/shadcn/ui/tooltip";
-import ReactResponsiveMasonry, {
-  ResponsiveMasonry,
-} from "react-responsive-masonry";
+/**
+ * TypeError: Cannot set property ResponsiveMasonry of #<Object> which has only a getter
+ *     at Object.<anonymous> (/Users/mark/coding/codebase-ts/node_modules/react-responsive-masonry/lib/index.js:18:27)
+ */
+// import ReactResponsiveMasonry, {
+//   ResponsiveMasonry,
+// } from "react-responsive-masonry";
 import MasonryCSS from "react-masonry-css";
 import "./containers.css";
 
@@ -48,15 +52,16 @@ export function MasonryContainer({
       return "todo";
 
     case "react-responsive-masonry":
-      return (
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{ 600: 2, 900: 3, 1200: 4, 1500: 5 }}
-        >
-          <ReactResponsiveMasonry gutter="1rem">
-            {children}
-          </ReactResponsiveMasonry>
-        </ResponsiveMasonry>
-      );
+      return;
+    // (
+    //   <ResponsiveMasonry
+    //     columnsCountBreakPoints={{ 600: 2, 900: 3, 1200: 4, 1500: 5 }}
+    //   >
+    //     <ReactResponsiveMasonry gutter="1rem">
+    //       {children}
+    //     </ReactResponsiveMasonry>
+    //   </ResponsiveMasonry>
+    // );
 
     case "react-masonry-css":
     default:

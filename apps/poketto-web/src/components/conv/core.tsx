@@ -1,3 +1,5 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
+import StripePricingTable from "@cs-magic/common/stripe/components/pricing-table";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { PromptRoleType } from "@prisma/client";
 import {
@@ -77,17 +79,15 @@ import {
 } from "@cs-magic/react/components/containers";
 import { LogoWithName } from "@/components/layouts/navbar";
 import { Loading } from "@cs-magic/react/components/loading";
-import StripePricingTable from "packages/common/src/stripe/components/pricing-table";
 import { contentStyleBasedOnRole } from "@/config";
 import { defaultModelQuota, memoryModes, modelTypes } from "@/ds";
 import { useMustache } from "@/hooks/use-mustache";
 import { useUniversalFullscreen } from "@/hooks/use-universal-fullscreen";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import { packMessageWithDate } from "@/lib/message";
 import { getConversationsLink } from "@/lib/string";
 import { useAppStore } from "@/store";
+import { trpcApi } from "@/trpc-api";
 
 export function ConversationCore({
   conversationId,
@@ -100,7 +100,7 @@ export function ConversationCore({
   const [alertVisible, setAlertVisible] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
 
-  const { userId } = useUser();
+  const { userId } = useUserInDb();
   const utils = trpcApi.useContext();
   const { data: conversation } = trpcApi.conv.get.useQuery({
     id: conversationId,

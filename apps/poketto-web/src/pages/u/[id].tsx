@@ -6,7 +6,7 @@ import { RootLayout } from "@/components/layouts/root.layout";
 import { Loading } from "@cs-magic/react/components/loading";
 import { UserProfile } from "@/components/user/profile.view";
 import { type NextPageWithAuth } from "@/ds";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { trpcApi } from "@/trpc-api";
 
 export const DashboardPage: NextPageWithAuth = () => {
   const router = useRouter();

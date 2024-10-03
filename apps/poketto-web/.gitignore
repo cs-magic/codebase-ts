@@ -1,5 +1,5 @@
 # has secrets
-data/next-auth/login/*
+scripts/data/next-auth/login/*
 
 .env
 

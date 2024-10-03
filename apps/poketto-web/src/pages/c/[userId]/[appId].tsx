@@ -5,7 +5,7 @@ import { AppDetailView } from "@/components/app/detail.view";
 import { ConversationCore } from "@/components/conv/core";
 import { ConversationList } from "@/components/conv/list";
 import { RootLayout } from "@/components/layouts/root.layout";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { trpcApi } from "@/trpc-api";
 import clsx from "@/lib/clsx";
 
 export default function ConversationPage() {

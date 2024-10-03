@@ -30,7 +30,7 @@ import { Textarea } from "@cs-magic/shadcn/ui/textarea";
 
 import { RootLayout } from "@/components/layouts/root.layout";
 import { feedbackFormSchema } from "@/ds";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { trpcApi } from "@/trpc-api";
 import { getZodDefaults } from "@/lib/zod";
 
 const FeedbackForm = () => {

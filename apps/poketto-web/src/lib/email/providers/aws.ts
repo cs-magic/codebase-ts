@@ -1,12 +1,12 @@
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { rootDir } from "@cs-magic/common/path";
 import { promises as fs } from "fs";
 import Mustache from "mustache";
 import path from "path";
 
 import { AWS_REGION, siteConfig } from "@/config";
 import { authEnv } from "@/env.mjs";
-import d from "@/packages/common/src/datetime";
-import { rootDir } from "@/packages/common/path";
+import d from "@cs-magic/common/datetime";
 
 export const sendViaAWS = async ({
   identifier,

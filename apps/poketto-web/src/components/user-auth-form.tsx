@@ -1,5 +1,6 @@
 "use client";
 
+import { getOrigin } from "@cs-magic/common/router";
 import { DiscordLogoIcon } from "@radix-ui/react-icons";
 import { signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
@@ -16,7 +17,6 @@ import { IconContainer } from "@cs-magic/react/components/containers";
 import { GithubIcon } from "@/components/icons";
 import LoginViaEmail from "@/components/login-via-email";
 import LoginViaSms from "@/components/login-via-sms";
-import { getOrigin } from "@/packages/common/src/router";
 import { cn } from "@/lib/utils";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}

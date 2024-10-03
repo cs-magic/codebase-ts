@@ -1,3 +1,4 @@
+import d from "@cs-magic/common/datetime";
 import { useElementSize } from "@mantine/hooks";
 import { StripePayment } from "@prisma/client";
 import { ChevronDownIcon, Pencil2Icon } from "@radix-ui/react-icons";
@@ -21,10 +22,9 @@ import { Loading } from "@cs-magic/react/components/loading";
 import { UserProfile } from "@/components/user/profile.view";
 import { MAX_MOBILE_WIDTH } from "@/config";
 import { type NextPageWithAuth, SelectChatMessageForDetailView } from "@/ds";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { useUserInDb as useUser } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
 import clsx from "@/lib/clsx";
-import d from "@/packages/common/src/datetime";
 
 export const DashboardPage: NextPageWithAuth = () => {
   const { t } = useTranslation();

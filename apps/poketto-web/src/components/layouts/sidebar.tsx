@@ -1,3 +1,5 @@
+import { useUserInDb } from "@/hooks/use-user-in-db";
+import { trpcApi } from "@/trpc-api";
 import { InvitationStatus } from "@prisma/client";
 import { BellIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { UserIcon } from "lucide-react";
@@ -26,13 +28,11 @@ import {
   sidebarSections,
   siteConfig,
 } from "@/config";
-import { useUser } from "packages/common/src/hooks/use-user";
-import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 
 export function Sidebar() {
   const { t } = useTranslation();
-  const { user, userId } = useUser();
+  const { user, userId } = useUserInDb();
 
   return (
     <div

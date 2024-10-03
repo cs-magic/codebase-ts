@@ -11,11 +11,11 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config";
 import { type ExtendedAppProps } from "@/ds";
-import { trpcApi } from "packages/common/src/api/trpc-api";
+import { trpcApi } from "@/trpc-api";
 import clsx from "@/lib/clsx";
-import d from "@/packages/common/src/datetime";
+import d from "@cs-magic/common/datetime";
 import { fontHeading, fontSans } from "@/lib/fonts";
-import { getOrigin } from "@/packages/common/src/router";
+import { getOrigin } from "@cs-magic/common/router";
 
 import "@assets/styles/main.css";
 
