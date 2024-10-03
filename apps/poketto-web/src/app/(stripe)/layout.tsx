@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { type PropsWithChildren } from "react";
 
+import { getOrigin } from "@cs-magic/common/router";
+
 import "./styles.css";
+
 import { LogoImg, siteConfig } from "@/config";
-import { getOrigin } from "@/packages/common/src/router";
 
 const metadata: Metadata = {
   metadataBase: new URL(getOrigin()),

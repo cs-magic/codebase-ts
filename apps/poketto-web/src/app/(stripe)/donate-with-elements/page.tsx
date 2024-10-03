@@ -1,17 +1,17 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next";
 
-import ElementsForm from "@/components/ElementsForm"
+import ElementsForm from "@cs-magic/common/stripe/components/ElementsForm";
 
 const metadata: Metadata = {
   title: "Donate with Elements",
-}
+};
 
 export default function PaymentElementPage({
   searchParams,
 }: {
   searchParams?: {
-    payment_intent_client_secret?: string
-  }
+    payment_intent_client_secret?: string;
+  };
 }): JSX.Element {
   return (
     <div className="page-container">
@@ -19,5 +19,5 @@ export default function PaymentElementPage({
       <p>Donate to our project 💖</p>
       <ElementsForm />
     </div>
-  )
+  );
 }

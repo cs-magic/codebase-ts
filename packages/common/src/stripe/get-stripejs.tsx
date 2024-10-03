@@ -1,6 +1,5 @@
 import { type Stripe, loadStripe } from "@stripe/stripe-js";
-
-import { STRIPE_PUBLISHABLE_KEY } from "@/packages/common/src/payment";
+import { STRIPE_PUBLISHABLE_KEY } from "./config";
 
 let stripePromise: Promise<Stripe | null>;
 const getStripe = () => {

@@ -1,3 +1,4 @@
+import {paymentProducts} from "@cs-magic/common/dist/stripe/config";
 import {
   ChatMessageFormatType,
   PlatformType,
@@ -24,7 +25,7 @@ import {
   POKETTO_SYSTEM_PROMPT,
   POKETTO_WELCOME_MESSAGE,
   USER_INVITATIONS_COUNT,
-  paymentProducts,
+
 } from "@/config";
 import { getWelcomeSystemNotification } from "@/lib/string";
 import { type ExtendedPrismaClient } from "@/packages/common/src/db/prisma";

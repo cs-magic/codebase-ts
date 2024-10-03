@@ -8,7 +8,6 @@ import imgCarouselExplore from "@assets/others/carousel-explore.jpg";
 import imgCarouselPeace from "@assets/others/carousel-peace.jpg";
 import imgHomeCover from "@assets/others/home-cover.jpg";
 import { Prisma, PromptRoleType } from "@prisma/client";
-import StripeProductUncheckedCreateInput = Prisma.StripeProductUncheckedCreateInput;
 
 export { LogoImg };
 
@@ -158,71 +157,12 @@ export type EmailProvider = "aws" | "postmark";
 export const emailProvider: EmailProvider = "aws";
 export const AWS_REGION = "ap-southeast-1";
 
-/// ///////////////////////////////////////////////////
-// stripe
-/// ///////////////////////////////////////////////////
-export const CURRENCY = "usd";
-// Set your amount limits: Use float for decimal currencies and
-// Integer for zero-decimal currencies: https://stripe.com/docs/currencies#zero-decimal.
-export const MIN_AMOUNT = 10.0;
-export const MAX_AMOUNT = 5000.0;
-export const AMOUNT_STEP = 5.0;
-
-export const STRIPE_SUBSCRIBE_PRODUCT_10_ID = "prod_OVgYAVpLO6oLje";
-
 export const FREE_GPT3_DAILY_TOTAL = 1000;
 export const FREE_GPT4_DAILY_TOTAL = 100;
 export const FREE_GPT3_DAILY_USER = 10;
 export const FREE_GPT4_DAILY_USER = 3;
 
 export const DEFAULT_LOCALE = "zh-CN";
-
-// products list, ref: https://dashboard.stripe.com/products?active=true
-export const paymentProducts: StripeProductUncheckedCreateInput[] = [
-  { id: "prod_OVgbKpNEmJJXIy", price: 10, currency: "USD", mode: "payment" },
-  {
-    id: "prod_OVgYAVpLO6oLje",
-    price: 9.99,
-    currency: "USD",
-    mode: "subscription",
-    level: "premium",
-    expire: 30,
-  },
-  {
-    id: "prod_OVgZnKD7Fc2bsQ",
-    price: 29.99,
-    currency: "USD",
-    mode: "subscription",
-    level: "extreme",
-    expire: 30,
-  },
-
-  { id: "prod_OOeVuH6LpHINCO", price: 9.99, currency: "CNY", mode: "payment" },
-  {
-    id: "prod_OOeF8lXiDVIMlS",
-    price: 9.99,
-    currency: "CNY",
-    mode: "subscription",
-    level: "basic",
-    expire: 30,
-  },
-  {
-    id: "prod_OOeH04oe1Sm67z",
-    price: 29.99,
-    currency: "CNY",
-    mode: "subscription",
-    level: "premium",
-    expire: 30,
-  },
-  {
-    id: "prod_OOeIvw7nucInBz",
-    price: 49.99,
-    currency: "CNY",
-    mode: "subscription",
-    level: "extreme",
-    expire: 30,
-  },
-];
 
 export const contentStyleBasedOnRole: Partial<Record<PromptRoleType, string>> =
   {

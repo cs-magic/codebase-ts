@@ -4,9 +4,9 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import type { Stripe } from "stripe";
 
-import { CURRENCY } from "@/config";
-import { stripe } from "@/packages/common/src/stripe/server";
-import { formatAmountForStripe } from "@/utils/stripe-helpers";
+import { CURRENCY } from "./config";
+import { stripe } from "./server";
+import { formatAmountForStripe } from "./utils";
 
 export async function createCheckoutSession(data: FormData): Promise<void> {
   const checkoutSession: Stripe.Checkout.Session =
