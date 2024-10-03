@@ -5,30 +5,30 @@ import { useRouter } from "next/router";
 import React from "react";
 import { toast } from "sonner";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@cs-magic/shadcn/dist/ui/card";
-import { Input } from "@cs-magic/shadcn/dist/ui/input";
-import { Label } from "@cs-magic/shadcn/dist/ui/label";
+} from "@cs-magic/shadcn/ui/card";
+import { Input } from "@cs-magic/shadcn/ui/input";
+import { Label } from "@cs-magic/shadcn/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@cs-magic/shadcn/dist/ui/select";
+} from "@cs-magic/shadcn/ui/select";
 
-import { IconContainer } from "@cs-magic/react/dist/components/containers";
+import { IconContainer } from "@cs-magic/react/components/containers";
 import { LocaleSwitcher, ThemeSwitcher } from "@/components/layouts/navbar";
 import { RootLayout } from "@/components/layouts/root.layout";
 import { URI } from "@/config";
 import { CardsLayoutType } from "@/ds";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import { useAppStore } from "@/store";
 
 export default function SettingsPage() {
@@ -42,7 +42,7 @@ export default function SettingsPage() {
     void router.push(URI.user.auth.logIn);
   };
 
-  const { mutateAsync: delUser } = api.user.del.useMutation({
+  const { mutateAsync: delUser } = trpcApi.user.del.useMutation({
     onSuccess: () => {
       toast.success("成功删除账号");
       void logout();

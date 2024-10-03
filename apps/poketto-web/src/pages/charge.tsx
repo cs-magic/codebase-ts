@@ -1,8 +1,8 @@
-import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import React from "react"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React from "react";
 
-import { RootLayout } from "@/components/layouts/root.layout"
-import StripePricingTable from "@/components/stripe/pricing-table"
+import { RootLayout } from "@/components/layouts/root.layout";
+import StripePricingTable from "packages/common/src/stripe/components/pricing-table";
 
 export default function GalleryPage() {
   return (
@@ -11,7 +11,7 @@ export default function GalleryPage() {
         <StripePricingTable />
       </div>
     </RootLayout>
-  )
+  );
 }
 
 export async function getStaticProps({ locale }) {
@@ -19,5 +19,5 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
     },
-  }
+  };
 }

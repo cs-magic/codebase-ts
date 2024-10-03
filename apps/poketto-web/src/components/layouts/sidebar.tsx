@@ -11,12 +11,12 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@cs-magic/shadcn/dist/ui/avatar";
-import { Badge } from "@cs-magic/shadcn/dist/ui/badge";
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
-import { Separator } from "@cs-magic/shadcn/dist/ui/separator";
+} from "@cs-magic/shadcn/ui/avatar";
+import { Badge } from "@cs-magic/shadcn/ui/badge";
+import { Button } from "@cs-magic/shadcn/ui/button";
+import { Separator } from "@cs-magic/shadcn/ui/separator";
 
-import { IconContainer } from "@cs-magic/react/dist/components/containers";
+import { IconContainer } from "@cs-magic/react/components/containers";
 import { MenuItems } from "@/components/icons";
 import { SidebarNavItem } from "@/components/link";
 import {
@@ -26,8 +26,8 @@ import {
   sidebarSections,
   siteConfig,
 } from "@/config";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 
 export function Sidebar() {
@@ -103,7 +103,7 @@ export function Sidebar() {
 }
 
 export function InviteCard() {
-  const { data = [] } = api.invitation.list.useQuery();
+  const { data = [] } = trpcApi.invitation.list.useQuery();
   // todo: include ? on enum type
   const surplus = data.filter(
     (item) => item.status === InvitationStatus.Idle,

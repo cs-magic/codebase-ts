@@ -1,5 +1,5 @@
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
-import { Skeleton } from "@cs-magic/shadcn/dist/ui/skeleton";
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
+import { Skeleton } from "@cs-magic/shadcn/ui/skeleton";
 
 import { UsesField, ViewsField } from "@/components/field";
 import { type AppForListView } from "@/ds";

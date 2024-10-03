@@ -6,7 +6,7 @@ import path from "path";
 import { AWS_REGION, siteConfig } from "@/config";
 import { authEnv } from "@/env.mjs";
 import d from "@/packages/common/src/datetime";
-import { rootDir } from "@/packages/common/dist/path";
+import { rootDir } from "@/packages/common/path";
 
 export const sendViaAWS = async ({
   identifier,

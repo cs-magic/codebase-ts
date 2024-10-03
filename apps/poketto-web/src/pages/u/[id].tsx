@@ -3,16 +3,16 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import { RootLayout } from "@/components/layouts/root.layout";
-import { Loading } from "@cs-magic/react/dist/components/loading";
+import { Loading } from "@cs-magic/react/components/loading";
 import { UserProfile } from "@/components/user/profile.view";
 import { type NextPageWithAuth } from "@/ds";
-import { api } from "@/lib/api";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 
 export const DashboardPage: NextPageWithAuth = () => {
   const router = useRouter();
   const userId = router.query.id as string;
   // console.log("dashboard: ", { userId })
-  const { data: userProfile } = api.user.getProfile.useQuery(
+  const { data: userProfile } = trpcApi.user.getProfile.useQuery(
     { id: userId },
     { enabled: !!userId },
   );

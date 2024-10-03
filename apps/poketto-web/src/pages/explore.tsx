@@ -8,7 +8,7 @@ import Image from "next/image";
 import React, { Fragment, useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 
-import { AspectRatio } from "@cs-magic/shadcn/dist/ui/aspect-ratio";
+import { AspectRatio } from "@cs-magic/shadcn/ui/aspect-ratio";
 import {
   Select,
   SelectContent,
@@ -16,8 +16,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@cs-magic/shadcn/dist/ui/select";
-import { Separator } from "@cs-magic/shadcn/dist/ui/separator";
+} from "@cs-magic/shadcn/ui/select";
+import { Separator } from "@cs-magic/shadcn/ui/separator";
 
 import { AppVerticalCardView } from "@/components/app/card-vertical.view";
 import { AppDetailContainer } from "@/components/app/container";
@@ -26,12 +26,12 @@ import {
   IconContainer,
   MasonryContainer,
   ResponsiveTooltip,
-} from "@cs-magic/react/dist/components/containers";
+} from "@cs-magic/react/components/containers";
 import { RootLayout } from "@/components/layouts/root.layout";
 import { CAROUSELS } from "@/config";
 import type { SortOrder } from "@/ds";
 import { CardsLayoutType, Order2icon, sortOrders } from "@/ds";
-import { api } from "@/lib/api";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import { useAppStore } from "@/store";
 
@@ -43,7 +43,7 @@ export default function ExplorePage() {
   const Container =
     cardsLayout === CardsLayoutType.grid ? GridContainer : MasonryContainer;
 
-  const query = api.app.list.useInfiniteQuery(
+  const query = trpcApi.app.list.useInfiniteQuery(
     {
       sortOrder,
       language:

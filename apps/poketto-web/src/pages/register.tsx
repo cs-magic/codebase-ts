@@ -2,7 +2,7 @@
 // // import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 // import Link from "next/link"
 //
-// import { buttonVariants } from "@cs-magic/shadcn/dist/ui/button"
+// import { buttonVariants } from "@cs-magic/shadcn/ui/button"
 //
 // import { ProductIcon } from "@/components/icons"
 // import { UserAuthForm } from "@/components/user-auth-form"
@@ -61,5 +61,5 @@
 // // }
 
 export default function RegisterPage() {
-  return null
+  return null;
 }

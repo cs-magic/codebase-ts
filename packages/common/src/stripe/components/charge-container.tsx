@@ -3,8 +3,8 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "@cs-magic/shadcn/dist/ui/dialog";
-import StripePricingTable from "@cs-magic/poketto/src/components/stripe/pricing-table";
+} from "@cs-magic/shadcn/ui/dialog";
+import StripePricingTable from "./pricing-table";
 
 export function ChargeContainer(
   props: React.ComponentPropsWithoutRef<typeof DialogTrigger>,

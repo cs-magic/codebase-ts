@@ -1,13 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { IssueType } from "@prisma/client"
-import { useTranslation } from "next-i18next"
-import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import { useRouter } from "next/router"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { IssueType } from "@prisma/client";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button"
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Form,
   FormControl,
@@ -16,37 +16,47 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@cs-magic/shadcn/dist/ui/form"
-import { Input } from "@cs-magic/shadcn/dist/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@cs-magic/shadcn/dist/ui/select"
-import { Switch } from "@cs-magic/shadcn/dist/ui/switch"
-import { Textarea } from "@cs-magic/shadcn/dist/ui/textarea"
+} from "@cs-magic/shadcn/ui/form";
+import { Input } from "@cs-magic/shadcn/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@cs-magic/shadcn/ui/select";
+import { Switch } from "@cs-magic/shadcn/ui/switch";
+import { Textarea } from "@cs-magic/shadcn/ui/textarea";
 
-import { RootLayout } from "@/components/layouts/root.layout"
-import { feedbackFormSchema } from "@/ds"
-import { api } from "@/lib/api"
-import { getZodDefaults } from "@/lib/zod"
+import { RootLayout } from "@/components/layouts/root.layout";
+import { feedbackFormSchema } from "@/ds";
+import { trpcApi } from "packages/common/src/api/trpc-api";
+import { getZodDefaults } from "@/lib/zod";
 
 const FeedbackForm = () => {
-  const { t } = useTranslation()
-  const router = useRouter()
-  const { mutateAsync: postFeedback, isLoading } = api.feedback.post.useMutation()
+  const { t } = useTranslation();
+  const router = useRouter();
+  const { mutateAsync: postFeedback, isLoading } =
+    trpcApi.feedback.post.useMutation();
 
   const form = useForm<z.infer<typeof feedbackFormSchema>>({
     resolver: zodResolver(feedbackFormSchema),
     defaultValues: getZodDefaults(feedbackFormSchema),
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof feedbackFormSchema>) {
-    console.log("submitted feedback: ", values)
-    toast.success("感谢！提交成功！")
-    await postFeedback(values)
-    void router.push("/")
+    console.log("submitted feedback: ", values);
+    toast.success("感谢！提交成功！");
+    await postFeedback(values);
+    void router.push("/");
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4 w-full md:w-[480px] mx-auto">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 p-4 w-full md:w-[480px] mx-auto"
+      >
         <FormField
           control={form.control}
           name="contact"
@@ -56,7 +66,9 @@ const FeedbackForm = () => {
               <FormControl>
                 <Input placeholder="微信/手机号/邮箱" {...field} />
               </FormControl>
-              <FormDescription>我们会同步以您留的联系方式通知反馈</FormDescription>
+              <FormDescription>
+                我们会同步以您留的联系方式通知反馈
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -66,7 +78,7 @@ const FeedbackForm = () => {
           control={form.control}
           name="issueType"
           render={({ field }) => {
-            console.log({ issueType: field })
+            console.log({ issueType: field });
 
             return (
               <FormItem>
@@ -85,10 +97,12 @@ const FeedbackForm = () => {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormDescription>{t(`feedback:${field.value}.desc`)}</FormDescription>
+                <FormDescription>
+                  {t(`feedback:${field.value}.desc`)}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
-            )
+            );
           }}
         />
 
@@ -101,7 +115,9 @@ const FeedbackForm = () => {
               <FormControl>
                 <Input placeholder="一句话描述您的问题" {...field} />
               </FormControl>
-              <FormDescription>我们不是标题党，但标题真地很重要！</FormDescription>
+              <FormDescription>
+                我们不是标题党，但标题真地很重要！
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -116,7 +132,9 @@ const FeedbackForm = () => {
               <FormControl>
                 <Textarea placeholder="对您问题的补充" {...field} />
               </FormControl>
-              <FormDescription>一份具体的说明往往会有意想不到的效果哦</FormDescription>
+              <FormDescription>
+                一份具体的说明往往会有意想不到的效果哦
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -129,10 +147,15 @@ const FeedbackForm = () => {
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <div className="space-y-0.5">
                 <FormLabel>是否匿名</FormLabel>
-                <FormDescription>匿名的话您的头像等信息将不会被显示</FormDescription>
+                <FormDescription>
+                  匿名的话您的头像等信息将不会被显示
+                </FormDescription>
               </div>
               <FormControl>
-                <Switch checked={field.value} onCheckedChange={field.onChange} />
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -143,15 +166,15 @@ const FeedbackForm = () => {
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};
 
 export default function SeekPlatformWaitlistPage() {
   return (
     <RootLayout>
       <FeedbackForm />
     </RootLayout>
-  )
+  );
 }
 
 export async function getStaticProps({ locale }) {
@@ -159,5 +182,5 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ["common", "feedback"])),
     },
-  }
+  };
 }

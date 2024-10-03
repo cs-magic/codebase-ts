@@ -10,9 +10,9 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@cs-magic/shadcn/dist/ui/tabs";
+} from "@cs-magic/shadcn/ui/tabs";
 
-import { IconContainer } from "@cs-magic/react/dist/components/containers";
+import { IconContainer } from "@cs-magic/react/components/containers";
 import { GithubIcon } from "@/components/icons";
 import LoginViaEmail from "@/components/login-via-email";
 import LoginViaSms from "@/components/login-via-sms";

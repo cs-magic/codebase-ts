@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import React from "react";
 
-import { ResponsiveTooltip } from "@cs-magic/react/dist/components/containers";
+import { ResponsiveTooltip } from "@cs-magic/react/components/containers";
 import { type IMenuItem } from "@/ds";
 
 export function SidebarNavItem({ field, Icon, link }: IMenuItem) {

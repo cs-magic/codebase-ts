@@ -4,14 +4,14 @@ import Head from "next/head";
 import React from "react";
 import { Toaster } from "sonner";
 
-import { TooltipProvider } from "@cs-magic/shadcn/dist/ui/tooltip";
+import { TooltipProvider } from "@cs-magic/shadcn/ui/tooltip";
 
 import ErrorBoundary from "@/components/error-boundary";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config";
 import { type ExtendedAppProps } from "@/ds";
-import { api } from "@/lib/api";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import d from "@/packages/common/src/datetime";
 import { fontHeading, fontSans } from "@/lib/fonts";
@@ -148,4 +148,4 @@ function MyApp({
   );
 }
 
-export default api.withTRPC(appWithTranslation(MyApp));
+export default trpcApi.withTRPC(appWithTranslation(MyApp));

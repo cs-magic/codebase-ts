@@ -1,15 +1,20 @@
-import capitalize from "lodash/capitalize"
-import startCase from "lodash/startCase"
-import Image from "next/image"
+import capitalize from "lodash/capitalize";
+import startCase from "lodash/startCase";
+import Image from "next/image";
 
-import { AspectRatio } from "@cs-magic/shadcn/dist/ui/aspect-ratio"
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar"
-import { Badge } from "@cs-magic/shadcn/dist/ui/badge"
+import { AspectRatio } from "@cs-magic/shadcn/ui/aspect-ratio";
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
+import { Badge } from "@cs-magic/shadcn/ui/badge";
 
-import { UsesField, ViewsField } from "@/components/field"
-import { type AppForListView, CardsLayoutType, IMAGE_SIZE, type SortOrder } from "@/ds"
-import clsx from "@/lib/clsx"
-import { getImageUri } from "@/lib/string"
+import { UsesField, ViewsField } from "@/components/field";
+import {
+  type AppForListView,
+  CardsLayoutType,
+  IMAGE_SIZE,
+  type SortOrder,
+} from "@/ds";
+import clsx from "@/lib/clsx";
+import { getImageUri } from "@/lib/string";
 
 export const AppVerticalCardView = ({
   app,
@@ -17,13 +22,13 @@ export const AppVerticalCardView = ({
   sort,
   size = "md",
 }: {
-  app: AppForListView
-  cardsLayout: CardsLayoutType
-  sort: SortOrder
-  size?: IMAGE_SIZE
+  app: AppForListView;
+  cardsLayout: CardsLayoutType;
+  sort: SortOrder;
+  size?: IMAGE_SIZE;
 }) => {
   // console.log("app avatar: ", app.avatar)
-  const appAvatar = getImageUri(app.avatar, size)
+  const appAvatar = getImageUri(app.avatar, size);
   return (
     <div className="group relative w-full overflow-hidden rounded-2xl text-white">
       {cardsLayout === CardsLayoutType.grid ? (
@@ -47,7 +52,7 @@ export const AppVerticalCardView = ({
           alt={app.name}
           style={{ width: "100%", height: "auto" }}
           onError={(error) => {
-            console.log({ error })
+            console.log({ error });
           }}
         />
       )}
@@ -55,7 +60,11 @@ export const AppVerticalCardView = ({
       {/* header desc */}
       <div className="| absolute top-0 flex w-full justify-between p-4">
         <div className="flex items-center gap-2">
-          {app.tags.length && <Badge variant="destructive">{startCase(capitalize(app.tags[0]?.name))}</Badge>}
+          {app.tags.length && (
+            <Badge variant="destructive">
+              {startCase(capitalize(app.tags[0]?.name))}
+            </Badge>
+          )}
         </div>
         {/*<AppDetailContainer appId={app.id}>*/}
         {/*  <DotsVerticalIcon className="hidden group-hover:flex" />*/}
@@ -73,7 +82,9 @@ export const AppVerticalCardView = ({
         {/* title */}
         <div className="truncate text-lg font-normal">{app.name}</div>
 
-        <div className="text-md hidden transition-all group-hover:line-clamp-3">{app.desc}</div>
+        <div className="text-md hidden transition-all group-hover:line-clamp-3">
+          {app.desc}
+        </div>
 
         {/*	user - ranks */}
         <div className="| flex justify-between text-xs text-slate-100  dark:text-primary-foreground/75 ">
@@ -93,5 +104,5 @@ export const AppVerticalCardView = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

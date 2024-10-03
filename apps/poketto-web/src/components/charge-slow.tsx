@@ -1,21 +1,21 @@
-import { useTranslation } from "next-i18next";
-import * as React from "react";
+import { defaultModelQuota, modelTypes } from "@/ds";
+import { useUserInDb } from "@/hooks/use-user-in-db";
+import { ChargeContainer } from "@cs-magic/common/stripe/components/charge-container";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-} from "@cs-magic/shadcn/dist/ui/card";
-
-import { defaultModelQuota, modelTypes } from "@/ds";
-import { useUser } from "@/hooks/use-user";
-import { ChargeContainer } from "@/frontend/payment/src/charge-container";
+} from "@cs-magic/shadcn/ui/card";
+import { useTranslation } from "next-i18next";
+import * as React from "react";
 
 const SlowChargeForm = () => {
   const { t } = useTranslation();
-  const { user } = useUser();
+  const user = useUserInDb();
+
   const quota = user?.quota ?? defaultModelQuota;
 
   return (

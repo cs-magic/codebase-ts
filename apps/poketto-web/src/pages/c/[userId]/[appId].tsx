@@ -1,18 +1,18 @@
-import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import { useRouter } from "next/router"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 
-import { AppDetailView } from "@/components/app/detail.view"
-import { ConversationCore } from "@/components/conv/core"
-import { ConversationList } from "@/components/conv/list"
-import { RootLayout } from "@/components/layouts/root.layout"
-import { api } from "@/lib/api"
-import clsx from "@/lib/clsx"
+import { AppDetailView } from "@/components/app/detail.view";
+import { ConversationCore } from "@/components/conv/core";
+import { ConversationList } from "@/components/conv/list";
+import { RootLayout } from "@/components/layouts/root.layout";
+import { trpcApi } from "packages/common/src/api/trpc-api";
+import clsx from "@/lib/clsx";
 
 export default function ConversationPage() {
-  const router = useRouter()
-  const userId = router.query.userId as string
-  const appId = router.query.appId as string
-  const { data: curConv } = api.conv.get.useQuery(
+  const router = useRouter();
+  const userId = router.query.userId as string;
+  const appId = router.query.appId as string;
+  const { data: curConv } = trpcApi.conv.get.useQuery(
     {
       conversation: {
         userId,
@@ -20,7 +20,7 @@ export default function ConversationPage() {
       },
     },
     { enabled: !!(userId && appId) },
-  )
+  );
   // console.log({ userId, appId, curConv })
 
   return (
@@ -30,7 +30,9 @@ export default function ConversationPage() {
           <ConversationList />
         </section>
 
-        <section className={clsx("relative w-full lg:grow", " overflow-hidden")}>
+        <section
+          className={clsx("relative w-full lg:grow", " overflow-hidden")}
+        >
           {curConv && <ConversationCore conversationId={curConv.id} />}
         </section>
 
@@ -39,7 +41,7 @@ export default function ConversationPage() {
         </section>
       </div>
     </RootLayout>
-  )
+  );
 }
 
 export async function getServerSideProps({ locale }) {
@@ -47,5 +49,5 @@ export async function getServerSideProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
     },
-  }
+  };
 }

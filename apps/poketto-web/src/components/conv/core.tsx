@@ -28,7 +28,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 
-import { TextareaAuto } from "@cs-magic/react/dist/components/textarea-auto";
+import { TextareaAuto } from "@cs-magic/react/components/textarea-auto";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -38,52 +38,52 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@cs-magic/shadcn/dist/ui/alert-dialog";
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
-import { Badge } from "@cs-magic/shadcn/dist/ui/badge";
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+} from "@cs-magic/shadcn/ui/alert-dialog";
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
+import { Badge } from "@cs-magic/shadcn/ui/badge";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@cs-magic/shadcn/dist/ui/card";
+} from "@cs-magic/shadcn/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "@cs-magic/shadcn/dist/ui/dialog";
+} from "@cs-magic/shadcn/ui/dialog";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@cs-magic/shadcn/dist/ui/popover";
+} from "@cs-magic/shadcn/ui/popover";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
-} from "@cs-magic/shadcn/dist/ui/select";
-import { Separator } from "@cs-magic/shadcn/dist/ui/separator";
-import { Textarea } from "@cs-magic/shadcn/dist/ui/textarea";
+} from "@cs-magic/shadcn/ui/select";
+import { Separator } from "@cs-magic/shadcn/ui/separator";
+import { Textarea } from "@cs-magic/shadcn/ui/textarea";
 
 import { AppDetailContainer } from "@/components/app/container";
 import SlowChargeForm from "@/components/charge-slow";
 import {
   AutoScrollContainer,
   IconContainer,
-} from "@cs-magic/react/dist/components/containers";
+} from "@cs-magic/react/components/containers";
 import { LogoWithName } from "@/components/layouts/navbar";
-import { Loading } from "@cs-magic/react/dist/components/loading";
-import StripePricingTable from "@/components/stripe/pricing-table";
+import { Loading } from "@cs-magic/react/components/loading";
+import StripePricingTable from "packages/common/src/stripe/components/pricing-table";
 import { contentStyleBasedOnRole } from "@/config";
 import { defaultModelQuota, memoryModes, modelTypes } from "@/ds";
 import { useMustache } from "@/hooks/use-mustache";
 import { useUniversalFullscreen } from "@/hooks/use-universal-fullscreen";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import { packMessageWithDate } from "@/lib/message";
 import { getConversationsLink } from "@/lib/string";
@@ -101,17 +101,19 @@ export function ConversationCore({
   const [hasUnread, setHasUnread] = useState(false);
 
   const { userId } = useUser();
-  const utils = api.useContext();
-  const { data: conversation } = api.conv.get.useQuery({ id: conversationId });
-  const { data: user } = api.user.getProfile.useQuery(
+  const utils = trpcApi.useContext();
+  const { data: conversation } = trpcApi.conv.get.useQuery({
+    id: conversationId,
+  });
+  const { data: user } = trpcApi.user.getProfile.useQuery(
     { id: userId },
     { enabled: !!userId },
   );
-  const { data: initialMessages } = api.message.list.useQuery(
+  const { data: initialMessages } = trpcApi.message.list.useQuery(
     { conversationId: conversationId },
     { enabled: !!userId },
   );
-  const { mutateAsync: pinConv } = api.conv.pin.useMutation({
+  const { mutateAsync: pinConv } = trpcApi.conv.pin.useMutation({
     onSuccess: () => {
       void utils.conv.list.invalidate();
       void utils.conv.get.invalidate();

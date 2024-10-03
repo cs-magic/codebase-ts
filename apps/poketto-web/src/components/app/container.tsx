@@ -1,8 +1,12 @@
-import React from "react"
+import React from "react";
 
-import { Dialog, DialogContent, DialogTrigger } from "@cs-magic/shadcn/dist/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@cs-magic/shadcn/ui/dialog";
 
-import { AppDetailView } from "@/components/app/detail.view"
+import { AppDetailView } from "@/components/app/detail.view";
 
 export function AppDetailContainer({
   appId,
@@ -10,9 +14,9 @@ export function AppDetailContainer({
   onOpenChange,
   ...props
 }: {
-  appId: string
-  open?: boolean
-  onOpenChange?: (v: boolean) => void
+  appId: string;
+  open?: boolean;
+  onOpenChange?: (v: boolean) => void;
 } & React.ComponentPropsWithoutRef<typeof DialogTrigger>) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -21,5 +25,5 @@ export function AppDetailContainer({
         <AppDetailView appId={appId} setOpen={onOpenChange} />
       </DialogContent>
     </Dialog>
-  )
+  );
 }

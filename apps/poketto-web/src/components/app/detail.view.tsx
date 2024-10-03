@@ -15,19 +15,19 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTrigger,
-} from "@cs-magic/shadcn/dist/ui/alert-dialog";
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
-import { Badge } from "@cs-magic/shadcn/dist/ui/badge";
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+} from "@cs-magic/shadcn/ui/alert-dialog";
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
+import { Badge } from "@cs-magic/shadcn/ui/badge";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "@cs-magic/shadcn/dist/ui/dialog";
-import { Separator } from "@cs-magic/shadcn/dist/ui/separator";
+} from "@cs-magic/shadcn/ui/dialog";
+import { Separator } from "@cs-magic/shadcn/ui/separator";
 
-import { MasonryContainer } from "@cs-magic/react/dist/components/containers";
-import { Loading } from "@cs-magic/react/dist/components/loading";
+import { MasonryContainer } from "@cs-magic/react/components/containers";
+import { Loading } from "@cs-magic/react/components/loading";
 import { InfoItem, StatusItem } from "@/components/status";
 import {
   FLOWGPT_HOMEPAGE,
@@ -38,8 +38,8 @@ import {
 } from "@/config";
 import { useMustache } from "@/hooks/use-mustache";
 import { useUrl } from "@/hooks/use-url";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import { vIsNumber } from "@/lib/number";
 import {
@@ -59,7 +59,9 @@ export function AppDetailView({
   setOpen?: (v: boolean) => void;
 } & HTMLProps<HTMLDivElement>) {
   const { userId } = useUser();
-  const { data: app, error: appError } = api.app.get.useQuery({ id: appId });
+  const { data: app, error: appError } = trpcApi.app.get.useQuery({
+    id: appId,
+  });
   const { t } = useTranslation();
   const { origin } = useUrl();
 
@@ -300,8 +302,8 @@ export function InstallButton({
   setOpen?: (v: boolean) => void;
 }) {
   const router = useRouter();
-  const utils = api.useContext();
-  const { data: hasApp } = api.conv.has.useQuery({
+  const utils = trpcApi.useContext();
+  const { data: hasApp } = trpcApi.conv.has.useQuery({
     conversation: { userId, appId },
   });
   const go = () => {
@@ -309,7 +311,7 @@ export function InstallButton({
     setOpen && setOpen(false);
   };
 
-  const { mutateAsync: addApp } = api.conv.add.useMutation({
+  const { mutateAsync: addApp } = trpcApi.conv.add.useMutation({
     onSuccess: (data) => {
       toast.success(`Successfully added one app`);
       void utils.conv.list.invalidate();
@@ -345,13 +347,13 @@ export function UninstallButton({
   setOpen?: (v: boolean) => void;
 }) {
   const router = useRouter();
-  const { data: conv } = api.conv.get.useQuery({
+  const { data: conv } = trpcApi.conv.get.useQuery({
     conversation: { userId, appId },
   });
 
-  const utils = api.useContext();
+  const utils = trpcApi.useContext();
 
-  const { mutate: delConv, data: delResult } = api.conv.del.useMutation({
+  const { mutate: delConv, data: delResult } = trpcApi.conv.del.useMutation({
     onSuccess: (input) => {
       toast.success(`You have deleted one app.`);
       void utils.conv.list.invalidate();

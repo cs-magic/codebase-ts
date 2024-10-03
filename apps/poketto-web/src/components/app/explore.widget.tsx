@@ -1,25 +1,30 @@
-import { ArrowRightIcon } from "@radix-ui/react-icons"
-import range from "lodash/range"
-import sampleSize from "lodash/sampleSize"
-import { useTranslation } from "next-i18next"
-import Link from "next/link"
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import range from "lodash/range";
+import sampleSize from "lodash/sampleSize";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@cs-magic/shadcn/dist/ui/card"
-import { Skeleton } from "@cs-magic/shadcn/dist/ui/skeleton"
+import { Button } from "@cs-magic/shadcn/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@cs-magic/shadcn/ui/card";
+import { Skeleton } from "@cs-magic/shadcn/ui/skeleton";
 
-import { AppHorizontalCardView } from "@/components/app/card-horizontal.view"
-import { AppDetailContainer } from "@/components/app/container"
-import { URI } from "@/config"
-import { api } from "@/lib/api"
+import { AppHorizontalCardView } from "@/components/app/card-horizontal.view";
+import { AppDetailContainer } from "@/components/app/container";
+import { URI } from "@/config";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 
-const k = 3
-const n = 5
+const k = 3;
+const n = 5;
 
 export function ExploreAppsWidget() {
-  const { i18n, t } = useTranslation()
+  const { i18n, t } = useTranslation();
 
-  const query = api.app.list.useInfiniteQuery(
+  const query = trpcApi.app.list.useInfiniteQuery(
     {
       limit: n,
       language: i18n.language === "zh-CN" ? "zh" : "en",
@@ -27,8 +32,8 @@ export function ExploreAppsWidget() {
     {
       getNextPageParam: (lastPage, allPages) => lastPage.nextCursor, // 这个必须加
     },
-  )
-  const apps = query.data?.pages.flatMap((item) => item.items)
+  );
+  const apps = query.data?.pages.flatMap((item) => item.items);
 
   // console.log({ apps })
 
@@ -38,7 +43,10 @@ export function ExploreAppsWidget() {
         <div className="| flex shrink-0 items-end justify-between">
           <CardTitle>{t("homepage:ExploreTrendingApps")}</CardTitle>
           <Link href={URI.app.explore}>
-            <Button variant="link" className="| flex h-fit items-center gap-2 py-0 text-xs">
+            <Button
+              variant="link"
+              className="| flex h-fit items-center gap-2 py-0 text-xs"
+            >
               <span>{t("homepage:ExploreAll")}</span>
               <ArrowRightIcon />
             </Button>
@@ -50,7 +58,10 @@ export function ExploreAppsWidget() {
         <div className="w-full h-full | flex flex-col divide-y">
           {!apps
             ? range(k).map((i) => (
-                <div key={i} className={"w-full h-20 flex items-center gap-4 py-6 "}>
+                <div
+                  key={i}
+                  className={"w-full h-20 flex items-center gap-4 py-6 "}
+                >
                   <Skeleton className={"wh-20"} />
                   <div className={"grow flex flex-col gap-2"}>
                     <Skeleton className={"w-full h-4"} />
@@ -72,5 +83,5 @@ export function ExploreAppsWidget() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

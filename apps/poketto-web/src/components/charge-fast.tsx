@@ -6,7 +6,7 @@
 // import { toast } from "sonner"
 // import { z } from "zod"
 //
-// import { Button } from "@cs-magic/shadcn/dist/ui/button"
+// import { Button } from "@cs-magic/shadcn/ui/button"
 // import {
 //   Form,
 //   FormControl,
@@ -15,8 +15,8 @@
 //   FormItem,
 //   FormLabel,
 //   FormMessage,
-// } from "@cs-magic/shadcn/dist/ui/form"
-// import { Input } from "@cs-magic/shadcn/dist/ui/input"
+// } from "@cs-magic/shadcn/ui/form"
+// import { Input } from "@cs-magic/shadcn/ui/input"
 //
 // import { ChargeContainer } from "@/components/containers"
 // import { useUser } from "@/hooks/use-user"

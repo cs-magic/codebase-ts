@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   ColumnDef,
@@ -7,20 +7,32 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { useTranslation } from "next-i18next"
-import { useState } from "react"
+} from "@tanstack/react-table";
+import { useTranslation } from "next-i18next";
+import { useState } from "react";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@cs-magic/shadcn/dist/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@cs-magic/shadcn/ui/table";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-  const { t } = useTranslation()
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([{ id: "role", value: "user" }])
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
+  const { t } = useTranslation();
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
+    { id: "role", value: "user" },
+  ]);
 
   const table = useReactTable({
     data,
@@ -31,7 +43,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     state: {
       columnFilters,
     },
-  })
+  });
 
   // table.getColumn("role")?.setFilterValue("user")
 
@@ -43,9 +55,14 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             {headerGroup.headers.map((header) => {
               return (
                 <TableHead key={header.id}>
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                 </TableHead>
-              )
+              );
             })}
           </TableRow>
         ))}
@@ -54,9 +71,14 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
       <TableBody>
         {table.getRowModel().rows?.length ? (
           table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+            <TableRow
+              key={row.id}
+              data-state={row.getIsSelected() && "selected"}
+            >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                <TableCell key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
               ))}
             </TableRow>
           ))
@@ -69,5 +91,5 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         )}
       </TableBody>
     </Table>
-  )
+  );
 }

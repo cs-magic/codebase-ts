@@ -1,26 +1,31 @@
-import { IssueType, Prisma } from "@prisma/client"
-import { Crosshair2Icon, CubeIcon, EyeOpenIcon } from "@radix-ui/react-icons"
-import { type IconProps } from "@radix-ui/react-icons/dist/types"
-import { CreateMessage } from "ai"
-import type { NextComponentType, NextPage, NextPageContext } from "next"
-import type { Session } from "next-auth"
-import type { AppProps } from "next/app"
-import { ElementType, type ForwardRefExoticComponent, type ReactNode, type RefAttributes } from "react"
-import { z } from "zod"
+import { IssueType, Prisma } from "@prisma/client";
+import { Crosshair2Icon, CubeIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { type IconProps } from "@radix-ui/react-icons/dist/types";
+import { CreateMessage } from "ai";
+import type { NextComponentType, NextPage, NextPageContext } from "next";
+import type { Session } from "next-auth";
+import type { AppProps } from "next/app";
+import {
+  ElementType,
+  type ForwardRefExoticComponent,
+  type ReactNode,
+  type RefAttributes,
+} from "react";
+import { z } from "zod";
 
-import { FREE_GPT3_DAILY_USER, FREE_GPT4_DAILY_USER, MenuKey } from "@/config"
+import { FREE_GPT3_DAILY_USER, FREE_GPT4_DAILY_USER, MenuKey } from "@/config";
 
-import AppGetPayload = Prisma.PokettoAppGetPayload
-import AppSelect = Prisma.PokettoAppSelect
-import ChatMessageGetPayload = Prisma.ChatMessageGetPayload
-import ChatMessageSelect = Prisma.ChatMessageSelect
-import ConversationGetPayload = Prisma.ConversationGetPayload
-import ConversationInclude = Prisma.ConversationInclude
-import ConversationSelect = Prisma.ConversationSelect
+import AppGetPayload = Prisma.PokettoAppGetPayload;
+import AppSelect = Prisma.PokettoAppSelect;
+import ChatMessageGetPayload = Prisma.ChatMessageGetPayload;
+import ChatMessageSelect = Prisma.ChatMessageSelect;
+import ConversationGetPayload = Prisma.ConversationGetPayload;
+import ConversationInclude = Prisma.ConversationInclude;
+import ConversationSelect = Prisma.ConversationSelect;
 
-import UserGetPayload = Prisma.UserGetPayload
-import UserSelect = Prisma.UserSelect
-import validator = Prisma.validator
+import UserGetPayload = Prisma.UserGetPayload;
+import UserSelect = Prisma.UserSelect;
+import validator = Prisma.validator;
 
 // -----------------------------------------------------------------------------
 // models
@@ -30,8 +35,10 @@ export const selectUserForListView = validator<UserSelect>()({
   id: true,
   name: true,
   image: true,
-})
-export type UserForListView = UserGetPayload<{ select: typeof selectUserForListView }>
+});
+export type UserForListView = UserGetPayload<{
+  select: typeof selectUserForListView;
+}>;
 
 export const selectUserProfile = validator<UserSelect>()({
   ...selectUserForListView,
@@ -44,8 +51,10 @@ export const selectUserProfile = validator<UserSelect>()({
   platformId: true,
   platformArgs: true,
   quota: true,
-})
-export type UserForProfile = UserGetPayload<{ select: typeof selectUserProfile }>
+});
+export type UserForProfile = UserGetPayload<{
+  select: typeof selectUserProfile;
+}>;
 
 export const selectAppForListView = validator<AppSelect>()({
   id: true,
@@ -73,8 +82,10 @@ export const selectAppForListView = validator<AppSelect>()({
       platformArgs: true,
     },
   },
-})
-export type AppForListView = AppGetPayload<{ select: typeof selectAppForListView }>
+});
+export type AppForListView = AppGetPayload<{
+  select: typeof selectAppForListView;
+}>;
 
 export const selectChatMessageForListView = validator<ChatMessageSelect>()({
   id: true,
@@ -86,8 +97,10 @@ export const selectChatMessageForListView = validator<ChatMessageSelect>()({
   user: {
     select: selectUserForListView,
   },
-})
-export type SelectChatMessageForListView = ChatMessageGetPayload<{ select: typeof selectChatMessageForListView }>
+});
+export type SelectChatMessageForListView = ChatMessageGetPayload<{
+  select: typeof selectChatMessageForListView;
+}>;
 
 export const selectConvForListView = validator<ConversationSelect>()({
   // @ts-ignore
@@ -103,9 +116,11 @@ export const selectConvForListView = validator<ConversationSelect>()({
   app: {
     select: selectAppForListView,
   },
-})
+});
 
-export type ConvForListView = ConversationGetPayload<{ select: typeof selectConvForListView }>
+export type ConvForListView = ConversationGetPayload<{
+  select: typeof selectConvForListView;
+}>;
 
 export const selectAppForDetailView = validator<AppSelect>()({
   ...selectAppForListView,
@@ -117,8 +132,10 @@ export const selectAppForDetailView = validator<AppSelect>()({
     },
   },
   temperature: true,
-})
-export type AppForDetailView = AppGetPayload<{ select: typeof selectAppForDetailView }>
+});
+export type AppForDetailView = AppGetPayload<{
+  select: typeof selectAppForDetailView;
+}>;
 
 export const selectChatMessageForDetailView = validator<ChatMessageSelect>()({
   ...selectChatMessageForListView,
@@ -126,8 +143,10 @@ export const selectChatMessageForDetailView = validator<ChatMessageSelect>()({
   conversation: {
     select: selectConvForListView,
   },
-})
-export type SelectChatMessageForDetailView = ChatMessageGetPayload<{ select: typeof selectChatMessageForDetailView }>
+});
+export type SelectChatMessageForDetailView = ChatMessageGetPayload<{
+  select: typeof selectChatMessageForDetailView;
+}>;
 
 export const includeConvForDetailView = validator<ConversationInclude>()({
   app: { select: selectAppForDetailView },
@@ -136,33 +155,38 @@ export const includeConvForDetailView = validator<ConversationInclude>()({
       user: true, // 获取每条信息的用户
     },
   },
-})
+});
 export type ConvForDetailView = ConversationGetPayload<{
-  include: typeof includeConvForDetailView
-}>
+  include: typeof includeConvForDetailView;
+}>;
 
 // -----------------------------------------------------------------------------
 // next-auth, ref: https://stackoverflow.com/a/69968164/9422455
 // -----------------------------------------------------------------------------
 
 export type NextPageWithAuth<P = any, IP = P> = NextPage<P, IP> & {
-  auth?: boolean
-}
+  auth?: boolean;
+};
 
-export type NextComponentWithAuth = NextComponentType<NextPageContext, any, any> & Partial<NextPageWithAuth>
+export type NextComponentWithAuth = NextComponentType<
+  NextPageContext,
+  any,
+  any
+> &
+  Partial<NextPageWithAuth>;
 
 export type ExtendedAppProps<P = { session: Session }> = AppProps<P> & {
-  Component: NextComponentWithAuth
-}
+  Component: NextComponentWithAuth;
+};
 
 // -----------------------------------------------------------------------------
 // general
 // -----------------------------------------------------------------------------
 
 export interface IMenuItem {
-  field: MenuKey
-  link: string
-  Icon?: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
+  field: MenuKey;
+  link: string;
+  Icon?: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
 }
 
 export enum CommandType {
@@ -171,32 +195,32 @@ export enum CommandType {
 }
 
 export interface ICommandItem {
-  id: string
-  Icon: (props: any) => ReactNode
-  title?: string
-  category: CommandType
-  kbd?: string
+  id: string;
+  Icon: (props: any) => ReactNode;
+  title?: string;
+  category: CommandType;
+  kbd?: string;
 }
 
-export const modelTypes = ["gpt-3.5-turbo", "gpt-4", "openchat"] as const
-export type ModelType = (typeof modelTypes)[number]
+export const modelTypes = ["gpt-3.5-turbo", "gpt-4", "openchat"] as const;
+export type ModelType = (typeof modelTypes)[number];
 export const defaultModelQuota: Record<ModelType, number> = {
   "gpt-3.5-turbo": FREE_GPT3_DAILY_USER,
   "gpt-4": FREE_GPT4_DAILY_USER,
   openchat: 100,
-}
+};
 
-export type IMAGE_SIZE = "xs" | "md" | "raw" | "full"
+export type IMAGE_SIZE = "xs" | "md" | "raw" | "full";
 
 export enum CardsLayoutType {
   masonry = "masonry",
   grid = "grid",
 }
 
-export const sortOrders = ["mostViewed", "mostUsed", "newest"] as const
+export const sortOrders = ["mostViewed", "mostUsed", "newest"] as const;
 // todo: more intelligent approach
 // export type SortOrder = keyof typeof resources.common.sorts
-export type SortOrder = (typeof sortOrders)[number]
+export type SortOrder = (typeof sortOrders)[number];
 
 export const Order2icon: { [key in SortOrder]: ElementType } = {
   mostViewed: EyeOpenIcon,
@@ -211,17 +235,22 @@ export const Order2icon: { [key in SortOrder]: ElementType } = {
   // "most-saved": IconDownload,
   // trending: IconTrendingUp,
   // follow: IconTelescope,
-}
+};
 
 export type AllMessage =
   | SelectChatMessageForListView
   | {
-      systemType: "notification" | "date"
-      content: string
-    }
+      systemType: "notification" | "date";
+      content: string;
+    };
 
-export const appPlatforms = ["web", "desktop", "mobile", "mini-program"] as const
-export type AppPlatform = (typeof appPlatforms)[number]
+export const appPlatforms = [
+  "web",
+  "desktop",
+  "mobile",
+  "mini-program",
+] as const;
+export type AppPlatform = (typeof appPlatforms)[number];
 
 export const feedbackFormSchema = z.object({
   // appPlatform: z.enum(appPlatforms).default("web"),
@@ -230,9 +259,9 @@ export const feedbackFormSchema = z.object({
   title: z.string().min(1),
   detail: z.string().min(1),
   anonymous: z.boolean().default(false),
-})
+});
 
-export const memoryModes = ["one-time", "recent", "with-memory"] as const
-export type MemoryMode = (typeof memoryModes)[number]
+export const memoryModes = ["one-time", "recent", "with-memory"] as const;
+export type MemoryMode = (typeof memoryModes)[number];
 
-export type OpenAIMessage = CreateMessage
+export type OpenAIMessage = CreateMessage;

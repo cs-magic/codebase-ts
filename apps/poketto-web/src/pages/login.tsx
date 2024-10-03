@@ -1,25 +1,31 @@
-import { ChevronLeftIcon } from "@radix-ui/react-icons"
-import { type Metadata } from "next"
-import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import Link from "next/link"
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import { type Metadata } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Link from "next/link";
 
-import { buttonVariants } from "@cs-magic/shadcn/dist/ui/button"
+import { buttonVariants } from "@cs-magic/shadcn/ui/button";
 
-import { ProductIcon } from "@/components/icons"
-import { RootLayout } from "@/components/layouts/root.layout"
-import { UserAuthForm } from "@/components/user-auth-form"
-import { cn } from "@/lib/utils"
+import { ProductIcon } from "@/components/icons";
+import { RootLayout } from "@/components/layouts/root.layout";
+import { UserAuthForm } from "@/components/user-auth-form";
+import { cn } from "@/lib/utils";
 
 const metadata: Metadata = {
   title: "Login",
   description: "Login to your account",
-}
+};
 
 export default function LoginPage() {
   return (
     <RootLayout>
       <div className="container relative flex h-full w-full overflow-auto flex-col items-center justify-center">
-        <Link href="/" className={cn(buttonVariants({ variant: "ghost" }), "absolute left-4 top-4 md:left-8 md:top-8")}>
+        <Link
+          href="/"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "absolute left-4 top-4 md:left-8 md:top-8",
+          )}
+        >
           <>
             <ChevronLeftIcon className="mr-2 h-4 w-4" />
             Back
@@ -60,7 +66,7 @@ export default function LoginPage() {
         </div>
       </div>
     </RootLayout>
-  )
+  );
 }
 
 export async function getStaticProps({ locale }) {
@@ -68,5 +74,5 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ["common", "auth"])),
     },
-  }
+  };
 }

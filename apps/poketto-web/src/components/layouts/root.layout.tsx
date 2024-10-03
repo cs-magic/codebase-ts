@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import React, { type PropsWithChildren, useEffect } from "react"
+import React, { type PropsWithChildren, useEffect } from "react";
 
-import Navbar from "./navbar"
-import { MenuItems } from "@/components/icons"
-import { Sidebar } from "@/components/layouts/sidebar"
-import { FooterNavItem } from "@/components/link"
-import { menuGroups } from "@/config"
-import { useMount } from "@/hooks/use-mount"
-import { useUser } from "@/hooks/use-user"
-import { useAppStore } from "@/store"
+import Navbar from "./navbar";
+import { MenuItems } from "@/components/icons";
+import { Sidebar } from "@/components/layouts/sidebar";
+import { FooterNavItem } from "@/components/link";
+import { menuGroups } from "@/config";
+import { useMount } from "@/hooks/use-mount";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { useAppStore } from "@/store";
 
 export const Footer = () => (
   <footer className="w-full shrink-0 | grid grid-cols-4">
@@ -19,24 +19,26 @@ export const Footer = () => (
         <FooterNavItem key={k.field} {...k} />
       ))}
   </footer>
-)
+);
 
 export function MobileLayout(props: PropsWithChildren) {
-  const { fullscreen } = useAppStore()
+  const { fullscreen } = useAppStore();
 
   return (
     <div className="md:hidden | h-full w-full | flex flex-col">
       {!fullscreen && <Navbar />}
 
-      <div className="w-full grow overflow-auto | flex flex-col items-center gap-2">{props.children}</div>
+      <div className="w-full grow overflow-auto | flex flex-col items-center gap-2">
+        {props.children}
+      </div>
 
       {!fullscreen && <Footer />}
     </div>
-  )
+  );
 }
 
 export function DesktopLayout(props: PropsWithChildren) {
-  const { setSearchOpen } = useAppStore()
+  const { setSearchOpen } = useAppStore();
 
   /**
    * 快速搜索（全局）， from gpt4
@@ -46,57 +48,62 @@ export function DesktopLayout(props: PropsWithChildren) {
     function handleKeyDownCapture(event: KeyboardEvent) {
       // console.log("in layout: ", event)
       if (event.metaKey && event.key === "k") {
-        setSearchOpen(true)
+        setSearchOpen(true);
         // 要两个结合
-        event.stopPropagation()
-        event.preventDefault()
+        event.stopPropagation();
+        event.preventDefault();
       }
     }
 
     // The third parameter 'true' means we're using the capturing phase
-    window.addEventListener("keydown", handleKeyDownCapture, true)
+    window.addEventListener("keydown", handleKeyDownCapture, true);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDownCapture, true)
-    }
-  }, [])
+      window.removeEventListener("keydown", handleKeyDownCapture, true);
+    };
+  }, []);
 
   return (
     <div className="hidden h-full w-full flex-col md:flex overflow-hidden">
       <Navbar />
       <div className="flex grow divide-x overflow-hidden">
         <Sidebar />
-        <div className="flex h-full grow flex-col items-center gap-2 overflow-auto">{props.children}</div>
+        <div className="flex h-full grow flex-col items-center gap-2 overflow-auto">
+          {props.children}
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
 export function RootLayout({ children }: PropsWithChildren) {
-  const mounted = useMount()
+  const mounted = useMount();
 
   /**
    * set height for mobile browser (safari, chrome ...) to be full of inner height (but invalid !)
    */
   useEffect(() => {
     const setInnerHeight = () => {
-      console.log("add setInnerHeight")
-      document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`)
-    }
-    window.addEventListener("resize", setInnerHeight)
+      console.log("add setInnerHeight");
+      document.documentElement.style.setProperty(
+        "--app-height",
+        `${window.innerHeight}px`,
+      );
+    };
+    window.addEventListener("resize", setInnerHeight);
 
-    setInnerHeight()
+    setInnerHeight();
     return () => {
-      console.log("remove setInnerHeight")
-      window.removeEventListener("resize", setInnerHeight)
-    }
-  }, [])
+      console.log("remove setInnerHeight");
+      window.removeEventListener("resize", setInnerHeight);
+    };
+  }, []);
 
-  const { user } = useUser()
+  const { user } = useUser();
   // console.log({ user })
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
@@ -104,5 +111,5 @@ export function RootLayout({ children }: PropsWithChildren) {
       <MobileLayout>{children}</MobileLayout>
       <DesktopLayout>{children}</DesktopLayout>
     </>
-  )
+  );
 }

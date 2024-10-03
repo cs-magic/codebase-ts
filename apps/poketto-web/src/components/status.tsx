@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import { ReactNode } from "react";
 
-import { MarqueeContainer } from "@cs-magic/react/dist/components/containers";
+import { MarqueeContainer } from "@cs-magic/react/components/containers";
 
 export function StatusItem({
   a,

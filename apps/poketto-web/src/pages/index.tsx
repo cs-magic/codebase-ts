@@ -5,14 +5,14 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@cs-magic/shadcn/dist/ui/card";
-import { Skeleton } from "@cs-magic/shadcn/dist/ui/skeleton";
+} from "@cs-magic/shadcn/ui/card";
+import { Skeleton } from "@cs-magic/shadcn/ui/skeleton";
 
 import { AppVerticalCardView } from "@/components/app/card-vertical.view";
 import { ExploreAppsWidget } from "@/components/app/explore.widget";
@@ -20,8 +20,8 @@ import { RootLayout } from "@/components/layouts/root.layout";
 import { StatusItem } from "@/components/status";
 import privacyEn from "@assets/docs/privacy/privacy_en.html";
 import { CardsLayoutType } from "@/ds";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import { getConversationLink, getConversationsLink } from "@/lib/string";
 
 export default function HomePage() {
@@ -50,7 +50,7 @@ export default function HomePage() {
 
 export const SystemStatus = () => {
   const { t } = useTranslation();
-  const { data: s } = api.system.status.useQuery();
+  const { data: s } = trpcApi.system.status.useQuery();
 
   return (
     <Card>
@@ -92,7 +92,7 @@ export const SystemStatus = () => {
 export function RecentConversations() {
   const { t } = useTranslation();
   const { user } = useUser();
-  const { data: conversations } = api.conv.list.useQuery(undefined, {
+  const { data: conversations } = trpcApi.conv.list.useQuery(undefined, {
     enabled: !!user,
   });
 

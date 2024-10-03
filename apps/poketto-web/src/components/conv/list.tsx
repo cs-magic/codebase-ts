@@ -5,20 +5,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { type PropsWithChildren, useState } from "react";
 
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
-import { Input } from "@cs-magic/shadcn/dist/ui/input";
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
+import { Button } from "@cs-magic/shadcn/ui/button";
+import { Input } from "@cs-magic/shadcn/ui/input";
 
 import { type ConvForListView } from "@/ds";
 import { useMustache } from "@/hooks/use-mustache";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import d from "@/packages/common/src/datetime";
 import { getConversationLink, getImageUri } from "@/lib/string";
 
 export function ConversationList() {
-  const { data: convs } = api.conv.list.useQuery();
+  const { data: convs } = trpcApi.conv.list.useQuery();
 
   const [searchKey, setSearchKey] = useState("");
   // todo: search chat history

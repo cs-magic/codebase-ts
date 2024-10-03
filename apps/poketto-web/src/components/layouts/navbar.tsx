@@ -24,8 +24,8 @@ import React, {
 import { TbLanguage } from "react-icons/tb";
 import { toast } from "sonner";
 
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/ui/avatar";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -33,14 +33,14 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@cs-magic/shadcn/dist/ui/command";
-import { Dialog, DialogContent } from "@cs-magic/shadcn/dist/ui/dialog";
-import { Input } from "@cs-magic/shadcn/dist/ui/input";
-import { Separator } from "@cs-magic/shadcn/dist/ui/separator";
-import { Skeleton } from "@cs-magic/shadcn/dist/ui/skeleton";
+} from "@cs-magic/shadcn/ui/command";
+import { Dialog, DialogContent } from "@cs-magic/shadcn/ui/dialog";
+import { Input } from "@cs-magic/shadcn/ui/input";
+import { Separator } from "@cs-magic/shadcn/ui/separator";
+import { Skeleton } from "@cs-magic/shadcn/ui/skeleton";
 
 import { AppDetailContainer } from "@/components/app/container";
-import { IconContainer } from "@cs-magic/react/dist/components/containers";
+import { IconContainer } from "@cs-magic/react/components/containers";
 import { CompanySVG, ProductIcon } from "@/components/icons";
 import {
   ICON_DIMENSION_SM,
@@ -51,8 +51,8 @@ import {
 } from "@/config";
 import { useMount } from "@/hooks/use-mount";
 import { usePokettoConversationUrl } from "@/hooks/use-url";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import { getOrigin } from "@/packages/common/src/router";
 import { getImageUri } from "@/lib/string";
@@ -226,7 +226,7 @@ function CommandSearch({ className, ...props }: HTMLProps<HTMLDivElement>) {
 
   const [search, setSearch] = React.useState("");
   const [toSearch] = useDebouncedValue(search, 200);
-  const { data: queried } = api.app.list.useInfiniteQuery(
+  const { data: queried } = trpcApi.app.list.useInfiniteQuery(
     { searchKey: toSearch, limit: 5 },
     {},
   );

@@ -6,23 +6,23 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
+import { Button } from "@cs-magic/shadcn/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@cs-magic/shadcn/dist/ui/card";
-import { Input } from "@cs-magic/shadcn/dist/ui/input";
+} from "@cs-magic/shadcn/ui/card";
+import { Input } from "@cs-magic/shadcn/ui/input";
 
 import { DataTable } from "@/components/data-table";
 import { RootLayout } from "@/components/layouts/root.layout";
-import { Loading } from "@cs-magic/react/dist/components/loading";
+import { Loading } from "@cs-magic/react/components/loading";
 import { UserProfile } from "@/components/user/profile.view";
 import { MAX_MOBILE_WIDTH } from "@/config";
 import { type NextPageWithAuth, SelectChatMessageForDetailView } from "@/ds";
-import { useUser } from "@/hooks/use-user";
-import { api } from "@/lib/api";
+import { useUser } from "packages/common/src/hooks/use-user";
+import { trpcApi } from "packages/common/src/api/trpc-api";
 import clsx from "@/lib/clsx";
 import d from "@/packages/common/src/datetime";
 
@@ -30,12 +30,12 @@ export const DashboardPage: NextPageWithAuth = () => {
   const { t } = useTranslation();
   const { userId } = useUser();
   // console.log("dashboard: ", { userId })
-  const { data: userProfile } = api.user.getProfile.useQuery(
+  const { data: userProfile } = trpcApi.user.getProfile.useQuery(
     { id: userId },
     { enabled: !!userId },
   );
-  const { data: payments } = api.bill.listPayments.useQuery();
-  const { data: messages } = api.message.list.useQuery(
+  const { data: payments } = trpcApi.bill.listPayments.useQuery();
+  const { data: messages } = trpcApi.message.list.useQuery(
     { userId },
     { enabled: !!userId },
   );

@@ -7,14 +7,14 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@cs-magic/shadcn/dist/ui/avatar";
-import { Badge } from "@cs-magic/shadcn/dist/ui/badge";
-import { Button } from "@cs-magic/shadcn/dist/ui/button";
-import { Separator } from "@cs-magic/shadcn/dist/ui/separator";
+} from "@cs-magic/shadcn/ui/avatar";
+import { Badge } from "@cs-magic/shadcn/ui/badge";
+import { Button } from "@cs-magic/shadcn/ui/button";
+import { Separator } from "@cs-magic/shadcn/ui/separator";
 
 import { DEFAULT_USER_NAME } from "@/config";
 import { type UserForProfile } from "@/ds";
-import { useUser } from "@/hooks/use-user";
+import { useUser } from "packages/common/src/hooks/use-user";
 import { getFlowgptUserLink, getImageUri } from "@/lib/string";
 import { ChargeContainer } from "@/frontend/payment/src/charge-container";
 
