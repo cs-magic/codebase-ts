@@ -1,11 +1,11 @@
-import type { Metadata } from "next"
-import Image from "next/image"
-import Link from "next/link"
-import { type PropsWithChildren } from "react"
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { type PropsWithChildren } from "react";
 
-import "./styles.css"
-import { LogoImg, siteConfig } from "@/config"
-import { getOrigin } from "@/lib/router"
+import "./styles.css";
+import { LogoImg, siteConfig } from "@/config";
+import { getOrigin } from "@/packages/common/src/router";
 
 const metadata: Metadata = {
   metadataBase: new URL(getOrigin()),
@@ -15,7 +15,8 @@ const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    description: "Full-stack TypeScript example using Next.js, react-stripe-js, and stripe-node.",
+    description:
+      "Full-stack TypeScript example using Next.js, react-stripe-js, and stripe-node.",
     images: [
       {
         url: "https://nextjs-typescript-react-stripe-js.vercel.app/social_card.png",
@@ -24,7 +25,7 @@ const metadata: Metadata = {
     site: "@StripeDev",
     title: "TypeScript Next.js Stripe Example",
   },
-}
+};
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -36,7 +37,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
               <div className="inline-flex items-center gap-8 flex-nowrap">
                 {/* <span className="light">Donate 🍩 to  ️</span> */}
                 <h1>{siteConfig.name}</h1>
-                <Link href="/" className="shrink-0 inline-flex items-center justify-center">
+                <Link
+                  href="/"
+                  className="shrink-0 inline-flex items-center justify-center"
+                >
                   <Image width={24} height={24} src={LogoImg} alt="logo" />
                 </Link>
               </div>
@@ -48,11 +52,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <span>
             Powered by{" "}
             <a href="https://stripe.com" target="_blank" rel="noreferrer">
-              stripe
+              server
             </a>
           </span>
         </div>
       </body>
     </html>
-  )
+  );
 }

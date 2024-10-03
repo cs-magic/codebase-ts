@@ -1,13 +1,20 @@
-import { Client } from "postmark"
+import { Client } from "postmark";
 
-import { siteConfig } from "@/config"
-import { authEnv } from "@/env.mjs"
-import { prisma } from "@/server/db"
+import { siteConfig } from "@/config";
+import { authEnv } from "@/env.mjs";
+import { prisma } from "@/packages/common/src/db/prisma";
 
-export const sendViaPostmark = async ({ identifier, url, provider, token, locale, origin }) => {
-  const api_token = authEnv.POSTMARK_API_TOKEN
-  if (!api_token) throw new Error("no POSTMARK_API_TOKEN in env")
-  const postmarkClient = new Client(api_token)
+export const sendViaPostmark = async ({
+  identifier,
+  url,
+  provider,
+  token,
+  locale,
+  origin,
+}) => {
+  const api_token = authEnv.POSTMARK_API_TOKEN;
+  if (!api_token) throw new Error("no POSTMARK_API_TOKEN in env");
+  const postmarkClient = new Client(api_token);
 
   const user = await prisma.user.findUnique({
     where: {
@@ -16,11 +23,13 @@ export const sendViaPostmark = async ({ identifier, url, provider, token, locale
     select: {
       emailVerified: true,
     },
-  })
+  });
 
-  const templateId = user?.emailVerified ? authEnv.POSTMARK_SIGN_IN_TEMPLATE : authEnv.POSTMARK_ACTIVATION_TEMPLATE
+  const templateId = user?.emailVerified
+    ? authEnv.POSTMARK_SIGN_IN_TEMPLATE
+    : authEnv.POSTMARK_ACTIVATION_TEMPLATE;
   if (!templateId) {
-    throw new Error("Missing template id")
+    throw new Error("Missing template id");
   }
 
   return postmarkClient.sendEmailWithTemplate({
@@ -39,5 +48,5 @@ export const sendViaPostmark = async ({ identifier, url, provider, token, locale
         Value: `${new Date().getTime()}`,
       },
     ],
-  })
-}
+  });
+};

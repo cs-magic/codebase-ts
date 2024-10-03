@@ -13,9 +13,9 @@ import { siteConfig } from "@/config";
 import { type ExtendedAppProps } from "@/ds";
 import { api } from "@/lib/api";
 import clsx from "@/lib/clsx";
-import d from "@/lib/datetime";
+import d from "@/packages/common/src/datetime";
 import { fontHeading, fontSans } from "@/lib/fonts";
-import { getOrigin } from "@/lib/router";
+import { getOrigin } from "@/packages/common/src/router";
 
 import "@assets/styles/main.css";
 

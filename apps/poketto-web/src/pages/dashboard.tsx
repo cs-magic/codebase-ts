@@ -24,7 +24,7 @@ import { type NextPageWithAuth, SelectChatMessageForDetailView } from "@/ds";
 import { useUser } from "@/hooks/use-user";
 import { api } from "@/lib/api";
 import clsx from "@/lib/clsx";
-import d from "@/lib/datetime";
+import d from "@/packages/common/src/datetime";
 
 export const DashboardPage: NextPageWithAuth = () => {
   const { t } = useTranslation();

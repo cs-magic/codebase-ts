@@ -309,7 +309,7 @@ const pushMessage = async (msg: Message) => {
 
 ```
 
-## stripe
+## server
 
 - references:
     - node sdk: https://github.com/stripe/stripe-node#configuration
@@ -323,8 +323,8 @@ const pushMessage = async (msg: Message) => {
     - (recommend) checkout example: https://vercel.com/guides/getting-started-with-nextjs-typescript-stripe
     - (recommend) nextjs official checkout
       example: https://github.com/vercel/next.js/tree/canary/examples/with-stripe-typescript
-    - taxonomy stripe example: https://github.com/cs-magic/taxonomy/blob/main/app/api/users/stripe/route.ts
-    - nextjs prisma stripe: https://github.com/BastidaNicolas/nextauth-prisma-stripe
+    - taxonomy server example: https://github.com/cs-magic/taxonomy/blob/main/app/api/users/stripe/route.ts
+    - nextjs prisma server: https://github.com/BastidaNicolas/nextauth-prisma-stripe
     -
 
 - pricing table (embedded)

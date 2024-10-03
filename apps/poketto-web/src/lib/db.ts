@@ -1,11 +1,16 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { type PrismaClient } from "@prisma/client"
-import { type AdapterUser, type Adapter as NextAuthAdapter } from "next-auth/adapters"
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { type PrismaClient } from "@prisma/client";
+import {
+  type AdapterUser,
+  type Adapter as NextAuthAdapter,
+} from "next-auth/adapters";
 
-import { prisma } from "@/server/db"
-import { initUser } from "@/server/init"
+import { prisma } from "@/packages/common/src/db/prisma";
+import { initUser } from "@/server/init";
 
-const { createUser: prismaCreateUser, ...adapterExtra } = PrismaAdapter(prisma as unknown as PrismaClient)
+const { createUser: prismaCreateUser, ...adapterExtra } = PrismaAdapter(
+  prisma as unknown as PrismaClient,
+);
 
 export const pokettoPrismaAdapter: NextAuthAdapter = {
   /**
@@ -16,7 +21,7 @@ export const pokettoPrismaAdapter: NextAuthAdapter = {
    emailVerified: null
    */
   createUser: async (user) => {
-    console.log("creating user: ", { user })
+    console.log("creating user: ", { user });
     // 有可能会重新插入！！！
     const existed = await prisma.user.findUnique({
       where: {
@@ -25,8 +30,8 @@ export const pokettoPrismaAdapter: NextAuthAdapter = {
           platformType: user.platformType,
         },
       },
-    })
-    return (existed || (await initUser(prisma, user))) as AdapterUser
+    });
+    return (existed || (await initUser(prisma, user))) as AdapterUser;
   },
   ...adapterExtra,
-}
+};

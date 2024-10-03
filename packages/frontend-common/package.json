@@ -13,5 +13,8 @@
     "html2canvas": "^1.4.1",
     "modern-screenshot": "^4.4.39",
     "qrcode.react": "^4.0.1"
+  },
+  "devDependencies": {
+    "npm-run-all": "*"
   }
 }

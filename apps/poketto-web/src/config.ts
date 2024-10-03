@@ -1,9 +1,3 @@
-import {
-  Prisma,
-  PromptRoleType,
-  StripeSubscriptionLevel,
-} from "@prisma/client";
-
 import resources from "@/@types/resources";
 import pokettoCreatorAvatar from "@assets/branding/neurora/neurora_1280_white.png";
 import pokettoAppAvatar from "@assets/branding/poketto/Your-Sole-Poketto.png";
@@ -13,6 +7,7 @@ import imgAiMap from "@assets/others/ai-anatomy-map@0.5x-裁切版.jpg";
 import imgCarouselExplore from "@assets/others/carousel-explore.jpg";
 import imgCarouselPeace from "@assets/others/carousel-peace.jpg";
 import imgHomeCover from "@assets/others/home-cover.jpg";
+import { Prisma, PromptRoleType } from "@prisma/client";
 import StripeProductUncheckedCreateInput = Prisma.StripeProductUncheckedCreateInput;
 
 export { LogoImg };
@@ -228,11 +223,6 @@ export const paymentProducts: StripeProductUncheckedCreateInput[] = [
     expire: 30,
   },
 ];
-export const subscriptionLevel2Unit: Record<StripeSubscriptionLevel, number> = {
-  basic: 1,
-  premium: 2,
-  extreme: 3,
-};
 
 export const contentStyleBasedOnRole: Partial<Record<PromptRoleType, string>> =
   {

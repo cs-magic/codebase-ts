@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 
 import { useUser } from "@/hooks/use-user";
-import { encodeClientReferenceId } from "@/lib/stripe";
+import { encodeClientReferenceId } from "@/packages/common/src/stripe/utils";
 import {
   STRIPE_PRICING_TABLE_ID,
   STRIPE_PUBLISHABLE_KEY,
@@ -11,8 +11,8 @@ import {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      // for stripe, ref: https://stripe.com/docs/payments/checkout/pricing-table#embed
-      "stripe-pricing-table": React.DetailedHTMLProps<
+      // for server, ref: https://stripe.com/docs/payments/checkout/pricing-table#embed
+      "server-pricing-table": React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement>,
         HTMLElement
       >;

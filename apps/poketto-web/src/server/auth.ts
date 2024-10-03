@@ -1,20 +1,30 @@
-import { PlatformType } from "@prisma/client"
-import { type GetServerSidePropsContext } from "next"
-import { type NextAuthOptions, type User as NextAuthUser, getServerSession } from "next-auth"
-import { Provider, SendVerificationRequestParams } from "next-auth/providers"
-import CredentialProvider from "next-auth/providers/credentials"
-import DiscordProvider from "next-auth/providers/discord"
-import EmailProvider from "next-auth/providers/email"
-import GithubProvider from "next-auth/providers/github"
+import { PlatformType } from "@prisma/client";
+import { type GetServerSidePropsContext } from "next";
+import {
+  type NextAuthOptions,
+  type User as NextAuthUser,
+  getServerSession,
+} from "next-auth";
+import { Provider, SendVerificationRequestParams } from "next-auth/providers";
+import CredentialProvider from "next-auth/providers/credentials";
+import DiscordProvider from "next-auth/providers/discord";
+import EmailProvider from "next-auth/providers/email";
+import GithubProvider from "next-auth/providers/github";
 
-import { DEFAULT_LOCALE, SMS_PROVIDER_ID, URI, allowDangerousEmailAccountLinking, siteConfig } from "@/config"
-import { authEnv } from "@/env.mjs"
-import { pokettoPrismaAdapter } from "@/lib/db"
-import { sendVerificationRequest } from "@/lib/email"
-import { getOrigin } from "@/lib/router"
-import { prisma } from "@/server/db"
+import {
+  DEFAULT_LOCALE,
+  SMS_PROVIDER_ID,
+  URI,
+  allowDangerousEmailAccountLinking,
+  siteConfig,
+} from "@/config";
+import { authEnv } from "@/env.mjs";
+import { pokettoPrismaAdapter } from "@/lib/db";
+import { sendVerificationRequest } from "@/lib/email";
+import { getOrigin } from "@/packages/common/src/router";
+import { prisma } from "@/packages/common/src/db/prisma";
 
-export const emailFrom = siteConfig.welcomeEmailAddress
+export const emailFrom = siteConfig.welcomeEmailAddress;
 
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
@@ -25,8 +35,8 @@ export const createAuthOptions = ({
   locale,
   origin = getOrigin(),
 }: {
-  locale: string
-  origin?: string
+  locale: string;
+  origin?: string;
 }): NextAuthOptions => {
   const providers: Provider[] = [
     CredentialProvider({
@@ -37,15 +47,21 @@ export const createAuthOptions = ({
         code: { type: "string", label: "code" },
       },
       authorize: async (credentials) => {
-        if (!credentials) throw new Error("no credentials")
-        const { phone, code } = credentials
-        if (!phone || !code) throw new Error("no phone or code")
+        if (!credentials) throw new Error("no credentials");
+        const { phone, code } = credentials;
+        if (!phone || !code) throw new Error("no phone or code");
         const accountInDB = await prisma.account.findUnique({
-          where: { provider_providerAccountId: { provider: "sms", providerAccountId: phone }, access_token: code },
+          where: {
+            provider_providerAccountId: {
+              provider: "sms",
+              providerAccountId: phone,
+            },
+            access_token: code,
+          },
           include: { user: true },
-        })
-        if (!accountInDB) throw new Error("no account")
-        return accountInDB.user
+        });
+        if (!accountInDB) throw new Error("no account");
+        return accountInDB.user;
       },
     }),
 
@@ -63,7 +79,7 @@ export const createAuthOptions = ({
           ...props,
         }),
     }),
-  ]
+  ];
 
   if (authEnv.GITHUB_CLIENT_ID && authEnv.GITHUB_CLIENT_SECRET) {
     providers.push(
@@ -81,10 +97,10 @@ export const createAuthOptions = ({
             image: profile.avatar_url,
             platformId: profile.id.toString(),
             platformType: PlatformType.github,
-          }
+          };
         },
       }),
-    )
+    );
   }
 
   if (authEnv.DISCORD_CLIENT_ID && authEnv.DISCORD_CLIENT_SECRET) {
@@ -94,7 +110,7 @@ export const createAuthOptions = ({
         clientSecret: authEnv.DISCORD_CLIENT_SECRET,
         allowDangerousEmailAccountLinking,
       }),
-    )
+    );
   }
 
   // ref: https://next-auth.js.org/providers/google
@@ -128,33 +144,33 @@ export const createAuthOptions = ({
     },
     callbacks: {
       signIn: async (signInParams) => {
-        const { user, email, profile, account, credentials } = signInParams
-        console.log("signIn: ", signInParams) // 这个文件里，不要用 pino 之类的异步 log 函数，否则会导致 debug 困难
-        user.platformId = user.id
-        user.platformType = account?.provider ?? PlatformType.Poketto
+        const { user, email, profile, account, credentials } = signInParams;
+        console.log("signIn: ", signInParams); // 这个文件里，不要用 pino 之类的异步 log 函数，否则会导致 debug 困难
+        user.platformId = user.id;
+        user.platformType = account?.provider ?? PlatformType.Poketto;
         if (profile) {
-          user.email = profile?.email
+          user.email = profile?.email;
         }
-        return true
+        return true;
       },
 
       async session(params) {
         // console.log("session: ", params)
-        const { token, session } = params
+        const { token, session } = params;
         if (token) {
-          session.user.id = token.sub! // 不要 token.id 了，妈的
-          session.user.name = token.name
-          session.user.email = token.email
-          session.user.image = token.picture
+          session.user.id = token.sub!; // 不要 token.id 了，妈的
+          session.user.name = token.name;
+          session.user.email = token.email;
+          session.user.image = token.picture;
         }
 
-        return session
+        return session;
       },
     }, // ref: https://github.com/nextauthjs/next-auth/issues/6078
     adapter: pokettoPrismaAdapter,
     providers,
-  }
-}
+  };
+};
 
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
@@ -162,6 +178,11 @@ export const createAuthOptions = ({
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = (ctx: {
-  req: GetServerSidePropsContext["req"]
-  res: GetServerSidePropsContext["res"]
-}) => getServerSession(ctx.req, ctx.res, createAuthOptions({ locale: DEFAULT_LOCALE }))
+  req: GetServerSidePropsContext["req"];
+  res: GetServerSidePropsContext["res"];
+}) =>
+  getServerSession(
+    ctx.req,
+    ctx.res,
+    createAuthOptions({ locale: DEFAULT_LOCALE }),
+  );

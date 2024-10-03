@@ -1,26 +1,26 @@
-import orderBy from "lodash/orderBy"
-import { XIcon } from "lucide-react"
-import { useTranslation } from "next-i18next"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { type PropsWithChildren, useState } from "react"
+import orderBy from "lodash/orderBy";
+import { XIcon } from "lucide-react";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { type PropsWithChildren, useState } from "react";
 
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar"
-import { Button } from "@cs-magic/shadcn/dist/ui/button"
-import { Input } from "@cs-magic/shadcn/dist/ui/input"
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
+import { Button } from "@cs-magic/shadcn/dist/ui/button";
+import { Input } from "@cs-magic/shadcn/dist/ui/input";
 
-import { type ConvForListView } from "@/ds"
-import { useMustache } from "@/hooks/use-mustache"
-import { useUser } from "@/hooks/use-user"
-import { api } from "@/lib/api"
-import clsx from "@/lib/clsx"
-import d from "@/lib/datetime"
-import { getConversationLink, getImageUri } from "@/lib/string"
+import { type ConvForListView } from "@/ds";
+import { useMustache } from "@/hooks/use-mustache";
+import { useUser } from "@/hooks/use-user";
+import { api } from "@/lib/api";
+import clsx from "@/lib/clsx";
+import d from "@/packages/common/src/datetime";
+import { getConversationLink, getImageUri } from "@/lib/string";
 
 export function ConversationList() {
-  const { data: convs } = api.conv.list.useQuery()
+  const { data: convs } = api.conv.list.useQuery();
 
-  const [searchKey, setSearchKey] = useState("")
+  const [searchKey, setSearchKey] = useState("");
   // todo: search chat history
 
   return (
@@ -32,7 +32,7 @@ export function ConversationList() {
           placeholder="(todo) 搜索 App / 消息"
           className="mx-auto my-2 w-[95%] rounded-2xl bg-accent"
           onChange={(event) => {
-            setSearchKey(event.currentTarget.value)
+            setSearchKey(event.currentTarget.value);
           }}
         />
         {searchKey && (
@@ -67,36 +67,41 @@ export function ConversationList() {
         {/*// ) : (*/}
         <>
           <SectionTitle>Poketto Apps</SectionTitle>
-          {orderBy(convs, ["pinned", "updatedAt"], ["desc", "desc"]).map((c) => (
-            <ConversationListView key={c.appId} c={c} />
-          ))}
+          {orderBy(convs, ["pinned", "updatedAt"], ["desc", "desc"]).map(
+            (c) => (
+              <ConversationListView key={c.appId} c={c} />
+            ),
+          )}
         </>
         {/*// )}*/}
       </div>
     </div>
-  )
+  );
 }
 
 export function SectionTitle({ children }: PropsWithChildren) {
-  return <div className="| w-full bg-muted px-4 py-2">{children}</div>
+  return <div className="| w-full bg-muted px-4 py-2">{children}</div>;
 }
 
 export function ConversationListView({ c }: { c: ConvForListView }) {
-  const m = useMustache()
-  const { userId, isLoadingUser } = useUser()
-  const latestMessage = c.messages[0]!
+  const m = useMustache();
+  const { userId, isLoadingUser } = useUser();
+  const latestMessage = c.messages[0]!;
   const {
     i18n: { language },
-  } = useTranslation()
+  } = useTranslation();
 
-  const router = useRouter()
-  if (!userId && !isLoadingUser) return router.push("/login")
+  const router = useRouter();
+  if (!userId && !isLoadingUser) return router.push("/login");
 
   return (
     <Link
       href="/c/[userId]/[appId]"
       as={getConversationLink(userId!, c.appId)}
-      className={clsx("h-fit w-full px-4 py-2 hover:bg-accent", c.pinned && "bg-indigo-100 dark:bg-slate-900")}
+      className={clsx(
+        "h-fit w-full px-4 py-2 hover:bg-accent",
+        c.pinned && "bg-indigo-100 dark:bg-slate-900",
+      )}
     >
       <div className="flex h-fit w-full items-center  gap-4">
         <Avatar className="shrink-0">
@@ -107,14 +112,18 @@ export function ConversationListView({ c }: { c: ConvForListView }) {
           <div className="| flex w-full justify-between gap-2">
             <span className="truncate ">{c.app.name}</span>
             {/* todo: dayjs locale calendar */}
-            <span>{d(latestMessage.updatedAt).locale(language).calendar()}</span>
+            <span>
+              {d(latestMessage.updatedAt).locale(language).calendar()}
+            </span>
           </div>
           <div className="flex gap-2">
             {/* 只有 group 才需要打开 */}
-            <span className="truncate text-muted-foreground">{m(latestMessage.content ?? "")}</span>
+            <span className="truncate text-muted-foreground">
+              {m(latestMessage.content ?? "")}
+            </span>
           </div>
         </div>
       </div>
     </Link>
-  )
+  );
 }

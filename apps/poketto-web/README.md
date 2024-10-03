@@ -1,5 +1,9 @@
 # Poketto AI
 
+## Todo
+
+- [ ] initSystem after prisma initialized
+
 ## 配置
 
 ### 1. 环境变量
@@ -24,8 +28,6 @@ yarn dev
 ```shell
 yarn build && yarn start
 ```
-
-## Todo
 
 ## Tech
 

@@ -281,9 +281,9 @@ model Coupon {
   @@schema("payment")
 }
 
-// todo: stripe 自己的 api 是不是够用了
+// todo: server 自己的 api 是不是够用了
 model StripeProduct {
-  // id 从 stripe 拿
+  // id 从 server 拿
   id String @id
 
   price    Float
@@ -299,7 +299,7 @@ model StripeProduct {
 }
 
 model StripePayment {
-  // id 从 stripe 拿
+  // id 从 server 拿
   id String @id
 
   // 记录要保留

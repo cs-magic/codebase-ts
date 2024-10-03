@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import { domToJpeg, domToDataUrl } from "modern-screenshot"; // Function to get the maximum width based on viewport
+import { domToDataUrl } from "modern-screenshot"; // Function to get the maximum width based on viewport
 
 export const svgElement2svgString = (svg: SVGSVGElement) =>
   new XMLSerializer().serializeToString(svg);
@@ -23,12 +23,12 @@ export const element2image = async (
     filename = "screenshot",
     backgroundColor = "white",
     format = "jpeg",
-  }?: {
+  }: {
     filename?: string;
     approach?: "html2canvas" | "modern-screenshot";
     backgroundColor?: string;
     format?: "png" | "jpeg" | "gif";
-  },
+  } = {},
 ) => {
   console.log("-- element2png start");
   let data;

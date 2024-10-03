@@ -16,7 +16,7 @@ import { IconContainer } from "@cs-magic/react/dist/components/containers";
 import { GithubIcon } from "@/components/icons";
 import LoginViaEmail from "@/components/login-via-email";
 import LoginViaSms from "@/components/login-via-sms";
-import { getOrigin } from "@/lib/router";
+import { getOrigin } from "@/packages/common/src/router";
 import { cn } from "@/lib/utils";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}

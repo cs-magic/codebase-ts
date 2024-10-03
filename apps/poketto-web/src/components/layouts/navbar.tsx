@@ -54,7 +54,7 @@ import { usePokettoConversationUrl } from "@/hooks/use-url";
 import { useUser } from "@/hooks/use-user";
 import { api } from "@/lib/api";
 import clsx from "@/lib/clsx";
-import { getOrigin } from "@/lib/router";
+import { getOrigin } from "@/packages/common/src/router";
 import { getImageUri } from "@/lib/string";
 import { useAppStore } from "@/store";
 

@@ -1,6 +1,10 @@
-import { ChatMessageFormatType, PlatformType, PromptRoleType } from "@prisma/client"
-import range from "lodash/range"
-import { type AdapterUser } from "next-auth/adapters"
+import {
+  ChatMessageFormatType,
+  PlatformType,
+  PromptRoleType,
+} from "@prisma/client";
+import range from "lodash/range";
+import { type AdapterUser } from "next-auth/adapters";
 
 import {
   POKETTO_APP_AVATAR,
@@ -21,13 +25,15 @@ import {
   POKETTO_WELCOME_MESSAGE,
   USER_INVITATIONS_COUNT,
   paymentProducts,
-} from "@/config"
-import { getWelcomeSystemNotification } from "@/lib/string"
-import { type ExtendedPrismaClient } from "@/server/db"
+} from "@/config";
+import { getWelcomeSystemNotification } from "@/lib/string";
+import { type ExtendedPrismaClient } from "@/packages/common/src/db/prisma";
 
 export const initSystem = async (prisma: ExtendedPrismaClient) => {
   const user = await prisma.user.upsert({
-    where: { platform: { platformId: POKETTO_CREATOR_ID, platformType: "Poketto" } },
+    where: {
+      platform: { platformId: POKETTO_CREATOR_ID, platformType: "Poketto" },
+    },
     update: {},
     create: {
       platformId: POKETTO_CREATOR_ID,
@@ -40,11 +46,13 @@ export const initSystem = async (prisma: ExtendedPrismaClient) => {
       name: POKETTO_CREATOR_NAME,
       image: POKETTO_CREATOR_AVATAR.src,
     },
-  })
+  });
 
   // 不要nest在user里写，否则app删除后，就脱钩了
   await prisma.pokettoApp.upsert({
-    where: { platform: { platformId: POKETTO_APP_ID, platformType: "Poketto" } },
+    where: {
+      platform: { platformId: POKETTO_APP_ID, platformType: "Poketto" },
+    },
     update: {},
     create: {
       creator: {
@@ -74,7 +82,12 @@ export const initSystem = async (prisma: ExtendedPrismaClient) => {
       },
       category: {
         connectOrCreate: {
-          where: { category: { main: POKETTO_CATEGORY_MAIN, sub: POKETTO_CATEGORY_SUB } },
+          where: {
+            category: {
+              main: POKETTO_CATEGORY_MAIN,
+              sub: POKETTO_CATEGORY_SUB,
+            },
+          },
           create: { main: POKETTO_CATEGORY_MAIN, sub: POKETTO_CATEGORY_SUB },
         },
       },
@@ -90,28 +103,36 @@ export const initSystem = async (prisma: ExtendedPrismaClient) => {
         },
       },
     },
-  })
+  });
 
   for (const product of paymentProducts) {
     await prisma.stripeProduct.upsert({
       where: { id: product.id },
       update: {},
       create: product,
-    })
+    });
   }
 
-  console.log("✅ Successfully initialized poketto system ~")
-}
+  console.log("✅ Successfully initialized poketto system ~");
+};
 
 /**
  *
  * @param {ExtendedPrismaClient} prisma
  * @param {} user 注意是 next-auth 里 user
  */
-export const initUser = async (prisma: ExtendedPrismaClient, user: Omit<AdapterUser, "id">) => {
+export const initUser = async (
+  prisma: ExtendedPrismaClient,
+  user: Omit<AdapterUser, "id">,
+) => {
   const pokettoRealApp = await prisma.pokettoApp.findUniqueOrThrow({
-    where: { platform: { platformId: POKETTO_APP_ID, platformType: PlatformType.Poketto } },
-  })
+    where: {
+      platform: {
+        platformId: POKETTO_APP_ID,
+        platformType: PlatformType.Poketto,
+      },
+    },
+  });
 
   const createdUser = await prisma.user.create({
     include: {
@@ -133,7 +154,10 @@ export const initUser = async (prisma: ExtendedPrismaClient, user: Omit<AdapterU
             messages: {
               create: [
                 {
-                  content: getWelcomeSystemNotification(user.name ?? "bro", POKETTO_APP_NAME),
+                  content: getWelcomeSystemNotification(
+                    user.name ?? "bro",
+                    POKETTO_APP_NAME,
+                  ),
                   format: ChatMessageFormatType.systemNotification,
                 },
                 {
@@ -155,8 +179,10 @@ export const initUser = async (prisma: ExtendedPrismaClient, user: Omit<AdapterU
         },
       },
     },
-  })
+  });
 
-  console.log(`✅ Successfully created user(id=${createdUser.id}, name=${createdUser.name}) ~`)
-  return createdUser
-}
+  console.log(
+    `✅ Successfully created user(id=${createdUser.id}, name=${createdUser.name}) ~`,
+  );
+  return createdUser;
+};

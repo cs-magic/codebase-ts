@@ -1,17 +1,24 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses"
-import { promises as fs } from "fs"
-import Mustache from "mustache"
-import path from "path"
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { promises as fs } from "fs";
+import Mustache from "mustache";
+import path from "path";
 
-import { AWS_REGION, siteConfig } from "@/config"
-import { authEnv } from "@/env.mjs"
-import d from "@/lib/datetime"
-import { rootDir } from "@/packages/common/dist/path"
+import { AWS_REGION, siteConfig } from "@/config";
+import { authEnv } from "@/env.mjs";
+import d from "@/packages/common/src/datetime";
+import { rootDir } from "@/packages/common/dist/path";
 
-export const sendViaAWS = async ({ identifier, url, provider, token, locale, origin }) => {
-  if (!AWS_REGION) throw new Error("no AWS_REGION")
-  if (!authEnv.AWS_AK) throw new Error("no AWS_AK")
-  if (!authEnv.AWS_SK) throw new Error("no AWS_SK")
+export const sendViaAWS = async ({
+  identifier,
+  url,
+  provider,
+  token,
+  locale,
+  origin,
+}) => {
+  if (!AWS_REGION) throw new Error("no AWS_REGION");
+  if (!authEnv.AWS_AK) throw new Error("no AWS_AK");
+  if (!authEnv.AWS_SK) throw new Error("no AWS_SK");
 
   const sesClient = new SESClient({
     region: AWS_REGION,
@@ -19,11 +26,14 @@ export const sendViaAWS = async ({ identifier, url, provider, token, locale, ori
       accessKeyId: authEnv.AWS_AK,
       secretAccessKey: authEnv.AWS_SK,
     },
-  })
+  });
 
-  const t = await fs.readFile(path.resolve(rootDir, `assets/docs/welcome/welcome_email_${locale}.html`), {
-    encoding: "utf-8",
-  })
+  const t = await fs.readFile(
+    path.resolve(rootDir, `assets/docs/welcome/welcome_email_${locale}.html`),
+    {
+      encoding: "utf-8",
+    },
+  );
 
   return sesClient.send(
     new SendEmailCommand({
@@ -55,7 +65,10 @@ export const sendViaAWS = async ({ identifier, url, provider, token, locale, ori
 
               trial_length: " 7 Days",
               trial_start_date: d(new Date()).toDate().toLocaleDateString(),
-              trial_end_date: d(new Date()).add(7, "days").toDate().toLocaleDateString(),
+              trial_end_date: d(new Date())
+                .add(7, "days")
+                .toDate()
+                .toLocaleDateString(),
             }),
           },
           Text: {
@@ -65,7 +78,9 @@ export const sendViaAWS = async ({ identifier, url, provider, token, locale, ori
         },
         Subject: {
           Charset: "UTF-8",
-          Data: (locale === "en" ? `Welcome to` : `欢迎来到`) + ` ${siteConfig.name} !`,
+          Data:
+            (locale === "en" ? `Welcome to` : `欢迎来到`) +
+            ` ${siteConfig.name} !`,
         },
       },
       Source: siteConfig.welcomeEmailAddress /* required */,
@@ -77,5 +92,5 @@ export const sendViaAWS = async ({ identifier, url, provider, token, locale, ori
     {
       requestTimeout: 300,
     },
-  )
-}
+  );
+};

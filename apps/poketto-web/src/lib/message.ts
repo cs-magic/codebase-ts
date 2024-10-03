@@ -1,17 +1,24 @@
-import { ChatMessageFormatType, PromptRoleType } from "@prisma/client"
-import { Message } from "ai"
+import { ChatMessageFormatType, PromptRoleType } from "@prisma/client";
+import { Message } from "ai";
 
-import { AllMessage, AppForListView, UserForListView } from "@/ds"
-import d from "@/lib/datetime"
+import { AllMessage, AppForListView, UserForListView } from "@/ds";
+import d from "@/packages/common/src/datetime";
 
-export const packMessageWithDate = (messages: Message[], user: UserForListView, app: AppForListView) => {
-  const messagesWithDate: AllMessage[] = []
-  let curDate = d(new Date(0, 0, 0))
+export const packMessageWithDate = (
+  messages: Message[],
+  user: UserForListView,
+  app: AppForListView,
+) => {
+  const messagesWithDate: AllMessage[] = [];
+  let curDate = d(new Date(0, 0, 0));
   for (const m of messages) {
-    const newDate = d(m.createdAt).startOf("date")
+    const newDate = d(m.createdAt).startOf("date");
     if (newDate > curDate) {
-      curDate = newDate
-      messagesWithDate.push({ systemType: "date", content: curDate.format("MMMM DD") })
+      curDate = newDate;
+      messagesWithDate.push({
+        systemType: "date",
+        content: curDate.format("MMMM DD"),
+      });
     }
     messagesWithDate.push({
       ...m,
@@ -27,10 +34,13 @@ export const packMessageWithDate = (messages: Message[], user: UserForListView, 
               image: app.avatar,
               name: app.name!,
             },
-      format: "format" in m ? (m.format as ChatMessageFormatType) : ChatMessageFormatType.text,
+      format:
+        "format" in m
+          ? (m.format as ChatMessageFormatType)
+          : ChatMessageFormatType.text,
       createdAt: m?.createdAt ?? new Date(),
       updatedAt: m?.createdAt ?? new Date(),
-    })
+    });
   }
-  return messagesWithDate
-}
+  return messagesWithDate;
+};

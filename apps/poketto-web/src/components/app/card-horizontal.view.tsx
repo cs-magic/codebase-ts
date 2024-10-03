@@ -1,12 +1,16 @@
-import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar"
-import { Skeleton } from "@cs-magic/shadcn/dist/ui/skeleton"
+import { Avatar, AvatarImage } from "@cs-magic/shadcn/dist/ui/avatar";
+import { Skeleton } from "@cs-magic/shadcn/dist/ui/skeleton";
 
-import { UsesField, ViewsField } from "@/components/field"
-import { type AppForListView } from "@/ds"
-import d from "@/lib/datetime"
-import { getImageUri } from "@/lib/string"
+import { UsesField, ViewsField } from "@/components/field";
+import { type AppForListView } from "@/ds";
+import d from "@/packages/common/src/datetime";
+import { getImageUri } from "@/lib/string";
 
-export function AppHorizontalCardView({ app }: { app: AppForListView | undefined }) {
+export function AppHorizontalCardView({
+  app,
+}: {
+  app: AppForListView | undefined;
+}) {
   if (!app) {
     return (
       <div className="| flex w-full gap-8 pb-3 pt-6 text-muted-foreground">
@@ -21,7 +25,7 @@ export function AppHorizontalCardView({ app }: { app: AppForListView | undefined
           <Skeleton className="h-8 w-40" />
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -31,7 +35,9 @@ export function AppHorizontalCardView({ app }: { app: AppForListView | undefined
       </Avatar>
 
       <div className="flex grow flex-col items-start gap-2 overflow-hidden">
-        <p className="truncate font-semibold text-primary-foreground">{app.name}</p>
+        <p className="truncate font-semibold text-primary-foreground">
+          {app.name}
+        </p>
         <p className="line-clamp-2 text-primary-foreground/75">{app.desc}</p>
 
         <div className="inline-flex w-full justify-between gap-4 overflow-hidden">
@@ -48,5 +54,5 @@ export function AppHorizontalCardView({ app }: { app: AppForListView | undefined
         {/* <SavesField value={app.state?.stars ?? 0} /> */}
       </div>
     </div>
-  )
+  );
 }
