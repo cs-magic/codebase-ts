@@ -90,8 +90,11 @@
     "zod-prisma-types": "^3.1.8"
   },
   "dependencies": {
+    "@mdx-js/esbuild": "^3.0.1",
     "@types/lodash": "^4.14.202",
     "lodash": "^4.17.21",
+    "rehype-pretty-code": "^0.14.0",
+    "shiki": "0.14.5",
     "stripe": "13.11.0",
     "ts-patch": "^3.2.1"
   },
@@ -112,5 +115,10 @@
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {
     "initVersion": "7.27.0"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "npx git-scripts-pre-push"
+    }
   }
 }

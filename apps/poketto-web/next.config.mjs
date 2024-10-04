@@ -4,6 +4,8 @@
  */
 import path from "path";
 import dotenv from "dotenv";
+import bundleAnalyzer from "@next/bundle-analyzer";
+import { fileURLToPath } from "node:url";
 
 dotenv.config({
   path: path.join(fileURLToPath(import.meta.url), "../../.env"),
@@ -13,9 +15,6 @@ dotenv.config({
 });
 
 await import("./src/env.mjs");
-
-import bundleAnalyzer from "@next/bundle-analyzer";
-import { fileURLToPath, pathToFileURL } from "node:url";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -49,8 +48,7 @@ const config = {
       { protocol: "http", hostname: "**" },
       { protocol: "https", hostname: "**" },
     ],
-  },
-  // 这个可以，ref: https://frontend-digest.com/how-to-import-svgs-into-nextjs-8ec6100e613f
+  }, // 这个可以，ref: https://frontend-digest.com/how-to-import-svgs-into-nextjs-8ec6100e613f
   webpack(config) {
     // 添加对 TypeScript 文件的处理 （主要是外部的ts，参考：https://chatgpt.com/c/138dbb55-e68d-43f6-8668-def2d403a138）
     config.module.rules.push({
