@@ -54,16 +54,15 @@
 	url = git@github.com:cs-magic/assistant-web.git
 	branch = main
 
-; projects
-
-[submodule "苏颖-智机科技"]
-	path = projects/苏颖-智机科技
-	url = git@github.com:cs-magic/SuYing-ZhijiKeji.git
-	branch = main
-
 [submodule "apps/totem-gpt"]
 	path = apps/totem-gpt
 	url = git@github.com:cs-magic/totem-gpt-web.git
+
 [submodule "apps/playground"]
 	path = apps/playground
 	url = git@github.com:cs-magic/playgrounds.git
+
+; projects
+[submodule "projects/zhijikeji"]
+	path = projects/zhijikeji
+	url = git@github.com:cs-magic/projects_zhijikeji.git
