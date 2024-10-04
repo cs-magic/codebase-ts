@@ -69,3 +69,6 @@
 [submodule "apps/home-v2"]
 	path = apps/home-v2
 	url = git@github.com:cs-magic/home-v2.git
+[submodule "apps/assistant-pc"]
+	path = apps/assistant-pc
+	url = git@github.com:cs-magic/assistant-pc.git
