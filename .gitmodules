@@ -75,3 +75,9 @@
 [submodule "web-apps/poketto-web"]
 	path = web-apps/poketto-web
 	url = git@github.com:cs-magic/poketto-web.git
+[submodule "apps/neurora-assistant"]
+	path = apps/neurora-assistant
+	url = git@github.com:cs-magic/neurora-assistant.git
+[submodule "apps/wechat-dbcracker"]
+	path = apps/wechat-dbcracker
+	url = git@github.com:cs-magic/wechat-dbcracker.git
