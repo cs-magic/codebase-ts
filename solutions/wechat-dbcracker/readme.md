@@ -42,7 +42,7 @@
 
 微信往期版本的下载地址：https://macdownload.informer.com/wechat/versions/
 
-![wechat-versions](./assets/wechat-versions.png)
+![wechat-versions](assets/wechat-versions.png)
 
 ### sqlcipher 依赖
 

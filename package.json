@@ -9,10 +9,9 @@
   "workspaces": [
     "packages/*",
     "plugins/*",
-    "web-apps/*",
-    "web-apps/home/*",
-    "web-apps/thinkow/*",
     "apps/*",
+    "apps/home/*",
+    "apps/thinkow/*",
     "solutions/*",
     "solutions/neurora-assistant/*",
     "solutions/neurora-assistant/frontend/*",
