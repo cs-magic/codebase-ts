@@ -44,10 +44,7 @@
 [submodule "apps/playground"]
 	path = apps/playground
 	url = git@github.com:cs-magic/playgrounds.git
-	
-[submodule "apps/poketto-web"]
-	path = apps/poketto-web
-	url = git@github.com:cs-magic/poketto-web.git
+
 
 [submodule "apps/neurora-assistant"]
 	path = apps/neurora-assistant
@@ -65,6 +62,9 @@
 	path = apps/neurora-playground
 	url = git@github.com:cs-magic/neurora-playground.git
 
+[submodule "apps/poketto"]
+	path = apps/poketto
+	url = git@github.com:cs-magic/poketto.git
 
 ; cases
 [submodule "cases/zhijikeji"]
