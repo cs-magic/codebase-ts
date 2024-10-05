@@ -61,8 +61,12 @@
 	path = apps/neurora-home
 	url = git@github.com:cs-magic/neurora-home.git
 
+[submodule "apps/neurora-playground"]
+	path = apps/neurora-playground
+	url = git@github.com:cs-magic/neurora-playground.git
+
+
 ; cases
 [submodule "cases/zhijikeji"]
 	path = cases/zhijikeji
 	url = git@github.com:cs-magic/cases_zhijikeji.git
-
