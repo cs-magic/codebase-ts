@@ -72,3 +72,6 @@
 [submodule "apps/assistant-pc"]
 	path = apps/assistant-pc
 	url = git@github.com:cs-magic/assistant-pc.git
+[submodule "apps/poketto-web"]
+	path = apps/poketto-web
+	url = git@github.com:cs-magic/poketto-web.git
