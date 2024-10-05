@@ -8,76 +8,61 @@
 	path = packages_wechaty/grpc
 	url = ./packages_wechaty/grpc
 
-; web-apps
-[submodule "home"]
-	path = web-apps/home
-	url = git@github.com:cs-magic/home.git
-	branch = main
-
-[submodule "thinkow-ui"]
-	path = web-apps/thinkow-ui
-	url = git@github.com:cs-magic/open-agent-ui.git
-	branch = main
-
-[submodule "thinkow-api"]
-	path = web-apps/thinkow-api
-	url = git@github.com:cs-magic/open-agi.git
-	branch = main
-
-[submodule "screensaver"]
-	path = web-apps/screensaver
-	url = git@github.com:cs-magic/app_screensaver.git
-	branch = main
-
-[submodule "wechat-dbcracker"]
-	path = web-apps/wechat-dbcracker
-	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
-	branch = main
+; plugins
 
 [submodule "exts_chrome_chatbot-exporter"]
-	path = web-apps/exts_chrome_chatbot-exporter
+	path = plugins/exts_chrome_chatbot-exporter
 	url = git@github.com:cs-magic/exts_chrome_chatbot-exporter.git
 	branch = main
 
 [submodule "exts_chrome_claude-artifact-enhancer"]
-    path = web-apps/exts_chrome_claude-artifact-enhancer
+    path = plugins/exts_chrome_claude-artifact-enhancer
 	url = git@github.com:cs-magic/exts_chrome_claude-artifact-enhancer.git
 	branch = main
 
-[submodule "eval-ai-web"]
-	path = web-apps/eval-ai-web
-	url = git@github.com:cs-magic/eval-ai-web.git
+
+; apps
+[submodule "screensaver"]
+	path = apps/screensaver
+	url = git@github.com:cs-magic/app_screensaver.git
 	branch = main
 
-[submodule "assistant-web"]
-	path = web-apps/assistant-web
-	url = git@github.com:cs-magic/assistant-web.git
+[submodule "wechat-dbcracker"]
+	path = apps/wechat-dbcracker
+	url = git@github.com:MarkShawn2020/wechat-dbcracker.git
 	branch = main
 
-[submodule "web-apps/totem-gpt"]
-	path = web-apps/totem-gpt
+[submodule "eval-ai"]
+	path = apps/eval-ai
+	url = git@github.com:cs-magic/eval-ai.git
+	branch = main
+
+[submodule "apps/totem-gpt"]
+	path = apps/totem-gpt
 	url = git@github.com:cs-magic/totem-gpt-web.git
 
-[submodule "web-apps/playground"]
-	path = web-apps/playground
+[submodule "apps/playground"]
+	path = apps/playground
 	url = git@github.com:cs-magic/playgrounds.git
-
-; projects
-[submodule "projects/zhijikeji"]
-	path = projects/zhijikeji
-	url = git@github.com:cs-magic/projects_zhijikeji.git
-[submodule "web-apps/home-v2"]
-	path = web-apps/home-v2
-	url = git@github.com:cs-magic/home-v2.git
-[submodule "web-apps/assistant-pc"]
-	path = web-apps/assistant-pc
-	url = git@github.com:cs-magic/assistant-pc.git
-[submodule "web-apps/poketto-web"]
-	path = web-apps/poketto-web
+	
+[submodule "apps/poketto-web"]
+	path = apps/poketto-web
 	url = git@github.com:cs-magic/poketto-web.git
+
 [submodule "apps/neurora-assistant"]
 	path = apps/neurora-assistant
 	url = git@github.com:cs-magic/neurora-assistant.git
+
 [submodule "apps/wechat-dbcracker"]
 	path = apps/wechat-dbcracker
 	url = git@github.com:cs-magic/wechat-dbcracker.git
+
+[submodule "apps/neurora-home"]
+	path = apps/neurora-home
+	url = git@github.com:cs-magic/neurora-home.git
+
+; cases
+[submodule "cases/zhijikeji"]
+	path = cases/zhijikeji
+	url = git@github.com:cs-magic/cases_zhijikeji.git
+
