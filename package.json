@@ -8,8 +8,15 @@
   "private": true,
   "workspaces": [
     "packages/*",
+    "plugins/*",
+    "web-apps/*",
+    "web-apps/home/*",
+    "web-apps/thinkow/*",
     "apps/*",
-    "projects/*",
+    "solutions/*",
+    "solutions/neurora-assistant/*",
+    "solutions/neurora-assistant/frontend/*",
+    "cases/*",
     "tests/*"
   ],
   "scripts": {
