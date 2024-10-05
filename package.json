@@ -9,10 +9,14 @@
   "workspaces": [
     "packages/*",
     "apps/*",
-    "apps/neurora-home/*",
-    "apps/neurora-assistant/*",
-    "apps/neurora-assistant/frontend/*",
-    "apps/thinkow/*",
+    "apps/neurora_home/*",
+    "apps/neurora_assistant/*",
+    "apps/neurora_assistant/frontend/*",
+    "apps/cs-magic/*",
+    "apps/cs-magic/thinkow/*",
+    "apps/exts/*",
+    "apps/exts/alfred/*",
+    "apps/exts/chrome/*",
     "cases/*",
     "tests/*"
   ],
