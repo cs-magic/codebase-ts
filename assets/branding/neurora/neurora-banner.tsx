@@ -1,21 +1,7 @@
-import NeuroraTechSVG from "./neurora_logo_1280_white.svg";
-import { range } from "lodash";
 import React from "react";
+import NeuroraTechSVG from "./neurora_logo_1280_white.svg";
 
 export const NeuroraBanner = () => {
-  const rects: JSX.Element[] = [];
-
-  let y = 0,
-    h0 = 0,
-    h1 = 4;
-  for (const i of range(5)) {
-    rects.push(<rect key={i} y={y} width="100%" height={h1} fill="white" />);
-    y += h1 + 3;
-    const h1_last = h1;
-    h1 += h0;
-    h0 = h1_last;
-  }
-
   return (
     <div className={"flex justify-center items-center gap-1"}>
       <NeuroraTechSVG width={64} height={64} />
@@ -43,7 +29,11 @@ export const NeuroraBanner = () => {
             width="100%"
             height={64}
           >
-            {rects}
+            <rect width="100%" height={4} y={0} fill="white" />
+            <rect width="100%" height={4} y={7} fill="white" />
+            <rect width="100%" height={8} y={14} fill="white" />
+            <rect width="100%" height={12} y={25} fill="white" />
+            <rect width="100%" height={20} y={40} fill="white" />
           </pattern>
         </defs>
 

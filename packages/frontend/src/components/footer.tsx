@@ -4,6 +4,7 @@ import { beian, mossSlogan } from "@/config";
 
 import { CompanySlogan } from "@/components/company-slogan";
 import { isCurUrlDomestic } from "@/utils/host";
+import FooterSVG from "./footer.svg";
 
 export const Footer = () => {
   return (
@@ -32,6 +33,12 @@ export const Footer = () => {
             </Link>
           )}
         </div>
+
+        {/*<div className="container mt-8 h-[100px]">*/}
+        {/*  <div className="flex w-full">*/}
+        {/*    <FooterSVG />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
     </>
   );
