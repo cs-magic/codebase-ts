@@ -1,0 +1,159 @@
+{
+  "main": {
+    "id": "3825ffda84757be9",
+    "type": "split",
+    "children": [
+      {
+        "id": "4045dc465e099cac",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b389f9a0a8768dcb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "apps/neurora_playground/README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ebb508906c2fa1ef",
+    "type": "split",
+    "children": [
+      {
+        "id": "cb72e7ba675f8af0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fabd2364054d55a3",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "585fc3b35d280042",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8e495c82f4c1e88d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c05839c853fea632",
+    "type": "split",
+    "children": [
+      {
+        "id": "5794cee95bf73478",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c0ce994135f04dfa",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "apps/neurora_playground/README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4256df2510ee6407",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "apps/neurora_playground/README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c3c17fea80e7fabb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "12c7892b07eaa7be",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "apps/neurora_playground/README.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "b389f9a0a8768dcb",
+  "lastOpenFiles": [
+    "assets/branding/third-parties/wechat/公众号-svg.ts",
+    "assets/branding/third-parties/wechat/公众号.svg",
+    "assets/branding/third-parties/wechat",
+    "assets/branding/third-parties/即刻-logo.png",
+    "assets/branding/third-parties",
+    "assets/branding/platforms",
+    "screenshot (30).png"
+  ]
+}
