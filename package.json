@@ -21,8 +21,7 @@
     "tests/*"
   ],
   "scripts": {
-    "prepare": "ts-patch install -s",
-    "postinstall": "./scripts/post-install.sh"
+    "prepare": "ts-patch install -s"
   },
   "resolutions": {
     "@babel/core": "^7.25.2",
