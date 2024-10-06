@@ -1,11 +1,16 @@
 "use client";
 
-import CustomDonationInput from "./CustomDonationInput";
-import StripeTestCards from "./StripeTestCards";
-import { AMOUNT_STEP, CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from "../config";
-import getStripe from "../get-stripejs";
-import { createPaymentIntent } from "../stripe.actions";
-import { formatAmountForDisplay } from "../utils";
+import CustomDonationInput from "src/stripe/components/CustomDonationInput";
+import StripeTestCards from "src/stripe/components/StripeTestCards";
+import {
+  AMOUNT_STEP,
+  CURRENCY,
+  MAX_AMOUNT,
+  MIN_AMOUNT,
+} from "src/stripe/config";
+import getStripe from "src/stripe/get-stripejs";
+import { createPaymentIntent } from "src/stripe/stripe.actions";
+import { formatAmountForDisplay } from "src/stripe/utils";
 import {
   Elements,
   PaymentElement,

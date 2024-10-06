@@ -1,18 +1,18 @@
-import { redis } from "@cs-magic/common/dist/db/redis"
-import logger from "@cs-magic/common/dist/log/index"
-import { ITransClient, ITransEvent } from "@cs-magic/common/dist/sse/schema"
+import { redis } from "@cs-magic/common/db/redis";
+import logger from "@cs-magic/common/log/index";
+import { ITransClient, ITransEvent } from "@cs-magic/common/sse/schema";
 
-import type { ILLMManagerTraditional } from "./schema.js"
+import type { ILLMManagerTraditional } from "./schema.js";
 
 export class RedisLLMManager implements ILLMManagerTraditional {
-  private triggerId: string
+  private triggerId: string;
 
   constructor(triggerId: string) {
-    this.triggerId = triggerId
+    this.triggerId = triggerId;
   }
 
   public async onTriggerStarts() {
-    this.onEvent({ event: "init", data: {} })
+    this.onEvent({ event: "init", data: {} });
   }
 
   //////////////////////////////
@@ -21,37 +21,41 @@ export class RedisLLMManager implements ILLMManagerTraditional {
 
   public async hasTrigger() {
     // logger.info("[redis] checking trigger: ", { triggerId })
-    return !!(await redis.exists(`${this.triggerId}-events`))
+    return !!(await redis.exists(`${this.triggerId}-events`));
   }
 
   /**
    * todo: redis get trigger()
    */
   public async getTrigger() {
-    const events = (await redis.lrange(`${this.triggerId}-events`, 0, -1)).map((e) => JSON.parse(e)) as ITransEvent[]
+    const events = (await redis.lrange(`${this.triggerId}-events`, 0, -1)).map(
+      (e) => JSON.parse(e),
+    ) as ITransEvent[];
 
-    const clients = (await redis.lrange(`${this.triggerId}-clients`, 0, -1)).map((e) => {
-      const client = JSON.parse(e) as ITransClient
-      logger.info({ client })
-      return client
-    })
+    const clients = (
+      await redis.lrange(`${this.triggerId}-clients`, 0, -1)
+    ).map((e) => {
+      const client = JSON.parse(e) as ITransClient;
+      logger.info({ client });
+      return client;
+    });
 
     logger.info("[redis] getting trigger: %o", {
       triggerId: this.triggerId,
       events,
       clients,
-    })
+    });
 
     return {
       events,
       clients,
-    }
+    };
   }
 
   public async onTriggerEnds() {
-    logger.info("[redis] clean trigger: %o", { triggerId: this.triggerId })
-    await redis.del(`${this.triggerId}-events`)
-    await redis.del(`${this.triggerId}-clients`)
+    logger.info("[redis] clean trigger: %o", { triggerId: this.triggerId });
+    await redis.del(`${this.triggerId}-events`);
+    await redis.del(`${this.triggerId}-clients`);
   }
 
   /**
@@ -62,39 +66,39 @@ export class RedisLLMManager implements ILLMManagerTraditional {
     logger.info("[redis] adding client: %o", {
       triggerId: this.triggerId,
       client,
-    })
+    });
 
-    redis.lpush(`${this.triggerId}-clients`, JSON.stringify(client))
+    redis.lpush(`${this.triggerId}-clients`, JSON.stringify(client));
   }
 
   public async onClientDisconnected(clientId: string) {
     logger.info("[redis] deleting client: %o", {
       triggerId: this.triggerId,
       clientId,
-    })
-    const index = await redis.lpos(this.triggerId, clientId)
-    index === null ? null : await redis.lpop(this.triggerId, index)
+    });
+    const index = await redis.lpos(this.triggerId, clientId);
+    index === null ? null : await redis.lpop(this.triggerId, index);
   }
 
   public async onEvent(event: ITransEvent) {
     logger.info("[redis] pushing event to all clients: %o", {
       triggerId: this.triggerId,
       event,
-    })
-    await redis.lpush(`${this.triggerId}-events`, JSON.stringify(event))
+    });
+    await redis.lpush(`${this.triggerId}-events`, JSON.stringify(event));
 
     await Promise.all(
       (await redis.keys(`${this.triggerId}-clients`)).map(async (client_) => {
         // todo: is it ok?
-        const client = JSON.parse(client_) as ITransClient
-        client.onEvent(event)
+        const client = JSON.parse(client_) as ITransClient;
+        client.onEvent(event);
       }),
-    )
+    );
   }
 
   private async listTriggers() {
-    const triggerIds = await redis.keys("*-events")
+    const triggerIds = await redis.keys("*-events");
     // logger.info("[redis] listed triggers: ", triggerIds)
-    return triggerIds
+    return triggerIds;
   }
 }

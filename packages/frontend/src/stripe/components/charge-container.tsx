@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@cs-magic/shadcn/ui/dialog";
-import StripePricingTable from "./pricing-table";
+import StripePricingTable from "src/stripe/components/pricing-table";
 
 export function ChargeContainer(
   props: React.ComponentPropsWithoutRef<typeof DialogTrigger>,

@@ -1,10 +1,10 @@
 "use client";
 
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from "../config";
-import { AMOUNT_STEP } from "../config";
-import { formatAmountForDisplay } from "../utils";
-import CustomDonationInput from "./CustomDonationInput";
-import { createCheckoutSession } from "../stripe.actions";
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from "src/stripe/config";
+import { AMOUNT_STEP } from "src/stripe/config";
+import { formatAmountForDisplay } from "src/stripe/utils";
+import CustomDonationInput from "src/stripe/components/CustomDonationInput";
+import { createCheckoutSession } from "src/stripe/stripe.actions";
 import React, { useState } from "react";
 
 export default function CheckoutForm(): JSX.Element {

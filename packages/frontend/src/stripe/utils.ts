@@ -1,4 +1,4 @@
-import { getServerId } from "../router";
+import { getServerId } from "@cs-magic/common/router";
 
 export interface IClientReferenceId {
   userId: string;

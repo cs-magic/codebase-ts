@@ -1,14 +1,15 @@
 // todo: monorepo not work on packages/common-auth-sms/hooks/use-sms-send-code.ts
-import { DefaultSession } from "next-auth"
-import { DefaultJWT } from "next-auth/jwt"
+import { DefaultSession } from "next-auth";
+import { DefaultJWT } from "next-auth/jwt";
 
 export interface IAuth {
-  id: string
+  id: string;
   // the optional of (name, image) is for callback (like signIn) compatible
-  name?: string | null
-  image?: string | null
-  phone: string | null
-  wxid: string | null
+  name?: string | null;
+  image?: string | null;
+  phone: string | null;
+  wxid: string | null;
+  email?: string | null;
 }
 
 declare module "next-auth/jwt" {
@@ -36,6 +37,6 @@ declare module "next-auth" {
    * user/profile --> token --> session
    */
   interface Session extends DefaultSession {
-    user: IAuth
+    user: IAuth;
   }
 }

@@ -1,4 +1,8 @@
-import { ITransChannel, ITransEvent, ResponseFinalStatus } from "@cs-magic/common/dist/sse/schema"
+import {
+  ITransChannel,
+  ITransEvent,
+  ResponseFinalStatus,
+} from "@cs-magic/common/sse/schema";
 
 export interface ILLMManagerPusher {
   //////////////////////////////
@@ -6,18 +10,18 @@ export interface ILLMManagerPusher {
   //////////////////////////////
 
   // 1. add trigger, on LLM starts
-  onTriggerStarts: (trigger: ITransChannel) => Promise<void>
+  onTriggerStarts: (trigger: ITransChannel) => Promise<void>;
   // 2. clean trigger, on LLM ends
-  onTriggerEnds: (reason: ResponseFinalStatus) => Promise<void>
+  onTriggerEnds: (reason: ResponseFinalStatus) => Promise<void>;
   // 3. push event to clients, when LLM outputs token
-  onEvent: (event: ITransEvent) => Promise<void>
+  onEvent: (event: ITransEvent) => Promise<void>;
 
   ///////////////////////////////
   // client (GET)
   //////////////////////////////
 
   // 1. a user visited
-  onClientConnected: (clientId: string) => void
+  onClientConnected: (clientId: string) => void;
   // 2. a user leaved
-  onClientDisconnected: (clientId: string) => void
+  onClientDisconnected: (clientId: string) => void;
 }

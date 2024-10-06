@@ -1,4 +1,4 @@
-import { formatAmountForDisplay } from "../utils";
+import { formatAmountForDisplay } from "src/stripe/utils";
 
 export default function CustomDonationInput({
   name,

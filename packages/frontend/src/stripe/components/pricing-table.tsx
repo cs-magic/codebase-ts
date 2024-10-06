@@ -2,8 +2,11 @@ import Head from "next/head";
 import React from "react";
 import { useSession } from "next-auth/react";
 
-import { STRIPE_PRICING_TABLE_ID, STRIPE_PUBLISHABLE_KEY } from "../config";
-import { encodeClientReferenceId } from "../utils";
+import {
+  STRIPE_PRICING_TABLE_ID,
+  STRIPE_PUBLISHABLE_KEY,
+} from "src/stripe/config";
+import { encodeClientReferenceId } from "src/stripe/utils";
 
 declare global {
   namespace JSX {
