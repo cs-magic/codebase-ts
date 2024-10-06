@@ -1,5 +1,7 @@
-/* shadcn: */
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 @layer base {
     :root {
@@ -127,10 +129,14 @@
     }
 }
 
-@tailwind components;
 
 @layer components {
 
+    /* 隐藏默认滚动条 */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
     body {
         position: relative;
 
@@ -140,7 +146,6 @@
     }
 }
 
-@tailwind utilities;
 
 @layer utilities {
     .actions {

@@ -1,15 +1,15 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
 const tailwindConfig = {
   darkMode: ["class"],
   /**
    * todo: 智能选择
    */
   content: [
-    // deps
-    "../../node_modules/@cs-magic/common/dist/**/*",
-    "../../node_modules/@cs-magic/common-frontend/dist/**/*",
-    "../../node_modules/@cs-magic/shadcn/dist/**/*",
-    "../../node_modules/@cs-magic/react/dist/**/*",
-
+    // deps // attention to the prefix
+    // "../../node_modules/@cs-magic/common/dist/**/*",
+    // "../../node_modules/@cs-magic/common-frontend/dist/**/*",
+    // "../../node_modules/@cs-magic/shadcn/dist/**/*",
+    // "../../node_modules/@cs-magic/react/dist/**/*",
     // apps
     // "../../app_chrome-exts/aigc-enhancer/src/**/*",
   ],
@@ -27,26 +27,33 @@ const tailwindConfig = {
       },
     },
     extend: {
-      fontFamily: {
-        // 需要本地安装
-        pingfang: ["PingFang SC"],
-        songti: ["Songti SC", "STSong"],
-        art: [
-          "Zapfino", //这个花体最飘逸！
-          // "Trebuchet MS",
-          // "Snell Roundhand", // 这个花体还行
-          // "SignPainter",
-          // "Rockwell",
-          // "Party LET",
-          // "Optima",
-          // "Menlo",
-          // "HYShangWeiShouShu W",
-          // "Helvetica Neue",
-          // "Chalkduster",
-          // "Brush Script MT",
-          // "Apple Chancery",
-        ],
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "backdrop-ring": "backdrop-ring 5s ease-in-out infinite",
+        marquee: "marquee 5s linear infinite",
+        marquee2: "marquee2 5s linear infinite",
+        "fade-in": "fade-in 3s ease-in-out forwards",
+        title: "title 3s ease-out forwards",
+        "fade-left": "fade-left 3s ease-in-out forwards",
+        "fade-right": "fade-right 3s ease-in-out forwards",
       },
+
+      backgroundImage: {
+        "gradient-radial":
+          "radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))",
+      },
+
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+
+      borderStyle: {
+        "wider-dashed": "dashed", // Name your custom style
+      },
+
       colors: {
         wechat: "hsl(var(--wechat))",
         border: "hsl(var(--border))",
@@ -87,11 +94,35 @@ const tailwindConfig = {
         },
         shadow: "var(--shadow)",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+
+      dropShadow: {
+        DEFAULT: "0 0 5px var(--shadow)",
+        lg: "0 0 20px var(--shadow)",
       },
+
+      fontFamily: {
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        display: ["var(--font-calsans)"],
+        // 需要本地安装
+        pingfang: ["PingFang SC"],
+        songti: ["Songti SC", "STSong"],
+        art: [
+          "Zapfino", //这个花体最飘逸！
+          // "Trebuchet MS",
+          // "Snell Roundhand", // 这个花体还行
+          // "SignPainter",
+          // "Rockwell",
+          // "Party LET",
+          // "Optima",
+          // "Menlo",
+          // "HYShangWeiShouShu W",
+          // "Helvetica Neue",
+          // "Chalkduster",
+          // "Brush Script MT",
+          // "Apple Chancery",
+        ],
+      },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -117,24 +148,89 @@ const tailwindConfig = {
             "100%": { transform: "translate(0%)" },
           },
         },
+
+        "fade-in": {
+          "0%": {
+            opacity: "0%",
+          },
+          "75%": {
+            opacity: "0%",
+          },
+          "100%": {
+            opacity: "100%",
+          },
+        },
+        "fade-left": {
+          "0%": {
+            transform: "translateX(100%)",
+            opacity: "0%",
+          },
+
+          "30%": {
+            transform: "translateX(0%)",
+            opacity: "100%",
+          },
+          "100%": {
+            opacity: "0%",
+          },
+        },
+        "fade-right": {
+          "0%": {
+            transform: "translateX(-100%)",
+            opacity: "0%",
+          },
+
+          "30%": {
+            transform: "translateX(0%)",
+            opacity: "100%",
+          },
+          "100%": {
+            opacity: "0%",
+          },
+        },
+        title: {
+          "0%": {
+            "line-height": "0%",
+            "letter-spacing": "0.25em",
+            opacity: "0",
+          },
+          "25%": {
+            "line-height": "0%",
+            opacity: "0%",
+          },
+          "80%": {
+            opacity: "100%",
+          },
+
+          "100%": {
+            "line-height": "100%",
+            opacity: "100%",
+          },
+        },
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "backdrop-ring": "backdrop-ring 5s ease-in-out infinite",
-        marquee: "marquee 5s linear infinite",
-        marquee2: "marquee2 5s linear infinite",
-      },
-      borderStyle: {
-        "wider-dashed": "dashed", // Name your custom style
-      },
+
       textShadow: {
         // 需要额外设置
         douyin: "1px 1px 2px red, 0 0 1rem blue, 0 0 0.2rem blue;",
       },
-      dropShadow: {
-        DEFAULT: "0 0 5px var(--shadow)",
-        lg: "0 0 20px var(--shadow)",
+
+      typography: {
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+          },
+        },
+        quoteless: {
+          css: {
+            "blockquote p:first-of-type::before": { content: "none" },
+            "blockquote p:first-of-type::after": { content: "none" },
+          },
+        },
       },
     },
   },
@@ -142,6 +238,7 @@ const tailwindConfig = {
     require("tailwindcss-animate"),
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
+    require("tailwindcss-debug-screens"),
     // eslint-disable-next-line @typescript-eslint/unbound-method
     require("tailwindcss/plugin")(function ({
       addVariant,
