@@ -148,12 +148,19 @@
   },
   "active": "b389f9a0a8768dcb",
   "lastOpenFiles": [
-    "assets/branding/third-parties/wechat/公众号-svg.ts",
+    "apps/neurora_home/v2/app/common.config.ts",
+    "apps/neurora_home/v2/app/server.config.ts",
+    "apps/neurora_home/v2/app/app.config.ts",
+    "apps/neurora_home/v2/app/components/card-badges.tsx",
+    "apps/neurora_home/v2/app/components/card-article.tsx",
+    "apps/neurora_home/v2/app/components/cards.tsx",
+    "apps/neurora_home/v2/app/components/card-top1.tsx",
+    "apps/neurora_home/v2/app/components/article.tsx",
+    "apps/neurora_home/v2/app/components/top1-card.tsx",
+    "apps/neurora_home/v2/types/assets.d.ts",
+    "apps/neurora_home/v2/types/interface.ts",
     "assets/branding/third-parties/wechat/公众号.svg",
-    "assets/branding/third-parties/wechat",
     "assets/branding/third-parties/即刻-logo.png",
-    "assets/branding/third-parties",
-    "assets/branding/platforms",
     "screenshot (30).png"
   ]
 }
