@@ -1,1 +1,1 @@
-export { default as NeuroraBannerSVG } from "./neurora-banner.svg";
+export { default as NeuroraBannerSVG } from "assets/branding/neurora/neurora-banner-current-trans.svg";
