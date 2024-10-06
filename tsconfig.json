@@ -3,7 +3,7 @@
   "compilerOptions": {
 
     /* If transpiling with TypeScript: */
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "module": "ESNext",
     "target": "ESNext",
     "sourceMap": true,
