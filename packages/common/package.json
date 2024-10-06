@@ -15,6 +15,7 @@
     "@alicloud/dysmsapi20170525": "^3.0.0",
     "@cs-magic/shadcn": "workspace:^",
     "@prisma/client": "*",
+    "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^4.7.0",
     "@types/lodash": "^4.14.202",
     "ali-oss": "^6.20.0",
