@@ -20,7 +20,12 @@ export const ButtonLink = ({
       {...props}
     />
   );
-  if (disabled) return <InnerButton />;
+  if (disabled)
+    return (
+      <div>
+        <InnerButton />
+      </div>
+    );
 
   return (
     <Link href={href}>

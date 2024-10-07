@@ -148,6 +148,8 @@
   },
   "active": "b389f9a0a8768dcb",
   "lastOpenFiles": [
+    "packages/frontend-shadcn/src/styles/globals.css",
+    "packages/frontend-shadcn/src/styles",
     "apps/neurora_home/v2/config/server.config.ts",
     "apps/neurora_home/v2/config/common.config.ts",
     "apps/neurora_home/v2/config",
@@ -160,8 +162,6 @@
     "docs/研发紧张，非请勿入/飞脑-海报.pdf",
     "docs/研发紧张，非请勿入/飞脑-海报.ai",
     "docs/研发紧张，非请勿入/飞脑-海报.jpg",
-    "docs/研发紧张，非请勿入",
-    "apps/neurora_home/v2/app/(sub)/career/page.tsx",
     "assets/bp/v2/01-intro.png",
     "assets/bp/v2/01-intro_core.png",
     "assets/branding/neurora/neurora-banner-white-black.png",
