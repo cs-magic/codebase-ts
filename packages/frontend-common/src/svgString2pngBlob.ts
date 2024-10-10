@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 export const svgString2svgBlob = (svgString: string) =>
   new Blob([svgString], { type: "image/svg+xml" });
 
@@ -13,6 +15,12 @@ export function svgBlob2pngBlob(svgBlob: Blob, ppi = 320): Promise<Blob> {
       const scale = ppi / 72; // Default PPI for SVG is 72
       canvas.width = img.width * scale;
       canvas.height = img.height * scale;
+      console.log({
+        image: _.pick(img, ["width", "height"]),
+        canvas: _.pick(img, ["height", "width"]),
+        scale: scale,
+      });
+
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
       canvas.toBlob((blob) => {

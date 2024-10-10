@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 8, 8, 28;
+  --foreground: 236, 240, 243;
+  --primary: 88, 101, 242;
+  --secondary: 255, 73, 209;
+  --accent: 0, 255, 240;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: 'Orbitron', sans-serif;
+  overflow-x: hidden;
+}
+
+@layer base {
+  h1 {
+    @apply text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-slate-900/70 rounded-3xl shadow-2xl p-8 border-2 border-indigo-500/30 backdrop-blur-xl;
+  }
+  .btn {
+    @apply px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-offset-4 focus:ring-offset-slate-900;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 text-white hover:from-blue-600 hover:via-indigo-700 hover:to-purple-800 focus:ring-indigo-500;
+  }
+  .input {
+    @apply w-full px-6 py-4 rounded-full bg-slate-800/50 border-2 border-indigo-500/50 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-all duration-300 backdrop-blur-sm;
+  }
+}
+
+.neon-glow {
+  text-shadow: 0 0 10px rgba(var(--accent), 0.7), 0 0 20px rgba(var(--accent), 0.5), 0 0 30px rgba(var(--accent), 0.3);
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(var(--accent), 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--accent), 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-move 20s linear infinite;
+}
+
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
