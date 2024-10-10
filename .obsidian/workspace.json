@@ -148,6 +148,9 @@
   },
   "active": "b389f9a0a8768dcb",
   "lastOpenFiles": [
+    "apps/game/cursor-work_plane_mvp.zip",
+    "apps/game/plane.zip",
+    "apps/game/plane-mvp.zip",
     "apps/exts/chrome/claude-artifact-enhancer/tmp/img_2.png",
     "apps/exts/chrome/claude-artifact-enhancer/tmp/img_1.png",
     "apps/exts/chrome/claude-artifact-enhancer/tmp/img.png",
@@ -160,8 +163,6 @@
     "apps/game/fruit/readme.md",
     "apps/game/fruit",
     "apps/game/plane/style.css",
-    "apps/game/plane/server.js",
-    "apps/game/plane/index.html",
     "node_modules/socket.io/node_modules/debug/README.md",
     "node_modules/socket.io/Readme.md",
     "node_modules/@socket.io/component-emitter/Readme.md",
@@ -192,7 +193,6 @@
     "cases/zhijikeji/frontend/public/images/projects/project-01/cover-04.jpg",
     "cases/zhijikeji/frontend/public/images/projects/project-01/image-03.jpg",
     "cases/zhijikeji/frontend/public/images/projects/project-01/image-02.jpg",
-    "cases/zhijikeji/frontend/public/images/projects/project-01/image-01.jpg",
-    "cases/zhijikeji/frontend/public/images/projects/project-01/avatar-02.png"
+    "cases/zhijikeji/frontend/public/images/projects/project-01/image-01.jpg"
   ]
 }

@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多人贪吃蛇游戏</title>
+    <title>星际战机</title>
     <link rel="stylesheet" href="style.css">
-    <!-- 添加 Socket.io 客户端库 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
 </head>
 <body>
     <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
+        <div id="start-screen" class="screen">
+            <h1>星际战机</h1>
+            <button id="start-button">开始游戏</button>
+            <!-- 添加恢复游戏按钮 -->
+            <button id="resume-button" style="display: none;">恢复游戏</button>
+        </div>
+        <canvas id="game-canvas" tabindex="0"></canvas>
         <div id="hud">
             <div id="score">得分: <span id="score-value">0</span></div>
             <div id="health">生命值: <span id="health-value">100</span></div>
             <button id="pauseButton">暂停</button>
             <button id="autoPlayToggle" style="display: none;">自动模式: 关闭</button>
         </div>
-    </div>
-    <div id="startScreen" class="screen">
-        <h1>贪吃蛇大作战</h1>
-        <button id="startButton">开始游戏</button>
-    </div>
-    <div id="gameOverScreen" class="screen" style="display: none;">
-        <h2>游戏结束</h2>
-        <p>你的分数: <span id="finalScore"></span></p>
-        <button id="restartButton">重新开始</button>
+        <!-- 将按钮移到这里，并初始设置为隐藏 -->
+        <div id="game-over-screen" class="screen">
+            <h2>游戏结束</h2>
+            <p>最终得分: <span id="final-score"></span></p>
+            <button id="restart-button">重新开始</button>
+        </div>
     </div>
     <script src="game.js"></script>
 </body>
