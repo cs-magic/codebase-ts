@@ -7,25 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-container">
-        <div id="start-screen" class="screen">
-            <h1>星际战机</h1>
-            <button id="start-button">开始游戏</button>
-            <!-- 添加恢复游戏按钮 -->
-            <button id="resume-button" style="display: none;">恢复游戏</button>
+    <div id="outer-container">
+        <div id="game-container">
+            <canvas id="game-canvas" tabindex="0"></canvas>
+            <div id="hud">
+                <div id="health-bar" class="progress-bar">
+                    <div class="progress-fill"></div>
+                    <span class="progress-text">生命值: <span id="health-value">100</span></span>
+                </div>
+                <div id="charge-bar" class="progress-bar">
+                    <div class="progress-fill"></div>
+                    <span class="progress-text">蓄力值: <span id="charge-value">0</span></span>
+                </div>
+            </div>
+            <div id="score-display">
+                <span id="score-value">0</span>
+            </div>
+            <div id="game-over-screen" class="screen" style="display: none;">
+                <h2>游戏结束</h2>
+                <p>最终得分: <span id="final-score"></span></p>
+            </div>
         </div>
-        <canvas id="game-canvas" tabindex="0"></canvas>
-        <div id="hud">
-            <div id="score">得分: <span id="score-value">0</span></div>
-            <div id="health">生命值: <span id="health-value">100</span></div>
-            <button id="pauseButton">暂停</button>
-            <button id="autoPlayToggle" style="display: none;">自动模式: 关闭</button>
-        </div>
-        <!-- 将按钮移到这里，并初始设置为隐藏 -->
-        <div id="game-over-screen" class="screen">
-            <h2>游戏结束</h2>
-            <p>最终得分: <span id="final-score"></span></p>
-            <button id="restart-button">重新开始</button>
+        <div id="control-panel">
+            <button id="gameButton" class="control-button">开始游戏</button>
+            <button id="autoPlayToggle" class="control-button" style="display: none;">自动模式: 关闭</button>
         </div>
     </div>
     <script src="game.js"></script>
