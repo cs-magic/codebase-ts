@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create White Round Mask PNG</title>
+</head>
+<body>
+    <canvas id="maskCanvas" width="100" height="100" style="display:none;"></canvas>
+    <a id="downloadLink" download="white-round-mask.png">Download White Round Mask PNG</a>
+
+    <script>
+        const canvas = document.getElementById('maskCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw white circle
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(50, 50, 50, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Create download link
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = canvas.toDataURL('image/png');
+    </script>
+</body>
+</html>

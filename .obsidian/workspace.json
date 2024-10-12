@@ -148,6 +148,12 @@
   },
   "active": "b389f9a0a8768dcb",
   "lastOpenFiles": [
+    "apps/totem-gpt/src/app/api/chat/test-claude.ts",
+    "assets/others/create-white-round-mask.html",
+    "create-white-round-mask.html",
+    "apps/game/plane/white-round-mask.svg",
+    "apps/game/plane/round-mask.svg",
+    "assets/others/round.svg",
     "apps/game/cursor-work_plane_mvp.zip",
     "apps/game/plane.zip",
     "apps/game/plane-mvp.zip",
@@ -159,10 +165,7 @@
     "apps/exts/chrome/claude-artifact-enhancer/dist/vendors.js",
     "apps/game/fruit/game.js",
     "apps/game/fruit/style.css",
-    "apps/game/fruit/index.html",
     "apps/game/fruit/readme.md",
-    "apps/game/fruit",
-    "apps/game/plane/style.css",
     "node_modules/socket.io/node_modules/debug/README.md",
     "node_modules/socket.io/Readme.md",
     "node_modules/@socket.io/component-emitter/Readme.md",
@@ -190,9 +193,6 @@
     "node_modules/next-mdx-remote/header.png",
     "cases/zhijikeji/frontend/public/images/projects/project-01/avatar-03.png",
     "cases/zhijikeji/frontend/public/images/projects/project-01/cover-03.jpg",
-    "cases/zhijikeji/frontend/public/images/projects/project-01/cover-04.jpg",
-    "cases/zhijikeji/frontend/public/images/projects/project-01/image-03.jpg",
-    "cases/zhijikeji/frontend/public/images/projects/project-01/image-02.jpg",
-    "cases/zhijikeji/frontend/public/images/projects/project-01/image-01.jpg"
+    "cases/zhijikeji/frontend/public/images/projects/project-01/cover-04.jpg"
   ]
 }
