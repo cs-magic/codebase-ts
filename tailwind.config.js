@@ -1,8 +1,15 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+
+// @ts-check
+/**
+ * @type {import("tailwindcss").Config}
+ */
 const tailwindConfig = {
   darkMode: ["class"],
   /**
    * todo: 智能选择
+   * 
+   * 
    */
   content: [
     // deps // attention to the prefix

@@ -139,6 +139,7 @@
 
     body {
         position: relative;
+        height: 100svh;
 
         /*height: 100%;*/
         /*height: 100vh;*/
