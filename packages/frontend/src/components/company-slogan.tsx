@@ -1,6 +1,6 @@
 import { CompanyLogo } from "@/components/company-logo";
 
-import bitFont from "../../../../assets/fonts/VonwaonBitmap-16px.ttf";
+import bitFont from "@assets/fonts/VonwaonBitmap-16px.ttf";
 import { cn } from "@cs-magic/shadcn/lib/utils";
 
 export const CompanySlogan = () => {
