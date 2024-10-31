@@ -9,16 +9,29 @@ import { prisma } from "@cs-magic/common/db/prisma";
 import { env } from "@cs-magic/common/env/get-env";
 import { WechatProvider } from "./next-auth-providers/wechat";
 import { ProfileUpdateProvider } from "./next-auth-providers/profile-update";
+import GoogleProvider from "next-auth/providers/google";
+import DiscordProvider from "next-auth/providers/discord";
 
 const providers: Provider[] = [
+  GoogleProvider({
+    clientId: process.env.GOOGLE_CLIENT_ID!,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+
+    httpOptions: {
+      timeout: 5000,
+    },
+  }),
+
   ProfileUpdateProvider,
 
   // SmsProvider,
 
-  // DiscordProvider({
-  //   clientId: env?.DISCORD_CLIENT_ID,
-  //   clientSecret: env?.DISCORD_CLIENT_SECRET,
-  // }),
+  DiscordProvider({
+    clientId: env.DISCORD_CLIENT_ID!,
+    clientSecret: env.DISCORD_CLIENT_SECRET!,
+
+    authorization: { params: { scope: "identify email" } },
+  }),
   /**
    * ...add more providers here.
    *
@@ -48,7 +61,7 @@ export const authOptions: NextAuthOptions = {
   debug: true,
 
   pages: {
-    signIn: "/auth",
+    // signIn: "/auth",
     // signOut: "/auth",
   },
 
@@ -60,6 +73,10 @@ export const authOptions: NextAuthOptions = {
 
   // @ts-ignore // todo: ts profile for signin
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+
     // compatible with credential providers
     jwt: ({ user, profile, token }) => {
       // console.log("[next-auth] jwt: ", { token, user, profile })
