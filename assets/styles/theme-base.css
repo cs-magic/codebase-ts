@@ -1,0 +1,124 @@
+
+    :root {
+        --background: 0 0% 100%;
+        /*--foreground: 222.2 47.4% 11.2%;*/
+        --foreground: 222.2 84% 4.9%;
+        /*--foreground: 222.2 84% 4.9%;*/
+
+        /*--primary: 222.2 47.4% 11.2%;*/
+        --primary: 150 19% 10%;
+        /*--primary-foreground: 210 40% 98%;*/ /* pink-500 （粉）*/
+        --primary-foreground: 330 81% 60%;
+
+        --secondary: 210 40% 96.1%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+
+        /*--destructive: 0 100% 50%;*/
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+
+        --card: 0 0% 100%;
+        /*--card-foreground: 222.2 47.4% 11.2%;*/
+        --card-foreground: 222.2 84% 4.9%;
+
+        --popover: 0 0% 100%;
+        /*--popover-foreground: 222.2 47.4% 11.2%;*/
+        --popover-foreground: 222.2 84% 4.9%;
+
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        /*--ring: 215 20.2% 65.1%;*/
+        --ring: 222.2 84% 4.9%;
+        --radius: 0.5rem;
+        --wechat: 118 99% 35%;
+        --primary2: 190 85% 19%;
+
+        --ev-c-white: #ffffff;
+        --ev-c-white-soft: #f8f8f8;
+        --ev-c-white-mute: #f2f2f2;
+
+        --ev-c-black: #1b1b1f;
+        --ev-c-black-soft: #222222;
+        --ev-c-black-mute: #282828;
+
+        --ev-c-gray-1: #515c67;
+        --ev-c-gray-2: #414853;
+        --ev-c-gray-3: #32363f;
+
+        --ev-c-text-1: rgba(255, 255, 245, 0.86);
+        --ev-c-text-2: rgba(235, 235, 245, 0.6);
+        --ev-c-text-3: rgba(235, 235, 245, 0.38);
+
+        --ev-button-alt-border: transparent;
+        --ev-button-alt-text: var(--ev-c-text-1);
+        --ev-button-alt-bg: var(--ev-c-gray-3);
+        --ev-button-alt-hover-border: transparent;
+        --ev-button-alt-hover-text: var(--ev-c-text-1);
+        --ev-button-alt-hover-bg: var(--ev-c-gray-2);
+
+        --color-background: var(--ev-c-black);
+        --color-background-soft: var(--ev-c-black-soft);
+        --color-background-mute: var(--ev-c-black-mute);
+
+        --color-text: var(--ev-c-text-1);
+    }
+
+    .dark {
+        /*--background: 224 71% 4%;*/
+        --background: 222.2 84% 4.9%;
+        /*--foreground: 213 31% 91%;*/
+        --foreground: 210 40% 98%;
+
+        /*--primary: 210 40% 98%;*/
+        /*--primary: #4A0D77; !* 知乎对比清华、南开、南大的颜色 *!*/
+        /*--primary: #C84FC7; !*主色调：用于大面积关注的主区域*!*/
+        --primary: 292 49% 37%; /* #82318e 维基百科清华校色 */
+        --primary-foreground: 222.2 47.4% 97%;
+        /*--primary-foreground: 330 81% 60%; !* pink-500 （粉）*!*/
+
+        /*--secondary: 222.2 47.4% 11.2%;*/
+        /*--secondary: 217.2 32.6% 17.5%;*/
+        --secondary: 241 94% 73%; /* #7a77fb 次色调：用于小面积关注的次区域*/
+        --secondary-foreground: 210 40% 98%;
+        /*--secondary-foreground: 239 84% 67%; !* indigo-500 (蓝)*!*/
+
+        /*--muted: 223 47% 11%;*/
+        --muted: 217.2 32.6% 17.5%;
+        /*--muted-foreground: 215.4 16.3% 56.9%;*/
+        --muted-foreground: 215 20.2% 65.1%;
+
+        /*--accent: 216 34% 17%;*/
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+
+        --destructive: 0 63% 31%;
+        /*--destructive: 0 62.8% 30.6%;*/
+        --destructive-foreground: 210 40% 98%;
+
+        /*--card: 224 71% 4%;*/
+        --card: 222.2 84% 4.9%;
+        /*--card-foreground: 213 31% 91%;*/
+        --card-foreground: 210 40% 98%;
+
+        /*--popover: 224 71% 4%;*/
+        --popover: 222.2 84% 4.9%;
+        /*--popover-foreground: 215 20.2% 65.1%;*/
+        --popover-foreground: 210 40% 98%;
+
+        /*--border: 216 34% 17%;*/
+        --border: 217.2 32.6% 17.5%;
+
+        /*--input: 216 34% 17%;*/
+        --input: 217.2 32.6% 17.5%;
+
+        /*--ring: 216 34% 17%;*/
+        --ring: 212.7 26.8% 83.9%;
+
+        --radius: 0.5rem;
+    }
