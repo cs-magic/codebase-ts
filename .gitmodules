@@ -42,10 +42,6 @@
 	path = apps/totem-gpt
 	url = git@github.com:cs-magic/totem-gpt-web.git
 
-[submodule "apps/playground"]
-	path = apps/playground
-	url = git@github.com:cs-magic/playgrounds.git
-
 [submodule "apps/neurora-assistant"]
 	path = apps/neurora_assistant
 	url = git@github.com:cs-magic/neurora-assistant.git
@@ -60,7 +56,7 @@
 
 [submodule "apps/neurora-playground"]
 	path = apps/neurora_playground
-	url = git@github.com:cs-magic/neurora-playground.git
+	url = git@github.com:cs-magic/playground.git
 
 [submodule "apps/poketto"]
 	path = apps/cs-magic/poketto
