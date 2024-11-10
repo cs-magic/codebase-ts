@@ -78,3 +78,6 @@
 [submodule "apps/badminton"]
 	path = apps/badminton-reservation
 	url = git@github.com:cs-magic/badminton.git
+[submodule "apps/uni-pusher"]
+	path = apps/uni-pusher
+	url = git@github.com:cs-magic/uni-pusher.git
