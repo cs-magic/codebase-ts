@@ -66,14 +66,17 @@
 	path = apps/cs-magic/thinkow
 	url = git@github.com:cs-magic/thinkow.git
 
+[submodule "apps/badminton"]
+	path = apps/badminton-reservation
+	url = git@github.com:cs-magic/badminton.git
+
+[submodule "apps/uni-pusher"]
+	path = apps/uni-pusher
+	url = git@github.com:cs-magic/uni-pusher.git
+
 ; cases
 [submodule "cases/zhijikeji"]
 	path = cases/zhijikeji
 	url = git@github.com:cs-magic/cases_zhijikeji.git
 
-[submodule "apps/badminton"]
-	path = apps/badminton-reservation
-	url = git@github.com:cs-magic/badminton.git
-[submodule "apps/uni-pusher"]
-	path = apps/uni-pusher
-	url = git@github.com:cs-magic/uni-pusher.git
+
