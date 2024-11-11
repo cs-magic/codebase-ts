@@ -35,7 +35,7 @@ datasource db {
 
   extensions = [vector]
 
-  schemas = ["public", "auth", "customer", "payment", "llm", "poketto", "wechat", "assistant"]
+  schemas = ["public", "auth", "customer", "payment", "llm", "poketto", "wechat", "assistant", "social-platform", "totem-gpt"]
 }
 
 // -----------------------------------------------------------------------------
@@ -147,12 +147,15 @@ model User {
   // 每日需要更新
 
   /// [ModelQuota]
-  quota         Json?
-  feedbacks     Feedback[]
-  appCategories PokettoAppCategory[]
-  coupons       Coupon[]
-  evalApps      EvalApp[]
-  evalConvs     Conv[]
+  quota                   Json?
+  feedbacks               Feedback[]
+  appCategories           PokettoAppCategory[]
+  coupons                 Coupon[]
+  evalApps                EvalApp[]
+  evalConvs               Conv[]
+  SocialPlatformAuth      SocialPlatformAuth[]
+  TotemGPTGenRequest      TotemGenRequest[]
+  TotemGenResponseActions TotemGenResponseActions[]
 
   // maybe we only need one id
   @@unique([platformType, platformId], name: "platform")
@@ -975,4 +978,132 @@ model Task {
   timer Json?
 
   @@schema("assistant")
+}
+
+// -----------------------------------------------------------------------------
+// totem-gpt
+// -----------------------------------------------------------------------------
+model TotemGenRequest {
+  id String @id @default(dbgenerated("nanoid(7)"))
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.VarChar(7)
+
+  prompt   String
+  response TotemGenResponse[]
+
+  @@schema("totem-gpt")
+}
+
+enum SseStatus {
+  preparing
+  running
+  interrupted
+  finished
+
+  @@schema("public")
+}
+
+model TotemGenResponse {
+  id        String   @id @default(dbgenerated("nanoid(7)"))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  request   TotemGenRequest @relation(fields: [requestId], references: [id])
+  requestId String
+
+  status                  SseStatus                 @default(preparing)
+  stream                  String
+  TotemGenResponseActions TotemGenResponseActions[]
+
+  @@schema("totem-gpt")
+}
+
+model TotemGenResponseActions {
+  id        String   @id @default(dbgenerated("nanoid(7)"))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  response   TotemGenResponse @relation(fields: [responseId], references: [id])
+  responseId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.VarChar(7)
+
+  type   String
+  detail String?
+
+  @@schema("totem-gpt")
+}
+
+// -----------------------------------------------------------------------------
+// social-platform
+// -----------------------------------------------------------------------------
+
+model SocialPlatform {
+  id                 String               @id
+  title              String
+  description        String
+  icon               String
+  SocialPlatformAuth SocialPlatformAuth[]
+
+  @@schema("social-platform")
+}
+
+model SocialPlatformAuth {
+  id     String @id @default(dbgenerated("nanoid(7)")) @db.VarChar(7)
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  socialPlatform   SocialPlatform @relation(fields: [socialPlatformId], references: [id])
+  socialPlatformId String
+
+  isLoggedIn         Boolean               @default(false)
+  // cookie, sms, mail ...
+  options            Json?
+  events             SocialPlatformEvent[]
+  SocialPlatformPost SocialPlatformPost[]
+
+  @@schema("social-platform")
+}
+
+model SocialPlatformEvent {
+  id String @id @default(dbgenerated("nanoid(7)"))
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // login / logout / CRUD / comment ...
+  type    String
+  payload Json?
+
+  auth   SocialPlatformAuth @relation(fields: [authId], references: [id])
+  authId String
+
+  @@schema("social-platform")
+}
+
+model SocialPlatformPost {
+  id String @id @default(dbgenerated("nanoid(7)"))
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  auth   SocialPlatformAuth @relation(fields: [authId], references: [id])
+  authId String
+
+  text        String?
+  images      Json?
+  audios      Json?
+  vidios      Json?
+  files       Json?
+  location    Json?
+  permissions Json?
+
+  publishTime DateTime?
+
+  @@schema("social-platform")
 }
