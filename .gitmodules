@@ -80,3 +80,6 @@
 	url = git@github.com:cs-magic/cases_zhijikeji.git
 
 
+[submodule "apps/neurora_playground"]
+	path = apps/neurora_playground
+	url = git@github.com:cs-magic/playground.git
