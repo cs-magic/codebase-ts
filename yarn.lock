@@ -3996,11 +3996,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cs-magic/totem-gpt-web@workspace:apps/totem-gpt":
+"@cs-magic/totem-gen@workspace:apps/totem-gen":
   version: 0.0.0-use.local
-  resolution: "@cs-magic/totem-gpt-web@workspace:apps/totem-gpt"
+  resolution: "@cs-magic/totem-gen@workspace:apps/totem-gen"
   dependencies:
     "@ai-sdk/anthropic": "npm:^0.0.50"
+    "@cs-magic/shadcn": "workspace:^"
     "@emotion/react": "npm:^11.13.3"
     "@emotion/styled": "npm:^11.13.0"
     "@hookform/resolvers": "npm:^3.3.1"
@@ -4067,12 +4068,14 @@ __metadata:
     "@dnd-kit/core": "npm:^6.1.0"
     "@dnd-kit/sortable": "npm:^8.0.0"
     "@dnd-kit/utilities": "npm:^3.2.2"
+    "@radix-ui/react-dialog": "npm:^1.x.x"
     "@react-google-maps/api": "npm:^2.20.3"
     "@types/react-beautiful-dnd": "npm:^13.1.8"
     autoprefixer: "npm:^10.4.20"
     immer: "npm:^10.1.1"
     jotai: "npm:^2.10.1"
     jotai-immer: "npm:^0.4.1"
+    jotai-utils: "npm:^0.x.x"
     lucide-react: "npm:^0.359.0"
     next: "npm:^14.2.15"
     npm-run-all: "npm:^4.1.5"
@@ -8911,7 +8914,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-dialog@npm:1.1.2, @radix-ui/react-dialog@npm:^1.0.5, @radix-ui/react-dialog@npm:^1.1.1, @radix-ui/react-dialog@npm:^1.1.2":
+"@radix-ui/react-dialog@npm:1.1.2, @radix-ui/react-dialog@npm:^1.0.5, @radix-ui/react-dialog@npm:^1.1.1, @radix-ui/react-dialog@npm:^1.1.2, @radix-ui/react-dialog@npm:^1.x.x":
   version: 1.1.2
   resolution: "@radix-ui/react-dialog@npm:1.1.2"
   dependencies:
@@ -28298,6 +28301,13 @@ __metadata:
     jotai: ">=2.5.0"
     react: ">=17.0.0"
   checksum: 10c0/d50372d6e42b8c2faa9aeb3ace032305f5c3fa8859aa8e7c1914ca8de7bc4c0ab86105a07bacf887d9130356133ea3b7dde561f42456012fd0899f196e133444
+  languageName: node
+  linkType: hard
+
+"jotai-utils@npm:^0.x.x":
+  version: 0.0.0
+  resolution: "jotai-utils@npm:0.0.0"
+  checksum: 10c0/436d395f36845e070cc5ba24c2af352d2a8b2cbb2125a5acefce9a4c114d8b3db6c62cdcbb952f466b6e78b18e111d0b77d21386e8c4fc3196e8ab4f7c16857d
   languageName: node
   linkType: hard
 

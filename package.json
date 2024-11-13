@@ -22,7 +22,9 @@
     "tests/*"
   ],
   "scripts": {
-    "prepare": "ts-patch install -s"
+    "prepare": "ts-patch install -s",
+    "init-app": "git submodule update --init --progress",
+    "run-app": "yarn workspace @cs-magic"
   },
   "resolutions": {
     "@babel/core": "^7.25.2",
