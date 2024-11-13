@@ -16,14 +16,6 @@
 	url = git@github.com:cs-magic/exts_chrome_claude-artifact-enhancer.git
 
 ; apps
-[submodule "apps/home-v1"]
-	path = apps/home-v1
-	url = git@github.com:cs-magic/home-v1.git
-
-[submodule "apps/home-v2"]
-	path = apps/home-v2
-	url = git@github.com:cs-magic/home-v2.git
-
 [submodule "apps/playground"]
 	path = apps/playground
 	url = git@github.com:cs-magic/playground.git
@@ -75,3 +67,9 @@
 [submodule "cases/zhijikeji"]
 	path = cases/zhijikeji
 	url = git@github.com:cs-magic/cases_zhijikeji.git
+[submodule "apps/home-v2"]
+	path = apps/home-v2
+	url = git@github.com:cs-magic/home-v2.git
+[submodule "apps/home-v1"]
+	path = apps/home-v1
+	url = git@github.com:cs-magic/home-v1.git
