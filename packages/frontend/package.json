@@ -9,7 +9,15 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "copyfiles -u1 src/**/*.{css,svg} dist && tsc -b"
+    "build": "copyfiles -u1 src/**/*.{css,svg} dist && tsc -b",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",

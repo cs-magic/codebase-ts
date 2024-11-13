@@ -1,0 +1,45 @@
+import type * as PUPPET from "packages_wechaty/wechaty-puppet/src/mods/mod"
+import { log } from "packages_wechaty/wechaty-puppet/src/mods/mod"
+
+import type { WebRoomRawMember, WebRoomRawPayload } from "src/web-schemas"
+import { plainText } from "src/wechat4u/utils/xml"
+
+export function wechat4uRoomToWechaty(rawPayload: WebRoomRawPayload): PUPPET.payloads.Room {
+  log.verbose("PuppetWechat4u", "roomRawPayloadParser(%s)", rawPayload)
+
+  const id = rawPayload.UserName
+  // const rawMemberList = rawPayload.MemberList || []
+  // const memberIdList  = rawMemberList.map(rawMember => rawMember.UserName)
+
+  // const aliasDict = {} as { [id: string]: string | undefined }
+
+  // if (Array.isArray(rawPayload.MemberList)) {
+  //   rawPayload.MemberList.forEach(rawMember => {
+  //     aliasDict[rawMember.UserName] = rawMember.DisplayName
+  //   })
+  // }
+
+  const memberIdList = rawPayload.MemberList ? rawPayload.MemberList.map((m) => m.UserName) : []
+
+  const roomPayload: PUPPET.payloads.Room = {
+    adminIdList: [],
+    avatar: rawPayload.HeadImgUrl,
+    id,
+    memberIdList,
+    topic: plainText(rawPayload.NickName) || "",
+    // aliasDict,
+  }
+  return roomPayload
+}
+
+export function wechat4uRoomMemberToWechaty(rawPayload: WebRoomRawMember): PUPPET.payloads.RoomMember {
+  log.verbose("PuppetWechat4u", "roomMemberRawPayloadParser(%s)", rawPayload)
+
+  const payload: PUPPET.payloads.RoomMember = {
+    avatar: rawPayload.HeadImgUrl,
+    id: rawPayload.UserName,
+    name: rawPayload.NickName,
+    roomAlias: rawPayload.DisplayName,
+  }
+  return payload
+}

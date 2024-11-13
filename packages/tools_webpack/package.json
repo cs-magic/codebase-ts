@@ -1,7 +1,14 @@
 {
   "name": "@cs-magic/webpack",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/babel__core": "^7",

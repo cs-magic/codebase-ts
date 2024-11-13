@@ -1,6 +1,6 @@
 {
   "name": "@cs-magic/shadcn",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "exports": {
@@ -9,7 +9,15 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npx tsc -b"
+    "build": "npx tsc -b",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@hookform/resolvers": "*",

@@ -1,5 +1,6 @@
 {
   "name": "@cs-magic/common",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "exports": {
@@ -9,7 +10,15 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@alicloud/dysmsapi20170525": "^3.0.0",

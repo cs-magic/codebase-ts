@@ -1,13 +1,21 @@
 {
   "name": "@cs-magic/common-frontend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "exports": {
     "./*": "./dist/*.js"
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

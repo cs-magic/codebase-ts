@@ -1,7 +1,17 @@
 {
   "name": "@cs-magic/tailwindcss",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
+  "scripts": {
+    "prepublishOnly": ""
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.45",

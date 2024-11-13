@@ -1,5 +1,6 @@
 {
   "name": "@cs-magic/llm",
+  "version": "0.1.0",
   "packageManager": "yarn@4.1.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -10,7 +11,15 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@cs-magic/common": "workspace:^",

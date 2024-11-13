@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "dist/cjs"
+  },
+  "references": [
+//    {"path": "../wechaty-puppet/tsconfig.cjs.json"}
+  ]
+}

@@ -1,11 +1,19 @@
 {
   "name": "@cs-magic/eslint-config",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "echo 'skip eslint'"
+    "lint": "echo 'skip eslint'",
+    "prepublishOnly": ""
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/eslint": "^8.56.0",

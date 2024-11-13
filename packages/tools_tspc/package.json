@@ -1,9 +1,17 @@
 {
   "name": "@cs-magic/tspc",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
-    "prepare": "npx ts-patch install -s"
+    "prepare": "npx ts-patch install -s",
+    "prepublishOnly": ""
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "^22.5.1",

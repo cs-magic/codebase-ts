@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "../../tsconfig.node.json", // bundle
+    "@chatie/tsconfig"
+  ],
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "noImplicitAny": false
+  },
+  "exclude": [
+    "node_modules/",
+    "dist/",
+    "tests/fixtures/"
+  ],
+  "include": [
+    "bin/*.ts",
+    "examples/**/*.ts",
+    "scripts/**/*.ts",
+    "src/**/*.ts",
+    "tests/**/*.spec.ts",
+    "tests/*.d.ts"
+  ]
+}
