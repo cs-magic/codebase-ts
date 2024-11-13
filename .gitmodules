@@ -41,7 +41,7 @@
 
 [submodule "screensaver"]
 	path = apps/screensaver
-	url = git@github.com:cs-magic/app_screensaver.git
+	url = git@github.com:cs-magic/screensaver.git
 	branch = main
 
 [submodule "wechat-dbcracker"]
@@ -72,7 +72,7 @@
 
 [submodule "apps/badminton"]
 	path = apps/badminton-reservation
-	url = git@github.com:cs-magic/badminton.git
+	url = git@github.com:cs-magic/badminton-reservation.git
 
 [submodule "apps/uni-pusher"]
 	path = apps/uni-pusher
