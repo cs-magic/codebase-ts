@@ -32,11 +32,11 @@
 	url = git@github.com:cs-magic/home-v2.git
 
 [submodule "apps/playground"]
-	path = apps/neurora_playground
+	path = apps/playground
 	url = git@github.com:cs-magic/playground.git
 
 [submodule "apps/neurora-assistant"]
-	path = apps/neurora_assistant
+	path = apps/assistant
 	url = git@github.com:cs-magic/neurora-assistant.git
 
 [submodule "screensaver"]
