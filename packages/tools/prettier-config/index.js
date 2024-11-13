@@ -5,7 +5,7 @@ module.exports = {
   tabWidth: 2,
   useTabs: false,
   semi: false,
-  singleQuote: true,
+  singleQuote: false,
   quoteProps: "as-needed",
   jsxSingleQuote: false,
   bracketSpacing: true,
@@ -51,4 +51,4 @@ module.exports = {
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   plugins: ["@trivago/prettier-plugin-sort-imports"],
-};
+}

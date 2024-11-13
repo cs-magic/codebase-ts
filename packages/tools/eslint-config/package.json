@@ -1,14 +1,23 @@
 {
   "name": "@cs-magic/eslint-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared ESLint configurations for CS Magic projects",
-  "main": "index.js",
+  "exports": {
+    "./base": "./base.js",
+    "./typescript": "./typescript.js",
+    "./typescript-type-checked": "./typescript-type-checked.js",
+    "./react": "./react.js",
+    "./next": "./next.js",
+    "./node": "./node.js",
+    "./prettier": "./prettier.js"
+  },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "index.js",
+    "base.js",
     "typescript.js",
+    "typescript-type-checked.js",
     "react.js",
     "next.js",
     "node.js",

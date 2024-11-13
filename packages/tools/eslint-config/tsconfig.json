@@ -1,8 +1,8 @@
 {
   "extends": [
-    "@cs-magic/ts-config/tsconfig.node.json"
+    "@cs-magic/ts-config/base"
   ],
   "include": [
-    ".eslintrc.js"
+    "*.js"
   ]
 }

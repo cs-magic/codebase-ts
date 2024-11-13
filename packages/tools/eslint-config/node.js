@@ -10,4 +10,4 @@ module.exports = {
     "no-process-exit": "error",
     "no-path-concat": "error",
   },
-};
+}
