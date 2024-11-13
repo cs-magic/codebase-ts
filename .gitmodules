@@ -1,12 +1,5 @@
 ; packages
 
-[submodule "packages_wechaty/puppet-service"]
-	path = packages_wechaty/puppet-service
-	url = ./packages_wechaty/puppet-service
-
-[submodule "packages_wechaty/grpc"]
-	path = packages_wechaty/grpc
-	url = ./packages_wechaty/grpc
 
 ; plugins
 
