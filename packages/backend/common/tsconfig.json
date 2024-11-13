@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "@cs-magic/ts-config/tsconfig.node.json"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "moduleResolution": "bundler"
+  },
+  "include": [
+    "./src/**/*",
+    "./src/**/*.json"
+  ],
+  "references": [
+    {
+    }
+  ]
+}

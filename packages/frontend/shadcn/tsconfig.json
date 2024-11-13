@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "@cs-magic/ts-config/tsconfig.dom.json"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*",
+        "./public/*",
+        "../../assets/*",
+        "../../*"
+      ]
+    },
+
+    // suppress chart / input-otp
+    "strictNullChecks": false
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {"path": "../common"}
+  ]
+}

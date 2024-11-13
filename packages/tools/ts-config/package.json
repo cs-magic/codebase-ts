@@ -1,0 +1,20 @@
+{
+  "name": "@cs-magic/ts-config",
+  "version": "0.1.0",
+  "description": "Shared TypeScript configurations for CS Magic projects",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "tsconfig.base.json",
+    "tsconfig.dom.json",
+    "tsconfig.node.json"
+  ],
+  "keywords": [
+    "typescript",
+    "tsconfig",
+    "configuration"
+  ],
+  "author": "CS Magic",
+  "license": "MIT"
+}

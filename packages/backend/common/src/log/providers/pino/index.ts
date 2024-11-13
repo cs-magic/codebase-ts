@@ -1,0 +1,18 @@
+/**
+ * ref" Better Logging in Next.js Apps with Pino | by Tat Leung | Level Up Coding, https://levelup.gitconnected.com/better-logging-in-next-js-apps-with-pino-f973de4dd8dd
+ */
+import { type Logger, pino } from "pino"
+
+import { logLevelData } from "src/log/providers/pino/config"
+
+const logLevels = new Map<string, string>(Object.entries(logLevelData))
+
+export function getLogLevel(logger: string): string {
+  return logLevels.get(logger) || logLevels.get("*") || "info"
+}
+
+export function getLogger(name: string): Logger {
+  return pino({ name, level: getLogLevel(name) })
+}
+
+export const pinoLogger = getLogger("default")

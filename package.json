@@ -1,15 +1,16 @@
 {
   "name": "@cs-magic/codebase-ts",
   "version": "0.8.1886",
-  "author": "markshawn2020 <mark@cs-magic.com>",
-  "repository": "git@github.com:cs-magic/codebase-ts.git",
+  "author": "Mark <mark@cs-magic.com>",
+  "repository": "https://github.com/cs-magic/codebase-ts",
   "bugs": "https://github.com/cs-magic/codebase-ts/issues",
   "license": "MIT",
-  "private": true,
   "workspaces": [
     "packages/*",
+    "packages/backend/*",
+    "packages/frontend/*",
+    "packages/tools/*",
     "packages_wechaty/*",
-    "apps/*",
     "apps/neurora_home/*",
     "apps/neurora_assistant/*",
     "apps/neurora_assistant/frontend/*",
@@ -116,7 +117,6 @@
     "ts-patch": "^3.2.1"
   },
   "devDependencies": {
-    "@cs-magic/tools": "workspace:^",
     "@prisma/client": "^5.19.1",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",

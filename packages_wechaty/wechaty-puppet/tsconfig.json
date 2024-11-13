@@ -1,6 +1,6 @@
 {
   "extends": [
-    "../../tsconfig.node.json",
+    "../../packages/tools/ts-config/tsconfig.node.json",
     "@chatie/tsconfig"
   ],
   "compilerOptions": {

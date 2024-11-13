@@ -1,0 +1,73 @@
+{
+  // ref: https://www.totaltypescript.com/tsconfig-cheat-sheet
+  "compilerOptions": {
+
+    /* If transpiling with TypeScript: */
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "target": "ESNext",
+    "sourceMap": true,
+    //    /* If NOT transpiling with TypeScript: */
+    //    "module": "preserve",
+    //    "noEmit": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "lib": [
+      "ESNext",
+
+      // 不加dom的话如果用了 windows 等变量会报错
+      "dom",
+      "dom.iterable"
+    ],
+    // 前端的话需要 react-jsx
+    "jsx": "react-jsx",
+    /* Base Options: */
+    "allowJs": false,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    //    "verbatimModuleSyntax": true,  // 是否要限制 导入 type
+
+    /* Strictness */
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    /* AND if you're building for a library: */
+    "declaration": true,
+    /* AND if you're building for a library in a monorepo: */
+    "composite": true,
+    "incremental": true,
+    "declarationMap": true,
+    "ignoreDeprecations": "5.0",
+    "traceResolution": false,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictFunctionTypes": true,
+    "alwaysStrict": true,
+    "skipDefaultLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
+    // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
+
+  },
+  "exclude": [
+    "../../../node_modules"
+  ]
+}

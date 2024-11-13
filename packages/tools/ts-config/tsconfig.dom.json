@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "./tsconfig.base.json"
+  ],
+  "compilerOptions": {
+    // ref: https://vitejs.dev/guide/features.html#client-types
+    "types": [
+      "vite/client"
+    ],
+    "lib": [
+      "ESNext",
+      "dom",
+      "dom.iterable"
+    ],
+    "jsx": "react-jsx",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  }
+}

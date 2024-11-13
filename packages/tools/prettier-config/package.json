@@ -1,0 +1,30 @@
+{
+  "name": "@cs-magic/prettier-config",
+  "version": "0.1.0",
+  "description": "Shared Prettier configurations for CS Magic projects",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "index.js",
+    "typescript.js",
+    "tailwind.js"
+  ],
+  "peerDependencies": {
+    "prettier": ">=3.0.0"
+  },
+  "dependencies": {
+    "prettier-plugin-organize-imports": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.0"
+  },
+  "keywords": [
+    "prettier",
+    "prettierconfig",
+    "config",
+    "cs-magic",
+    "formatting"
+  ],
+  "author": "CS Magic",
+  "license": "MIT"
+}

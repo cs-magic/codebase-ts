@@ -1,0 +1,33 @@
+{
+  "name": "@cs-magic/tailwind-config",
+  "version": "0.1.0",
+  "description": "Shared TailwindCSS configurations for CS Magic projects",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "index.js",
+    "presets/*.js",
+    "plugins/*.js",
+    "themes/*.js"
+  ],
+  "peerDependencies": {
+    "tailwindcss": "^3.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/container-queries": "^0.1.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "tailwindcss-animate": "^1.0.0"
+  },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "config",
+    "preset"
+  ],
+  "author": "CS Magic",
+  "license": "MIT"
+}
