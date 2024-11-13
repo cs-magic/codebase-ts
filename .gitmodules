@@ -54,9 +54,9 @@
 	url = git@github.com:cs-magic/eval-ai.git
 	branch = main
 
-[submodule "apps/totem-gpt"]
+[submodule "apps/totem-gen"]
 	path = apps/totem-gen
-	url = git@github.com:cs-magic/totem-gpt-web.git
+	url = git@github.com:cs-magic/totem-gen.git
 
 [submodule "apps/wechat-dbcracker"]
 	path = apps/wechat-dbcracker
