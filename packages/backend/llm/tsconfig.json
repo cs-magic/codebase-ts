@@ -1,11 +1,18 @@
 {
   "extends": [
-    "@cs-magic/ts-config/tsconfig.dom.json"
+    "@cs-magic/ts-config/dom"
   ],
   "compilerOptions": {
+    "types": ["jest", "node"],
     "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo",
-    "rootDir": "src"
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "./src/**/*",

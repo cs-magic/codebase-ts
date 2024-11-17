@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { validatePhone } from "src/sms.validation"
+import { validatePhone } from "@/sms.validation"
 
 /**
  * 用户短信发送在form里需要的信息
@@ -21,7 +21,7 @@ export type IProviderSendSms = (
 
 export const smsSignInSchema = sendSmsSchema.and(
   z.object({
-    code: z.string().refine((s) => /\d{6}/.test(s), "验证码格式不合法"),
+    code: z.string().refine(s => /\d{6}/.test(s), "验证码格式不合法"),
   }),
 )
 export type ISmsSignIn = z.infer<typeof smsSignInSchema>

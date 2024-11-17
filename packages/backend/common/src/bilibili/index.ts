@@ -1,3 +1,3 @@
-export * from "src/bilibili/actions"
-export * from "src/bilibili/schema"
-export * from "src/bilibili/utils"
+export * from "@/bilibili/actions"
+export * from "@/bilibili/schema"
+export * from "@/bilibili/utils"

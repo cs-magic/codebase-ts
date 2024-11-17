@@ -1,4 +1,4 @@
-import { isClient } from "src/env/is-client"
+import { isClient } from "@/env/is-client"
 
 /**
  * ref: https://stackoverflow.com/a/30026162

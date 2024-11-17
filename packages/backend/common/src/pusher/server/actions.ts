@@ -1,7 +1,6 @@
-import { pusherServerConfigs } from "src/pusher/config"
-import type { PusherEventData, PusherEventType, PusherServerId } from "src/pusher/schema"
-
-import { initPusherServer } from "src/pusher/server/init"
+import { pusherServerConfigs } from "@/pusher/config"
+import type { PusherEventData, PusherEventType, PusherServerId } from "@/pusher/schema"
+import { initPusherServer } from "@/pusher/server/init"
 
 export const pusherSend = async <T extends PusherEventType>(
   serverId: PusherServerId,

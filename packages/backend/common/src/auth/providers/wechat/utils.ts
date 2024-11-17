@@ -1,7 +1,5 @@
-import { api } from "src/api"
-import { env } from "src/env"
-
-import { WECHAT_API_URL, WECHAT_AUTH_CALLBACK_URL } from "src/auth/providers/wechat/config"
+import { api } from "@/api"
+import { WECHAT_API_URL, WECHAT_AUTH_CALLBACK_URL } from "@/auth/providers/wechat/config"
 import {
   IWechatAdaptedToken,
   IWechatProfile,
@@ -9,7 +7,8 @@ import {
   IWechatToken,
   WechatScopeType,
   isWechatError,
-} from "src/auth/providers/wechat/schema"
+} from "@/auth/providers/wechat/schema"
+import { env } from "@/env"
 
 /**
  * 只有该函数可以在客户端调用，用于拉起用户微信授权弹窗
@@ -27,7 +26,11 @@ export const getWechatAuthorizationUrl = (
  * @param path
  * @param params
  */
-export const fetchWechatApi = async <T>(name: string, path: string, params: Record<string, string>) => {
+export const fetchWechatApi = async <T>(
+  name: string,
+  path: string,
+  params: Record<string, string>,
+) => {
   const { data } = await api.get(
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     `${WECHAT_API_URL}${path}?${new URLSearchParams(params)}`,
@@ -41,7 +44,8 @@ export const fetchWechatApi = async <T>(name: string, path: string, params: Reco
  * @param code
  */
 export const getWechatAuthToken = async (code: string) => {
-  if (!env?.NEXT_PUBLIC_WECHAT_APP_ID || !env?.WECHAT_APP_SECRET) throw new Error("invalid wechat env")
+  if (!env?.NEXT_PUBLIC_WECHAT_APP_ID || !env?.WECHAT_APP_SECRET)
+    throw new Error("invalid wechat env")
 
   return fetchWechatApi<IWechatToken>("get-token", `/sns/oauth2/access_token`, {
     appid: env?.NEXT_PUBLIC_WECHAT_APP_ID,

@@ -1,4 +1,4 @@
-import type { IBilibiliVideo } from "src/bilibili/schema"
+import type { IBilibiliVideo } from "@/bilibili/schema"
 
 export const getBilibiliIFrameUrl = (video: IBilibiliVideo) => {
   let url = "//player.bilibili.com/player.html"

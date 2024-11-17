@@ -1,6 +1,6 @@
 import winston, { format } from "winston"
 
-import { consoleLikeFormat } from "src/log/providers/winston/formats/console-like"
+import { consoleLikeFormat } from "@/log/providers/winston/formats/console-like"
 
 export const consoleTransport = new winston.transports.Console({
   format: format.combine(

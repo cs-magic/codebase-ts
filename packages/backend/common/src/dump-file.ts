@@ -1,13 +1,12 @@
 "use server"
 
 import fs from "fs"
-import path from "src/path"
+import path from "path"
 
-import { formatAction } from "src/utils/format-action"
+import { formatAction } from "@/utils/format-action"
 
 export const dumpFile = async (
-  content: string | object,
-  // type: "json" | "text" = "json",
+  content: string | object, // type: "json" | "text" = "json",
   options:
     | {
         fn: string
@@ -29,6 +28,9 @@ export const dumpFile = async (
   }
 
   await formatAction(async () => {
-    await fs.promises.writeFile(fp, typeof content === "string" ? content : JSON.stringify(content, null, 2))
+    await fs.promises.writeFile(
+      fp,
+      typeof content === "string" ? content : JSON.stringify(content, null, 2),
+    )
   }, `dumping JSON file into file://${fp}`)
 }

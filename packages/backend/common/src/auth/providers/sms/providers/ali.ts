@@ -8,9 +8,9 @@ import Dysmsapi, * as Api from "@alicloud/dysmsapi20170525"
 import { Config } from "@alicloud/openapi-client"
 import { RuntimeOptions } from "@alicloud/tea-util"
 
-import { env } from "src/env"
-import logger from "src/log"
-import { formatError } from "src/utils/format-error"
+import { env } from "@/env"
+import logger from "@/log"
+import { formatError } from "@/utils/format-error"
 
 const aliSmsConfig = {
   ak: env?.ALI_AK,

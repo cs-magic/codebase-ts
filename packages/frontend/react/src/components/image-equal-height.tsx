@@ -1,7 +1,7 @@
-import Image from "next/image";
-import React, { ComponentProps } from "react";
+import Image from "next/image"
+import React, { ComponentProps } from "react"
 
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
+import { cn } from "@cs-magic/shadcn/lib/utils"
 
 export const ImageEqualHeight = ({
   src,
@@ -18,5 +18,5 @@ export const ImageEqualHeight = ({
       width={width}
       height={height}
     />
-  );
-};
+  )
+}

@@ -1,16 +1,16 @@
 import { sha1 } from "js-sha1"
 
-import { api } from "src/api"
-import { IWechatSDKToken, fetchWechatApi } from "src/auth"
-import { env } from "src/env"
-
-import { WECHAT_NONCE_STR, WECHAT_TIMESTAMP } from "src/wechat/notify/config"
+import { api } from "@/api"
+import { IWechatSDKToken, fetchWechatApi } from "@/auth"
+import { env } from "@/env"
+import { WECHAT_NONCE_STR, WECHAT_TIMESTAMP } from "@/wechat/notify/config"
 
 /**
  * ref: https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html
  */
 export const getWechatToken = async () => {
-  if (!env?.NEXT_PUBLIC_WECHAT_APP_ID || !env?.WECHAT_APP_SECRET) throw new Error("invalid wechat app id/secret in env")
+  if (!env?.NEXT_PUBLIC_WECHAT_APP_ID || !env?.WECHAT_APP_SECRET)
+    throw new Error("invalid wechat app id/secret in env")
 
   return fetchWechatApi<IWechatSDKToken>("get-wechat-sdk-token", "/cgi-bin/token", {
     grant_type: "client_credential",
@@ -40,7 +40,7 @@ export const getWechatSignature = async (ticket: string, url: string) => {
   }
   const str = Object.keys(params)
     .sort()
-    .map((k) => `${k}=${params[k]}`)
+    .map(k => `${k}=${params[k]}`)
     .join("&")
   const signature = sha1(str)
   console.log("[wx] getSignature: ", { str, signature })
@@ -52,7 +52,12 @@ export interface ITemplate {
   data: Record<string, { value: string | number }>
 }
 
-export async function sendWechatNotification(access_token: string, openid: string, template: ITemplate, url: string) {
+export async function sendWechatNotification(
+  access_token: string,
+  openid: string,
+  template: ITemplate,
+  url: string,
+) {
   const targetUrl = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${access_token}`
 
   const payload = {

@@ -1,11 +1,12 @@
-import { calculateToken } from "src/utils/calculate-token"
+import { calculateToken } from "@/utils/calculate-token"
 
 it("should ", () => {
   const result = calculateToken(
     [
       {
         role: "system",
-        content: "You are a helpful, pattern-following assistant that translates corporate jargon into plain English.",
+        content:
+          "You are a helpful, pattern-following assistant that translates corporate jargon into plain English.",
       },
       {
         role: "system",
@@ -20,7 +21,8 @@ it("should ", () => {
       {
         role: "system",
         name: "example_user",
-        content: "Let's circle back when we have more bandwidth to touch base on opportunities for increased leverage.",
+        content:
+          "Let's circle back when we have more bandwidth to touch base on opportunities for increased leverage.",
       },
       {
         role: "system",
@@ -29,7 +31,8 @@ it("should ", () => {
       },
       {
         role: "user",
-        content: "This late pivot means we don't have time to boil the ocean for the client deliverable.",
+        content:
+          "This late pivot means we don't have time to boil the ocean for the client deliverable.",
       },
     ],
     "gpt-3.5-turbo",

@@ -5,8 +5,8 @@
  */
 import { v20210111 } from "tencentcloud-sdk-nodejs-sms/tencentcloud/services/sms/v20210111/index.js"
 
-import { env } from "src/env"
-import logger from "src/log"
+import { env } from "@/env"
+import logger from "@/log"
 
 const tencentSmsConfig = {
   signName: "邢健的个人博客",

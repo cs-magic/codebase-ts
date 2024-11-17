@@ -2,9 +2,8 @@ import AsyncLock from "async-lock"
 import { chromium } from "playwright"
 import type { Browser, BrowserType, LaunchOptions, Page } from "playwright-core"
 
-import logger from "src/log"
-
-import { type DriverType } from "src/spider/schema"
+import logger from "@/log"
+import { type DriverType } from "@/spider/schema"
 
 const lock = new AsyncLock()
 

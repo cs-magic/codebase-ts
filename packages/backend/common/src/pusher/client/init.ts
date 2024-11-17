@@ -1,7 +1,7 @@
 import Pusher from "pusher-js"
 
-import { env } from "src/env"
-import type { IPusherServerConfig } from "src/pusher/schema"
+import { env } from "@/env"
+import type { IPusherServerConfig } from "@/pusher/schema"
 
 export const initPusherClient = (
   config: IPusherServerConfig,
@@ -21,7 +21,7 @@ export const initPusherClient = (
    */
   Pusher.log = (message: string) => {
     // console.log({ message })
-    const exists = (events: string[]) => events.some((s) => message.includes(s))
+    const exists = (events: string[]) => events.some(s => message.includes(s))
 
     if (exists(["pusher:ping", "initialized -> connecting"]) && options?.onPing) options.onPing()
 

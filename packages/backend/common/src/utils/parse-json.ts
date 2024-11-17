@@ -1,4 +1,4 @@
-import { parseJs } from "src/utils/parse-js"
+import { parseJs } from "@/utils/parse-js"
 
 export const parseJsonSafe = <T>(s?: any): T | null => {
   // logger.debug("parseJsonSafe: %o", s)

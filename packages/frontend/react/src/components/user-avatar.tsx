@@ -1,13 +1,15 @@
-import { VerticalAspectRatio } from "@/components/aspect-ratio";
-import { IUserSummary } from "@cs-magic/common/dist/schema/user.summary";
-import { upgradeUrl } from "@cs-magic/common/dist/utils/upgrade-url";
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
-import { Avatar, AvatarFallback } from "packages/frontend/frontend-shadcn/src/ui/avatar";
-import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import { omit } from "lodash-es";
-import { UserIcon } from "lucide-react";
-import Image from "next/image";
-import { ComponentPropsWithoutRef, HTMLAttributes } from "react";
+import * as AvatarPrimitive from "@radix-ui/react-avatar"
+import { omit } from "lodash-es"
+import { UserIcon } from "lucide-react"
+import Image from "next/image"
+import { ComponentPropsWithoutRef, HTMLAttributes } from "react"
+
+import { IUserSummary } from "@cs-magic/common/schema/user.summary"
+import { upgradeUrl } from "@cs-magic/common/utils/upgrade-url"
+import { cn } from "@cs-magic/shadcn/lib/utils"
+import { Avatar, AvatarFallback } from "@cs-magic/shadcn/ui/avatar"
+
+import { VerticalAspectRatio } from "@/components/aspect-ratio"
 
 export const UserAvatar = ({
   user,
@@ -17,14 +19,13 @@ export const UserAvatar = ({
   avatarProps,
   ...props
 }: {
-  user: IUserSummary | null;
-  withName?: boolean;
+  user: IUserSummary | null
+  withName?: boolean
 } & HTMLAttributes<HTMLDivElement> & {
-    imageProps?: ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>;
-    avatarProps?: ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>;
+    imageProps?: ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+    avatarProps?: ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
   }) => {
-  const avatarUrl =
-    imageProps?.src ?? upgradeUrl(user?.image ?? user?.avatar ?? "");
+  const avatarUrl = imageProps?.src ?? upgradeUrl(user?.image ?? user?.avatar ?? "")
 
   return (
     <div className={cn("flex h-full items-center gap-2", className)} {...props}>
@@ -67,9 +68,7 @@ export const UserAvatar = ({
         </Avatar>
       </VerticalAspectRatio>
 
-      {withName && (
-        <span className={"overflow-ellipsis text-ellipsis"}>{user?.name}</span>
-      )}
+      {withName && <span className={"overflow-ellipsis text-ellipsis"}>{user?.name}</span>}
     </div>
-  );
-};
+  )
+}

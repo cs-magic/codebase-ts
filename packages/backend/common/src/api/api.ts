@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
 
-import { createHttpInstance } from "src/api/core"
+import { createHttpInstance } from "@/api/core"
 
 export const api: AxiosInstance = createHttpInstance()

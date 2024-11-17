@@ -1,6 +1,5 @@
-import { ELLIPSE } from "src/const"
-
-import { isAscii } from "src/utils/is-ascii"
+import { ELLIPSE } from "@/const"
+import { isAscii } from "@/utils/is-ascii"
 
 export const truncateString = (s: string, asciiMaxLen = 20, ellipse = ELLIPSE) => {
   let index = 0

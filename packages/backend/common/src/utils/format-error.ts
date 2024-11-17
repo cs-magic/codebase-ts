@@ -1,6 +1,6 @@
-import { AxiosError } from "axios";
+import { AxiosError } from "axios"
 
-import logger from "src/log";
+import logger from "@/log"
 
 export const formatError = (e: unknown) => {
   const s =
@@ -8,7 +8,7 @@ export const formatError = (e: unknown) => {
       ? JSON.stringify(e.response?.data)
       : e instanceof Error
         ? e.message
-        : (e as string);
-  logger.error(`❌ 出错： [${s}]`);
-  return s;
-};
+        : (e as string)
+  logger.error(`❌ 出错： [${s}]`)
+  return s
+}

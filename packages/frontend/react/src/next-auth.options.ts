@@ -1,16 +1,16 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { CallbacksOptions, type NextAuthOptions } from "next-auth";
-import { Adapter } from "next-auth/adapters";
-import { Provider } from "next-auth/providers/index";
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { CallbacksOptions, type NextAuthOptions } from "next-auth"
+import { Adapter } from "next-auth/adapters"
+import DiscordProvider from "next-auth/providers/discord"
+import GoogleProvider from "next-auth/providers/google"
+import { Provider } from "next-auth/providers/index"
+import { ProfileUpdateProvider } from "src/next-auth-providers/profile-update"
+import { WechatProvider } from "src/next-auth-providers/wechat"
 
-import { tokenExpireSeconds } from "@cs-magic/common/dist/auth/config";
-import { IWechatProfile } from "@cs-magic/common/dist/auth/providers/wechat/schema";
-import { prisma } from "@cs-magic/common/dist/db/prisma";
-import { env } from "@cs-magic/common/dist/env/get-env";
-import { WechatProvider } from "src/next-auth-providers/wechat";
-import { ProfileUpdateProvider } from "src/next-auth-providers/profile-update";
-import GoogleProvider from "next-auth/providers/google";
-import DiscordProvider from "next-auth/providers/discord";
+import { tokenExpireSeconds } from "@cs-magic/common/auth/config"
+import { IWechatProfile } from "@cs-magic/common/auth/providers/wechat/schema"
+import { prisma } from "@cs-magic/common/db/prisma"
+import { env } from "@cs-magic/common/env/get-env"
 
 const providers: Provider[] = [
   GoogleProvider({
@@ -41,7 +41,7 @@ const providers: Provider[] = [
    *
    * @see https://next-auth.js.org/providers/github
    */
-];
+]
 
 if (env?.NEXT_PUBLIC_WECHAT_APP_ID && env?.WECHAT_APP_SECRET) {
   providers.push(
@@ -49,7 +49,7 @@ if (env?.NEXT_PUBLIC_WECHAT_APP_ID && env?.WECHAT_APP_SECRET) {
       clientId: env.NEXT_PUBLIC_WECHAT_APP_ID,
       clientSecret: env.WECHAT_APP_SECRET,
     }),
-  );
+  )
 }
 
 /**
@@ -74,7 +74,7 @@ export const authOptions: NextAuthOptions = {
   // @ts-ignore // todo: ts profile for signin
   callbacks: {
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      return baseUrl
     },
 
     // compatible with credential providers
@@ -83,23 +83,23 @@ export const authOptions: NextAuthOptions = {
 
       // 首次注册入表 （user中有userId）
       if (user) {
-        token.sub = user.id;
-        token.name = user.name;
-        token.image = user.image ?? null;
-        token.wxid = user.wxid;
-        token.phone = user.phone;
+        token.sub = user.id
+        token.name = user.name
+        token.image = user.image ?? null
+        token.wxid = user.wxid
+        token.phone = user.phone
       }
 
       // profile 中 只有 accountId，没有 id
       // todo: unify Profile
       // link 是自动的，link会在有session的时候登录其他平台拿到profile后更新
       if (profile) {
-        token.name = profile.nickname;
-        token.image = profile.headimgurl;
-        token.wxid = profile.openid;
+        token.name = profile.nickname
+        token.image = profile.headimgurl
+        token.wxid = profile.openid
       }
 
-      return token;
+      return token
     },
 
     session: ({ session, user, token }) => {
@@ -115,10 +115,10 @@ export const authOptions: NextAuthOptions = {
           phone: token.phone,
           email: token.email,
         },
-      };
+      }
     },
     // custom profile
   } as Partial<CallbacksOptions<IWechatProfile>>,
   adapter: PrismaAdapter(prisma) as unknown as Adapter,
   providers,
-};
+}

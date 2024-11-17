@@ -1,7 +1,7 @@
 import Pusher from "pusher"
 
-import { env } from "src/env"
-import type { IPusherServerConfig } from "src/pusher/schema"
+import { env } from "@/env"
+import type { IPusherServerConfig } from "@/pusher/schema"
 
 export const initPusherServer = (config: IPusherServerConfig) => {
   const { port, useTLS, cluster, host } = config

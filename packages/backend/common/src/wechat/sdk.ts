@@ -1,6 +1,5 @@
-import { IWechatSDKToken } from "src/auth"
-
-import { getWechatSignature, getWechatTicket, getWechatToken } from "src/wechat/notify/functions"
+import { IWechatSDKToken } from "@/auth"
+import { getWechatSignature, getWechatTicket, getWechatToken } from "@/wechat/notify/functions"
 
 export class WechatSDK {
   private token?: IWechatSDKToken

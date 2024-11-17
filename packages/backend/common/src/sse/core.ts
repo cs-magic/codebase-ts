@@ -1,7 +1,6 @@
-import { logger } from "src/log"
-import { formatError } from "src/utils/format-error"
-
-import type { TransEventType } from "src/sse/schema"
+import { logger } from "@/log"
+import type { TransEventType } from "@/sse/schema"
+import { formatError } from "@/utils/format-error"
 
 export const fetchSSE = (
   requestUrl: string,
@@ -39,12 +38,13 @@ export const fetchSSE = (
   sse.addEventListener("error" as TransEventType, (ev: MessageEvent<string>) => {
     formatError(ev)
 
-    if (options?.onError) options.onError(typeof ev.data === "string" ? (JSON.parse(ev.data) as string) : ev.data)
+    if (options?.onError)
+      options.onError(typeof ev.data === "string" ? (JSON.parse(ev.data) as string) : ev.data)
 
     doEnd()
   })
 
-  sse.onerror = (err) => {
+  sse.onerror = err => {
     // 2 是结束
     if (err.eventPhase !== 2) console.warn(`event source error: `, err)
     else logger.info("[sse] closed")

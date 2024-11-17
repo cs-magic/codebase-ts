@@ -1,5 +1,5 @@
-import { logger } from "src/log"
-import { truncateString } from "src/utils/truncate-string"
+import { logger } from "@/log"
+import { truncateString } from "@/utils/truncate-string"
 
 /**
  * @deprecated
@@ -9,7 +9,7 @@ import { truncateString } from "src/utils/truncate-string"
 export const transformMindmapContent = (input?: string): string => {
   const output = (input ?? "")
     .split(/\\n/g)
-    .map((s) => {
+    .map(s => {
       return truncateString(s, 30)
     })
     .join("\n")

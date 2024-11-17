@@ -1,12 +1,18 @@
 {
   "extends": [
-    "@cs-magic/ts-config/tsconfig.node.json"
+    "@cs-magic/ts-config/node"
   ],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "./src/**/*",

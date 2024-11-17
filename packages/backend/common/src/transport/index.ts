@@ -1,1 +1,1 @@
-export * from "src/transport/schema"
+export * from "@/transport/schema"

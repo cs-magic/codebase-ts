@@ -1,13 +1,12 @@
-import { Check } from "lucide-react";
-import Image from "next/image";
-import React, { HTMLAttributes } from "react";
+import { Check } from "lucide-react"
+import Image from "next/image"
+import React, { HTMLAttributes } from "react"
+import { FlexContainer } from "src/components/flex-container"
+import { Loading } from "src/components/loading"
 
-import { IUploadFile } from "@cs-magic/common/dist/oss/schema";
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
-import { AspectRatio } from "packages/frontend/frontend-shadcn/src/ui/aspect-ratio";
-
-import { FlexContainer } from "src/components/flex-container";
-import { Loading } from "src/components/loading";
+import { IUploadFile } from "@cs-magic/common/oss/schema"
+import { cn } from "@cs-magic/shadcn/lib/utils"
+import { AspectRatio } from "@cs-magic/shadcn/ui/aspect-ratio"
 
 export const FileComp = ({
   file,
@@ -20,16 +19,16 @@ export const FileComp = ({
         <FileCompInner file={file} />
       </AspectRatio>
     </div>
-  );
-};
+  )
+}
 
 const FileCompInner = ({ file }: { file: IUploadFile }) => {
   switch (file.status) {
     case "idle":
-      return <span>idle</span>;
+      return <span>idle</span>
 
     case "running":
-      return <Loading />;
+      return <Loading />
 
     case "finished":
       if (!file.success)
@@ -38,15 +37,15 @@ const FileCompInner = ({ file }: { file: IUploadFile }) => {
             <div>{file.input.name}</div>
             <div>upload failed</div>
           </FlexContainer>
-        );
+        )
       if (file.input.type.startsWith("image")) {
         return (
           <>
             <Image src={file.data} alt={file.input.name} fill sizes={"320px"} />
             <Check className={"text-green-500 absolute right-0 top-0"} />
           </>
-        );
+        )
       }
-      return <div>uploaded {file.input.name}</div>;
+      return <div>uploaded {file.input.name}</div>
   }
-};
+}

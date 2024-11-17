@@ -1,7 +1,6 @@
-import { api } from "src/api/api"
-import { parseJs } from "src/utils/parse-js"
-
-import type { IXiaoHongShuNotePageData } from "src/xhs/schema"
+import { api } from "@/api/api"
+import { parseJs } from "@/utils/parse-js"
+import type { IXiaoHongShuNotePageData } from "@/xhs/schema"
 
 /**
  * approach 1 (via server json):
@@ -28,7 +27,9 @@ import type { IXiaoHongShuNotePageData } from "src/xhs/schema"
  *
  * @param url
  */
-export const fetchXiaoHongShuDetail = async (url: string): Promise<IXiaoHongShuNotePageData | null> => {
+export const fetchXiaoHongShuDetail = async (
+  url: string,
+): Promise<IXiaoHongShuNotePageData | null> => {
   console.log({ url })
 
   const { data: html } = await api.get<string>(url, {

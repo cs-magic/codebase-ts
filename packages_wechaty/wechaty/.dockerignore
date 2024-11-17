@@ -1,6 +1,0 @@
-dist
-docs
-node_modules
-*.memory-card.json
-t/
-t.*

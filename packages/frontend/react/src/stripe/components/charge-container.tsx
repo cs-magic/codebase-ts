@@ -1,14 +1,10 @@
-import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "packages/frontend/frontend-shadcn/src/ui/dialog";
-import StripePricingTable from "@/stripe/components/pricing-table";
+import React from "react"
 
-export function ChargeContainer(
-  props: React.ComponentPropsWithoutRef<typeof DialogTrigger>,
-) {
+import { Dialog, DialogContent, DialogTrigger } from "@cs-magic/shadcn/ui/dialog"
+
+import StripePricingTable from "@/stripe/components/pricing-table"
+
+export function ChargeContainer(props: React.ComponentPropsWithoutRef<typeof DialogTrigger>) {
   return (
     <Dialog>
       <DialogTrigger {...props} />
@@ -16,5 +12,5 @@ export function ChargeContainer(
         <StripePricingTable />
       </DialogContent>
     </Dialog>
-  );
+  )
 }

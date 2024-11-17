@@ -1,5 +1,9 @@
-import { IWechatProfile, IWechatRefreshedToken } from "src/auth/providers/wechat/schema"
-import { getWechatAuthToken, getWechatUserProfile, refreshWechatAuthToken } from "src/auth/providers/wechat/utils"
+import { IWechatProfile, IWechatRefreshedToken } from "@/auth/providers/wechat/schema"
+import {
+  getWechatAuthToken,
+  getWechatUserProfile,
+  refreshWechatAuthToken,
+} from "@/auth/providers/wechat/utils"
 
 /**
  * 用于稳定地获取用户信息

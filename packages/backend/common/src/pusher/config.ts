@@ -1,4 +1,4 @@
-import type { IPusherServerConfig, PusherServerId } from "src/pusher/schema"
+import type { IPusherServerConfig, PusherServerId } from "@/pusher/schema"
 
 export const pusherServerConfigs: Record<PusherServerId, IPusherServerConfig> = {
   aws: {

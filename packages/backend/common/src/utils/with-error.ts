@@ -1,4 +1,4 @@
-import { formatError } from "src/utils/format-error"
+import { formatError } from "@/utils/format-error"
 
 export const withError = (s: string) => async (func: Promise<any>) => {
   try {

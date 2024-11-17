@@ -1,9 +1,7 @@
-import React from "react";
+import React from "react"
 
-import {
-  IBilibiliVideo,
-  getBilibiliIFrameUrl,
-} from "@cs-magic/common/dist/bilibili";
+import { IBilibiliVideo } from "@cs-magic/common/bilibili/schema"
+import { getBilibiliIFrameUrl } from "@cs-magic/common/bilibili/utils"
 
 /**
  *
@@ -27,7 +25,7 @@ import {
  * @constructor
  */
 export const BilibiliVideo = ({ video }: { video: IBilibiliVideo }) => {
-  const url = getBilibiliIFrameUrl(video);
+  const url = getBilibiliIFrameUrl(video)
 
   return (
     <iframe
@@ -37,5 +35,5 @@ export const BilibiliVideo = ({ video }: { video: IBilibiliVideo }) => {
       height={video.dimension?.height}
       allowFullScreen
     />
-  );
-};
+  )
+}

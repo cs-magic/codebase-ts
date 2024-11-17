@@ -73,3 +73,6 @@
 [submodule "apps/home-v1"]
 	path = apps/home-v1
 	url = git@github.com:cs-magic/home-v1.git
+[submodule "cases/semantic-pdf-parser"]
+	path = cases/semantic-pdf-parser
+	url = ./cases/semantic-pdf-parser

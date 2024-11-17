@@ -1,6 +1,6 @@
 {
   "name": "@cs-magic/webpack-config",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "Shared Webpack configurations for CS Magic projects",
   "main": "index.js",
   "publishConfig": {

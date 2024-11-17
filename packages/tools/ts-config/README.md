@@ -16,7 +16,7 @@ yarn add -D @cs-magic/ts-config
 
 ```json
 {
-  "extends": "@cs-magic/ts-config/tsconfig.dom.json"
+  "extends": "@cs-magic/ts-config/dom"
 }
 ```
 
@@ -24,7 +24,7 @@ yarn add -D @cs-magic/ts-config
 
 ```json
 {
-  "extends": "@cs-magic/ts-config/tsconfig.node.json"
+  "extends": "@cs-magic/ts-config/node"
 }
 ```
 
@@ -34,7 +34,7 @@ yarn add -D @cs-magic/ts-config
 
 ```json
 {
-  "extends": "@cs-magic/ts-config/tsconfig.dom.json",
+  "extends": "@cs-magic/ts-config/dom",
   "compilerOptions": {
     // 你的自定义配置
   }

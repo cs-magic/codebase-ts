@@ -1,4 +1,4 @@
-import type { IDimension } from "src/schema"
+import type { IDimension } from "@/schema"
 
 export interface IBilibiliVideoDetail {
   View: {

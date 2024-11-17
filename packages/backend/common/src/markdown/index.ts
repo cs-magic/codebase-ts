@@ -1,2 +1,2 @@
-export * from "src/markdown/compress-md"
-export * from "src/markdown/html2md"
+export * from "@/markdown/compress-md"
+export * from "@/markdown/html2md"

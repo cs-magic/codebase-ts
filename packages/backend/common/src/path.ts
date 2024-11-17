@@ -1,4 +1,4 @@
-import path from "src/path"
+import path from "path"
 
 export const packageDir = process.cwd()
 export const rootDir = path.join(packageDir, "../..")

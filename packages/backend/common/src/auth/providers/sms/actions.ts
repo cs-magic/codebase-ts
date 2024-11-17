@@ -1,9 +1,9 @@
 "use server"
 
-import { prisma } from "src/db/prisma"
-import logger from "src/log"
-import { SMS_PROVIDER_ID } from "src/sms.base"
-import { IProviderSendSms } from "src/sms.schema"
+import { prisma } from "@/db/prisma"
+import logger from "@/log"
+import { SMS_PROVIDER_ID } from "@/sms.base"
+import { IProviderSendSms } from "@/sms.schema"
 
 /**
  * 发送验证码的时候，要创建Account以存储AccessToken，并在后续验证的时候实现登录

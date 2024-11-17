@@ -2,10 +2,9 @@
 
 import OSS from "ali-oss"
 
-import { IApiResult, api } from "src/api"
-import { env } from "src/env"
-
-import { OSS_BUCKET_NAME, OSS_REGION } from "src/oss/const"
+import { IApiResult, api } from "@/api"
+import { env } from "@/env"
+import { OSS_BUCKET_NAME, OSS_REGION } from "@/oss/const"
 
 // ref: https://help.aliyun.com/zh/oss/developer-reference/initialization-10#783f1f604f969
 const initAliOss = () => {

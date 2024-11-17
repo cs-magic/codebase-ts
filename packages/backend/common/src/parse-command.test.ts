@@ -1,4 +1,4 @@
-import { parseCommand } from "src/parse-command"
+import { parseCommand } from "@/parse-command"
 
 describe("parseCommand", () => {
   it("should ", () => {

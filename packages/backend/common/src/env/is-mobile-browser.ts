@@ -1,4 +1,4 @@
-import { isClient } from "src/env/is-client"
+import { isClient } from "@/env/is-client"
 
 /**
  * todo: https://nextjs.org/docs/app/api-reference/functions/userAgent

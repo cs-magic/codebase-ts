@@ -1,33 +1,31 @@
-"use client";
+"use client"
 
-import { ButtonLink } from "@/components/button-link";
+import DiagonalSeparatorSVG from "assets/others/diagnoal-separator.svg"
+import { clsx } from "clsx"
+import { useSetAtom } from "jotai"
+import Link from "next/link"
+import { ReactNode, useEffect } from "react"
+import { useMeasure } from "react-use"
+
+import { NavigationMenu, NavigationMenuList } from "@cs-magic/shadcn/ui/navigation-menu"
+
+import { ButtonLink } from "@/components/button-link"
 // todo: added localeSwitcher, after fixing: `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`
 // import { LocaleSwitcher } from "@/components/locale-switcher"
-import { CompanyLogo } from "@/components/company-logo";
-import { uri } from "@/config";
-import { NAVBAR_ID } from "@/const";
-import { navbarHeightAtom } from "@/store";
-
-import {
-  NavigationMenu,
-  NavigationMenuList,
-} from "packages/frontend/frontend-shadcn/src/ui/navigation-menu";
-import { clsx } from "clsx";
-import { useSetAtom } from "jotai";
-import Link from "next/link";
-import { ReactNode, useEffect } from "react";
-import { useMeasure } from "react-use";
-import DiagonalSeparatorSVG from "assets/others/diagnoal-separator.svg";
+import { CompanyLogo } from "@/components/company-logo"
+import { uri } from "@/config"
+import { NAVBAR_ID } from "@/const"
+import { navbarHeightAtom } from "@/store"
 
 export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
-  const [ref, { height }] = useMeasure<HTMLDivElement>();
-  const setNavbarHeight = useSetAtom(navbarHeightAtom);
+  const [ref, { height }] = useMeasure<HTMLDivElement>()
+  const setNavbarHeight = useSetAtom(navbarHeightAtom)
 
   useEffect(() => {
-    if (!height) return;
+    if (!height) return
 
-    setNavbarHeight(height);
-  }, [height]);
+    setNavbarHeight(height)
+  }, [height])
 
   return (
     <div
@@ -43,16 +41,11 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
         }
       >
         <div className={clsx("flex items-center gap-0 sm:gap-2 px-2 h-12")}>
-          <Link
-            className={"inline-flex-center gap-2 whitespace-nowrap"}
-            href={uri.company}
-          >
+          <Link className={"inline-flex-center gap-2 whitespace-nowrap"} href={uri.company}>
             <CompanyLogo width={32} height={32} />
 
             {!productBanner && (
-              <h1 className={clsx("text-2xl font-medium", "uppercase")}>
-                Neurora
-              </h1>
+              <h1 className={clsx("text-2xl font-medium", "uppercase")}>Neurora</h1>
             )}
           </Link>
 
@@ -72,9 +65,7 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
               " md:flex",
             )}
           >
-            <NavigationMenuList
-              className={"gap-2 md:gap-4 inline-flex whitespace-nowrap"}
-            >
+            <NavigationMenuList className={"gap-2 md:gap-4 inline-flex whitespace-nowrap"}>
               {/* todo: variant thinner / outline */}
 
               <ButtonLink
@@ -101,5 +92,5 @@ export const Navbar = ({ productBanner }: { productBanner?: ReactNode }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

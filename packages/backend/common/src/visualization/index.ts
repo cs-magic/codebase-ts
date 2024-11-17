@@ -1,1 +1,1 @@
-export * from "src/visualization/transform-mindmap-content"
+export * from "@/visualization/transform-mindmap-content"

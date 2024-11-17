@@ -3,7 +3,7 @@
  */
 import axios, { AxiosError, type AxiosResponse, type CreateAxiosDefaults } from "axios"
 
-import { logger } from "src/log"
+import { logger } from "@/log"
 
 declare module "axios" {
   export interface AxiosRequestConfig {
@@ -52,7 +52,7 @@ type ErrorHandlerMany = Record<string, ErrorHandler>
 // type guard to identify that is an ErrorHandlerObject
 function isErrorHandlerObject(value: any): value is ErrorHandlerObject {
   if (typeof value === "object") {
-    return ["message", "after", "before", "notify"].some((k) => k in value)
+    return ["message", "after", "before", "notify"].some(k => k in value)
   }
   return false
 }
@@ -95,9 +95,13 @@ class ErrorHandlerRegistry {
   }
 
   // handle error seeking for key
-  handleError(this: ErrorHandlerRegistry, seek: (string | undefined)[] | string, error: THttpError): boolean {
+  handleError(
+    this: ErrorHandlerRegistry,
+    seek: (string | undefined)[] | string,
+    error: THttpError,
+  ): boolean {
     if (Array.isArray(seek)) {
-      return seek.some((key) => {
+      return seek.some(key => {
         if (key !== undefined) return this.handleError(String(key), error)
       })
     }
@@ -132,7 +136,13 @@ class ErrorHandlerRegistry {
       const config = error?.config
       const data = response?.data as HttpData
       if (!direct && config?.raw) throw error
-      const seekers = [data?.code, error.code, error?.name, String(data?.status), String(response?.status)]
+      const seekers = [
+        data?.code,
+        error.code,
+        error?.name,
+        String(data?.status),
+        String(response?.status),
+      ]
       const result = this.handleError(seekers, error)
       if (!result) {
         if (data?.code && data?.description) {
@@ -169,7 +179,7 @@ globalHandlers.registerMany({
 })
 
 // you can registre only one:
-globalHandlers.register("HttpError", (error) => {
+globalHandlers.register("HttpError", error => {
   //send email to developer that api return an 500 server internal console.error
   return { message: "Internal server errror! We already notify developers!" }
   //when we return an valid ErrorHandlerObject, will be processed as whell.
@@ -184,7 +194,9 @@ export function dealWith(solutions: ErrorHandlerMany, ignoreGlobal?: boolean) {
   return (error: THttpError) => localHandlers.responseErrorHandler(error, true)
 }
 
-function responseHandler<T>(response: AxiosResponse<T> & { config: { raw: true } }): AxiosResponse<T>
+function responseHandler<T>(
+  response: AxiosResponse<T> & { config: { raw: true } },
+): AxiosResponse<T>
 function responseHandler<T>(response: AxiosResponse<T> & { config?: { raw?: false } }): T
 function responseHandler<T>(response: AxiosResponse<T>): AxiosResponse<T> | T {
   const config = response?.config

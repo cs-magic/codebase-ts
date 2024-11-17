@@ -1,2 +1,2 @@
-export * from "src/xhs/actions"
-export * from "src/xhs/schema"
+export * from "@/xhs/actions"
+export * from "@/xhs/schema"

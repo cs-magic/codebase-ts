@@ -1,4 +1,4 @@
-import { parseFunction } from "src/utils/parse-function"
+import { parseFunction } from "@/utils/parse-function"
 
 describe("parseFunction", () => {
   it("should ", () => {

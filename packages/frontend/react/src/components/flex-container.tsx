@@ -1,7 +1,7 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { HTMLAttributes, forwardRef } from "react"
 
-import { Orientation } from "@cs-magic/common/dist/schema/ui";
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
+import { Orientation } from "@cs-magic/common/schema/ui"
+import { cn } from "@cs-magic/shadcn/lib/utils"
 
 export const FlexContainer = forwardRef<
   HTMLDivElement,
@@ -20,6 +20,6 @@ export const FlexContainer = forwardRef<
       )}
       {...props}
     />
-  );
-});
-FlexContainer.displayName = "FlexContainer";
+  )
+})
+FlexContainer.displayName = "FlexContainer"

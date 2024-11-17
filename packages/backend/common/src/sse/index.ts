@@ -1,2 +1,2 @@
-export * from "src/sse/core"
-export * from "src/sse/schema"
+export * from "@/sse/core"
+export * from "@/sse/schema"

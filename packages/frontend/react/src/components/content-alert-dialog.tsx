@@ -1,27 +1,24 @@
-"use client";
+"use client"
 
-import { useAtom } from "jotai";
-import React, { PropsWithChildren } from "react";
+import { useAtom } from "jotai"
+import React, { PropsWithChildren } from "react"
 
-import {
-  AlertDialog,
-  AlertDialogContent,
-} from "packages/frontend/frontend-shadcn/src/ui/alert-dialog";
+import { AlertDialog, AlertDialogContent } from "@cs-magic/shadcn/ui/alert-dialog"
 
-import { uiAlertDialogOpen } from "@/store/ui.atom";
+import { uiAlertDialogOpen } from "@/store/ui.atom"
 
 export const ContentAlertDialog = ({ children }: PropsWithChildren) => {
-  const [open, setOpen] = useAtom(uiAlertDialogOpen);
+  const [open, setOpen] = useAtom(uiAlertDialogOpen)
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent
         onClick={() => {
-          setOpen(false);
+          setOpen(false)
         }}
       >
         {children}
       </AlertDialogContent>
     </AlertDialog>
-  );
-};
+  )
+}

@@ -1,17 +1,13 @@
-import { useTranslation } from "next-i18next";
+import { clsx } from "clsx"
+import { useTranslation } from "next-i18next"
 import React, {
   type HTMLProps,
   type PropsWithChildren,
   type ReactNode,
   useCallback,
   useState,
-} from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "packages/frontend/frontend-shadcn/src/ui/tooltip";
+} from "react"
+
 /**
  * TypeError: Cannot set property ResponsiveMasonry of #<Object> which has only a getter
  *     at Object.<anonymous> (/Users/mark/coding/codebase-ts/node_modules/react-responsive-masonry/lib/index.js:18:27)
@@ -19,12 +15,14 @@ import {
 // import ReactResponsiveMasonry, {
 //   ResponsiveMasonry,
 // } from "react-responsive-masonry";
-import MasonryCSS from "react-masonry-css";
-import "src/components/containers.css";
+import MasonryCSS from "react-masonry-css"
+import ScrollToBottom from "react-scroll-to-bottom"
+import "src/components/containers.css"
 
-import { Loading } from "@/components/loading";
-import { type DEVICE_TYPE, DEVICES } from "@cs-magic/common/dist/device";
-import { clsx } from "clsx";
+import { DEVICES, type DEVICE_TYPE } from "@cs-magic/common/device"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/shadcn/ui/tooltip"
+
+import { Loading } from "@/components/loading"
 
 export function GridContainer({ children }: PropsWithChildren) {
   return (
@@ -35,24 +33,24 @@ export function GridContainer({ children }: PropsWithChildren) {
     >
       {children}
     </div>
-  );
+  )
 }
 
 export function MasonryContainer({
   children,
   lib = "masonic",
 }: PropsWithChildren & {
-  lib?: "masonic" | "react-responsive-masonry" | "react-masonry-css";
+  lib?: "masonic" | "react-responsive-masonry" | "react-masonry-css"
 }) {
   // return null;
   // todo: TypeError: Cannot set property ResponsiveMasonry of #<Object> which has only a getter
 
   switch (lib) {
     case "masonic":
-      return "todo";
+      return "todo"
 
     case "react-responsive-masonry":
-      return;
+      return
     // (
     //   <ResponsiveMasonry
     //     columnsCountBreakPoints={{ 600: 2, 900: 3, 1200: 4, 1500: 5 }}
@@ -70,7 +68,7 @@ export function MasonryContainer({
         1100: 3,
         700: 2,
         500: 1,
-      };
+      }
       return (
         <MasonryCSS
           breakpointCols={breakpointColumnsObj}
@@ -79,7 +77,7 @@ export function MasonryContainer({
         >
           {children}
         </MasonryCSS>
-      );
+      )
   }
 }
 
@@ -91,15 +89,15 @@ export function MarqueeContainer({
   // ref:
   // 1. https://play.tailwindcss.com/VJvK9YXBoB?layout=horizontal
   // 2. https://flowgpt.com/prompt/vqxUPqsxdZ1swXykpypj8?isModal=true
-  const [isOverflow, setOverflow] = useState(false);
+  const [isOverflow, setOverflow] = useState(false)
   const ref = useCallback((node: HTMLDivElement | null) => {
     if (node) {
-      const { scrollWidth, offsetWidth } = node;
+      const { scrollWidth, offsetWidth } = node
       if (scrollWidth > offsetWidth) {
-        setOverflow(true);
+        setOverflow(true)
       }
     }
-  }, []);
+  }, [])
 
   return (
     <div
@@ -111,16 +109,10 @@ export function MarqueeContainer({
       )}
       {...props}
     >
-      <div
-        className={clsx("whitespace-nowrap ", isOverflow && "animate-marquee ")}
-      >
-        {children}
-      </div>
-      {isOverflow && (
-        <div className="absolute top-0 animate-marquee2">{children}</div>
-      )}
+      <div className={clsx("whitespace-nowrap ", isOverflow && "animate-marquee ")}>{children}</div>
+      {isOverflow && <div className="absolute top-0 animate-marquee2">{children}</div>}
     </div>
-  );
+  )
 }
 
 export function DeviceContainerInner({
@@ -129,9 +121,9 @@ export function DeviceContainerInner({
   ratio = 1,
   children,
 }: PropsWithChildren & {
-  height: number;
-  width: number;
-  ratio?: number;
+  height: number
+  width: number
+  ratio?: number
 }) {
   return (
     <div
@@ -142,7 +134,7 @@ export function DeviceContainerInner({
         {children}
       </div>
     </div>
-  );
+  )
 }
 
 export function DeviceContainer({
@@ -150,19 +142,16 @@ export function DeviceContainer({
   ratio = 1,
   children,
 }: PropsWithChildren & {
-  device?: DEVICE_TYPE;
-  ratio?: number;
+  device?: DEVICE_TYPE
+  ratio?: number
 }) {
-  const { w, h, r = 68 } = DEVICES[device];
+  const { w, h, r = 68 } = DEVICES[device]
   return (
     <DeviceContainerInner width={w} height={h} ratio={ratio}>
       <div className={clsx("device", `device-${device}`)}>
         <div className="device-frame">
           {/* ref: https://codesandbox.io/s/react-phone-mockup-slider-wsdy5?file=/src/App.js:1232-1296 */}
-          <div
-            className="h-full w-full overflow-hidden bg-white"
-            style={{ borderRadius: r }}
-          >
+          <div className="h-full w-full overflow-hidden bg-white" style={{ borderRadius: r }}>
             {children}
           </div>
         </div>
@@ -173,11 +162,11 @@ export function DeviceContainer({
         <div className="device-power " />
       </div>
     </DeviceContainerInner>
-  );
+  )
 }
 
 export function NormalScrollContainer({ children }: PropsWithChildren) {
-  return <div className="grow overflow-auto">{children}</div>;
+  return <div className="grow overflow-auto">{children}</div>
 }
 
 export function AutoScrollContainer({ children }: PropsWithChildren) {
@@ -190,7 +179,7 @@ export function AutoScrollContainer({ children }: PropsWithChildren) {
     >
       {children}
     </ScrollToBottom>
-  );
+  )
 }
 
 /**
@@ -208,19 +197,13 @@ export function ResponsiveTooltip({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<typeof TooltipTrigger> & {
-  content?: ReactNode;
-  disableHoverableContent?: boolean;
+  content?: ReactNode
+  disableHoverableContent?: boolean
 }) {
   return (
-    <Tooltip
-      delayDuration={100}
-      disableHoverableContent={disableHoverableContent}
-    >
+    <Tooltip delayDuration={100} disableHoverableContent={disableHoverableContent}>
       <TooltipTrigger
-        className={clsx(
-          "flex items-center gap-2 p-interactive px-2 w-full",
-          className,
-        )}
+        className={clsx("flex items-center gap-2 p-interactive px-2 w-full", className)}
         {...props}
       >
         {children}
@@ -229,7 +212,7 @@ export function ResponsiveTooltip({
 
       <TooltipContent className="lg:hidden">{content}</TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 export function IconContainer({
@@ -247,24 +230,22 @@ export function IconContainer({
     >
       {children}
     </div>
-  );
+  )
 }
 
 export const AsyncListContainer = <T,>({
   items,
   style,
 }: {
-  items?: T[];
-  style: (ele: T) => ReactNode;
+  items?: T[]
+  style: (ele: T) => ReactNode
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return !items ? (
     <Loading />
   ) : !items.length ? (
-    <div className={"w-full flex flex-col items-center"}>
-      {t("common:CurrentlyNoResult")}
-    </div>
+    <div className={"w-full flex flex-col items-center"}>{t("common:CurrentlyNoResult")}</div>
   ) : (
     <>{items.map((p, index) => style(p))}</>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@cs-magic/ts-config/tsconfig.dom.json"
+    "@cs-magic/ts-config/dom"
   ],
   "compilerOptions": {
     "rootDir": "src",

@@ -1,11 +1,12 @@
-import { api } from "src/api/api"
-import type { IApiResult } from "src/api/schema"
-import { logger } from "src/log"
-
-import type { IBilibiliVideoDetail } from "src/bilibili/schema"
+import { api } from "@/api/api"
+import type { IApiResult } from "@/api/schema"
+import type { IBilibiliVideoDetail } from "@/bilibili/schema"
+import { logger } from "@/log"
 
 export const getBilibiliSummary = async (bvid: string) => {
-  const { data } = await api.get(`https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`)
+  const { data } = await api.get(
+    `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`,
+  )
   logger.debug("getBilibiliDetail: %o", data)
 
   if (data.code !== 0) throw new Error(JSON.stringify(data))
@@ -38,7 +39,9 @@ export const fetchBvidFromb23tv = async (url: string): Promise<IApiResult<string
   return { success: false, message: `not found bvid from ${url}` }
 }
 
-export const fetchBilibiliDetail = async (bvid: string): Promise<IApiResult<IBilibiliVideoDetail>> => {
+export const fetchBilibiliDetail = async (
+  bvid: string,
+): Promise<IApiResult<IBilibiliVideoDetail>> => {
   const url = `https://api.bilibili.com/x/web-interface/wbi/view/detail?bvid=${bvid}&need_view=1`
   console.debug("-- fetchBilibiliDetail:", url)
 

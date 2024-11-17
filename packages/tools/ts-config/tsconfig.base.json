@@ -52,7 +52,8 @@
     "strictFunctionTypes": true,
     "alwaysStrict": true,
     "skipDefaultLibCheck": true,
-    "suppressImplicitAnyIndexErrors": true,
+    // TS5102: Option 'suppressImplicitAnyIndexErrors' has been removed. Please remove it from your configuration.
+//    "suppressImplicitAnyIndexErrors": true,
     "noPropertyAccessFromIndexSignature": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,

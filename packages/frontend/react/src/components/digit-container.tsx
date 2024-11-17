@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import React, { ComponentProps, useEffect, useRef } from "react";
+import React, { ComponentProps, useEffect, useRef } from "react"
 
-import { SMS_DIGIT_SIZE } from "@cs-magic/common/dist/config";
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
-import { Input } from "packages/frontend/frontend-shadcn/src/ui/input";
+import { SMS_DIGIT_SIZE } from "@cs-magic/common/config"
+import { cn } from "@cs-magic/shadcn/lib/utils"
+import { Input } from "@cs-magic/shadcn/ui/input"
 
 export const DigitContainer = ({
   className,
@@ -12,13 +12,13 @@ export const DigitContainer = ({
   focus,
   ...props
 }: ComponentProps<typeof Input> & { focus: boolean }) => {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (!focus || !ref.current) return;
+    if (!focus || !ref.current) return
 
-    ref.current.focus();
-  }, [focus]);
+    ref.current.focus()
+  }, [focus])
 
   return (
     <Input
@@ -31,5 +31,5 @@ export const DigitContainer = ({
       maxLength={1}
       {...props}
     />
-  );
-};
+  )
+}

@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import clsx from "clsx";
-import React, { ComponentProps, forwardRef } from "react";
+import clsx from "clsx"
+import React, { ComponentProps, forwardRef } from "react"
 
 // todo: why cn not okay
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
+import { cn } from "@cs-magic/shadcn/lib/utils"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "packages/frontend/frontend-shadcn/src/ui/tooltip";
+} from "@cs-magic/shadcn/ui/tooltip"
 
 export const IconContainer = forwardRef<
   HTMLButtonElement,
   ComponentProps<typeof TooltipTrigger> & {
-    size?: "sm" | "lg";
-    tooltipContent?: string;
+    size?: "sm" | "lg"
+    tooltipContent?: string
   }
 >(({ className, size, tooltipContent, ...props }, ref) => {
   return (
@@ -40,6 +40,6 @@ export const IconContainer = forwardRef<
         {tooltipContent && <TooltipContent>{tooltipContent}</TooltipContent>}
       </Tooltip>
     </TooltipProvider>
-  );
-});
-IconContainer.displayName = "IconContainer";
+  )
+})
+IconContainer.displayName = "IconContainer"

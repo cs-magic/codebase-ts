@@ -1,1 +1,1 @@
-export * from "src/html/utils"
+export * from "@/html/utils"

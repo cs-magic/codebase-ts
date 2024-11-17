@@ -65,23 +65,6 @@ init_commands() {
   ts-patch install -s
 }
 
-init_wechaty()  {
-#  wechaty-puppet
-  echo_step "building wechaty-puppet"
-  yarn workspace wechaty-puppet dist
-
-#  wechaty-puppet-wechat4u
-  echo_step "building wechaty-puppet-wechat4u"
-  yarn workspace wechat4u compile && yarn workspace wechaty-puppet-wechat4u dist
-
-#  wechaty-service
-  echo_step "building wechaty-puppet-service"
-  yarn workspace wechaty-grpc install:protoc && PATH=$PATH:$(go env GOPATH)/bin yarn workspace wechaty-grpc dist && yarn workspace wechaty-puppet-service dist
-
-#  wechaty
-  echo_step "building wechaty"
-  yarn workspace wechaty dist
-}
 
 init_fullstack_packages() {
 # build frontend, as well as backend
@@ -93,5 +76,4 @@ init_fullstack_packages() {
 run_task init_env "$@"
 run_task init_db "$@"
 run_task init_commands "$@"
-run_task init_wechaty "$@"
 run_task init_fullstack_packages "$@"

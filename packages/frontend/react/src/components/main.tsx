@@ -1,14 +1,16 @@
-"use client";
+"use client"
 
-import { navbarHeightAtom } from "@/store";
-import { cn } from "packages/frontend/frontend-shadcn/src/lib/utils";
-import { useAtom } from "jotai";
-import React, { PropsWithChildren } from "react";
+import { useAtom } from "jotai"
+import React, { PropsWithChildren } from "react"
+
+import { cn } from "@cs-magic/shadcn/lib/utils"
+
+import { navbarHeightAtom } from "@/store"
 
 export const Main = ({ children }: PropsWithChildren) => {
-  const [navbarHeight] = useAtom(navbarHeightAtom);
+  const [navbarHeight] = useAtom(navbarHeightAtom)
 
-  console.log({ navbarHeight });
+  console.log({ navbarHeight })
 
   return (
     <main
@@ -22,5 +24,5 @@ export const Main = ({ children }: PropsWithChildren) => {
     >
       {navbarHeight ? children : null}
     </main>
-  );
-};
+  )
+}

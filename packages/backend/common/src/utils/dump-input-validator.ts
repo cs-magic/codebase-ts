@@ -1,12 +1,12 @@
 import { ZodBoolean, ZodString } from "zod"
 
-import type { InputValidatorType } from "src/schema/utils"
+import type { InputValidatorType } from "@/schema/utils"
 
 export const dumpInputValidator = (v: InputValidatorType): string => {
   if ("options" in v)
     return dumpInputValidator(
       v.options.map(
-        (o) =>
+        o =>
           // o instanceof ZodLiteral ? o.value :
           o,
       ),
