@@ -1,6 +1,6 @@
 "use client"
 
-import DiagonalSeparatorSVG from "assets/others/diagnoal-separator.svg"
+import DiagonalSeparatorSVG from "@assets/others/diagnoal-separator.svg"
 import { clsx } from "clsx"
 import { useSetAtom } from "jotai"
 import Link from "next/link"
