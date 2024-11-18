@@ -124,6 +124,7 @@
     "protoc-gen-js": "^3.21.2",
     "shx": "^0.3.4",
     "ttypescript": "^1.5.15",
+    "turbo": "^2.3.0",
     "typescript": "5.5.4",
     "typescript-transform-paths": "^3.5.1"
   },
