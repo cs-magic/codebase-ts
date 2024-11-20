@@ -6,13 +6,10 @@ module.exports = {
     node: true,
   },
 
-  extends: [
-    "plugin:@next/next/recommended",
-      "./react.js",
-  ],
+  extends: ["plugin:@next/next/recommended", "./react.js"],
   rules: {
     // Next.js 特定规则
     "@next/next/no-html-link-for-pages": "error",
     "@next/next/no-img-element": "error",
   },
-};
+}

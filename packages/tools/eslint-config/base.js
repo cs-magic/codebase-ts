@@ -1,18 +1,11 @@
 // base.js - 基础 JavaScript 规则
 module.exports = {
-  settings: {
-    "import/resolver": {
-      typescript: {
-        alwaysTryTypes: true,
-        // project: "./tsconfig.json",
-      },
-    },
-  },
   env: {
     es2022: true,
-    node: true,
   },
+
   extends: ["eslint:recommended", "plugin:import/recommended"],
+
   rules: {
     "no-console": ["warn", { allow: ["warn", "error"] }],
     "no-debugger": "warn",
@@ -24,16 +17,24 @@ module.exports = {
       "error",
       {
         groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
-        "pathGroups": [
+        pathGroups: [
           {
-            "pattern": "contentlayer/generated",
-            "group": "internal",
-            "position": "after"
-          }
+            pattern: "contentlayer/generated",
+            group: "internal",
+            position: "after",
+          },
         ],
         "newlines-between": "always",
         alphabetize: { order: "asc" },
       },
     ],
+  },
+
+  settings: {
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true, // project: "./tsconfig.json",
+      },
+    },
   },
 }

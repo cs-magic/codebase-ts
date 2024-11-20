@@ -1,9 +1,9 @@
 // node.js - Node.js 配置
 module.exports = {
-  extends: ["./typescript.js"],
+  extends: ["./base.js"],
   env: {
+    es2022: true,
     node: true,
-    browser: false,
   },
   rules: {
     // Node.js 特定规则
