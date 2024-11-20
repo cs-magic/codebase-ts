@@ -13,29 +13,31 @@ npm install --save-dev @cs-magic/prettier-config
 ### 基础配置
 
 在 `package.json` 中：
+
 ```json
 {
   "prettier": "@cs-magic/prettier-config"
 }
 ```
 
-或者在 `.prettierrc.js` 中：
+或者在 `.prettierrc` 中：
+
 ```js
-module.exports = require('@cs-magic/prettier-config')
+module.exports = require('@cs-magic/prettier-config/src')
 ```
 
 ### TypeScript 项目
 
 ```js
-// .prettierrc.js
-module.exports = require('@cs-magic/prettier-config/typescript')
+// .prettierrc
+module.exports = require('@cs-magic/prettier-config/src/typescript')
 ```
 
 ### Tailwind CSS 项目
 
 ```js
-// .prettierrc.js
-module.exports = require('@cs-magic/prettier-config/tailwind')
+// .prettierrc
+module.exports = require('@cs-magic/prettier-config/src/tailwind')
 ```
 
 ### 与 ESLint 集成
@@ -54,11 +56,13 @@ module.exports = {
 如果你想单独集成：
 
 1. 安装依赖：
+
 ```bash
 npm install --save-dev eslint-config-prettier eslint-plugin-prettier
 ```
 
 2. 配置 ESLint：
+
 ```js
 // .eslintrc.js
 module.exports = {
@@ -71,11 +75,11 @@ module.exports = {
 
 ## 自定义配置
 
-创建 `.prettierrc.js` 文件来覆盖默认配置：
+创建 `.prettierrc` 文件来覆盖默认配置：
 
 ```js
 module.exports = {
-  ...require('@cs-magic/prettier-config'),
+  ...require('@cs-magic/prettier-config/src'),
   // 你的自定义配置
   semi: true,
   tabWidth: 4,
@@ -123,6 +127,7 @@ prettier --check "src/**/*.{js,jsx,ts,tsx}"
 
 1. 安装 Prettier 插件
 2. 设置为默认格式化工具：
+
 ```json
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",

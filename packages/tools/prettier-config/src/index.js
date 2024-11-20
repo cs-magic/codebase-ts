@@ -34,13 +34,18 @@ module.exports = {
   // importOrderTypeScriptVersion: '5.0.0',
   importOrder: [
     // 普通第三方依赖，不是 @cs-magic 不是 @/ 不是 ./ 不是 ../ 开头
-    "^(?!@cs-magic|@/|\\./|\\.\\./).*",
+    // "^(?!@cs-magic|@/|\\./|\\.\\./).*",
 
-    // @cs-magic 开头
-    "^@cs-magic/.*?$",
+    "^@cs-magic/.*?$", // @cs-magic 开头
 
     // todo: why this not work
     "^.prisma/.*?$",
+
+    "^contentlayer/.*?$",
+
+    "^@assets/(.*)$",
+
+    "^@/(.*)$",
 
     // 父级组件
     "^../.*?$",
@@ -50,5 +55,9 @@ module.exports = {
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  plugins: ["@trivago/prettier-plugin-sort-imports"],
+  plugins: [
+    "@trivago/prettier-plugin-sort-imports",
+    // 让 Prettier 遵循 ESLint 的排序规则
+    "prettier-plugin-organize-imports",
+  ],
 }

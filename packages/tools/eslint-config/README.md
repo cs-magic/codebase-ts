@@ -13,22 +13,19 @@ CS Magic 项目的共享 ESLint 配置。
 ```js
 // 根目录 .eslintrc.js
 module.exports = {
-    root: true,
-    extends: [
-        '@cs-magic/eslint-config/typescript-type-checked',
-        '@cs-magic/eslint-config/prettier',
-    ],
-    parserOptions: {
-        project: ['./tsconfig.json', './packages/*/tsconfig.json'],
-    },
-    ignorePatterns: ['**/dist/**', '**/node_modules/**'],
+  root: true,
+  extends: ["@cs-magic/eslint-config/typescript-type-checked", "@cs-magic/eslint-config/prettier"],
+  parserOptions: {
+    project: ["./tsconfig.json", "./packages/*/tsconfig.json"],
+  },
+  ignorePatterns: ["**/dist/**", "**/node_modules/**"],
 }
 ```
 
 4. 如果遇到性能问题，可以：
-    - 使用 `.eslintignore` 排除不需要检查的文件
-    - 使用基础的 typescript 配置而不是 typescript-type-checked
-    - 在 CI 中使用类型检查，本地开发时使用基础配置
+   - 使用 `.eslintignore` 排除不需要检查的文件
+   - 使用基础的 typescript 配置而不是 typescript-type-checked
+   - 在 CI 中使用类型检查，本地开发时使用基础配置
 
 ## 安装
 
@@ -37,6 +34,7 @@ npm install --save-dev @cs-magic/eslint-config
 ```
 
 ## 使用
+
 ## 使用
 
 创建 `.eslintrc.js` 文件：
@@ -45,10 +43,7 @@ npm install --save-dev @cs-magic/eslint-config
 
 ```js
 module.exports = {
-  extends: [
-    '@cs-magic/eslint-config/base',
-    '@cs-magic/eslint-config/prettier',
-  ],
+  extends: ["@cs-magic/eslint-config/base", "@cs-magic/eslint-config/prettier"],
 }
 ```
 
@@ -57,10 +52,7 @@ module.exports = {
 ```js
 // .eslintrc.js
 module.exports = {
-  extends: [
-    '@cs-magic/eslint-config/typescript',
-    '@cs-magic/eslint-config/prettier',
-  ],
+  extends: ["@cs-magic/eslint-config/typescript", "@cs-magic/eslint-config/prettier"],
 }
 ```
 
@@ -69,12 +61,9 @@ module.exports = {
 ```js
 // .eslintrc.js
 module.exports = {
-  extends: [
-    '@cs-magic/eslint-config/typescript-type-checked',
-    '@cs-magic/eslint-config/prettier',
-  ],
+  extends: ["@cs-magic/eslint-config/typescript-type-checked", "@cs-magic/eslint-config/prettier"],
   parserOptions: {
-    project: './tsconfig.json',
+    project: "./tsconfig.json",
   },
 }
 ```
@@ -83,10 +72,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  extends: [
-    '@cs-magic/eslint-config/react',
-    '@cs-magic/eslint-config/prettier',
-  ],
+  extends: ["@cs-magic/eslint-config/react", "@cs-magic/eslint-config/prettier"],
 }
 ```
 
@@ -94,12 +80,9 @@ module.exports = {
 
 ```js
 module.exports = {
-  extends: [
-    '@cs-magic/eslint-config/next',
-    '@cs-magic/eslint-config/prettier',
-  ],
+  extends: ["@cs-magic/eslint-config/next", "@cs-magic/eslint-config/prettier"],
   parserOptions: {
-    project: './tsconfig.json', // 如果需要类型检查
+    project: "./tsconfig.json", // 如果需要类型检查
   },
 }
 ```
@@ -132,7 +115,7 @@ public
 
 ```js
 module.exports = {
-  extends: ['@cs-magic/eslint-config/react'],
+  extends: ["@cs-magic/eslint-config/react"],
   rules: {
     // 你的自定义规则
   },

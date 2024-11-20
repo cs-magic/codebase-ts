@@ -13,21 +13,7 @@ module.exports = {
     "no-var": "error",
     "prefer-const": "error",
     "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    "import/order": [
-      "error",
-      {
-        groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
-        pathGroups: [
-          {
-            pattern: "contentlayer/generated",
-            group: "internal",
-            position: "after",
-          },
-        ],
-        "newlines-between": "always",
-        alphabetize: { order: "asc" },
-      },
-    ],
+    "import/order": "off",
   },
 
   settings: {
