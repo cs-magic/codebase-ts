@@ -22,6 +22,7 @@
   ],
   "scripts": {
     "prepare": "ts-patch install -s",
+    "postinstall": "prisma generate",
     "init-app": "git submodule update --init --progress",
     "run-app": "yarn workspace @cs-magic"
   },
@@ -99,34 +100,16 @@
     "zod-prisma-types": "^3.1.8"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.0.2",
-    "@mdx-js/esbuild": "^3.0.1",
-    "@octokit/rest": "^21.0.2",
+    "@prisma/client": "^5.19.1",
     "@types/lodash": "^4.14.202",
-    "highlight.js": "^11.10.0",
     "lodash": "^4.17.21",
-    "rehype-highlight": "^7.0.0",
-    "rehype-pretty-code": "^0.14.0",
-    "shiki": "0.14.5",
-    "socket.io": "^4.8.0",
-    "stripe": "13.11.0",
-    "swr": "^2.2.5",
-    "ts-patch": "^3.2.1"
+    "prisma": "^5.21.0"
   },
   "devDependencies": {
-    "@prisma/client": "^5.19.1",
-    "@tailwindcss/forms": "^0.5.9",
-    "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.0.0",
     "npm-run-all": "^4.1.5",
-    "postcss-import": "^16.1.0",
-    "prisma": "^5.21.0",
-    "protoc-gen-js": "^3.21.2",
-    "shx": "^0.3.4",
-    "ttypescript": "^1.5.15",
     "turbo": "^2.3.0",
-    "typescript": "5.5.4",
-    "typescript-transform-paths": "^3.5.1"
+    "typescript": "5.5.4"
   },
   "packageManager": "yarn@4.4.0",
   "ct3aMetadata": {

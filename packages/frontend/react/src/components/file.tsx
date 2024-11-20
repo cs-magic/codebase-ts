@@ -1,12 +1,13 @@
-import { Check } from "lucide-react"
-import Image from "next/image"
-import React, { HTMLAttributes } from "react"
-import { FlexContainer } from "src/components/flex-container"
-import { Loading } from "src/components/loading"
-
-import { IUploadFile } from "@cs-magic/common/oss/schema"
+import type { IUploadFile } from "@cs-magic/common/oss/schema"
 import { cn } from "@cs-magic/shadcn/lib/utils"
 import { AspectRatio } from "@cs-magic/shadcn/ui/aspect-ratio"
+import { Check } from "lucide-react"
+import Image from "next/image"
+import React, { type HTMLAttributes } from "react"
+
+
+import { FlexContainer } from "@/components/flex-container"
+import { Loading } from "@/components/loading"
 
 export const FileComp = ({
   file,
@@ -15,7 +16,7 @@ export const FileComp = ({
 }: { file: IUploadFile } & HTMLAttributes<HTMLDivElement>) => {
   return (
     <div className={cn("w-full", className)} {...props}>
-      <AspectRatio ratio={1} className={"relative"}>
+      <AspectRatio className={"relative"} ratio={1}>
         <FileCompInner file={file} />
       </AspectRatio>
     </div>
@@ -41,7 +42,7 @@ const FileCompInner = ({ file }: { file: IUploadFile }) => {
       if (file.input.type.startsWith("image")) {
         return (
           <>
-            <Image src={file.data} alt={file.input.name} fill sizes={"320px"} />
+            <Image fill alt={file.input.name} sizes={"320px"} src={file.data} />
             <Check className={"text-green-500 absolute right-0 top-0"} />
           </>
         )

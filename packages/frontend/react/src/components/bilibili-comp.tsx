@@ -1,7 +1,7 @@
-import React from "react"
 
-import { IBilibiliVideo } from "@cs-magic/common/bilibili/schema"
+import type { IBilibiliVideo } from "@cs-magic/common/bilibili/schema"
 import { getBilibiliIFrameUrl } from "@cs-magic/common/bilibili/utils"
+import React from "react"
 
 /**
  *
@@ -29,11 +29,11 @@ export const BilibiliVideo = ({ video }: { video: IBilibiliVideo }) => {
 
   return (
     <iframe
+      allowFullScreen
+      height={video.dimension?.height}
       src={url}
       title={video.title}
       width={video.dimension?.width}
-      height={video.dimension?.height}
-      allowFullScreen
     />
   )
 }

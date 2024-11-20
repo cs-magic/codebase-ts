@@ -1,4 +1,4 @@
-import { IWechatSDKToken } from "@/auth"
+import type { IWechatSDKToken } from "@/auth"
 import { getWechatSignature, getWechatTicket, getWechatToken } from "@/wechat/notify/functions"
 
 export class WechatSDK {
@@ -16,7 +16,7 @@ export class WechatSDK {
 
   private async getToken() {
     if (!this.token) this.token = await getWechatToken()
-    return this.token!.access_token
+    return this.token.access_token
   }
 
   private async _getTicket() {

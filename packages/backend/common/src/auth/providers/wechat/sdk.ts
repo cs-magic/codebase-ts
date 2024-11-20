@@ -1,4 +1,4 @@
-import { IWechatProfile, IWechatRefreshedToken } from "@/auth/providers/wechat/schema"
+import type { IWechatProfile, IWechatRefreshedToken } from "@/auth/providers/wechat/schema"
 import {
   getWechatAuthToken,
   getWechatUserProfile,

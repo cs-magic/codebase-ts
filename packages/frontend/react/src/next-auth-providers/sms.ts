@@ -1,7 +1,7 @@
-import Credentials from "next-auth/providers/credentials"
 
 import { prisma } from "@cs-magic/common/db/prisma"
 import { SMS_PROVIDER_ID } from "@cs-magic/common/sms.base"
+import Credentials from "next-auth/providers/credentials"
 
 export const SmsProvider = Credentials({
   id: SMS_PROVIDER_ID,

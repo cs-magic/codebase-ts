@@ -1,9 +1,9 @@
 "use client"
 
-import { useAtom } from "jotai"
-import React, { PropsWithChildren } from "react"
-
 import { cn } from "@cs-magic/shadcn/lib/utils"
+import { useAtom } from "jotai"
+import React, { type PropsWithChildren } from "react"
+
 
 import { navbarHeightAtom } from "@/store"
 

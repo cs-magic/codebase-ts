@@ -1,10 +1,9 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { beian, mossSlogan } from "@/config";
-
-import { CompanySlogan } from "@/components/company-slogan";
-import { isCurUrlDomestic } from "@/utils/host";
-import FooterSVG from "src/components/footer.svg";
+import { CompanySlogan } from "@/components/company-slogan"
+import FooterSVG from "@/components/footer.svg"
+import { beian, mossSlogan } from "@/config"
+import { isCurUrlDomestic } from "@/utils/host"
 
 export const Footer = () => {
   return (
@@ -41,5 +40,5 @@ export const Footer = () => {
         {/*</div>*/}
       </div>
     </>
-  );
-};
+  )
+}

@@ -1,7 +1,7 @@
-import { useState } from "react"
 
 import { uploadFile } from "@cs-magic/common/oss/oss.server"
-import { IUploadFile } from "@cs-magic/common/oss/schema"
+import type { IUploadFile } from "@cs-magic/common/oss/schema"
+import { useState } from "react"
 
 export const useUploadFile = () => {
   const [status, setStatus] = useState<IUploadFile>({ status: "idle" })

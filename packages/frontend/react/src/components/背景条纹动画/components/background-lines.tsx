@@ -1,8 +1,8 @@
-import styles from "src/components/背景条纹动画/components/background-lines.module.css";
+import styles from "@/components/背景条纹动画/components/background-lines.module.css"
 
 type Props = {
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+}
 
 export default function BackgroundLines({ children }: Props) {
   return (
@@ -12,5 +12,5 @@ export default function BackgroundLines({ children }: Props) {
       <div className={styles.backgroundLines}></div>
       <div className="relative z-50">{children}</div>
     </div>
-  );
+  )
 }

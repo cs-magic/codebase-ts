@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import React from "react"
 
 export const StatItem = ({ Icon, value }: { Icon: LucideIcon; value?: number }) => {

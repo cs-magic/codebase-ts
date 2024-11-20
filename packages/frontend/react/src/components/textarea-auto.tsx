@@ -1,13 +1,13 @@
 "use client"
 
+import { cn } from "@cs-magic/shadcn/lib/utils"
 import { useAtom } from "jotai"
-import React, { ComponentProps, forwardRef } from "react"
+import React, { type ComponentProps, forwardRef } from "react"
 import ReactTextareaAutoSize from "react-textarea-autosize"
 
-import { cn } from "@cs-magic/shadcn/lib/utils"
 
 import { useMounted } from "@/hooks/use-mounted"
-import { Atom } from "@/store/jotai.types"
+import type { Atom } from "@/store/jotai.types"
 
 const TextareaInner = forwardRef<
   HTMLTextAreaElement,
@@ -22,9 +22,6 @@ const TextareaInner = forwardRef<
 
   return (
     <ReactTextareaAutoSize
-      rows={rows}
-      minRows={minRows}
-      maxRows={8}
       ref={ref}
       cacheMeasurements
       className={cn(
@@ -34,6 +31,9 @@ const TextareaInner = forwardRef<
         "resize-none focus-visible:outline-none bg-transparent",
         className,
       )}
+      maxRows={8}
+      minRows={minRows}
+      rows={rows}
       onChange={event => {
         // 更新用户的输入
         const value = event.currentTarget.value
@@ -68,7 +68,7 @@ export const TextareaWithAtom = forwardRef<
   ComponentProps<typeof TextareaInner> & { atom: Atom<string> }
 >(({ atom, ...props }, ref) => {
   const [value, setValue] = useAtom(atom)
-  return <TextareaInner ref={ref} value={value} setValue={setValue} {...props} />
+  return <TextareaInner ref={ref} setValue={setValue} value={value} {...props} />
 })
 TextareaWithAtom.displayName = "TextareaWithAtom"
 

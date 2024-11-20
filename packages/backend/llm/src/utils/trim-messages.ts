@@ -1,5 +1,5 @@
 import logger from "@cs-magic/common/log/index"
-import { ILlmMessage } from "@cs-magic/common/schema/message"
+import type { ILlmMessage } from "@cs-magic/common/schema/message"
 
 import type { LlmModelType } from "@/schema/llm.models"
 import { calculateToken } from "@/utils/calculate-token"

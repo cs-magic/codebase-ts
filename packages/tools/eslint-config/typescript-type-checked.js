@@ -5,10 +5,10 @@ module.exports = {
     project: true,
   },
   extends: [
-    './typescript',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
+    './typescript.js',
   ],
   rules: {
     // 需要类型检查的规则

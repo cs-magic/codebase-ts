@@ -1,11 +1,11 @@
-import remove from "lodash/remove.js"
-
-import {
+import type {
   ITransChannel,
   ITransClient,
   ITransEvent,
   ResponseFinalStatus,
 } from "@cs-magic/common/sse/schema"
+import remove from "lodash/remove.js"
+
 
 import type { ILLMManagerTraditional } from "@/@deprecated/providers/llm-sse/schema"
 

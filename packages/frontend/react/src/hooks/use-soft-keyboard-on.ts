@@ -1,7 +1,7 @@
 import { useAtom } from "jotai"
 import { useWindowSize } from "react-use"
 
-import { uiInnerHeight } from "src/store"
+import { uiInnerHeight } from "@/store"
 
 export const useSoftKeyboardOn = () => {
   const { height } = useWindowSize()

@@ -1,6 +1,6 @@
+import { cn } from "@cs-magic/shadcn/lib/utils"
 import * as React from "react"
 
-import { cn } from "@cs-magic/shadcn/lib/utils"
 
 export interface InputWithEnterProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onEnter?: (value: string) => void

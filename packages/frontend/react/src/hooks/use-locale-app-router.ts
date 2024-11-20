@@ -1,6 +1,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
-import { LocaleType } from "@/locales"
+import type { LocaleType } from "@/locales"
 
 export const useSwitchLocaleInAppRouter = () => {
   const router = useRouter()

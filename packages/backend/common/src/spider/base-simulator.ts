@@ -3,7 +3,7 @@ import { chromium } from "playwright"
 import type { Browser, BrowserType, LaunchOptions, Page } from "playwright-core"
 
 import logger from "@/log"
-import { type DriverType } from "@/spider/schema"
+import type { DriverType } from "@/spider/schema"
 
 const lock = new AsyncLock()
 

@@ -1,7 +1,7 @@
 import { sleep } from "@/datetime/utils"
 import { env } from "@/env"
 import logger from "@/log"
-import { IUserSummaryFilled, UnexpectedError } from "@/schema"
+import { type IUserSummaryFilled, UnexpectedError } from "@/schema"
 import { BaseSimulator } from "@/spider/base-simulator"
 
 /**
@@ -36,7 +36,7 @@ export class CardSimulator extends BaseSimulator {
     if (!this.page) throw new UnexpectedError()
 
     // logger.debug("-- inputting user if necessary: %o", user)
-    await this.page.locator("#card-user-name").fill(user.name as string)
+    await this.page.locator("#card-user-name").fill(user.name)
     await this.page.locator("#card-user-avatar").fill(user.image as string)
 
     logger.debug(`-- inputting content: %o`, content)

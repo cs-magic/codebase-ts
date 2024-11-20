@@ -10,8 +10,8 @@ import { env } from "@/env"
 // Vercel log drain was setup to send logs here: https://logflare.app/sources/13830
 
 const { stream, send } = logflarePinoVercel({
-  apiKey: env!.NEXT_PUBLIC_PINO_LOGFLARE_API_KEY!,
-  sourceToken: env!.NEXT_PUBLIC_PINO_LOGFLARE_SOURCE_TOKEN!,
+  apiKey: env.NEXT_PUBLIC_PINO_LOGFLARE_API_KEY!,
+  sourceToken: env.NEXT_PUBLIC_PINO_LOGFLARE_SOURCE_TOKEN!,
 })
 
 /**

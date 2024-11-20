@@ -1,8 +1,7 @@
 import { IconLanguage } from "@tabler/icons-react"
 import { useTranslation } from "next-i18next"
 
-import { ICON_SIZE_MD } from "src/config"
-
+import { ICON_SIZE_MD } from "@/config"
 import { useSwitchLocale } from "@/hooks/use-locale"
 import { LocaleNameSpace, LocaleType } from "@/locales"
 

@@ -1,6 +1,6 @@
+import type { IDimension } from "@cs-magic/common/schema/ui"
 import { atom } from "jotai"
 
-import { IDimension } from "@cs-magic/common/schema/ui"
 
 /**
  * alert dialog for loading

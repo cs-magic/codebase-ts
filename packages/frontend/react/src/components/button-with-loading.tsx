@@ -1,7 +1,7 @@
-import { LoaderIcon } from "lucide-react"
-import React, { ComponentProps } from "react"
-
 import { Button } from "@cs-magic/shadcn/ui/button"
+import { LoaderIcon } from "lucide-react"
+import React, { type ComponentProps } from "react"
+
 
 export const ButtonWithLoading = ({
   children,

@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import AddTodoForm from '../components/AddTodoForm';
 import TodoList from '../components/TodoList';
-import { Todo } from '../types/todo';
+import type { Todo } from '../types/todo';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);

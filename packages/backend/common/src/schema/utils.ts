@@ -1,4 +1,4 @@
-import { ZodBoolean, ZodEnum, ZodString, z } from "zod"
+import type { ZodBoolean, ZodEnum, ZodString, z } from "zod"
 
 export type LiteralUnionSchema = z.ZodUnion<[z.ZodLiteral<string>, ...z.ZodLiteral<string>[]]>
 export type CompressLineFunction = (line: string, ratio?: number) => string

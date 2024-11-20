@@ -1,13 +1,13 @@
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
-import { omit } from "lodash-es"
-import { UserIcon } from "lucide-react"
-import Image from "next/image"
-import { ComponentPropsWithoutRef, HTMLAttributes } from "react"
-
-import { IUserSummary } from "@cs-magic/common/schema/user.summary"
+import type { IUserSummary } from "@cs-magic/common/schema/user.summary"
 import { upgradeUrl } from "@cs-magic/common/utils/upgrade-url"
 import { cn } from "@cs-magic/shadcn/lib/utils"
 import { Avatar, AvatarFallback } from "@cs-magic/shadcn/ui/avatar"
+import type * as AvatarPrimitive from "@radix-ui/react-avatar"
+import { omit } from "lodash-es"
+import { UserIcon } from "lucide-react"
+import Image from "next/image"
+import type { ComponentPropsWithoutRef, HTMLAttributes } from "react"
+
 
 import { VerticalAspectRatio } from "@/components/aspect-ratio"
 
@@ -44,10 +44,10 @@ export const UserAvatar = ({
           {avatarUrl && (
             <Image
               alt={"user-avatar"}
-              width={120}
-              height={120}
               className={"rounded-full "}
+              height={120}
               src={avatarUrl}
+              width={120}
               {...omit(imageProps, ["src", "width", "height"])}
             />
           )}

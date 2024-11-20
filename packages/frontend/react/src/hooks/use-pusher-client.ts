@@ -1,7 +1,11 @@
+import { initPusherClient } from "@cs-magic/common/pusher/client/init"
+import { pusherServerConfigs } from "@cs-magic/common/pusher/config"
 import { useAtom } from "jotai"
 import { sum } from "lodash-es"
-import PusherJS from "pusher-js"
+import type PusherJS from "pusher-js"
 import { useEffect, useRef } from "react"
+
+
 import {
   pusherClientAtom,
   pusherLastPingTimeAtom,
@@ -9,10 +13,7 @@ import {
   pusherLatenciesAtom,
   pusherLatencyAtom,
   pusherServerIdAtom,
-} from "src/store"
-
-import { initPusherClient } from "@cs-magic/common/pusher/client/init"
-import { pusherServerConfigs } from "@cs-magic/common/pusher/config"
+} from "@/store"
 
 export const usePusherClient = () => {
   const [serverId] = useAtom(pusherServerIdAtom)

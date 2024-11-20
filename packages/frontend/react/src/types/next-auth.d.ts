@@ -1,6 +1,6 @@
 // todo: monorepo not work on packages/common-auth-sms/hooks/use-sms-send-code.ts
-import { DefaultSession } from "next-auth";
-import { DefaultJWT } from "next-auth/jwt";
+import type { DefaultSession } from "next-auth";
+import type { DefaultJWT } from "next-auth/jwt";
 
 export interface IAuth {
   id: string;

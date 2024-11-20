@@ -1,6 +1,6 @@
 // node.js - Node.js 配置
 module.exports = {
-  extends: ["./typescript"],
+  extends: ["./typescript.js"],
   env: {
     node: true,
     browser: false,

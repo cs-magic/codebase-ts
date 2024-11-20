@@ -1,7 +1,7 @@
-import React, { HTMLAttributes, forwardRef } from "react"
 
-import { Orientation } from "@cs-magic/common/schema/ui"
+import type { Orientation } from "@cs-magic/common/schema/ui"
 import { cn } from "@cs-magic/shadcn/lib/utils"
+import React, { type HTMLAttributes, forwardRef } from "react"
 
 export const FlexContainer = forwardRef<
   HTMLDivElement,

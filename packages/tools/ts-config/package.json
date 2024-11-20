@@ -22,5 +22,9 @@
     "configuration"
   ],
   "author": "CS Magic",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ts-patch": "^3.2.1",
+    "typescript-transform-paths": "^3.5.2"
+  }
 }

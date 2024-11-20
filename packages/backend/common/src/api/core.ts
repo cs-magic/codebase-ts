@@ -1,7 +1,7 @@
 /**
  * error handler: Axios & Error handling like a boss 😎 - DEV Community, https://dev.to/mperon/axios-error-handling-like-a-boss-333d
  */
-import axios, { AxiosError, type AxiosResponse, type CreateAxiosDefaults } from "axios"
+import axios, { type AxiosError, type AxiosResponse, type CreateAxiosDefaults } from "axios"
 
 import { logger } from "@/log"
 

@@ -1,6 +1,7 @@
-import { useState } from "react";
-import reactLogo from "../../assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
+import { useState } from "react";
+
+import reactLogo from "../../assets/react.svg";
 import "./App.css";
 
 function App() {
@@ -17,14 +18,14 @@ function App() {
       <h1>Welcome to Tauri!</h1>
 
       <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
+        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
+          <img alt="Vite logo" className="logo vite" src="/vite.svg" />
         </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
+        <a href="https://tauri.app" rel="noreferrer" target="_blank">
+          <img alt="Tauri logo" className="logo tauri" src="/tauri.svg" />
         </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+        <a href="https://reactjs.org" rel="noreferrer" target="_blank">
+          <img alt="React logo" className="logo react" src={reactLogo} />
         </a>
       </div>
 
@@ -39,8 +40,8 @@ function App() {
       >
         <input
           id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
           placeholder="Enter a name..."
+          onChange={(e) => setName(e.currentTarget.value)}
         />
         <button type="submit">Greet</button>
       </form>

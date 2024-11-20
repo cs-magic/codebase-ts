@@ -1,5 +1,5 @@
-import { useTranslation } from "next-i18next"
 import { useRouter } from "next/router"
+import { useTranslation } from "next-i18next"
 
 import { DEFAULT_LOCALE_TYPE, LocaleNameSpace, LocaleType } from "@/locales"
 

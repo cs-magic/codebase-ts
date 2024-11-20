@@ -1,6 +1,15 @@
 // next.js - Next.js 配置
 module.exports = {
-  extends: ["./react", "plugin:@next/next/recommended"],
+  env: {
+    es2022: true,
+    browser: true,
+    node: true,
+  },
+
+  extends: [
+    "plugin:@next/next/recommended",
+      "./react.js",
+  ],
   rules: {
     // Next.js 特定规则
     "@next/next/no-html-link-for-pages": "error",

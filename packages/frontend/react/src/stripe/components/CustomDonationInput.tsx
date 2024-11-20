@@ -24,14 +24,14 @@ export default function CustomDonationInput({
       Custom donation amount ({formatAmountForDisplay(min, currency)}-
       {formatAmountForDisplay(max, currency)}):
       <input
-        type="range"
-        name={name}
-        min={min}
-        max={max}
-        step={step}
-        onChange={onChange}
-        value={value}
         className={className}
+        max={max}
+        min={min}
+        name={name}
+        step={step}
+        type="range"
+        value={value}
+        onChange={onChange}
       />
     </label>
   );

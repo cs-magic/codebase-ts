@@ -1,4 +1,4 @@
-import BackgroundLines from "src/components/背景条纹动画/components/background-lines";
+import BackgroundLines from "@/components/背景条纹动画/components/background-lines"
 
 export default function Home() {
   return (
@@ -10,5 +10,5 @@ export default function Home() {
       </BackgroundLines>
       <hr className="border-neutral-800" />
     </>
-  );
+  )
 }

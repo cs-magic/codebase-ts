@@ -1,9 +1,10 @@
+import { isServer } from "@cs-magic/common/env/is-server"
 import { useAtom } from "jotai"
 import { useCallback, useEffect, useState } from "react"
-import { useDisplayAutoScrollTop } from "src/hooks/use-display-auto-scroll-top"
-import { uiInnerHeight, uiViewportHeight } from "src/store"
 
-import { isServer } from "@cs-magic/common/env/is-server"
+
+import { useDisplayAutoScrollTop } from "@/hooks/use-display-auto-scroll-top"
+import { uiInnerHeight, uiViewportHeight } from "@/store"
 
 /**
  * 充分性：自动调整屏幕高度

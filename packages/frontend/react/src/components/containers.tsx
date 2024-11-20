@@ -1,3 +1,5 @@
+import { DEVICES, type DEVICE_TYPE } from "@cs-magic/common/device"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/shadcn/ui/tooltip"
 import { clsx } from "clsx"
 import { useTranslation } from "next-i18next"
 import React, {
@@ -17,11 +19,9 @@ import React, {
 // } from "react-responsive-masonry";
 import MasonryCSS from "react-masonry-css"
 import ScrollToBottom from "react-scroll-to-bottom"
-import "src/components/containers.css"
 
-import { DEVICES, type DEVICE_TYPE } from "@cs-magic/common/device"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@cs-magic/shadcn/ui/tooltip"
 
+import "@/components/containers.css"
 import { Loading } from "@/components/loading"
 
 export function GridContainer({ children }: PropsWithChildren) {
@@ -127,8 +127,8 @@ export function DeviceContainerInner({
 }) {
   return (
     <div
-      style={{ height: height * ratio, width: width * ratio }}
       className="shrink-0 overflow-hidden"
+      style={{ height: height * ratio, width: width * ratio }}
     >
       <div className="origin-top-left" style={{ transform: `scale(${ratio})` }}>
         {children}
@@ -147,7 +147,7 @@ export function DeviceContainer({
 }) {
   const { w, h, r = 68 } = DEVICES[device]
   return (
-    <DeviceContainerInner width={w} height={h} ratio={ratio}>
+    <DeviceContainerInner height={h} ratio={ratio} width={w}>
       <div className={clsx("device", `device-${device}`)}>
         <div className="device-frame">
           {/* ref: https://codesandbox.io/s/react-phone-mockup-slider-wsdy5?file=/src/App.js:1232-1296 */}
@@ -172,9 +172,9 @@ export function NormalScrollContainer({ children }: PropsWithChildren) {
 export function AutoScrollContainer({ children }: PropsWithChildren) {
   return (
     <ScrollToBottom
-      debounce={50}
       checkInterval={50}
       className="w-full h-full"
+      debounce={50}
       initialScrollBehavior="auto"
     >
       {children}

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { Activity, Cpu, Zap, Wifi, Globe, Database } from "lucide-react";
+import React, { useState, useEffect } from "react";
+
 import { Progress } from "@/components/ui/progress";
 
 // import "./app/App.css";
@@ -32,7 +33,7 @@ const SystemDashboard = () => {
 
   const MetricCard = ({ Icon, title, value, unit }) => (
     <div className="bg-gray-800 p-4 rounded-lg flex items-center space-x-4">
-      <Icon size={24} className="text-cyan-400" />
+      <Icon className="text-cyan-400" size={24} />
       <div>
         <h3 className="text-sm text-gray-400">{title}</h3>
         <p className="text-xl font-bold">
@@ -68,37 +69,37 @@ const SystemDashboard = () => {
         <MetricCard
           Icon={Cpu}
           title="CPU Usage"
-          value={systemInfo.cpu_usage}
           unit="%"
+          value={systemInfo.cpu_usage}
         />
         <MetricCard
           Icon={Database}
           title="Memory Usage"
-          value={systemInfo.memory_usage}
           unit="%"
+          value={systemInfo.memory_usage}
         />
         <MetricCard
           Icon={Globe}
           title="Disk Usage"
-          value={systemInfo.disk_usage}
           unit="%"
+          value={systemInfo.disk_usage}
         />
 
         <MetricCard
           Icon={Activity}
           title="Network Speed"
-          value={systemInfo.network_speed}
           unit="Mbps"
+          value={systemInfo.network_speed}
         />
         <MetricCard
           Icon={Zap}
           title="Battery Level"
-          value={systemInfo.battery_level}
           unit="%"
+          value={systemInfo.battery_level}
         />
         <div className="bg-gray-800 p-4 rounded-lg flex flex-col justify-center">
           <h3 className="text-sm text-gray-400 mb-2">System Health</h3>
-          <Progress value={100 - systemInfo.cpu_usage} className="h-2" />
+          <Progress className="h-2" value={100 - systemInfo.cpu_usage} />
           <p className="text-right text-sm mt-1">
             {(100 - systemInfo.cpu_usage).toFixed(2)}%
           </p>

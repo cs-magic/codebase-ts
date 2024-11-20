@@ -1,9 +1,9 @@
 "use client"
 
-import React, { HTMLAttributes } from "react"
+import { cn } from "@cs-magic/shadcn/lib/utils"
+import React, { type HTMLAttributes } from "react"
 import { useMeasure } from "react-use"
 
-import { cn } from "@cs-magic/shadcn/lib/utils"
 
 export const VerticalAspectRatio = ({
   ratio,
@@ -15,9 +15,9 @@ export const VerticalAspectRatio = ({
 
   return (
     <div
+      ref={ref}
       className={cn("h-full", className)}
       style={{ width: height / ratio, ...style }}
-      ref={ref}
       {...props}
     />
   )

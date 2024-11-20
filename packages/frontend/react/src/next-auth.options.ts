@@ -1,16 +1,17 @@
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { CallbacksOptions, type NextAuthOptions } from "next-auth"
-import { Adapter } from "next-auth/adapters"
-import DiscordProvider from "next-auth/providers/discord"
-import GoogleProvider from "next-auth/providers/google"
-import { Provider } from "next-auth/providers/index"
-import { ProfileUpdateProvider } from "src/next-auth-providers/profile-update"
-import { WechatProvider } from "src/next-auth-providers/wechat"
-
 import { tokenExpireSeconds } from "@cs-magic/common/auth/config"
-import { IWechatProfile } from "@cs-magic/common/auth/providers/wechat/schema"
+import type { IWechatProfile } from "@cs-magic/common/auth/providers/wechat/schema"
 import { prisma } from "@cs-magic/common/db/prisma"
 import { env } from "@cs-magic/common/env/get-env"
+import type { CallbacksOptions, NextAuthOptions } from "next-auth"
+import type { Adapter } from "next-auth/adapters"
+import DiscordProvider from "next-auth/providers/discord"
+import GoogleProvider from "next-auth/providers/google"
+import type { Provider } from "next-auth/providers/index"
+
+
+import { ProfileUpdateProvider } from "@/next-auth-providers/profile-update"
+import { WechatProvider } from "@/next-auth-providers/wechat"
 
 const providers: Provider[] = [
   GoogleProvider({

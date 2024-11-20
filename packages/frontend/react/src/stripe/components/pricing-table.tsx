@@ -1,6 +1,6 @@
 import Head from "next/head";
-import React from "react";
 import { useSession } from "next-auth/react";
+import React from "react";
 
 import {
   STRIPE_PRICING_TABLE_ID,
@@ -50,10 +50,10 @@ function StripePricingTable() {
       </Head>
 
       <stripe-pricing-table
-        pricing-table-id={STRIPE_PRICING_TABLE_ID}
-        publishable-key={STRIPE_PUBLISHABLE_KEY}
         client-reference-id={clientReferenceId}
         customer-email={user.email}
+        pricing-table-id={STRIPE_PRICING_TABLE_ID}
+        publishable-key={STRIPE_PUBLISHABLE_KEY}
       />
     </>
   );

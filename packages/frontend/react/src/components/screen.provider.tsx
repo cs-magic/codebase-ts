@@ -1,7 +1,7 @@
 "use client";
 
 import { useSetAtom } from "jotai";
-import React, { PropsWithChildren, useEffect } from "react";
+import React, { type PropsWithChildren, useEffect } from "react";
 import { useMeasure } from "react-use";
 
 import { uiScreenAtom } from "@/store/ui.atom";
@@ -19,7 +19,7 @@ export const ScreenProvider = ({ children }: PropsWithChildren) => {
   // return children;
 
   return (
-    <div id={"screen-measure"} className={"w-full h-full"} ref={ref}>
+    <div ref={ref} className={"w-full h-full"} id={"screen-measure"}>
       {children}
     </div>
   );

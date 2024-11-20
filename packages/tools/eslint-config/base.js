@@ -1,5 +1,13 @@
 // base.js - 基础 JavaScript 规则
 module.exports = {
+  settings: {
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+        // project: "./tsconfig.json",
+      },
+    },
+  },
   env: {
     es2022: true,
     node: true,
@@ -16,6 +24,13 @@ module.exports = {
       "error",
       {
         groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "pathGroups": [
+          {
+            "pattern": "contentlayer/generated",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
         "newlines-between": "always",
         alphabetize: { order: "asc" },
       },

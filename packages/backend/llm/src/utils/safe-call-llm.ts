@@ -1,12 +1,12 @@
-import { HttpsProxyAgent } from "https-proxy-agent"
-import OpenAI from "openai"
-import { v4 } from "uuid"
 
 import { SEPARATOR_BOX } from "@cs-magic/common/const"
 import { env } from "@cs-magic/common/env/get-env"
 import logger from "@cs-magic/common/log/index"
 import { formatError } from "@cs-magic/common/utils/format-error"
 import { formatString } from "@cs-magic/common/utils/format-string"
+import { HttpsProxyAgent } from "https-proxy-agent"
+import type OpenAI from "openai"
+import { v4 } from "uuid"
 
 import {
   type ILlmQueryConfig,

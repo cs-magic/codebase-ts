@@ -1,6 +1,6 @@
-import OpenAI from "openai"
+import type { ILlmMessage } from "@cs-magic/common/schema/message"
+import type OpenAI from "openai"
 
-import { ILlmMessage } from "@cs-magic/common/schema/message"
 
 import type { LlmModelType } from "@/schema/llm.models"
 

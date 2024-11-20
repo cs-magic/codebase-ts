@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "exports": {
+    ".": "./dist/index.js",
     "./*": "./dist/*.js"
   },
   "scripts": {
@@ -23,6 +24,8 @@
     "qrcode.react": "^4.0.1"
   },
   "devDependencies": {
-    "npm-run-all": "*"
+    "npm-run-all": "*",
+    "ts-patch": "^3.2.1",
+    "typescript-transform-paths": "^3.5.2"
   }
 }

@@ -1,13 +1,13 @@
 "use client"
 
-import React, { HTMLAttributes, LegacyRef } from "react"
-import Markdown, { ExtraProps } from "react-markdown"
+import { cn } from "@cs-magic/shadcn/lib/utils"
+import React, { type HTMLAttributes, type LegacyRef } from "react"
+import Markdown, { type ExtraProps } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
 
-import { cn } from "@cs-magic/shadcn/lib/utils"
 
 // import styles from "./markdown-comp.module.css"
 // import "katex/katex.min.css";
@@ -25,8 +25,6 @@ export const MarkdownComp = ({
     <Markdown
       {...props}
       className={cn(className)}
-      remarkPlugins={[remarkMath]}
-      rehypePlugins={[rehypeKatex]}
       components={{
         h1: props => {
           // console.log("h1: ", { props })
@@ -64,15 +62,17 @@ export const MarkdownComp = ({
               ref={ref as LegacyRef<SyntaxHighlighter>}
               {...rest}
               PreTag="div"
+              className={"w-full"}
               language={language}
               style={darcula}
-              className={"w-full"}
             >
               {String(children).replace(/\n$/, "")}
             </SyntaxHighlighter>
           )
         },
       }}
+      rehypePlugins={[rehypeKatex]}
+      remarkPlugins={[remarkMath]}
     >
       {children}
     </Markdown>

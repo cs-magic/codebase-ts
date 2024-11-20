@@ -79,3 +79,6 @@
 [submodule "cases/hand-future-frontend"]
 	path = cases/xieshou-frontend
 	url = git@github.com:mark-freelance/hand-future-frontend.git
+[submodule "apps/docs"]
+	path = apps/docs
+	url = git@github.com:MarkShawn2020/nextra-docs.git

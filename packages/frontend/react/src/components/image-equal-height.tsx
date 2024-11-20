@@ -1,7 +1,7 @@
-import Image from "next/image"
-import React, { ComponentProps } from "react"
-
 import { cn } from "@cs-magic/shadcn/lib/utils"
+import Image from "next/image"
+import React, { type ComponentProps } from "react"
+
 
 export const ImageEqualHeight = ({
   src,
@@ -12,11 +12,11 @@ export const ImageEqualHeight = ({
 }: Omit<ComponentProps<typeof Image>, "alt"> & { alt?: string }) => {
   return (
     <Image
-      src={src}
       alt={alt}
       className={cn("h-full w-auto", className)}
-      width={width}
       height={height}
+      src={src}
+      width={width}
     />
   )
 }

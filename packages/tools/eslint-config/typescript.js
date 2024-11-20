@@ -2,7 +2,11 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['./base', 'plugin:import/typescript', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/recommended',
+    './base.js',
+  ],
   settings: {
     'import/resolver': {
       typescript: true,

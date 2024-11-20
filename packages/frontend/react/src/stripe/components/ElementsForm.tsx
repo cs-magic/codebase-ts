@@ -1,5 +1,14 @@
 "use client";
 
+import {
+  Elements,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import type { StripeError } from "@stripe/stripe-js";
+import * as React from "react";
+
 import CustomDonationInput from "@/stripe/components/CustomDonationInput";
 import StripeTestCards from "@/stripe/components/StripeTestCards";
 import {
@@ -11,14 +20,6 @@ import {
 import getStripe from "@/stripe/get-stripejs";
 import { createPaymentIntent } from "@/stripe/stripe.actions";
 import { formatAmountForDisplay } from "@/stripe/utils";
-import {
-  Elements,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
-import type { StripeError } from "@stripe/stripe-js";
-import * as React from "react";
 
 function CheckoutForm(): JSX.Element {
   const [input, setInput] = React.useState<{
@@ -127,12 +128,12 @@ function CheckoutForm(): JSX.Element {
       <form onSubmit={handleSubmit}>
         <CustomDonationInput
           className="elements-style"
-          name="customDonation"
-          value={input.customDonation}
-          min={MIN_AMOUNT}
-          max={MAX_AMOUNT}
-          step={AMOUNT_STEP}
           currency={CURRENCY}
+          max={MAX_AMOUNT}
+          min={MIN_AMOUNT}
+          name="customDonation"
+          step={AMOUNT_STEP}
+          value={input.customDonation}
           onChange={handleInputChange}
         />
         <StripeTestCards />
@@ -140,12 +141,12 @@ function CheckoutForm(): JSX.Element {
           <legend>Your payment details:</legend>
           {paymentType === "card" ? (
             <input
-              placeholder="Cardholder name"
-              className="elements-style"
-              type="Text"
-              name="cardholderName"
-              onChange={handleInputChange}
               required
+              className="elements-style"
+              name="cardholderName"
+              placeholder="Cardholder name"
+              type="Text"
+              onChange={handleInputChange}
             />
           ) : null}
           <div className="FormRow elements-style">
@@ -158,11 +159,11 @@ function CheckoutForm(): JSX.Element {
         </fieldset>
         <button
           className="elements-style-background"
-          type="submit"
           disabled={
             !["initial", "succeeded", "error"].includes(payment.status) ||
             !stripe
           }
+          type="submit"
         >
           Donate {formatAmountForDisplay(input.customDonation, CURRENCY)}
         </button>
@@ -175,7 +176,6 @@ function CheckoutForm(): JSX.Element {
 export default function ElementsForm(): JSX.Element {
   return (
     <Elements
-      stripe={getStripe()}
       options={{
         appearance: {
           variables: {
@@ -187,6 +187,7 @@ export default function ElementsForm(): JSX.Element {
         mode: "payment",
         amount: Math.round(MAX_AMOUNT / AMOUNT_STEP),
       }}
+      stripe={getStripe()}
     >
       <CheckoutForm />
     </Elements>

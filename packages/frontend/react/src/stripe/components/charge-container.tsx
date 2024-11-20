@@ -1,6 +1,6 @@
+import { Dialog, DialogContent, DialogTrigger } from "@cs-magic/shadcn/ui/dialog"
 import React from "react"
 
-import { Dialog, DialogContent, DialogTrigger } from "@cs-magic/shadcn/ui/dialog"
 
 import StripePricingTable from "@/stripe/components/pricing-table"
 

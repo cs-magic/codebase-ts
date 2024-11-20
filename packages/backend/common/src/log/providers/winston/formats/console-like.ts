@@ -1,5 +1,6 @@
-import { SPLAT } from "triple-beam"
 import { inspect } from "util"
+
+import { SPLAT } from "triple-beam"
 import { format } from "winston"
 
 /**

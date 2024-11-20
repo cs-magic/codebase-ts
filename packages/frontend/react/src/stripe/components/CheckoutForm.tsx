@@ -1,11 +1,12 @@
 "use client";
 
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from "@/stripe/config";
-import { AMOUNT_STEP } from "@/stripe/config";
-import { formatAmountForDisplay } from "@/stripe/utils";
-import CustomDonationInput from "@/stripe/components/CustomDonationInput";
-import { createCheckoutSession } from "@/stripe/stripe.actions";
 import React, { useState } from "react";
+
+import CustomDonationInput from "@/stripe/components/CustomDonationInput";
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT , AMOUNT_STEP } from "@/stripe/config";
+import { createCheckoutSession } from "@/stripe/stripe.actions";
+import { formatAmountForDisplay } from "@/stripe/utils";
+
 
 export default function CheckoutForm(): JSX.Element {
   const [loading] = useState<boolean>(false);
@@ -27,19 +28,19 @@ export default function CheckoutForm(): JSX.Element {
     <form action={createCheckoutSession}>
       <CustomDonationInput
         className="checkout-style"
-        name="customDonation"
-        min={MIN_AMOUNT}
-        max={MAX_AMOUNT}
-        step={AMOUNT_STEP}
         currency={CURRENCY}
-        onChange={handleInputChange}
+        max={MAX_AMOUNT}
+        min={MIN_AMOUNT}
+        name="customDonation"
+        step={AMOUNT_STEP}
         value={input.customDonation}
+        onChange={handleInputChange}
       />
       {/* <StripeTestCards /> */}
       <button
         className="checkout-style-background"
-        type="submit"
         disabled={loading}
+        type="submit"
       >
         Donate {formatAmountForDisplay(input.customDonation, CURRENCY)}
       </button>

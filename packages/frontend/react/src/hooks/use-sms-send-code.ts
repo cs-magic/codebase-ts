@@ -1,13 +1,13 @@
 "use client"
 
+import { $sendSms } from "@cs-magic/common/auth/providers/sms/actions"
+import { $sendSmsViaAli } from "@cs-magic/common/auth/providers/sms/providers/ali"
+import { $sendSmsViaTencent } from "@cs-magic/common/auth/providers/sms/providers/tencent"
 import { useAtom, useSetAtom } from "jotai"
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import { toast } from "sonner"
 
-import { $sendSms } from "@cs-magic/common/auth/providers/sms/actions"
-import { $sendSmsViaAli } from "@cs-magic/common/auth/providers/sms/providers/ali"
-import { $sendSmsViaTencent } from "@cs-magic/common/auth/providers/sms/providers/tencent"
 
 import {
   smsCodeCurCountdownSecondsAtom,

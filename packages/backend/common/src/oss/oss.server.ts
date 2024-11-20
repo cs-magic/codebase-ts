@@ -2,7 +2,7 @@
 
 import OSS from "ali-oss"
 
-import { IApiResult, api } from "@/api"
+import { type IApiResult, api } from "@/api"
 import { env } from "@/env"
 import { OSS_BUCKET_NAME, OSS_REGION } from "@/oss/const"
 

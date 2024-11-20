@@ -1,12 +1,12 @@
 "use client"
 
+import { AlertDialog, AlertDialogContent } from "@cs-magic/shadcn/ui/alert-dialog"
 import { useAtom } from "jotai"
 import { Ellipsis, LoaderIcon } from "lucide-react"
 import React from "react"
-import { FlexContainer } from "src/components/flex-container"
 
-import { AlertDialog, AlertDialogContent } from "@cs-magic/shadcn/ui/alert-dialog"
 
+import { FlexContainer } from "@/components/flex-container"
 import { uiLoadingAlertDialogAtom } from "@/store/ui.atom"
 
 export const Loading = ({ type = "spin" }: { type?: "spin" | "dots" }) => (

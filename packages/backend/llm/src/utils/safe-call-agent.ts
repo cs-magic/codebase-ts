@@ -1,5 +1,5 @@
 import logger from "@cs-magic/common/log/index"
-import { ILlmMessage } from "@cs-magic/common/schema/message"
+import type { ILlmMessage } from "@cs-magic/common/schema/message"
 import { compressContent } from "@cs-magic/common/utils/compress-content"
 
 import type { ILlmQueryConfig } from "@/schema/llm.api"

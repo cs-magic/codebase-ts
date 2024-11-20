@@ -1,4 +1,4 @@
-import { HTMLElement } from "node-html-parser"
+import type { HTMLElement } from "node-html-parser"
 
 export const parseMetaFromHtml = (
   html: HTMLElement,

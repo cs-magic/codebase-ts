@@ -1,6 +1,6 @@
 import { redis } from "@cs-magic/common/db/redis"
 import logger from "@cs-magic/common/log/index"
-import { ITransClient, ITransEvent } from "@cs-magic/common/sse/schema"
+import type { ITransClient, ITransEvent } from "@cs-magic/common/sse/schema"
 
 import type { ILLMManagerTraditional } from "@/@deprecated/providers/llm-sse/schema"
 

@@ -1,10 +1,10 @@
 import { api } from "@/api"
 import { WECHAT_API_URL, WECHAT_AUTH_CALLBACK_URL } from "@/auth/providers/wechat/config"
 import {
-  IWechatAdaptedToken,
-  IWechatProfile,
-  IWechatRefreshedToken,
-  IWechatToken,
+  type IWechatAdaptedToken,
+  type IWechatProfile,
+  type IWechatRefreshedToken,
+  type IWechatToken,
   WechatScopeType,
   isWechatError,
 } from "@/auth/providers/wechat/schema"

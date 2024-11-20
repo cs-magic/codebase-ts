@@ -1,7 +1,7 @@
 import { sha1 } from "js-sha1"
 
 import { api } from "@/api"
-import { IWechatSDKToken, fetchWechatApi } from "@/auth"
+import { type IWechatSDKToken, fetchWechatApi } from "@/auth"
 import { env } from "@/env"
 import { WECHAT_NONCE_STR, WECHAT_TIMESTAMP } from "@/wechat/notify/config"
 

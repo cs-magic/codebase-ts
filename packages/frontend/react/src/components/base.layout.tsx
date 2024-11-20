@@ -1,6 +1,6 @@
+import { Toaster } from "@cs-magic/shadcn/ui/sonner"
 import React from "react"
 
-import { Toaster } from "@cs-magic/shadcn/ui/sonner"
 
 import { GlobalProvider } from "@/components/global.provider"
 import { LoadingAlertDialog } from "@/components/loading"
@@ -12,7 +12,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
     <GlobalProvider>
       {children}
 
-      <Toaster richColors position={"top-right"} duration={3000} closeButton={false} />
+      <Toaster richColors closeButton={false} duration={3000} position={"top-right"} />
 
       <LoadingAlertDialog />
 

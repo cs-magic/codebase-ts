@@ -1,4 +1,4 @@
-import { ILlmMessage } from "@cs-magic/common/schema/message"
+import type { ILlmMessage } from "@cs-magic/common/schema/message"
 import { formatString } from "@cs-magic/common/utils/format-string"
 
 export const formatLlmMessage = (m: ILlmMessage, maxLength = 40) =>

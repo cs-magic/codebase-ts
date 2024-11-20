@@ -1,4 +1,4 @@
-import { StripeSubscriptionLevel, Prisma } from "@prisma/client";
+import type { StripeSubscriptionLevel, Prisma } from "@prisma/client";
 
 export const subscriptionLevel2Unit: Record<StripeSubscriptionLevel, number> = {
   basic: 1,

@@ -1,9 +1,5 @@
 "use client"
 
-import { Atom, PrimitiveAtom, useAtom } from "jotai"
-import React from "react"
-import { LabelLine } from "src/components/label-line"
-
 import {
   Select,
   SelectContent,
@@ -12,6 +8,11 @@ import {
   SelectValue,
 } from "@cs-magic/shadcn/ui/select"
 import { Switch } from "@cs-magic/shadcn/ui/switch"
+import { type Atom, type PrimitiveAtom, useAtom } from "jotai"
+import React from "react"
+
+
+import { LabelLine } from "@/components/label-line"
 
 /**
  * @param atom
@@ -44,7 +45,7 @@ export const AtomSelector = <T extends string>({
   atom: Atom<T>
 }) => {
   const [v, setV] = useAtom(atom)
-  return <BaseSelector v={v} setV={setV} name={name} vs={vs} />
+  return <BaseSelector name={name} setV={setV} v={v} vs={vs} />
 }
 
 export const BaseSelector = <T extends string>({
@@ -67,7 +68,7 @@ export const BaseSelector = <T extends string>({
 
         <SelectContent>
           {vs.map(v => (
-            <SelectItem value={v} key={v}>
+            <SelectItem key={v} value={v}>
               {v}
             </SelectItem>
           ))}

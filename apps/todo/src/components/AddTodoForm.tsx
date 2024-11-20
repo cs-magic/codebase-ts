@@ -16,15 +16,15 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form className="mb-4" onSubmit={handleSubmit}>
       <input
+        className="border p-2 mr-2"
+        placeholder="Add a new todo"
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new todo"
-        className="border p-2 mr-2"
       />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+      <button className="bg-blue-500 text-white p-2 rounded" type="submit">
         Add Todo
       </button>
     </form>

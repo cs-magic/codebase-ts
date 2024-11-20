@@ -1,8 +1,8 @@
+import type { Nullable } from "@cs-magic/common/schema/base"
+import type { ISendSms, ISmsSignIn, SmsProviderType, SmsStage } from "@cs-magic/common/sms.schema"
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 
-import { Nullable } from "@cs-magic/common/schema/base"
-import { ISendSms, ISmsSignIn, SmsProviderType, SmsStage } from "@cs-magic/common/sms.schema"
 
 //////////////////////////////
 // base

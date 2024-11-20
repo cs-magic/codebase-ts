@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "@cs-magic/ts-config/base"
-  ],
-  "include": [
-    "*.js"
-  ]
-}
