@@ -1,20 +1,18 @@
 {
   "name": "@cs-magic/ts-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared TypeScript configurations for CS Magic projects",
   "publishConfig": {
     "access": "public"
   },
   "exports": {
-    ".": "./tsconfig.base.json",
-    "./base": "./tsconfig.base.json",
-    "./node": "./tsconfig.node.json",
-    "./dom": "./tsconfig.dom.json"
+    ".": "./src/tsconfig.base.json",
+    "./base": "./src/tsconfig.base.json",
+    "./node": "./src/tsconfig.node.json",
+    "./dom": "./src/tsconfig.dom.json"
   },
   "files": [
-    "tsconfig.base.json",
-    "tsconfig.dom.json",
-    "tsconfig.node.json"
+    "src"
   ],
   "keywords": [
     "typescript",
