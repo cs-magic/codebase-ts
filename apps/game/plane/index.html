@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星际战机</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="outer-container">
+        <div id="game-container">
+            <canvas id="game-canvas" tabindex="0"></canvas>
+            <div id="hud">
+                <div id="health-bar" class="progress-bar">
+                    <div class="progress-fill"></div>
+                    <span class="progress-text">生命值: <span id="health-value">100</span></span>
+                </div>
+                <div id="charge-bar" class="progress-bar">
+                    <div class="progress-fill"></div>
+                    <span class="progress-text">蓄力值: <span id="charge-value">0</span></span>
+                </div>
+            </div>
+            <div id="score-display">
+                <span id="score-value">0</span>
+            </div>
+            <div id="game-over-screen" class="screen" style="display: none;">
+                <h2>游戏结束</h2>
+                <p>最终得分: <span id="final-score"></span></p>
+            </div>
+        </div>
+        <div id="control-panel">
+            <button id="gameButton" class="control-button">开始游戏</button>
+            <button id="autoPlayToggle" class="control-button" style="display: none;">自动模式: 关闭</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
