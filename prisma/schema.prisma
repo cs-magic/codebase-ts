@@ -584,6 +584,8 @@ model EvalApp {
   // Optional
   // Defaults to 0
   // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+  //
+  // We generally recommend altering this or temperature but not both.
   frequencyPenalty Float? @default(0)
 
   // number or null
@@ -1106,4 +1108,16 @@ model SocialPlatformPost {
   publishTime DateTime?
 
   @@schema("social-platform")
+}
+
+model Generation {
+  id        String   @id @default(cuid())
+  userId    String
+  prompt    String
+  result    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@schema("llm")
 }
