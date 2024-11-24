@@ -16,7 +16,7 @@
     "access": "public"
   },
   "files": [
-    "../config/src/eslint"
+    "src"
   ],
   "peerDependencies": {
     "eslint": ">=8.0.0",

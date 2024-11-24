@@ -1,0 +1,1 @@
+- clerk with next-intl: [Next.js: clerkMiddleware() | Next.js](https://clerk.com/docs/references/nextjs/clerk-middleware#combine-middleware)

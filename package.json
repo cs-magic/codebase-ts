@@ -21,7 +21,7 @@
     "tests/*"
   ],
   "scripts": {
-    "prepare": "ts-patch install -s",
+    "prepare": "ts-patch install",
     "postinstall": "prisma generate",
     "init-app": "git submodule update --init --progress",
     "run-app": "yarn workspace @cs-magic"
