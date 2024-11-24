@@ -2783,12 +2783,18 @@ __metadata:
   resolution: "@cs-magic/badminton-reservation@workspace:apps/badminton-reservation"
   dependencies:
     "@cs-magic/shadcn": "workspace:^"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     autoprefixer: "npm:^10.4.20"
+    copyfiles: "npm:^2.4.1"
+    jest: "npm:^29.7.0"
     next: "npm:^14.2.15"
     npm-run-all: "npm:^4.1.5"
     postcss: "npm:^8.4.47"
     react-bmapgl: "npm:^0.2.28"
     tailwindcss: "npm:^3.4.13"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
   languageName: unknown
   linkType: soft
 
@@ -2812,6 +2818,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@cs-magic/common-frontend@workspace:packages/frontend/common"
   dependencies:
+    "@cs-magic/common": "workspace:^"
+    "@cs-magic/eslint-config": "workspace:^"
+    "@cs-magic/llm": "workspace:^"
+    "@cs-magic/prettier-config": "workspace:^"
+    "@cs-magic/tailwindcss-config": "workspace:^"
+    "@cs-magic/ts-config": "workspace:^"
+    "@types/copyfiles": "npm:^2"
+    copyfiles: "npm:^2.4.1"
     html2canvas: "npm:^1.4.1"
     modern-screenshot: "npm:^4.4.39"
     npm-run-all: "npm:*"
@@ -3018,7 +3032,14 @@ __metadata:
   resolution: "@cs-magic/exts_chrome_chatbot-exporter@workspace:apps/exts/chrome/chatbot-exporter"
   dependencies:
     "@svgr/webpack": "npm:^8.1.0"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
+    copyfiles: "npm:^2.4.1"
+    jest: "npm:^29.7.0"
+    npm-run-all: "npm:^4.1.5"
     react-draggable: "npm:^4.4.6"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
     webpack: "npm:^5.94.0"
   languageName: unknown
   linkType: soft
@@ -3030,11 +3051,18 @@ __metadata:
     "@cs-magic/common-frontend": "workspace:^"
     "@cs-magic/shadcn": "workspace:^"
     "@types/chrome": "npm:^0.0.270"
+    "@types/copyfiles": "npm:^2"
     "@types/html2canvas": "npm:^1.0.0"
+    "@types/jest": "npm:^29.5.14"
+    copyfiles: "npm:^2.4.1"
     html2canvas: "npm:^1.4.1"
+    jest: "npm:^29.7.0"
     jszip: "npm:^3.10.1"
     modern-screenshot: "npm:^4.4.39"
+    npm-run-all: "npm:^4.1.5"
     ts-loader: "npm:^9.5.1"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
     webpack: "npm:^5.94.0"
   languageName: unknown
   linkType: soft
@@ -3146,7 +3174,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cs-magic/llm@workspace:packages/backend/llm":
+"@cs-magic/llm@workspace:^, @cs-magic/llm@workspace:packages/backend/llm":
   version: 0.0.0-use.local
   resolution: "@cs-magic/llm@workspace:packages/backend/llm"
   dependencies:
@@ -3161,12 +3189,14 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/js-yaml": "npm:^4.0.9"
     copyfiles: "npm:^2.4.1"
+    html2canvas: "npm:^1.4.1"
     https-proxy-agent: "npm:^7.0.5"
     jest: "npm:^29.7.0"
     js-md5: "npm:^0.8.3"
     js-yaml: "npm:^4.1.0"
-    openai: "npm:^4.52.7"
-    tiktoken: "npm:^1.0.15"
+    modern-screenshot: "npm:^4.5.4"
+    openai: "npm:^4.73.0"
+    tiktoken: "npm:^1.0.17"
     ts-jest: "npm:^29.2.5"
     ts-patch: "npm:^3.2.1"
     typescript-transform-paths: "npm:^3.5.2"
@@ -3201,9 +3231,11 @@ __metadata:
     "@trpc/next": "npm:^10.37.1"
     "@trpc/react-query": "npm:^10.37.1"
     "@trpc/server": "npm:^10.37.1"
+    "@types/copyfiles": "npm:^2"
     "@types/d3": "npm:^7.4.3"
     "@types/eslint": "npm:^8.44.2"
     "@types/eventsource": "npm:^1.1.15"
+    "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.14.201"
     "@types/node": "npm:20.10.4"
     "@types/prop-types": "npm:^15"
@@ -3216,6 +3248,7 @@ __metadata:
     autoprefixer: "npm:^10.4.14"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.0.0"
+    copyfiles: "npm:^2.4.1"
     d3-force: "npm:^3.0.0"
     dagre: "npm:^0.8.5"
     eslint: "npm:^8.47.0"
@@ -3225,12 +3258,14 @@ __metadata:
     gojs: "npm:^2.3.11"
     gojs-react: "npm:^1.1.2"
     immer: "npm:^10.0.3"
+    jest: "npm:^29.7.0"
     lodash: "npm:^4.17.21"
     lucide-react: "npm:*"
     monaco-editor: "npm:^0.51.0"
     next: "npm:*"
     next-auth: "npm:^4.23.0"
     next-themes: "npm:^0.2.1"
+    npm-run-all: "npm:^4.1.5"
     openai: "npm:4.12.1"
     postcss: "npm:^8.4.27"
     prettier: "npm:*"
@@ -3252,9 +3287,11 @@ __metadata:
     tailwind-merge: "npm:^2.0.0"
     tailwindcss: "npm:^3.3.3"
     tailwindcss-animate: "npm:^1.0.7"
+    ts-patch: "npm:^3.2.1"
     ts-toolbelt: "npm:^9.6.0"
     type-fest: "npm:^4.7.1"
     typescript: "npm:*"
+    typescript-transform-paths: "npm:^3.5.2"
     uuid: "npm:^9.0.1"
     vue: "npm:^3.4.38"
     zod: "npm:*"
@@ -3317,11 +3354,15 @@ __metadata:
   resolution: "@cs-magic/playground@workspace:apps/playground"
   dependencies:
     "@tanstack/react-query": "npm:^5.60.5"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
+    copyfiles: "npm:^2.4.1"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.14"
+    jest: "npm:^29.7.0"
     lucide-react: "npm:^0.447.0"
     next: "npm:14.2.14"
     npm-run-all: "npm:^4.1.5"
@@ -3329,7 +3370,9 @@ __metadata:
     react: "npm:^18"
     react-dom: "npm:^18"
     tailwindcss: "npm:^3.4.1"
+    ts-patch: "npm:^3.2.1"
     typescript: "npm:^5"
+    typescript-transform-paths: "npm:^3.5.2"
   languageName: unknown
   linkType: soft
 
@@ -3461,8 +3504,15 @@ __metadata:
   resolution: "@cs-magic/prettier-config@workspace:packages/tools/prettier-config"
   dependencies:
     "@cs-magic/ts-config": "workspace:^"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
+    copyfiles: "npm:^2.4.1"
+    jest: "npm:^29.7.0"
+    npm-run-all: "npm:^4.1.5"
     prettier-plugin-organize-imports: "npm:^3.0.0"
     prettier-plugin-tailwindcss: "npm:^0.5.0"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
   peerDependencies:
     prettier: ">=3.0.0"
   languageName: unknown
@@ -3501,6 +3551,7 @@ __metadata:
     "@tabler/icons-react": "npm:^3.12.0"
     "@types/copyfiles": "npm:^2"
     "@types/eslint": "npm:*"
+    "@types/jest": "npm:^29.5.14"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-responsive": "npm:^8.0.8"
@@ -3514,6 +3565,7 @@ __metadata:
     eslint: "npm:*"
     eslint-config-next: "npm:*"
     i18next: "npm:*"
+    jest: "npm:^29.7.0"
     jotai: "npm:*"
     lucide-react: "npm:*"
     masonic: "npm:^4.0.1"
@@ -3587,14 +3639,19 @@ __metadata:
     "@radix-ui/react-toggle": "npm:^1.1.0"
     "@radix-ui/react-toggle-group": "npm:^1.1.0"
     "@radix-ui/react-tooltip": "npm:^1.1.2"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
     cmdk: "npm:1.0.0"
+    copyfiles: "npm:^2.4.1"
     date-fns: "npm:^3.6.0"
     embla-carousel-react: "npm:^8.2.0"
     input-otp: "npm:^1.2.4"
+    jest: "npm:^29.7.0"
     lucide-react: "npm:*"
     next-themes: "npm:*"
+    npm-run-all: "npm:^4.1.5"
     react: "npm:*"
     react-day-picker: "npm:8.10.1"
     react-dom: "npm:*"
@@ -3620,8 +3677,14 @@ __metadata:
     "@tailwindcss/container-queries": "npm:^0.1.0"
     "@tailwindcss/forms": "npm:^0.5.0"
     "@tailwindcss/typography": "npm:^0.5.0"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
+    copyfiles: "npm:^2.4.1"
+    jest: "npm:^29.7.0"
     npm-run-all: "npm:^4.1.5"
     tailwindcss-animate: "npm:^1.0.0"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
   peerDependencies:
     tailwindcss: ^3.0.0
   languageName: unknown
@@ -3646,6 +3709,8 @@ __metadata:
     "@radix-ui/react-slot": "npm:^1.0.2"
     "@tailwindcss/forms": "npm:^0.5.6"
     "@tailwindcss/typography": "npm:^0.5.10"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     "@types/jsdom": "npm:^21.1.7"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/node": "npm:*"
@@ -3660,9 +3725,11 @@ __metadata:
     autoprefixer: "npm:10.4.15"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.0.0"
+    copyfiles: "npm:^2.4.1"
     country-flag-icons: "npm:^1.5.13"
     eslint: "npm:^9.15.0"
     eslint-config-next: "npm:*"
+    jest: "npm:^29.7.0"
     jotai: "npm:*"
     jsdom: "npm:^25.0.1"
     lodash-es: "npm:^4.17.21"
@@ -3687,8 +3754,10 @@ __metadata:
     tailwindcss: "npm:3.3.3"
     tailwindcss-animate: "npm:^1.0.7"
     tailwindcss-debug-screens: "npm:^2.2.1"
+    ts-patch: "npm:^3.2.1"
     tsx: "npm:^4.19.2"
     typescript: "npm:*"
+    typescript-transform-paths: "npm:^3.5.2"
     uuid: "npm:^10.0.0"
     zod: "npm:^3.22.2"
   languageName: unknown
@@ -3713,9 +3782,13 @@ __metadata:
     "@dnd-kit/utilities": "npm:^3.2.2"
     "@radix-ui/react-dialog": "npm:^1.x.x"
     "@react-google-maps/api": "npm:^2.20.3"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     "@types/react-beautiful-dnd": "npm:^13.1.8"
     autoprefixer: "npm:^10.4.20"
+    copyfiles: "npm:^2.4.1"
     immer: "npm:^10.1.1"
+    jest: "npm:^29.7.0"
     jotai: "npm:^2.10.1"
     jotai-immer: "npm:^0.4.1"
     jotai-utils: "npm:^0.x.x"
@@ -3729,6 +3802,8 @@ __metadata:
     sonner: "npm:^1.7.0"
     swr: "npm:^2.2.5"
     tailwindcss: "npm:^3.4.13"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
   languageName: unknown
   linkType: soft
 
@@ -3740,18 +3815,25 @@ __metadata:
     "@babel/preset-env": "npm:^7.0.0"
     "@babel/preset-react": "npm:^7.0.0"
     "@babel/preset-typescript": "npm:^7.0.0"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     babel-loader: "npm:^9.0.0"
+    copyfiles: "npm:^2.4.1"
     css-loader: "npm:^6.0.0"
     css-minimizer-webpack-plugin: "npm:^5.0.0"
     html-webpack-plugin: "npm:^5.0.0"
+    jest: "npm:^29.7.0"
     mini-css-extract-plugin: "npm:^2.0.0"
     next-compose-plugins: "npm:^2.2.1"
     next-transpile-modules: "npm:^10.0.0"
+    npm-run-all: "npm:^4.1.5"
     postcss-loader: "npm:^7.0.0"
     sass-loader: "npm:^13.0.0"
     style-loader: "npm:^3.0.0"
     terser-webpack-plugin: "npm:^5.0.0"
     ts-loader: "npm:^9.0.0"
+    ts-patch: "npm:^3.2.1"
+    typescript-transform-paths: "npm:^3.5.2"
     webpack-bundle-analyzer: "npm:^4.0.0"
     webpack-dev-server: "npm:^4.0.0"
     webpack-merge: "npm:^5.0.0"
@@ -9320,15 +9402,19 @@ __metadata:
     "@next/font": "npm:^13.5.4"
     "@next/mdx": "npm:^13.5.4"
     "@tailwindcss/typography": "npm:^0.5.10"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.14.202"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/mapbox-gl": "npm:^3.4.0"
     "@types/uuid": "npm:^10"
     "@upstash/redis": "npm:^1.23.3"
     contentlayer: "npm:^0.3.4"
+    copyfiles: "npm:^2.4.1"
     eslint: "npm:*"
     eslint-config-next: "npm:*"
     framer-motion: "npm:^10.12.16"
+    jest: "npm:^29.7.0"
     leaflet: "npm:^1.9.4"
     lodash: "npm:^4.17.21"
     lucide-react: "npm:*"
@@ -9351,7 +9437,9 @@ __metadata:
     remark-gfm: "npm:3.0.1"
     shiki: "npm:0.14.5"
     tailwindcss: "npm:3.3.3"
+    ts-patch: "npm:^3.2.1"
     typescript: "npm:*"
+    typescript-transform-paths: "npm:^3.5.2"
     yet-another-react-lightbox: "npm:^3.21.6"
   languageName: unknown
   linkType: soft
@@ -24928,7 +25016,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"modern-screenshot@npm:^4.4.39":
+"modern-screenshot@npm:^4.4.39, modern-screenshot@npm:^4.5.4":
   version: 4.5.4
   resolution: "modern-screenshot@npm:4.5.4"
   checksum: 10c0/ccd342b792f3e5e65c7103561a4e08f5a6197ac803ee6345bb4a6b39289de84d5da81ff722858e11037d69a661d7c1ae1e29116c70a07710f22ffa0cb056253a
@@ -26007,7 +26095,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openai@npm:^4, openai@npm:^4.52.7, openai@npm:^4.67.3, openai@npm:^4.71.0":
+"openai@npm:^4, openai@npm:^4.67.3, openai@npm:^4.71.0":
   version: 4.72.0
   resolution: "openai@npm:4.72.0"
   dependencies:
@@ -26026,6 +26114,28 @@ __metadata:
   bin:
     openai: bin/cli
   checksum: 10c0/38d76a3359297b7a8f2b6780d03ccbc152985e39141e7cf7a7823d5b0b189990523c5fb6be26631eb191cb3c437e293023e7e9fd3c5c2ae37369175e838bc9e9
+  languageName: node
+  linkType: hard
+
+"openai@npm:^4.73.0":
+  version: 4.73.0
+  resolution: "openai@npm:4.73.0"
+  dependencies:
+    "@types/node": "npm:^18.11.18"
+    "@types/node-fetch": "npm:^2.6.4"
+    abort-controller: "npm:^3.0.0"
+    agentkeepalive: "npm:^4.2.1"
+    form-data-encoder: "npm:1.7.2"
+    formdata-node: "npm:^4.3.2"
+    node-fetch: "npm:^2.6.7"
+  peerDependencies:
+    zod: ^3.23.8
+  peerDependenciesMeta:
+    zod:
+      optional: true
+  bin:
+    openai: bin/cli
+  checksum: 10c0/ff2c1086e98563f3b164c25be94c2b299b6d38ea8556a14577dd7f57d3999fb1298913437dc011bf582f20f126ec5553900cd295d9ba30c29561abfe197a2cbd
   languageName: node
   linkType: hard
 
@@ -30126,15 +30236,22 @@ __metadata:
     "@cs-magic/shadcn": "workspace:^"
     "@tauri-apps/api": "npm:^1"
     "@tauri-apps/cli": "npm:^1"
+    "@types/copyfiles": "npm:^2"
+    "@types/jest": "npm:^29.5.14"
     "@types/react": "npm:^18.2.15"
     "@types/react-dom": "npm:^18.2.7"
     "@vitejs/plugin-react": "npm:^4.2.1"
     autoprefixer: "npm:^10.4.20"
+    copyfiles: "npm:^2.4.1"
+    jest: "npm:^29.7.0"
+    npm-run-all: "npm:^4.1.5"
     postcss: "npm:^8.4.45"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     tailwindcss: "npm:^3.4.10"
+    ts-patch: "npm:^3.2.1"
     typescript: "npm:*"
+    typescript-transform-paths: "npm:^3.5.2"
     vite: "npm:^5.3.1"
   languageName: unknown
   linkType: soft
@@ -32061,7 +32178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiktoken@npm:^1.0.15":
+"tiktoken@npm:^1.0.17":
   version: 1.0.17
   resolution: "tiktoken@npm:1.0.17"
   checksum: 10c0/e79031b8f49a10a01e48c6fe20408ed44cb4de20606f123f5305563d9f23b8512e05f519e6f8467de843a3dbb9907c39d05ff29609e5f58331d89ef1426d13ba
