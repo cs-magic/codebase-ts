@@ -28,7 +28,9 @@ brew install "${packages[@]}"
 - installation: `yarn` (db migration will auto exec)
   ```shell
   yarn workspaces foreach -pA add -D npm-run-all
-  yarn workspaces foreach -pA --include "packages/frontend/*" --include "packages/backend/*" add -D ts-patch typescript-transform-paths  
+  yarn workspaces foreach -pA --include "packages/frontend/*" --include "packages/backend/*" \
+    add -D ts-patch typescript-transform-paths copyfiles \
+    @cs-magic/ts-config @cs-magic/eslint-config @cs-magic/prettier-config @cs-magic/tailwindcss-config  
   ```
 
 ## References 

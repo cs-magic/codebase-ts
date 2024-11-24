@@ -1,6 +1,8 @@
 {
   // ref: https://www.totaltypescript.com/tsconfig-cheat-sheet
   "compilerOptions": {
+    /* AND if you're building for a library in a monorepo: */
+    "composite": true,
 
     /* If transpiling with TypeScript: */
     "moduleResolution": "Bundler",
@@ -40,9 +42,7 @@
     "noImplicitOverride": true,
     /* AND if you're building for a library: */
     "declaration": true,
-    /* AND if you're building for a library in a monorepo: */
-    "composite": true,
-    "incremental": true,
+
     "declarationMap": true,
     "ignoreDeprecations": "5.0",
     "traceResolution": false,

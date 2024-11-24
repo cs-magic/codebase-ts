@@ -3,6 +3,7 @@
     "@cs-magic/ts-config/dom"
   ],
   "compilerOptions": {
+    "composite": true,
     "types": ["jest", "node"],
     "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo",

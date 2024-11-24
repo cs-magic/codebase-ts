@@ -24,6 +24,12 @@
     "qrcode.react": "^4.0.1"
   },
   "devDependencies": {
+    "@cs-magic/eslint-config": "workspace:^",
+    "@cs-magic/prettier-config": "workspace:^",
+    "@cs-magic/tailwindcss-config": "workspace:^",
+    "@cs-magic/ts-config": "workspace:^",
+    "@types/copyfiles": "^2",
+    "copyfiles": "^2.4.1",
     "npm-run-all": "*",
     "ts-patch": "^3.2.1",
     "typescript-transform-paths": "^3.5.2"

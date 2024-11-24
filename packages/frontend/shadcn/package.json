@@ -70,6 +70,10 @@
     "zod": "*"
   },
   "devDependencies": {
+    "@cs-magic/eslint-config": "workspace:^",
+    "@cs-magic/prettier-config": "workspace:^",
+    "@cs-magic/tailwindcss-config": "workspace:^",
+    "@cs-magic/ts-config": "workspace:^",
     "tailwindcss": "^3.4.10",
     "ts-patch": "^3.2.1",
     "typescript-transform-paths": "^3.5.2"

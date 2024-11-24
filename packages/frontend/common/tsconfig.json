@@ -3,6 +3,7 @@
     "@cs-magic/ts-config/dom"
   ],
   "compilerOptions": {
+    "composite": true,
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo",

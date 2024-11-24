@@ -3,6 +3,7 @@
     "@cs-magic/ts-config/node"
   ],
   "compilerOptions": {
+    "composite": true,
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/.tsbuildinfo",
