@@ -27,6 +27,10 @@ echo_info() {
     echo -e "${INDENT}${INDENT}${MAGENTA}ℹ${RESET} $1"
 }
 
+echo_error() {
+    echo -e "${INDENT}${INDENT}${RED}ℹ${RESET} $1"
+}
+
 echo_end() {
     echo -e "${END_INDICATOR} ${GREEN}Completed:${RESET} $1\n"
 }
@@ -55,7 +59,7 @@ init_db() {
   elif [[ "$1" == "--remote" ]]; then
     prisma migrate deploy
   else
-    echo "Error: You should specify which migration to run on prisma (--local or --remote)"
+    echo_error "Error: You should specify which migration to run on prisma (--local or --remote)"
     return 1
   fi
 }
