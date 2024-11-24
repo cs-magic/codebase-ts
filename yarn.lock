@@ -3670,6 +3670,7 @@ __metadata:
     tailwind-merge: "npm:^1.14.0"
     tailwindcss: "npm:3.3.3"
     tailwindcss-animate: "npm:^1.0.7"
+    tailwindcss-debug-screens: "npm:^2.2.1"
     tsx: "npm:^4.19.2"
     typescript: "npm:*"
     uuid: "npm:^10.0.0"
