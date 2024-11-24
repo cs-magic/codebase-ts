@@ -2802,6 +2802,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     npm-run-all: "npm:^4.1.5"
     prisma: "npm:^5.21.0"
+    stripe: "npm:^17.4.0"
     turbo: "npm:^2.3.0"
     typescript: "npm:5.5.4"
   languageName: unknown
@@ -31328,6 +31329,16 @@ __metadata:
     "@types/node": "npm:>=8.1.0"
     qs: "npm:^6.11.0"
   checksum: 10c0/ea9ad9397a4b5464bf5e2cc3a65683d14e035161c5db0146061370f2316851e6b919e4fe2be97ec0dc72a2856b09cceab69e7afcb4a86f9e3361ed630f2fbad2
+  languageName: node
+  linkType: hard
+
+"stripe@npm:^17.4.0":
+  version: 17.4.0
+  resolution: "stripe@npm:17.4.0"
+  dependencies:
+    "@types/node": "npm:>=8.1.0"
+    qs: "npm:^6.11.0"
+  checksum: 10c0/bae24fc8c7b464f26f0b03f278007ef08e7fda31215fd5547521edb18e681615fc20023661f881340b8bcc46b6fdb3fd8e306cb76599fcab49231407932ad990
   languageName: node
   linkType: hard
 
