@@ -21,12 +21,15 @@ brew install "${packages[@]}"
 ```
 - prepare yarn: `NV=18.19.0 && nvm install $NV && nvm use $NV && npm i -g yarn`
 - `export PATH=$(pwd)/node_modules/.bin:$PATH` (sometimes important!)
+- postgresql vector initialization
+  ```shell
+
+  ```
 - installation: `yarn` (db migration will auto exec)
--
-    ```
-    yarn workspaces foreach -pA add -D npm-run-all
-    yarn workspaces foreach -pA --include "packages/frontend/*" --include "packages/backend/*" add -D ts-patch typescript-transform-paths  
-    ```
+  ```shell
+  yarn workspaces foreach -pA add -D npm-run-all
+  yarn workspaces foreach -pA --include "packages/frontend/*" --include "packages/backend/*" add -D ts-patch typescript-transform-paths  
+  ```
 
 ## References 
 
