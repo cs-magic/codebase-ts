@@ -1,5 +1,7 @@
 // packages/tools/eslint-config/tsconfig.json
 {
   "extends": ["@cs-magic/ts-config"],
-  "include": ["src/**.js"]
+  "include": [
+    "src/**.js"
+  ]
 }
