@@ -33,31 +33,21 @@ module.exports = {
   // importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
   // importOrderTypeScriptVersion: '5.0.0',
   importOrder: [
-    // 普通第三方依赖，不是 @cs-magic 不是 @/ 不是 ./ 不是 ../ 开头
-    // "^(?!@cs-magic|@/|\\./|\\.\\./).*",
+    // 第三方依赖
+    "^[^@\\.]",
 
-    "^@cs-magic/.*?$", // @cs-magic 开头
+    // 内部包
+    "^@cs-magic/",
+    "^@/",
 
-    // todo: why this not work
-    "^.prisma/.*?$",
+    // 相对路径
+    "^\\.\\./*",
+    "^\\./*",
 
-    "^contentlayer/.*?$",
-
-    "^@assets/(.*)$",
-
-    "^@/(.*)$",
-
-    // 父级组件
-    "^../.*?$",
-
-    // 同级组件
-    "^./.*?$",
+    // 样式文件
+    "^.*\\.(css|scss|sass|less|styl)$",
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  plugins: [
-    "@trivago/prettier-plugin-sort-imports",
-    // 让 Prettier 遵循 ESLint 的排序规则
-    "prettier-plugin-organize-imports",
-  ],
+  plugins: ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-organize-imports"],
 }
