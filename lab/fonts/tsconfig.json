@@ -6,11 +6,7 @@
     "allowImportingTsExtensions": true
   },
   "include": [
-    ".eslintrc.js",
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
+    "/Users/mark/coding/apps/totem-gen_mini_2/src/**/*.ts",
+    "./**/*.ts"
   ]
-
 }

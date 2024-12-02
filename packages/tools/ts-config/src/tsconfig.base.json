@@ -57,6 +57,7 @@
     "noPropertyAccessFromIndexSignature": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "allowImportingTsExtensions": true,
 
     // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
     "plugins": [

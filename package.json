@@ -18,6 +18,7 @@
     "apps/exts/chrome/*",
     "cases/*",
     "cases/*/*",
+    "lab/*",
     "tests/*"
   ],
   "scripts": {

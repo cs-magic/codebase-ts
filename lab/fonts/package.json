@@ -1,0 +1,8 @@
+{
+  "name": "fonts",
+  "type": "module",
+  "packageManager": "yarn@4.4.0",
+  "dependencies": {
+    "fontmin": "^2.0.0"
+  }
+}
